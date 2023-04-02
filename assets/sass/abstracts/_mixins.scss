@@ -1,0 +1,189 @@
+
+@use "sass:string";
+
+@mixin media ($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        $breakpoint-value: map-get($breakpoints, $breakpoint);
+        @media (min-width: $breakpoint-value){
+            @content;
+        }
+    }
+    @else {
+        @warn 'Invalid breakpoint provided';
+    }
+}
+
+// Media Query - min-width for mobile-first design
+// @mixin media($breakpoint){
+//     @media (min-width: $breakpoint) {
+//         @content
+//     }
+// };
+
+@mixin base-margin {
+
+    margin-inline: 50px;
+    margin-block: 35px;
+
+    @include media($screen-sm) {
+        margin-inline: 250px;
+        margin-block: 50px;
+    }
+};
+
+
+// general mixins for ease-of-use
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+@mixin flex {
+    display: flex;
+    flex-direction: row;
+}
+@mixin flex-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin truncate($truncation-boundary) {
+    max-width: $truncation-boundary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// for when using ::before and ::after
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+// Idk, I kinda wanna see if this is usable for speech bubbles
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false){
+    @include pseudo($pos: $position);
+    width: 0;
+    height: 0;
+    @if $round {
+        border-radius: 3px;
+    }
+    @if $direction == down {
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        border-top: $size solid $color;
+        margin-top: 0 - round( $size / 2.5 );
+    } @else if $direction == up {
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        border-bottom: $size solid $color;
+        margin-bottom: 0 - round( $size / 2.5 );
+    } @else if $direction == right {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-left: $size solid $color;
+        margin-right: -$size;
+    } @else if  $direction == left {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-right: $size solid $color;
+        margin-left: -$size;
+    }
+}
+
+// Applies bg colour based on class name
+@mixin conditional-bg ($selector: ''){
+
+    @if (string.length($selector) != 0){
+        &.primary #{$selector} { background-color: $clr-primary;}
+        &.secondary #{$selector} { background-color: $clr-secondary; }
+        &.accent-1 #{$selector} { background-color: $clr-accent-1; }
+        &.accent-2 #{$selector} { background-color: $clr-accent-2; }
+
+    } @else {
+
+        &.primary { background-color: $clr-primary;}
+        &.secondary { background-color: $clr-secondary; }
+        &.accent-1 { background-color: $clr-accent-1; }
+        &.accent-2 { background-color: $clr-accent-2; }
+    }
+}
+
+@mixin conditional-bg-alt ($selector: ''){
+    @if (string.length($selector) != 0){
+        &.primary #{$selector} { background-color: $clr-secondary; }
+        &.secondary #{$selector} { background-color: $clr-primary; }
+        &.accent-1 #{$selector} { background-color: $clr-accent-2; }
+        &.accent-2 #{$selector}{ background-color: $clr-accent-1; }
+    } @else {
+        &.primary { background-color: $clr-secondary; }
+        &.secondary { background-color: $clr-primary;}
+        &.accent-1 { background-color: $clr-accent-2; }
+        &.accent-2 { background-color: $clr-accent-1; }
+    }
+}
+
+@mixin conditional-text ($selector: ''){
+
+    @if (string.length($selector) != 0){
+        &.primary #{$selector} { color: $clr-primary;}
+        &.secondary #{$selector} { color: $clr-secondary; }
+        &.accent-1 #{$selector} { color: $clr-accent-1; }
+        &.accent-2 #{$selector} { color: $clr-accent-2; }
+
+    } @else {
+
+        &.primary { color: $clr-primary;}
+        &.secondary { color: $clr-secondary; }
+        &.accent-1 { color: $clr-accent-1; }
+        &.accent-2 { color: $clr-accent-2; }
+    }
+}
+
+// Alternates bg-colour based on class name
+// e.g. primary colour switches to secondary
+
+@mixin conditional-text-alt ($selector: '') {
+    @if (string.length($selector) != 0){
+        &.primary #{$selector}  { color: $clr-secondary; }
+        &.secondary #{$selector} { color: $clr-primary;}
+        &.accent-1 #{$selector} { color: $clr-accent-2; }
+        &.accent-2 #{$selector} { color: $clr-accent-1; }
+    } @else {
+        &.primary { color: $clr-secondary; }
+        &.secondary { color: $clr-primary;}
+        &.accent-1 { color: $clr-accent-2; }
+        &.accent-2 { color: $clr-accent-1; }
+    }
+}
+
+// Taken from PIHSS code
+// Edit how you like
+@mixin scrollbar {
+    /* Custom Scrollbar */
+    -ms-overflow-style: auto; // IE and Edge
+    scrollbar-width: auto; // Firefox
+    
+
+    &::-webkit-scrollbar-track {
+        // scroll-margin-block: 1em;
+        // background-color: rgba($clr-secondary, 0.2);
+        border-radius: 20px;
+        border: solid 3px transparent;
+        margin-block: .75em;
+    }
+
+    &::-webkit-scrollbar {
+        // scroll-margin-block: 1em;
+        width: 3px;
+        // background-color: rgba($clr-secondary, 0.3);
+        border-radius: 10px;
+        display: block;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        // scroll-margin-block: 1em;
+        background-color: rgba($clr-accent-1, 1);
+        border-radius: 10px;
+    }
+}

@@ -8,7 +8,10 @@
         Read our documentation <a href="https://sidebase.io/sidebase/welcome" target="_blank">here</a>.
         Get started in no time with the following amazing modules:
       </p>
+      <font-awesome-icon icon="fa-brands fa-twitter" />
+      <font-awesome-icon :icon="['fab', 'github']" />
     </div>
+    <div />
     <div class="cards">
       <div class="card prisma__card">
         <div class="card__body">
@@ -83,7 +86,8 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+
   * {
     margin: 0;
     padding: 0;

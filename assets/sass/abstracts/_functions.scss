@@ -1,0 +1,34 @@
+// @function getColour($colour) {
+//   @if $colour == 'primary' {
+//     @return $clr-primary
+//   }
+//   @if $colour == 'secondary' {
+//     @return $clr-secondary
+//   }
+//   @if $colour == 'accent-1' {
+//     @return $clr-accent-1
+//   }
+//   @if $colour == 'accent-2' {
+//     @return $clr-accent-2
+//   }
+
+  
+//   @return '#FFFFFF'
+// }
+
+// @function getColourAlternate($colour){
+//   @if $colour == 'primary' {
+//     @return $clr-secondary
+//   }
+//   @if $colour == 'secondary' {
+//     @return $clr-primary
+//   }
+//   @if $colour == 'accent-1' {
+//     @return $clr-accent-2
+//   }
+//   @if $colour == 'accent-2' {
+//     @return $clr-accent-1
+//   }
+
+//   @return '#FFFFFF'
+// }

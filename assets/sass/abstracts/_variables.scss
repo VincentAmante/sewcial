@@ -1,0 +1,33 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+// breakpoints
+$breakpoints:  (
+  "mobile": 640px, // portrait screens
+  "tablet": 768px, // small landscape screens
+  "desktop": 1024px, // large screens
+  "lg-screen": 1280px, // tv screens
+  "xl-screen": 1536px // cinema screens ig
+);
+
+// colours
+$clr-primary: #FFFAE0;
+$clr-secondary: #607BDA;
+$clr-accent-1: #FF96C3;
+$clr-accent-2: #FF4E4E;
+$clr-text: #282A2F;
+
+// fonts
+$font-primary: 'Lexend', sans-serif;
+
+// TODO: Figure these out
+$margin-width-mobile: 30px;
+$margin-width-desktop: 250px;
+// Clamps between the two
+$margin-width: clamp($margin-width-mobile, 10vw, $margin-width-desktop);
+
+$margin-height-mobile: 25px;
+$margin-height-desktop: 50px;
+$margin-height: clamp($margin-height-mobile, 10vh, $margin-height-desktop);
+
+$nav-link-icon-size: clamp(30px, 10vw, 50px);

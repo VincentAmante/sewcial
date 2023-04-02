@@ -1,0 +1,59 @@
+html {
+    font-family: $font-primary;
+}
+
+.text-h-giant {
+    font-size: clamp(55px, 5vmax, 150px);
+    font-weight: 700;
+}
+
+.text-h-big-boy {
+    font-size: clamp(30px, 5vmax, 90px);
+    font-weight: 700;
+}
+
+    // Heading 1
+h1, .text-h1 {
+    font-size: clamp(16px, 2.5vmax, 20px);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-block: 1rem;
+}
+
+// Heading 2
+h2, .text-h2 {
+    font-size: clamp(20px, 2.4vw, 16px);
+    // font-size: clamp(13px, 2.4vw, 16px);
+    font-weight: 700;
+    // text-transform: uppercase;
+    margin-block: 1rem;
+}
+
+h3, .text-h3 {
+    font-size: clamp(11px, 1.95vw, 13px);
+    font-weight: 700;
+    margin-block: 1rem;
+}
+
+// Speech Bubbles
+// Button
+.bubble, .button, button {
+    font-size: clamp(14px, 2vw, 14.5px);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-block: 1rem;
+}
+
+// Body Text
+.body, p {
+    font-size: clamp(14px, 1.085vw, 12px);
+    font-weight: 400;
+    margin-block: 1rem;
+}
+
+// Captions
+.caption {
+    font-size: 10px;
+    font-weight: 400;
+    margin-block: 1rem;
+}
