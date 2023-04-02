@@ -1,27 +1,4 @@
 <script setup lang="ts">
-// Import of a speechbubble
-import SpeechBubble from '@/components/SpeechBubble.vue'
-
-import ButtonDownload from '@/components/icons/ButtonDownload.vue'
-import ButtonFullscreen from '@/components/icons/ButtonFullscreen.vue'
-import ButtonLikedPage from '@/components/icons/ButtonLikedPage.vue'
-import IconHeart from '@/components/icons/IconHeart.vue'
-import IconCreditCard from '@/components/icons/IconCreditCard.vue'
-import IconFilter from '@/components/icons/IconFilter.vue'
-import IconPlus from '@/components/icons/IconPlus.vue'
-import IconUser from '@/components/icons/IconUser.vue'
-import IconChevronLeft from '@/components/icons/IconChevronLeft.vue'
-import IconChevronRight from '@/components/icons/IconChevronRight.vue'
-
-import LikeMeButton from '@/components/LikeMeButton.vue'
-import LikedButton from '@/components/LikedButton.vue'
-import TemplateCard from '@/components/TemplateCard.vue'
-import DownloadButton from '@/components/DownloadButton.vue'
-import DropdownTab from '@/components/DropdownTab.vue'
-import CatalogueCard from '@/components/CatalogueCard.vue'
-import ItemDescription from '@/components/ItemDescription.vue'
-import BookingSummary from '@/components/BookingSummary.vue'
-import Pagination from '@/components/Pagination.vue'
 </script>
 <template>
   <main>
@@ -75,9 +52,9 @@ import Pagination from '@/components/Pagination.vue'
             Short description
           </template>
         </TemplateCard>
-        <DropdownTab>
+        <DropDownTab>
           <h1>SHOP BY</h1>
-        </DropdownTab>
+        </DropDownTab>
         <DropdownTab>
           <h1>STYLE</h1>
         </DropdownTab>
