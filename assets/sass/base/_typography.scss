@@ -12,6 +12,12 @@ html {
     font-weight: 700;
 }
 
+.text-h-tilted {
+    font-size: clamp(18px, 2.5vmax, 50px);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
     // Heading 1
 h1, .text-h1 {
     font-size: clamp(16px, 2.5vmax, 20px);

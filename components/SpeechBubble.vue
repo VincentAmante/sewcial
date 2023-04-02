@@ -1,24 +1,22 @@
 <script setup lang="ts">
-    // Variables passed to this component are props
-    const props = defineProps({
-        alignment: {
-            type: String,
-            default: 'left'
-        }
-    })
+// Variables passed to this component are props
+const props = defineProps({
+  alignment: {
+    type: String,
+    default: 'left'
+  }
+})
 </script>
 
 <!-- Template with defined slots -->
 <!-- Currently, content by default goes to the one without a name -->
 <!-- Slot 'Icon' has no implementation yet -->
 <template lang="">
-    <div class="speech-bubble" :class="alignment">
-        <slot name="icon"></slot>
-        <slot class="text">
-            
-        </slot>
-        <div class="arrow"></div>
-    </div>
+  <div class="speech-bubble" :class="alignment">
+    <slot name="icon" />
+    <slot class="text" />
+    <div class="arrow" />
+  </div>
 </template>
 
 <!-- Scoped Styling -->
@@ -40,8 +38,8 @@
 
             .arrow {
                 z-index: -1;
-                width: 0; 
-                height: 0; 
+                width: 0;
+                height: 0;
                 border-bottom: 20px solid $clr-accent-1;
                 border-left: 50px solid transparent;
                 left: 0px;
@@ -56,8 +54,8 @@
 
             .arrow {
                 z-index: -1;
-                width: 0; 
-                height: 0; 
+                width: 0;
+                height: 0;
                 border-bottom: 20px solid $clr-secondary;
                 border-right: 50px solid transparent;
                 right: 0px;

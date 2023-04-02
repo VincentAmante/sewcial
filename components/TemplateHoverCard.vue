@@ -20,7 +20,7 @@ const props = defineProps({
 
 <!-- Browse Image Card Templates -->
 <template>
-        <div class="cards-container">
+    <div class="cards-container">
         <div class="card">
           <div class="card-image" :style="{ backgroundImage: `url(${image})` }"></div>
             <div class="card-info-container">
@@ -38,16 +38,12 @@ const props = defineProps({
 <!-- Scoped Styling -->
 <style scoped lang="scss">
     .cards-container {
-        padding: .75em;
-        margin: 5px;
-        width: 70%;
+        padding: 10px;
     }
     .card {
         position: relative;
-    }
-    .icon{
-        width: 20px;
-        height: 20px;
+        height: 0;
+        padding-bottom: 100%;
     }
     .card-info {
         width: 100%;
@@ -79,8 +75,6 @@ const props = defineProps({
         transform: translateY(0);
         cursor: pointer;
         border-top: 3px dashed $clr-primary;
-        // outline: dashed 3px $clr-primary;
-        // outline-offset: 1px;
     }
 
     // Moved styling to a container here

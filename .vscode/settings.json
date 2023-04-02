@@ -4,7 +4,7 @@
     "source.fixAll.eslint": true
   },
   "[vue]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "Vue.volar"
   },
   "[js]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
@@ -21,7 +21,7 @@
     "vue"
   ],
   // Tailwind Support, see https://tailwindcss.nuxt.dev/tailwind/editor-support
-  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs",
+  // "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs",
   "files.associations": {
     "*.css": "tailwindcss"
   },
