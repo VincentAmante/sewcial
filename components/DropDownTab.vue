@@ -1,23 +1,23 @@
 <script setup lang="ts">
-    // Import Plus
-    import IconPlus from '@/components/icons/IconPlus.vue';
+// Import Plus
+import IconPlus from '@/components/icons/IconPlus.vue'
 
-    // Variables passed to this component are props
-    const props = defineProps({
-        alignment: {
-            type: String,
-            required: true,
-            default: 'left'
-        }
-    })
+// Variables passed to this component are props
+const props = defineProps({
+  alignment: {
+    type: String,
+    required: true,
+    default: 'left'
+  }
+})
 </script>
 
 <!-- Template with default text and icon -->
 <template lang="">
-    <div class="dropdown-tab" :class="alignment">
-        <slot class="text"></slot>
-        <IconPlus class="icon"></IconPlus>
-    </div>
+  <div class="dropdown-tab" :class="alignment">
+    <slot class="text" />
+    <IconPlus class="icon" />
+  </div>
 </template>
 
 <!-- Scoped Styling -->
@@ -31,7 +31,7 @@
         flex-direction: row;
 
         align-self: flex-start;
-        
+
         max-width: 40ch; //remove if not wide enough, was added for tests
         justify-content: space-between;
 
