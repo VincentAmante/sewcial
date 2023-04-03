@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SpeechBubble from '@/components/SpeechBubble.vue'
-import DropDownTab from '@/components/DropDownTab.vue.js'
+import DropDownTab from '@/components/DropDownTab.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import IconFilter from '@/components/icons/IconFilter.vue'
 import Pagination from '@/components/Pagination.vue'
