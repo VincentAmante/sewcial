@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SpeechBubble from '@/components/SpeechBubble.vue'
-import DropdownTab from '~~/components/DropdownTab.vue.js'
+import DropDownTab from '@/components/DropDownTab.vue.js'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import IconFilter from '@/components/icons/IconFilter.vue'
 import Pagination from '@/components/Pagination.vue'
@@ -33,15 +33,15 @@ definePageMeta({
       </div>
       <div class="filters-container">
         <p>HIDE FILTERS</p>
-        <DropdownTab>
+        <DropDownTab>
           <h1>SHOP BY</h1>
-        </DropdownTab>
-        <DropdownTab>
+        </DropDownTab>
+        <DropDownTab>
           <h1>STYLE</h1>
-        </DropdownTab>
-        <DropdownTab>
+        </DropDownTab>
+        <DropDownTab>
           <h1>PRICE</h1>
-        </DropdownTab>
+        </DropDownTab>
         <button>
           <p class="button">
             APPLY FILTERS
