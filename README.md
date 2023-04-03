@@ -27,6 +27,11 @@ Start the development server on http://localhost:3000
 npm run dev
 ```
 
+## Recommended Extensions (on top of the ones from sewcial)
+
+- [Tailwind IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+- [Inline Fold (for hiding long Tailwind Classes)](https://marketplace.visualstudio.com/items?itemName=moalamri.inline-fold)
+
 ## Conceptual Difference between Nuxt3 and Vue3
 
 Nuxt is a framework that is built on Vue. The key difference is that Nuxt performs what is called 'Universal Rendering'. This renders content on a server-side environment, which allows the back-end functionality that Sewcial requires. This differs from Vue which runs as a Single-Page Application, where all the content is rendered on the user's browser. Nuxt bridges its serverside rendering with Vue's client-rendering by *also* running some javascript on the client browser after sending the generated HTML content. This concept (called Hydration) allows the same SinglePage experience while still allowing space for server-side code.
@@ -42,11 +47,15 @@ All your Vue code will run without crash in Nuxt3. A few differences persists th
 - HYDRATION: The concept of hydration may cause issues with your pages, hydration mismatches are the result of incorrect HTML hierarchies (such as `<li>` not placed under a `<ul>` tag). To fix you may either fix your HTML hierarchy or wrap the offending HTML inside a `<ClientOnly>` tag, where it will only render client-side like in Vue.
 - Nuxt Layouts allow for re-usable page structures. For now, however, this is the new method of defining whether a page is a *'shop'* page. All other pages will follow a default layout.
   - To override, paste this code in the page's script tag:
+
   - ```js
         definePageMeta({
         layout: 'shop'
         })
         ```
+
+- eslinting for universally formatted code, a lot of errors will exist that will go away on save
+  - If some remain, not all erorrs crash the app, do fix if convenient
 
 ## TailwindCSS Migration
 
