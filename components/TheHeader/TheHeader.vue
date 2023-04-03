@@ -61,17 +61,15 @@ const formatStyle = computed(() => {
 })
 </script>
 <template>
-  <ClientOnly>
-    <header :class="formatStyle">
-      <HeaderLogo class="logo" :class="formatStyle" :colour="navColour" :header-toggled="headerToggled" />
-      <div class="btn-container">
-        <ButtonLikedPage class="btn-liked-page" />
-        <BurgerButton v-model="headerToggled" class="burger-btn" :colour="navColour" />
-      </div>
-    </header>
+  <header :class="formatStyle">
+    <HeaderLogo class="logo" :class="formatStyle" :colour="navColour" :header-toggled="headerToggled" />
+    <div class="btn-container">
+      <ButtonLikedPage class="btn-liked-page" />
+      <BurgerButton v-model="headerToggled" class="burger-btn" :colour="navColour" />
+    </div>
+  </header>
 
-    <Navigation :is-toggled="headerToggled" :colour="navColour" :page="page" />
-  </ClientOnly>
+  <Navigation :is-toggled="headerToggled" :colour="navColour" :page="page" />
 </template>
 
 <style scoped lang="scss">

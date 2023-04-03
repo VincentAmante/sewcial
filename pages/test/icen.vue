@@ -194,7 +194,7 @@ const peopleCount = ref(0)
 
     .banner-wrapper {
         position: relative;
-        overflow-x: hidden;
+        // overflow-x: hidden;
         border-bottom: 6px dashed $clr-secondary;
         width: 100%;
         height: 80svh;
@@ -211,10 +211,11 @@ const peopleCount = ref(0)
         .sticker-container {
             position: absolute;
             width: 100%;
+            height: 100%;
 
             // Sets stickers to display only past desktop
             .sticker {
-                display: none;
+                // display: none;
                 @include media(desktop){
                     display: block;
                 }

@@ -31,6 +31,12 @@
     }
 };
 
+@mixin tailwind-overwrite {
+    * {
+        margin: initial;
+        padding: initial;
+    }
+}
 
 // general mixins for ease-of-use
 @mixin flex-col {
@@ -163,7 +169,7 @@
     /* Custom Scrollbar */
     -ms-overflow-style: auto; // IE and Edge
     scrollbar-width: auto; // Firefox
-    
+
 
     &::-webkit-scrollbar-track {
         // scroll-margin-block: 1em;

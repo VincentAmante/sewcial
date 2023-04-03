@@ -3,7 +3,6 @@
 
 <template>
   <div>
-    <!-- <TheHeader /> -->
     <NuxtLayout />
   </div>
 </template>

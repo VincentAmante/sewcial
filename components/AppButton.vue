@@ -5,3 +5,7 @@
     </slot>
   </button>
 </template>
+
+<style scoped lang="scss">
+  // @include tailwind-overwrite;
+</style>
