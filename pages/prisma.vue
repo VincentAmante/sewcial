@@ -1,3 +1,4 @@
+<!-- prisma.vue -->
 <script setup lang="ts">
 const { data: examples } = useFetch('/api/examples')
 </script>

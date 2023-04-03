@@ -164,10 +164,13 @@ const secondaryColour = computed(() => {
                 justify-content: space-between;
                 .right {
                     display: initial;
-                    visibility: visible
+                    visibility: visible;
+                    position: absolute;
+                    right: 0;
                 }
 
                 a {
+                    width: 100%;
                     text-align: left;
                 }
             }

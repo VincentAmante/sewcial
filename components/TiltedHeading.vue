@@ -1,19 +1,19 @@
 <script setup lang="ts">
-    // Variables passed to this component are props
-    const props = defineProps({
-        alignment: {
-            type: String,
-            default: 'left'
-        }
-    })
+// Variables passed to this component are props
+const props = defineProps({
+  alignment: {
+    type: String,
+    default: 'left'
+  }
+})
 </script>
 
 <!-- Template with defined slots -->
 <!-- Currently, content by default goes to the one without a name -->
 <template lang="">
-    <h1 class="heading" :class="alignment">
-        <slot></slot>
-    </h1>
+  <h1 class="heading" :class="alignment">
+    <slot />
+  </h1>
 </template>
 
 <!-- Scoped Styling -->

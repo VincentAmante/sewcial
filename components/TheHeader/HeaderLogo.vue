@@ -77,7 +77,7 @@ const visibility = computed(() => {
       transition: all .1s ease-out;
 
       svg {
-        height: clamp(30px, 7.5vmax, 50px);
+        height: clamp(20px, 6vmax, 50px);
         display: block;
       }
 
