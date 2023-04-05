@@ -17,7 +17,7 @@ import LikeMeButton from '@/components/LikeMeButton.vue'
 import LikedButton from '@/components/LikedButton.vue'
 import TemplateCard from '@/components/TemplateCard.vue'
 import DownloadButton from '@/components/DownloadButton.vue'
-import DropdownTab from '@/components/DropdownTab.vue'
+import DropDownTab from '@/components/DropDownTab.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import ItemDescription from '@/components/ItemDescription.vue'
 import BookingSummary from '@/components/BookingSummary.vue'
@@ -75,15 +75,15 @@ import Pagination from '@/components/Pagination.vue'
             Short description
           </template>
         </TemplateCard>
-        <DropdownTab>
+        <DropDownTab>
           <h1>SHOP BY</h1>
-        </DropdownTab>
-        <DropdownTab>
+        </DropDownTab>
+        <DropDownTab>
           <h1>STYLE</h1>
-        </DropdownTab>
-        <DropdownTab>
+        </DropDownTab>
+        <DropDownTab>
           <h1>PRICE</h1>
-        </DropdownTab>
+        </DropDownTab>
         <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
           <template #item-name>
             JACKET
