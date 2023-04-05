@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const routes = router.getRoutes()
@@ -26,3 +25,6 @@ const selectedRoute = computed({
     </option>
   </select>
 </template>
+
+<script lang="scss">
+</script>

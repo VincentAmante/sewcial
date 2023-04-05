@@ -1,64 +1,66 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import ButtonClose from './icons/ButtonClose.vue'
+    import { ref, computed } from 'vue';
+    import ButtonClose from './icons/ButtonClose.vue';
 
-const isOpen = ref(false)
-const props = defineProps({
-  // Name of the area the desc is about
-  name: {
-    type: String,
-    required: true
-  },
+    const isOpen = ref(false)
+    const props = defineProps({
+        // Name of the area the desc is about
+        name: {
+            type: String,
+            required: true
+        },
 
-  // source for thumbnail, should be path from public
-  imgSrc: {
-    type: String,
-    required: true
-  }
-})
+        // source for thumbnail, should be path from public
+        imgSrc: {
+            type: String,
+            required: true
+        }
+    })
 
-// Listens for an event based on the prop<name> to open
-// See TestViewIcen to see how that operates
-window.addEventListener(`toggle-${props.name}`, () => {
-  isOpen.value = true
-})
+    // Listens for an event based on the prop<name> to open
+    // See TestViewIcen to see how that operates
+    window.addEventListener(`toggle-${props.name}`, () => {
 
-function close () {
-  isOpen.value = false
-}
+        isOpen.value = true
+    })
 
-// Computed variables will watch for certain variables inside its code
-const toggledStyle = computed(() => {
-  if (isOpen.value) {
-    return 'toggled'
-  } else {
-    return ''
-  }
-})
+    function close(){
+        isOpen.value = false
+    }
+
+    // Computed variables will watch for certain variables inside its code
+    const toggledStyle = computed(() => {
+        if (isOpen.value){
+            return 'toggled'
+        } else {
+            return ''
+        }
+    })
 </script>
 
 <template>
-  <div class="description-slider-wrapper" :class="toggledStyle">
-    <div class="description-slider">
-      <div class="button-close">
-        <!-- DEV: ButtonClose has a function for when the 'close-btn-clicked' emit is triggered -->
-        <ButtonClose @close-btn-clicked="close" />
-      </div>
-      <div class="slider-content">
-        <div class="img-wrapper">
-          <img :src="imgSrc" alt="">
+    <div class="description-slider-wrapper" :class="toggledStyle">
+        <div class="description-slider">
+            <div class="button-close">
+                <!-- DEV: ButtonClose has a function for when the 'close-btn-clicked' emit is triggered -->
+                <ButtonClose @close-btn-clicked="close"></ButtonClose>
+            </div>
+            <div class="slider-content">
+                <div class="img-wrapper">
+                    <img :src="imgSrc" alt="">
+                </div>
+                <div class="content">
+                    <h1>
+                        <slot name="title"></slot>
+                    </h1>
+                    <div class="description">
+                        <slot>
+                        </slot>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="content">
-          <h1>
-            <slot name="title" />
-          </h1>
-          <div class="description">
-            <slot />
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <style scoped lang="scss">
@@ -81,7 +83,7 @@ const toggledStyle = computed(() => {
             background-color: $clr-primary;
             max-width: 100%;
             height: 100vh;
-
+            
             .button-close {
                 position: absolute;
                 right: 0;

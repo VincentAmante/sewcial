@@ -1,6 +1,6 @@
 <script setup lang="ts">
     // Import download button
-    import DownloadButton from '@/components/DownloadButton.vue';
+    import RSVPButton from '@/components/RSVPButton.vue';
     
     // Variables passed to this component are props
     const props = defineProps({
@@ -18,15 +18,15 @@
           <div class="card-image" :style="{ backgroundImage: `url(${image})` }"></div>
         <div class="card-info">
             <h1>
-              <slot name="item-name"></slot>
+              <slot name="event-name"></slot>
             </h1>
             <h3>
-              <slot name="owner"></slot>
+              <slot name="date"></slot>
             </h3>
-            <p>
-              <slot name="description"></slot>
-            </p>
-            <DownloadButton></DownloadButton>
+            <h3 class = "disclaimer">
+              FREE ENTRY!
+            </h3>
+            <RSVPButton></RSVPButton>
         </div>
         </div>
     </div>
@@ -35,28 +35,23 @@
 <!-- Scoped Styling -->
 <style scoped lang="scss">
 .cards {
-    margin: 10px;
-    
+    padding: .75em;
+    margin: 5px;
     .card {
       flex-direction: column;
       color: $clr-text;
       background-color: $clr-primary;
-      width: 180px; // change this depending on the thign
-      height: 300px;
-      border-radius: 15px;
+      width: 100%; // change this depending on the thign
+      border-radius: 20px;
+      transition: transform 300ms linear;
 
-      @include media(desktop) {
-        width: 260px;
-        height: 370px;
-      }
-  
       &:hover {
         cursor: pointer;
+        transform: scale(1);
         box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
         
         .card-image {
           filter: brightness(100%);
-
         }
       }
     }
@@ -64,11 +59,15 @@
     // Content
     .card-info {
       flex-direction: column;
-      padding: 1rem;
-      justify-content: center;
-
+      padding: 1.8rem;
+      text-align: left;
       h1, h3 {
-        margin: 0;
+        margin-block: 0.2em;
+      }
+
+      .disclaimer {
+        padding-top: 0.5em;
+        margin-block: 1.5em;
       }
     }
   
@@ -79,11 +78,11 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      border-radius: 15px 15px 0px 0px;
+      border-radius: 20px 20px 0px 0px;
       width: 100%;
       vertical-align: middle;
-      filter: brightness(80%);
-
+      filter: brightness(90%);
+      // background-image: url(../assets/images/OpenMic.png);
     }
   }
   

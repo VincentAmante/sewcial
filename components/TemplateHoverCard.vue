@@ -5,12 +5,6 @@ import ButtonDownload from './icons/ButtonDownload.vue';
 
 // Variables passed to this component are props
 const props = defineProps({
-    alignment: {
-        type: String,
-        required: true,
-        default: 'left'
-    },
-
     image: {
         type: String,
         required: true
@@ -22,11 +16,16 @@ const props = defineProps({
 <template>
     <div class="cards-container">
         <div class="card">
-          <div class="card-image" :style="{ backgroundImage: `url(${image})` }"></div>
+            <!-- Image -->
+            <div class = "card-image-container">
+                <img :src="image" class="card-image" />
+            </div>
+            <!-- Info -->
             <div class="card-info-container">
-                <div class="card-info" :class="alignment">
+                <div class="card-info">
                     <div class="card-text">
-                        <slot name="text"></slot>
+                        <h1><slot name="item-name"></slot></h1>
+                        <h3><slot name="owner-name"></slot></h3>
                     </div>
                     <ButtonDownload></ButtonDownload>
                 </div>
@@ -39,60 +38,71 @@ const props = defineProps({
 <style scoped lang="scss">
     .cards-container {
         padding: 10px;
-    }
-    .card {
+        .card {
         position: relative;
         height: 0;
         padding-bottom: 100%;
-    }
-    .card-info {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: $clr-primary;
-        padding-block: 0;
-        padding-inline: 1.5rem;
-    }
-    // Images
-    .card-image{
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        border-radius: 20px;
-        width: 100%;
-        vertical-align: middle;
-    }
-    .card-image:hover{
-        box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
-        filter: brightness(80%);
-        cursor: pointer;
-    }
-    .card:hover .card-info{
-        height: 6rem;
-        transform: translateY(0);
-        cursor: pointer;
-        border-top: 3px dashed $clr-primary;
-    }
+        }
 
-    // Moved styling to a container here
-    .card-info-container {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 0;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        // background-color: #fff;
-        color: $clr-text;
-        // padding: 0 1.5rem;
-        border-radius: 0px 0px 20px 20px;
-        overflow: hidden; /* hide content that overflows */
-        transition: height 0.3s ease-in-out; /* animate height change */
+        // Images
+        .card-image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 2rem;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .card-image{
+            // overflow: hidden;
+            // background-size: cover;
+            // background-position: center;
+            // border-radius: 20px;
+            // vertical-align: middle;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            
+        }
+        .card-image:hover{
+            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+            filter: brightness(80%);
+            cursor: pointer;
+        }
+        .card:hover .card-info{
+            height: 6rem;
+            transform: translateY(0);
+            cursor: pointer;
+            border-top: 3px dashed $clr-primary;
+        }
+
+        .card-info-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            // background-color: #fff;
+            color: $clr-text;
+            // padding: 0 1.5rem;
+            border-radius: 0px 0px 20px 20px;
+            overflow: hidden; /* hide content that overflows */
+            transition: height 0.3s ease-in-out; /* animate height change */
+        }
+        .card-info {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: $clr-primary;
+            padding-block: 0;
+            padding-inline: 1.5rem;
+        }
     }
 
     .card:hover .card-info-container {
