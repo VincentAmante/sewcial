@@ -17,12 +17,12 @@ model Example {
   details     String
 }
 
-model Post {
-  id          String @id @default(uuid())
-  title       String
-  content     String
-  published   Boolean @default(false)
-  authorId    String?
-  tags        String[]
-}
+// model Post {
+//   id          String @id @default(uuid())
+//   title       String
+//   content     String
+//   published   Boolean @default(false)
+//   authorId    String?
+//   tags        String[]
+// }
 
