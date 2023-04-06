@@ -33,7 +33,7 @@ const object = computed(() => {
 })
 
 function showContactObject () {
-  console.log(object.value)
+  // console.log(object.value)
 }
 
 const date = ref(new Date())
@@ -43,7 +43,7 @@ const peopleCount = ref(0)
 </script>
 <template>
   <main>
-    <section class="banner-wrapper">
+    <!-- <section class="banner-wrapper">
       <div class="sticker-container">
         <img class="sticker sticker-1" src="@/assets/images/Sticker_1.png" alt="">
         <img class="sticker sticker-2" src="@/assets/images/Sticker_2.png" alt="">
@@ -55,21 +55,24 @@ const peopleCount = ref(0)
           <p>It contains stickers that are horribly implemented</p>
         </SpeechBubble>
       </div>
-    </section>
+    </section> -->
     <!-- Just test divs, don't mind -->
     <div class="test">
       <AppButton @click="() => toggleTestSlider()">
         Test DescriptionSlider
       </AppButton>
 
-      <!-- <DescriptionSlider name="test" img-src="/images/placeholders/studio.png">
-                    <template #title>Test Slider</template>
-                    <template #default>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
-                    </template>
-                </DescriptionSlider> -->
-      <form class="contact-field" action="">
+      <DescriptionSlider name="test" img-src="/images/placeholders/studio.png">
+        <template #title>
+          Test Slider
+        </template>
+        <template #default>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
+        </template>
+      </DescriptionSlider>
+
+      <!-- <form class="contact-field" action="">
         <ContactField v-model="name" name="name" is-required>
           Name
         </ContactField>
@@ -96,9 +99,9 @@ const peopleCount = ref(0)
             {{ object }}
           </div>
         </div>
-      </form>
+      </form> -->
       <ClientOnly>
-        <div class="booking-sample">
+        <!-- <div class="booking-sample">
           <DatePicker v-model="date" />
           <div class="value-display">
             <h2>Date Value</h2>
@@ -135,7 +138,7 @@ const peopleCount = ref(0)
               {{ peopleCount }}
             </h3>
           </div>
-        </div>
+        </div> -->
       </ClientOnly>
     </div>
   </main>
