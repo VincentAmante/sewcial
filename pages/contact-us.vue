@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import ContactField from '@/components/FormFields/ContactField.vue'
+import ContactTextArea from '@/components/FormFields/ContactTextArea.vue'
+
 const name = ref('')
 const email = ref('')
 const mobileNumber = ref('')
@@ -15,29 +18,41 @@ function showContactForm () {
 </script>
 
 <template>
-  <main class="flex flex-col gap-20 tablet:flex-row tablet:justify-between">
+  <main class="flex flex-row gap-20 mx-default-w tablet:flex-row tablet:justify-between">
     <section class="w-full">
-      <div class="description flex flex-col w-full px-1">
-        <SpeechBubble class="flex flex-col gap-6 py-24">
+      <div class="flex flex-col w-full px-1">
+        <SpeechBubble class="flex flex-col gap-6 py-8">
           <h1>
             Get in touch with us
           </h1>
         </SpeechBubble>
         <SpeechBubble
-          class="flex flex-col gap-6 py-24"
+          class="flex flex-col gap-4 py-8"
           alignment="right"
         >
           <div>
-            <h1>Location</h1>
-            <h2>Dubai Marina, Dubai, UAE</h2>
+            <h1 class="my-0">
+              Location
+            </h1>
+            <h2 class="my-0 font-normal">
+              Dubai Marina, Dubai, UAE
+            </h2>
           </div>
           <div>
-            <h1>Phone Number</h1>
-            <h2>+971 00 000 000</h2>
+            <h1 class="my-0">
+              Phone Number
+            </h1>
+            <h2 class="my-0 font-normal">
+              +971 00 000 000
+            </h2>
           </div>
           <div>
-            <h1>Email</h1>
-            <h2>sewcial@gmail.com</h2>
+            <h1 class="my-0">
+              Email
+            </h1>
+            <h2 class="my-0 font-normal">
+              sewcial@gmail.com
+            </h2>
           </div>
         </SpeechBubble>
       </div>
@@ -70,5 +85,13 @@ function showContactForm () {
 
     main {
         padding: $margin-width;
+
+        h1, h2 {
+          margin-block: 0;
+        }
+        h2 {
+          font-weight: 400;
+          text-transform: none;
+        }
     }
 </style>
