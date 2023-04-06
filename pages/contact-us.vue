@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import SpeechBubble from '@/components/SpeechBubble.vue'
-import ContactField from '@/components/FormFields/ContactField.vue'
-import ContactTextArea from '@/components/FormFields/ContactTextArea.vue'
-import AppButton from '@/components/AppButton.vue'
-
 const name = ref('')
 const email = ref('')
 const mobileNumber = ref('')
@@ -21,15 +15,18 @@ function showContactForm () {
 </script>
 
 <template>
-  <main>
-    <section>
-      <div class="description">
-        <SpeechBubble>
+  <main class="flex flex-col gap-20 tablet:flex-row tablet:justify-between">
+    <section class="w-full">
+      <div class="description flex flex-col w-full px-1">
+        <SpeechBubble class="flex flex-col gap-6 py-24">
           <h1>
             Get in touch with us
           </h1>
         </SpeechBubble>
-        <SpeechBubble class="speech-bubble" alignment="right">
+        <SpeechBubble
+          class="flex flex-col gap-6 py-24"
+          alignment="right"
+        >
           <div>
             <h1>Location</h1>
             <h2>Dubai Marina, Dubai, UAE</h2>
@@ -45,8 +42,8 @@ function showContactForm () {
         </SpeechBubble>
       </div>
     </section>
-    <section>
-      <form>
+    <section class="w-full">
+      <form class="flex flex-col gap-4 border-4 border-dashed border-secondary rounded-3xl p-12">
         <ContactField v-model="name" name="name">
           Name
         </ContactField>
@@ -59,8 +56,8 @@ function showContactForm () {
         <ContactTextArea v-model="message" name="message">
           Message
         </ContactTextArea>
-        <div class="btn-container">
-          <AppButton class="button" @click="showContactForm()">
+        <div class="flex justify-center items-center w-full">
+          <AppButton class="w-full" @click="showContactForm()">
             Send Message
           </AppButton>
         </div>
@@ -73,55 +70,5 @@ function showContactForm () {
 
     main {
         padding: $margin-width;
-        @include flex-col;
-        gap: 5em;
-
-        @include media(tablet){
-            flex-direction: row;
-            justify-content: space-between
-        }
-
-        section {
-            width: 100%
-        }
-    }
-
-    .description {
-        @include flex-col;
-        width: 100%;
-        padding-inline: .25em;
-
-        h1, h2 {
-            margin-block: 0em;
-        }
-
-        h2 {
-            text-transform: initial;
-        }
-
-        .speech-bubble {
-            @include flex-col;
-            gap: 1.5em;
-            padding-block: 2em;
-        }
-    }
-
-    form {
-        @include flex-col;
-        gap: 1em;
-
-        border: 4px dashed $clr-secondary;
-        border-radius: 20px;
-        padding: 3em;
-    }
-
-    .btn-container {
-        width: 100%;
-        @include flex;
-        @include flex-centered;
-
-        .button {
-            width: 100%;
-        }
     }
 </style>

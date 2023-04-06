@@ -54,11 +54,11 @@ const toggledStyle = computed(() => {
       :class="toggledStyle.slider"
       class="relative pointer-events-auto -translate-x-full bg-primary max-w-full h-full transition-all ease-out duration-150 desktop:flex-row desktop:w-1/2"
     >
-      <div class="absolute right-0 pt-mobile pr-mobile">
+      <div class="absolute right-0 pt-mobile-h pr-mobile-w">
         <!-- DEV: ButtonClose has a function for when the 'close-btn-clicked' emit is triggered -->
         <ButtonClose @close-btn-clicked="close" />
       </div>
-      <div class="flex flex-col h-full justify-center desktop:flex-row desktop:items-center desktop:justify-start desktop:grid desktop:grid-flow-col px-mobile">
+      <div class="flex flex-col h-full justify-center desktop:flex-row desktop:items-center desktop:justify-start desktop:grid desktop:grid-flow-col px-mobile-w">
         <img
           :src="imgSrc"
           alt=""
