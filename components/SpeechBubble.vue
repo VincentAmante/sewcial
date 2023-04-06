@@ -31,7 +31,7 @@ const alignmentStyle = computed(() => {
 <!-- Template with defined slots -->
 <!-- Currently, content by default goes to the one without a name -->
 <!-- Slot 'Icon' has no implementation yet -->
-<template lang="">
+<template>
   <div
     class=" speech-bubble relative rounded-3xl text-primary m-2 mx-3 p-2 px-7 w-fit max-w-[55ch] break-words"
     :class="[alignment, alignmentStyle.wrapper]"
