@@ -1,20 +1,10 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
 import 'v-calendar/style.css'
-
 import { DatePicker } from 'v-calendar'
-import SpeechBubble from '@/components/SpeechBubble.vue'
-import DescriptionSlider from '@/components/DescriptionSlider.vue'
-import AppButton from '@/components/AppButton.vue'
-import ContactField from '@/components/FormFields/ContactField.vue'
-import StartTimePicker from '@/components/FormFields/StartTimePicker.vue'
-import EndTimePicker from '@/components/FormFields/EndTimePicker.vue'
-import BookingPeopleCount from '@/components/FormFields/BookingPeopleCount.vue'
-import TiltedHeading from '@/components/TiltedHeading.vue'
 
 // This creates an app-wide event to toggle the description slider
-function toggleTestSlider () {
-  window.dispatchEvent(new Event('toggle-test'))
+function toggleTestSlider (name: string) {
+  window.dispatchEvent(new Event(`toggle-${name}`))
 }
 
 const name = ref('')
@@ -58,13 +48,24 @@ const peopleCount = ref(0)
     </section> -->
     <!-- Just test divs, don't mind -->
     <div class="test">
-      <AppButton @click="() => toggleTestSlider()">
-        Test DescriptionSlider
+      <AppButton @click="() => toggleTestSlider('cafe')">
+        Sewcial Cafe
+      </AppButton>
+      <AppButton @click="() => toggleTestSlider('studio')">
+        Sewcial Studio
       </AppButton>
 
-      <DescriptionSlider name="test" img-src="/images/placeholders/studio.png">
+      <AppButton @click="() => toggleTestSlider('workshop')">
+        Sewcial Workshop
+      </AppButton>
+
+      <AppButton @click="() => toggleTestSlider('lounge')">
+        Sewcial Lounge
+      </AppButton>
+
+      <DescriptionSlider name="cafe" img-src="/images/placeholders/studio.png">
         <template #title>
-          Test Slider
+          Sewcial Cafe
         </template>
         <template #default>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
@@ -72,6 +73,67 @@ const peopleCount = ref(0)
         </template>
       </DescriptionSlider>
 
+      <DescriptionSlider name="studio" img-src="/images/placeholders/studio.png">
+        <template #title>
+          Sewcial Studio
+        </template>
+        <template #default>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
+          <div class="flex flex-col">
+            <SpeechBubble
+              class="flex justify-between items-center cursor-pointer"
+              @click="() => useRouter().push('/templates')"
+            >
+              <p class="text-alt uppercase">
+                Try our templates
+              </p>
+              <img src="/images/door.png" alt="">
+            </SpeechBubble>
+            <SpeechBubble
+              alignment="right"
+              class="flex flex-row-reverse justify-between items-center cursor-pointer"
+              @click="() => useRouter().push('/donate')"
+            >
+              <p class="text-alt uppercase">
+                Donate Here
+              </p>
+              <img src="/images/door-alt.png" alt="">
+            </SpeechBubble>
+          </div>
+        </template>
+      </DescriptionSlider>
+
+      <DescriptionSlider name="workshop" img-src="/images/placeholders/studio.png">
+        <template #title>
+          Sewcial Showcase
+        </template>
+        <template #default>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
+          <div class="flex flex-col">
+            <SpeechBubble
+              class="flex justify-between items-center cursor-pointer"
+              @click="() => useRouter().push('/shop/catalogue')"
+            >
+              <p class="text-alt uppercase">
+                See our Catalogue
+              </p>
+              <img src="/images/door.png" alt="">
+            </SpeechBubble>
+          </div>
+        </template>
+      </DescriptionSlider>
+
+      <DescriptionSlider name="lounge" img-src="/images/placeholders/studio.png">
+        <template #title>
+          Sewcial Lounge
+        </template>
+        <template #default>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
+        </template>
+      </DescriptionSlider>
       <!-- <form class="contact-field" action="">
         <ContactField v-model="name" name="name" is-required>
           Name

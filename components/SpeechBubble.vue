@@ -14,7 +14,7 @@ const alignmentStyle = computed(() => {
   }
   const rightStyling = {
     wrapper: ['self-end', 'bg-secondary'],
-    arrow: ['bg-b-secondary', 'border-r-[50px]', 'border-r-transparent', 'transform-y-2', 'translate-x-[2.5em]', 'rotate-[15deg]', 'right-0']
+    arrow: ['border-b-secondary', 'border-r-[50px]', 'border-r-transparent', 'transform-y-2', 'translate-x-[2.5em]', 'rotate-[15deg]', 'right-0']
   }
 
   switch (props.alignment) {
@@ -33,13 +33,13 @@ const alignmentStyle = computed(() => {
 <!-- Slot 'Icon' has no implementation yet -->
 <template>
   <div
-    class=" speech-bubble relative rounded-3xl text-primary m-2 mx-3 p-2 px-7 w-fit max-w-[55ch] break-words"
+    class="relative rounded-3xl text-primary m-2 mx-3 p-2 px-7 w-fit max-w-[55ch] break-words"
     :class="[alignment, alignmentStyle.wrapper]"
   >
     <slot name="icon" />
     <slot class="text" />
     <div
-      class="arrow absolute -z-[1] w-0 h-0 border-b-[20px] border-solid bottom-0"
+      class="absolute w-0 h-0 border-b-[20px] border-solid bottom-0"
       :class="[alignmentStyle.arrow]"
     />
   </div>
