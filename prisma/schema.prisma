@@ -24,19 +24,62 @@ model Author {
 }
 
 model Template {
-  id          String @id @default(uuid())
-  name        String
-  description String
-  detailsSrc  String
-  authorId    String
-  author      Author @relation(fields: [authorId], references: [id])
+  id                     String                   @id @default(uuid())
+  name                   String
+  description            String
+  detailsSrc             String
+  authorId               String
+  priceAED               Float
+  isFeatured             Boolean
+  author                 Author                   @relation(fields: [authorId], references: [id])
+  TemplateTagsOnTemplate TemplateTagsOnTemplate[]
 
   @@index([authorId])
 }
 
+enum TemplateTagType {
+  CATEGORY
+  STYLE
+}
+
+model TemplateTag {
+  id                     String                   @id @default(uuid())
+  name                   String
+  type                   TemplateTagType
+  TemplateTagsOnTemplate TemplateTagsOnTemplate[]
+}
+
+model TemplateTagsOnTemplate {
+  id            String      @id @default(uuid())
+  templateId    String
+  templateTagId String
+  template      Template    @relation(fields: [templateId], references: [id])
+  templateTag   TemplateTag @relation(fields: [templateTagId], references: [id])
+
+  @@index([templateId])
+  @@index([templateTagId])
+}
+
 model CatalogueItem {
-  id          String @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
   description String
   imageSrc    String
+  priceAED    Float
+  isFeatured  Boolean
+}
+
+model Event {
+  id        String   @id @default(uuid())
+  startTime DateTime
+  endTime   DateTime
+}
+
+model ContactSubmission {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  mobile    String
+  message   String
+  createdAt DateTime @default(now())
 }

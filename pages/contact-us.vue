@@ -7,13 +7,29 @@ const email = ref('')
 const mobileNumber = ref('')
 const message = ref('')
 
-function showContactForm () {
-  console.log({
-    name: name.value,
-    email: email.value,
-    mobileNumber: mobileNumber.value,
-    message: message.value
-  })
+async function submitContactForm () {
+  console.log('attempting to submit contact form')
+  console.log(name.value, email.value, mobileNumber.value, message.value)
+
+  if (name.value && message.value) {
+    const { data: response } = await useFetch('/api/ContactSubmissions/create', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        mobile: mobileNumber.value,
+        message: message.value
+      })
+    })
+    console.log(response.value)
+  }
+
+  // console.log({
+  //   name: name.value,
+  //   email: email.value,
+  //   mobileNumber: mobileNumber.value,
+  //   message: message.value
+  // })
 }
 </script>
 
@@ -58,7 +74,7 @@ function showContactForm () {
       </div>
     </section>
     <section class="w-full">
-      <form class="flex flex-col gap-4 border-4 border-dashed border-secondary rounded-3xl p-12">
+      <form class="flex flex-col gap-4 border-4 border-dashed border-secondary rounded-3xl p-12" @submit.prevent="submitContactForm()">
         <ContactField v-model="name" name="name">
           Name
         </ContactField>
@@ -72,7 +88,7 @@ function showContactForm () {
           Message
         </ContactTextArea>
         <div class="flex justify-center items-center w-full">
-          <AppButton class="w-full" @click="showContactForm()">
+          <AppButton class="w-full">
             Send Message
           </AppButton>
         </div>
