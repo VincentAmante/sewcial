@@ -55,7 +55,7 @@
         box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
         
         .card-image {
-          filter: brightness(100%);
+          filter: brightness(80%);
 
         }
       }
@@ -82,7 +82,7 @@
       border-radius: 15px 15px 0px 0px;
       width: 100%;
       vertical-align: middle;
-      filter: brightness(80%);
+      filter: brightness(100%);
 
     }
   }
