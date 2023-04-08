@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { z } from 'zod'
 import ContactField from '@/components/FormFields/ContactField.vue'
 import ContactTextArea from '@/components/FormFields/ContactTextArea.vue'
 
@@ -7,29 +8,46 @@ const email = ref('')
 const mobileNumber = ref('')
 const message = ref('')
 
-async function submitContactForm () {
-  console.log('attempting to submit contact form')
-  console.log(name.value, email.value, mobileNumber.value, message.value)
-
-  if (name.value && message.value) {
-    const { data: response } = await useFetch('/api/ContactSubmissions/create', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: name.value,
-        email: email.value,
-        mobile: mobileNumber.value,
-        message: message.value
-      })
-    })
-    console.log(response.value)
+function validateThenParse (input: string, validator: z.ZodType<any>) {
+  const parsed = validator.safeParse(input)
+  if (parsed.success) {
+    return {
+      status: 'success',
+      result: parsed.data
+    }
+  } else {
+    return {
+      status: 'error',
+      result: parsed.error
+    }
   }
+}
 
-  // console.log({
-  //   name: name.value,
-  //   email: email.value,
-  //   mobileNumber: mobileNumber.value,
-  //   message: message.value
-  // })
+async function submitContactForm () {
+  const nameInput = validateThenParse(name.value, z.string().min(0))
+  const emailInput = validateThenParse(email.value, z.string().email())
+  const mobileNumberInput = validateThenParse(mobileNumber.value, z.string().min(0))
+  const messageInput = validateThenParse(message.value, z.string().min(0))
+
+  if (nameInput.status === 'error' ||
+  emailInput.status === 'error' ||
+  mobileNumberInput.status === 'error' ||
+  messageInput.status === 'error') {
+    console.log('submission failed')
+  } else {
+    console.log('submission success')
+
+    // const { data: response } = await useFetch('/api/ContactSubmissions/create', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     name: name.value,
+    //     email: email.value,
+    //     mobile: mobileNumber.value,
+    //     message: message.value
+    //   })
+    // })
+    // console.log(response.value)
+  }
 }
 </script>
 
