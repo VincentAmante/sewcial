@@ -3,6 +3,10 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
 import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import Pagination from '@/components/Pagination.vue'
+
+definePageMeta({
+  layout: 'shop'
+})
 </script>
 
 <template>

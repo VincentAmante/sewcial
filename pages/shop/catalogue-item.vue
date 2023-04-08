@@ -2,6 +2,10 @@
 import LikeMeButton from '@/components/LikeMeButton.vue'
 import ItemDescription from '@/components/ItemDescription.vue'
 import ItemImage from '@/components/ItemImage.vue'
+
+definePageMeta({
+  layout: 'shop'
+})
 </script>
 
 <template>
