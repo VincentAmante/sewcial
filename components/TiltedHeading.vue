@@ -29,7 +29,7 @@
         word-wrap: break-word;
         rotate: -5deg;
         &.left {
-            align-self: flex-start;
+            // align-self: flex-start;
             background-color: $clr-accent-1;
         }
     }
