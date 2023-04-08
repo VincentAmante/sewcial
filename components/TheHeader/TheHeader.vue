@@ -26,7 +26,7 @@ const setColour = (page: String) => {
   // Decides colours for the header
   switch (page) {
     case 'home':
-    // case '':
+    case '':
       return 'primary'
     case 'test':
     case 'about':
