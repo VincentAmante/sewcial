@@ -33,7 +33,6 @@ async function submitContactForm () {
   emailInput.status === 'error' ||
   mobileNumberInput.status === 'error' ||
   messageInput.status === 'error') {
-    console.log('submission failed')
   } else {
     console.log('submission success')
 
@@ -46,6 +45,8 @@ async function submitContactForm () {
         message: message.value
       })
     })
+
+    console.log(response.value)
   }
 }
 </script>
