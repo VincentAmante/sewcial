@@ -37,16 +37,15 @@ async function submitContactForm () {
   } else {
     console.log('submission success')
 
-    // const { data: response } = await useFetch('/api/ContactSubmissions/create', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     name: name.value,
-    //     email: email.value,
-    //     mobile: mobileNumber.value,
-    //     message: message.value
-    //   })
-    // })
-    // console.log(response.value)
+    const { data: response } = await useFetch('/api/ContactSubmissions/create', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        mobile: mobileNumber.value,
+        message: message.value
+      })
+    })
   }
 }
 </script>
