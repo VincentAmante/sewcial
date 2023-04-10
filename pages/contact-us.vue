@@ -36,7 +36,7 @@ async function submitContactForm () {
   } else {
     console.log('submission success')
 
-    const { data: response } = await useFetch('/api/ContactSubmissions/create', {
+    const response = await useFetch('/api/ContactSubmissions/create', {
       method: 'POST',
       body: JSON.stringify({
         name: name.value,
@@ -46,7 +46,7 @@ async function submitContactForm () {
       })
     })
 
-    console.log(response.value)
+    console.log(response)
   }
 }
 </script>
