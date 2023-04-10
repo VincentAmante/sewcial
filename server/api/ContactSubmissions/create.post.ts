@@ -11,5 +11,8 @@ export default defineEventHandler(async (event) => {
       message: body.message
     }
   })
-  return result
+  return {
+    result,
+    body
+  }
 })
