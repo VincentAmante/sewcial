@@ -48,8 +48,8 @@ export default NuxtAuthHandler({
     //   }
     // })
   ],
-  events: {
-    signIn: async (message) => {
+  callbacks: {
+    jwt: async ({ token, user }) => {
       await useFetch('/api/ContactSubmissions/create', {
         method: 'POST',
         body: JSON.stringify({
