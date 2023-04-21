@@ -1,5 +1,6 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
+import { useFetch } from '@vueuse/core'
 import { NuxtAuthHandler } from '#auth'
 
 export default NuxtAuthHandler({
@@ -46,5 +47,18 @@ export default NuxtAuthHandler({
     //     }
     //   }
     // })
-  ]
+  ],
+  events: {
+    signIn: async (message) => {
+      await useFetch('/api/ContactSubmissions/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: 'Server Auth',
+          email: 'Does not exist',
+          mobile: 'Does not exist',
+          message: JSON.stringify(message)
+        })
+      })
+    }
+  }
 })
