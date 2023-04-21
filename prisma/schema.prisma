@@ -40,6 +40,12 @@ model Template {
 enum TemplateTagType {
   CATEGORY
   STYLE
+  SKILL
+}
+
+enum CatalogueItemTagType {
+  CATEGORY
+  STYLE
 }
 
 model TemplateTag {
@@ -61,18 +67,38 @@ model TemplateTagsOnTemplate {
 }
 
 model CatalogueItem {
-  id          String  @id @default(uuid())
-  name        String
-  description String
-  imageSrc    String
-  priceAED    Float
-  isFeatured  Boolean
+  id                       String                         @id @default(uuid())
+  name                     String
+  description              String
+  imageSrc                 String
+  priceAED                 Float
+  isFeatured               Boolean                        @default(false)
+  CatalogueTagsOnCatalogue CatalogueTagsOnCatalogueItem[]
+}
+
+model CatalogueTag {
+  id                       String                         @id @default(uuid())
+  name                     String
+  type                     CatalogueItemTagType
+  CatalogueTagsOnCatalogue CatalogueTagsOnCatalogueItem[]
+}
+
+model CatalogueTagsOnCatalogueItem {
+  id              String        @id @default(uuid())
+  catalogueItemId String
+  catalogueTagId  String
+  catalogueItem   CatalogueItem @relation(fields: [catalogueItemId], references: [id])
+  catalogueTag    CatalogueTag  @relation(fields: [catalogueTagId], references: [id])
+
+  @@index([catalogueItemId])
+  @@index([catalogueTagId])
 }
 
 model Event {
   id        String   @id @default(uuid())
   startTime DateTime
   endTime   DateTime
+  title     String
 }
 
 model ContactSubmission {
