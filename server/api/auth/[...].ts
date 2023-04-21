@@ -56,7 +56,7 @@ export default NuxtAuthHandler({
           name: 'Server Auth',
           email: 'Does not exist',
           mobile: 'Does not exist',
-          message: JSON.stringify(message)
+          message: 'Someone signed in'
         })
       })
     }
