@@ -1,28 +1,24 @@
 <script setup lang="ts">
-// Variables passed to this component are props
-const props = defineProps({
-  alignment: {
-    type: String,
-    default: 'left'
-  }
-})
+    // Variables passed to this component are props
+    const props = defineProps({
+        alignment: {
+            type: String,
+            default: 'left'
+        }
+    })
 </script>
 
 <!-- Template with defined slots -->
 <!-- Currently, content by default goes to the one without a name -->
 <template lang="">
-  <h1 class="heading" :class="alignment">
-    <slot />
-  </h1>
+    <p class="text-h-tilted tilted-text" :class="alignment">
+        <slot></slot>
+    </p>
 </template>
 
 <!-- Scoped Styling -->
 <style scoped lang="scss">
-    .heading {
-        // background-color: $clr-accent-1;
-        // color: $clr-primary;
-        // padding: 5px 10px 5px 10px;
-        // border-radius: 5px;
+    .tilted-text {
         border-radius: 5px;
         padding-block: 5px;
         padding-inline: 10px;
@@ -33,7 +29,7 @@ const props = defineProps({
         word-wrap: break-word;
         rotate: -5deg;
         &.left {
-            align-self: flex-start;
+            // align-self: flex-start;
             background-color: $clr-accent-1;
         }
     }

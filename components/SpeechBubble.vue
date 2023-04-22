@@ -6,63 +6,41 @@ const props = defineProps({
     default: 'left'
   }
 })
+
+const alignmentStyle = computed(() => {
+  const leftStyling = {
+    wrapper: ['self-start', 'bg-accent-1'],
+    arrow: ['border-l-[50px]', 'border-l-transparent', '-transform-y-2', 'translate-x-[-2.5em]', 'rotate-[-15deg]', 'left-0', 'border-b-accent-1']
+  }
+  const rightStyling = {
+    wrapper: ['self-end', 'bg-secondary'],
+    arrow: ['border-b-secondary', 'border-r-[50px]', 'border-r-transparent', 'transform-y-2', 'translate-x-[2.5em]', 'rotate-[15deg]', 'right-0']
+  }
+
+  switch (props.alignment) {
+    case 'right':
+      return rightStyling
+    case 'left':
+      return leftStyling
+    default:
+      return leftStyling
+  }
+})
 </script>
 
 <!-- Template with defined slots -->
 <!-- Currently, content by default goes to the one without a name -->
 <!-- Slot 'Icon' has no implementation yet -->
-<template lang="">
-  <div class="speech-bubble" :class="alignment">
+<template>
+  <div
+    class="relative rounded-3xl text-primary m-2 mx-3 p-2 px-7 w-fit max-w-[55ch] break-words"
+    :class="[alignment, alignmentStyle.wrapper]"
+  >
     <slot name="icon" />
     <slot class="text" />
-    <div class="arrow" />
+    <div
+      class="absolute w-0 h-0 border-b-[20px] border-solid bottom-0"
+      :class="[alignmentStyle.arrow]"
+    />
   </div>
 </template>
-
-<!-- Scoped Styling -->
-<style scoped lang="scss">
-    .speech-bubble {
-        border-radius: 20px;
-        color: $clr-primary;
-        margin: 5px;
-        padding: .35em;
-        padding-inline: 1.75em;
-        width: fit-content;
-        position: relative;
-
-        max-width: 50ch;
-        word-wrap: break-word;
-        &.left {
-            align-self: flex-start;
-            background-color: $clr-accent-1;
-
-            .arrow {
-                z-index: -1;
-                width: 0;
-                height: 0;
-                border-bottom: 20px solid $clr-accent-1;
-                border-left: 50px solid transparent;
-                left: 0px;
-                bottom: 0px;
-                transform: translateY(-.05em) translateX(-2.5em) rotate(-15deg);
-                position: absolute;
-            }
-        }
-        &.right {
-            align-self: flex-end;
-            background-color: $clr-secondary;
-
-            .arrow {
-                z-index: -1;
-                width: 0;
-                height: 0;
-                border-bottom: 20px solid $clr-secondary;
-                border-right: 50px solid transparent;
-                right: 0px;
-                bottom: 0px;
-                transform: translateY(-.05em) translateX(2.5em) rotate(15deg);
-                position: absolute;
-            }
-        }
-    }
-</style>

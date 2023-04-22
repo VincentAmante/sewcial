@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import SpeechBubble from '@/components/SpeechBubble.vue'
-import DropdownTab from '~~/components/DropdownTab.vue.js'
 import CatalogueCard from '@/components/CatalogueCard.vue'
-import IconFilter from '@/components/icons/IconFilter.vue'
+import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
 import Pagination from '@/components/Pagination.vue'
 
 definePageMeta({
@@ -25,10 +24,11 @@ definePageMeta({
         </SpeechBubble>
       </div>
     </div>
+
     <div class="catalogue-container">
       <!-- Filters -->
       <div class="filters-dropdown">
-        <IconFilter />
+        <IconFilterBlue />
         <p>FILTER</p>
       </div>
       <div class="filters-container">

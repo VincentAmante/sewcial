@@ -16,14 +16,14 @@ const props = defineProps({
 
 <!-- Team Member Card -->
 <template>
-<div class="team-container">
+<!-- <div class="team-container"> -->
     <div class="member-card">
         <div class="member-image">
             <img :src="imgSrc">
         </div>
         <div class="member-details">
             <div class="member-name" :class="alignment"> 
-            <h3><slot name="name"></slot></h3>
+            <p><slot name="name"></slot></p>
             </div>
 
             <div class="member-role">
@@ -31,7 +31,7 @@ const props = defineProps({
             </div>
         </div>
     </div>
-</div>
+<!-- </div> -->
 </template>
 
 <!-- Scoped Styling -->
@@ -41,6 +41,9 @@ const props = defineProps({
     text-align: center;
     margin: 10px;
 }
+img{
+    width: 100%;
+}
 .member-card:hover{
     transform: scale(1.1);
     transition: transform 0.5s;
@@ -49,6 +52,13 @@ const props = defineProps({
 }
 .member-role{
     margin-top: -10px;
+}
+.member-name p{
+    color: $clr-primary;
+    font-weight: 500;
+}
+.member-role p{
+    color: $clr-accent-2;
 }
 // .team-container{
 //     @include flex;

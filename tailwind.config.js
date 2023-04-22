@@ -25,8 +25,8 @@ module.exports = {
       colors: {
         primary: '#FFFAE0',
         secondary: '#607BDA',
-        accent1: '#FF96C3',
-        accent2: '#FFC6A5',
+        'accent-1': '#FF96C3',
+        'accent-2': '#FFC6A5',
         dark: '#282A2F'
       },
       fontSize: {
@@ -39,6 +39,14 @@ module.exports = {
         '4xl': 'clamp(18px, 2.5vmax, 50px)', // tilted
         '5xl': 'clamp(30px, 5vmax, 90px)', // big boy
         '6xl': 'clamp(55px, 5vmax, 150px)' // giant
+      },
+      spacing: {
+        'mobile-w': '1.875rem',
+        'mobile-h': '1.6rem',
+        'desktop-w': '16rem',
+        'desktop-h': '3.125rem',
+        'default-w': 'clamp(1.875rem, 10vw, 16rem)',
+        'default-h': 'clamp(1.6rem, 10vh, 3.125rem)'
       }
     }
   }

@@ -2,6 +2,7 @@
 // Import Plus
 import IconPlus from '@/components/icons/IconPlus.vue'
 
+//
 // Variables passed to this component are props
 const props = defineProps({
   alignment: {

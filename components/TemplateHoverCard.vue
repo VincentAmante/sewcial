@@ -1,16 +1,7 @@
 <script setup lang="ts">
-
-// Import download button icon
-import ButtonDownload from './icons/ButtonDownload.vue';
-
+import ButtonDownload from '@/components/icons/ButtonDownload.vue';
 // Variables passed to this component are props
 const props = defineProps({
-    alignment: {
-        type: String,
-        required: true,
-        default: 'left'
-    },
-
     image: {
         type: String,
         required: true
@@ -20,16 +11,17 @@ const props = defineProps({
 
 <!-- Browse Image Card Templates -->
 <template>
-    <div class="cards-container">
-        <div class="card">
-          <div class="card-image" :style="{ backgroundImage: `url(${image})` }"></div>
-            <div class="card-info-container">
-                <div class="card-info" :class="alignment">
-                    <div class="card-text">
-                        <slot name="text"></slot>
-                    </div>
-                    <ButtonDownload></ButtonDownload>
+    <div class="card info-Slide-up">
+        <!-- Image -->
+            <img :src="image" />            
+        <!-- Info -->
+        <div class="info-container">
+            <div class="info-wrapper">
+                <div class="card-text">
+                    <h1><slot name="item-name"></slot></h1>
+                    <h3><slot name="owner-name"></slot></h3>
                 </div>
+                <ButtonDownload class="btn-download"></ButtonDownload>
             </div>
         </div>
     </div>
@@ -37,68 +29,62 @@ const props = defineProps({
 
 <!-- Scoped Styling -->
 <style scoped lang="scss">
-    .cards-container {
-        padding: 10px;
-    }
     .card {
-        position: relative;
-        height: 0;
-        padding-bottom: 100%;
+    position: relative;
+    width: 100%;
+    color:#fff;
+    overflow: hidden;
+    border-radius: 10px;
     }
-    .card-info {
+    img{
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: $clr-primary;
-        padding-block: 0;
-        padding-inline: 1.5rem;
+        height: 100%;
     }
-    // Images
-    .card-image{
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        border-radius: 20px;
-        width: 100%;
-        vertical-align: middle;
+    .card-text{
+        color: $clr-text;
     }
-    .card-image:hover{
+    .info-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    .info-container {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: $clr-primary;
+    padding: 0 15px 0 15px;
+    transform: translateY(100%);
+    backface-visibility: hidden;
+    transition: opacity 0.1s 0.3s, -webkit-transform 0.4s;
+    transition: transform 0.4s, opacity 0.1s 0.3s;
+    transition: transform 0.4s, opacity 0.1s 0.3s, -webkit-transform 0.4s;
+    border-radius: 0 0 10px 10px;
+    }
+
+    .info-Slide-up:hover{
+    cursor: pointer;
+        img{
         box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
         filter: brightness(80%);
-        cursor: pointer;
+        }
     }
-    .card:hover .card-info{
-        height: 6rem;
-        transform: translateY(0);
-        cursor: pointer;
-        border-top: 3px dashed $clr-primary;
-    }
-
-    // Moved styling to a container here
-    .card-info-container {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 0;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        // background-color: #fff;
-        color: $clr-text;
-        // padding: 0 1.5rem;
-        border-radius: 0px 0px 20px 20px;
-        overflow: hidden; /* hide content that overflows */
-        transition: height 0.3s ease-in-out; /* animate height change */
+    .info-Slide-up:hover .info-container {
+    transform: translateY(0px);
+    transition: opacity 0.1s, -webkit-transform 0.4s;
+    transition: transform 0.4s, opacity 0.1s;
+    transition: transform 0.4s, opacity 0.1s, -webkit-transform 0.4s;
+    // border-top: 3px dashed $clr-primary;
     }
 
-    .card:hover .card-info-container {
-        height: 6rem;
-        transform: translateY(0);
-        cursor: pointer;
-        border-top: 3px dashed $clr-primary;
+    .btn-download{
+        width: 40px;
+        height: 40px;
+        @include media(desktop) {
+            width: 50px;
+            height: 50px;
+        }
     }
 </style>

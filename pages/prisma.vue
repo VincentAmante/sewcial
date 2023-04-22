@@ -1,6 +1,6 @@
 <!-- prisma.vue -->
 <script setup lang="ts">
-const { data: examples } = useFetch('/api/examples')
+const { data: examples } = useFetch('/api/examples/get')
 </script>
 
 <template>

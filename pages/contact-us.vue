@@ -1,52 +1,98 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import SpeechBubble from '@/components/SpeechBubble.vue'
+import { z } from 'zod'
 import ContactField from '@/components/FormFields/ContactField.vue'
 import ContactTextArea from '@/components/FormFields/ContactTextArea.vue'
-import AppButton from '@/components/AppButton.vue'
 
 const name = ref('')
 const email = ref('')
 const mobileNumber = ref('')
 const message = ref('')
 
-function showContactForm () {
-  console.log({
-    name: name.value,
-    email: email.value,
-    mobileNumber: mobileNumber.value,
-    message: message.value
-  })
+function validateThenParse (input: string, validator: z.ZodType<any>) {
+  const parsed = validator.safeParse(input)
+  if (parsed.success) {
+    return {
+      status: 'success',
+      result: parsed.data
+    }
+  } else {
+    return {
+      status: 'error',
+      result: parsed.error
+    }
+  }
+}
+
+async function submitContactForm () {
+  const nameInput = validateThenParse(name.value, z.string().min(0))
+  const emailInput = validateThenParse(email.value, z.string().email())
+  const mobileNumberInput = validateThenParse(mobileNumber.value, z.string().min(0))
+  const messageInput = validateThenParse(message.value, z.string().min(0))
+
+  if (nameInput.status === 'error' ||
+  emailInput.status === 'error' ||
+  mobileNumberInput.status === 'error' ||
+  messageInput.status === 'error') {
+  } else {
+    console.log('submission success')
+
+    const response = await useFetch('/api/ContactSubmissions/create', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        mobile: mobileNumber.value,
+        message: message.value
+      })
+    })
+
+    console.log(response)
+  }
 }
 </script>
 
 <template>
-  <main>
-    <section>
-      <div class="description">
-        <SpeechBubble>
+  <main class="flex flex-row gap-20 mx-default-w tablet:flex-row tablet:justify-between">
+    <section class="w-full">
+      <div class="flex flex-col w-full px-1">
+        <SpeechBubble class="flex flex-col gap-6 py-8">
           <h1>
             Get in touch with us
           </h1>
         </SpeechBubble>
-        <SpeechBubble class="speech-bubble" alignment="right">
+        <SpeechBubble
+          class="flex flex-col gap-4 py-8"
+          alignment="right"
+        >
           <div>
-            <h1>Location</h1>
-            <h2>Dubai Marina, Dubai, UAE</h2>
+            <h1 class="my-0">
+              Location
+            </h1>
+            <h2 class="my-0 font-normal">
+              Dubai Marina, Dubai, UAE
+            </h2>
           </div>
           <div>
-            <h1>Phone Number</h1>
-            <h2>+971 00 000 000</h2>
+            <h1 class="my-0">
+              Phone Number
+            </h1>
+            <h2 class="my-0 font-normal">
+              +971 00 000 000
+            </h2>
           </div>
           <div>
-            <h1>Email</h1>
-            <h2>sewcial@gmail.com</h2>
+            <h1 class="my-0">
+              Email
+            </h1>
+            <h2 class="my-0 font-normal">
+              sewcial@gmail.com
+            </h2>
           </div>
         </SpeechBubble>
       </div>
     </section>
-    <section>
-      <form>
+    <section class="w-full">
+      <form class="flex flex-col gap-4 border-4 border-dashed border-secondary rounded-3xl p-12" @submit.prevent="submitContactForm()">
         <ContactField v-model="name" name="name">
           Name
         </ContactField>
@@ -59,8 +105,8 @@ function showContactForm () {
         <ContactTextArea v-model="message" name="message">
           Message
         </ContactTextArea>
-        <div class="btn-container">
-          <AppButton class="button" @click="showContactForm()">
+        <div class="flex justify-center items-center w-full">
+          <AppButton class="w-full">
             Send Message
           </AppButton>
         </div>
@@ -73,55 +119,13 @@ function showContactForm () {
 
     main {
         padding: $margin-width;
-        @include flex-col;
-        gap: 5em;
-
-        @include media(tablet){
-            flex-direction: row;
-            justify-content: space-between
-        }
-
-        section {
-            width: 100%
-        }
-    }
-
-    .description {
-        @include flex-col;
-        width: 100%;
-        padding-inline: .25em;
 
         h1, h2 {
-            margin-block: 0em;
+          margin-block: 0;
         }
-
         h2 {
-            text-transform: initial;
-        }
-
-        .speech-bubble {
-            @include flex-col;
-            gap: 1.5em;
-            padding-block: 2em;
-        }
-    }
-
-    form {
-        @include flex-col;
-        gap: 1em;
-
-        border: 4px dashed $clr-secondary;
-        border-radius: 20px;
-        padding: 3em;
-    }
-
-    .btn-container {
-        width: 100%;
-        @include flex;
-        @include flex-centered;
-
-        .button {
-            width: 100%;
+          font-weight: 400;
+          text-transform: none;
         }
     }
 </style>

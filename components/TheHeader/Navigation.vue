@@ -45,7 +45,7 @@ const secondaryColour = computed(() => {
     <div class="logo-container">
       <HeaderLogo class="logo" :colour="secondaryColour" />
     </div>
-    <ul class="routes">
+    <ul class="routes uppercase">
       <li id="nav-home">
         <a href="/">
           Map

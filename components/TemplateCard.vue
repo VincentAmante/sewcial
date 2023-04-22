@@ -35,24 +35,28 @@
 <!-- Scoped Styling -->
 <style scoped lang="scss">
 .cards {
-    padding: .75em;
-    margin: 5px;
+    margin: 10px;
     
     .card {
       flex-direction: column;
       color: $clr-text;
       background-color: $clr-primary;
-      width: 100%; // change this depending on the thign
-      border-radius: 20px;
-      transition: transform 300ms linear;
+      width: 180px; // change this depending on the thign
+      height: 300px;
+      border-radius: 15px;
+
+      @include media(desktop) {
+        width: 260px;
+        height: 370px;
+      }
   
       &:hover {
         cursor: pointer;
-        transform: scale(1);
         box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
         
         .card-image {
-          filter: brightness(100%);
+          filter: brightness(80%);
+
         }
       }
     }
@@ -61,7 +65,7 @@
     .card-info {
       flex-direction: column;
       padding: 1rem;
-      text-align: left;
+      justify-content: center;
 
       h1, h3 {
         margin: 0;
@@ -75,10 +79,10 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      border-radius: 20px 20px 0px 0px;
+      border-radius: 15px 15px 0px 0px;
       width: 100%;
       vertical-align: middle;
-      filter: brightness(90%);
+      filter: brightness(100%);
 
     }
   }

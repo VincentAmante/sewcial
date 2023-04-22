@@ -17,10 +17,12 @@ const props = defineProps({
   }
 })
 
-// Listens for an event based on the prop<name> to open
-// See TestViewIcen to see how that operates
-window.addEventListener(`toggle-${props.name}`, () => {
-  isOpen.value = true
+onMounted(() => {
+  // Listens for an event based on the prop<name> to open
+  // See TestViewIcen to see how that operates
+  window.addEventListener(`toggle-${props.name}`, () => {
+    isOpen.value = true
+  })
 })
 
 function close () {
@@ -30,29 +32,43 @@ function close () {
 // Computed variables will watch for certain variables inside its code
 const toggledStyle = computed(() => {
   if (isOpen.value) {
-    return 'toggled'
+    return {
+      wrapper: ['bg-black', 'bg-opacity-20', 'pointer-events-auto'],
+      slider: ['transform-none', 'translate-x-0']
+    }
   } else {
-    return ''
+    return {
+      wrapper: [''],
+      slider: ['']
+    }
   }
 })
 </script>
 
 <template>
-  <div class="description-slider-wrapper" :class="toggledStyle">
-    <div class="description-slider">
-      <div class="button-close">
+  <div
+    :class="toggledStyle.wrapper"
+    class="absolute top-0 left-0 w-screen h-screen z-[105] overflow-hidden pointer-events-none transition-all ease-out duration-150"
+  >
+    <div
+      :class="toggledStyle.slider"
+      class="relative pointer-events-auto -translate-x-full bg-primary max-w-full h-full transition-all ease-out duration-150 desktop:flex-row desktop:w-1/2"
+    >
+      <div class="absolute right-0 pt-mobile-h pr-mobile-w">
         <!-- DEV: ButtonClose has a function for when the 'close-btn-clicked' emit is triggered -->
         <ButtonClose @close-btn-clicked="close" />
       </div>
-      <div class="slider-content">
-        <div class="img-wrapper">
-          <img :src="imgSrc" alt="">
-        </div>
-        <div class="content">
+      <div class="flex flex-col h-full justify-center desktop:flex-row desktop:items-center desktop:justify-start desktop:grid desktop:grid-flow-col px-mobile-w">
+        <img
+          :src="imgSrc"
+          alt=""
+          class="w-full object-contain max-h-80"
+        >
+        <div class="content text-secondary">
           <h1>
             <slot name="title" />
           </h1>
-          <div class="description">
+          <div class="description text-justify relative">
             <slot />
           </div>
         </div>
@@ -60,87 +76,3 @@ const toggledStyle = computed(() => {
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-    .description-slider-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 105;
-        pointer-events: none;
-
-        .description-slider {
-            pointer-events: all;
-
-            // opacity: 0;
-            position: relative;
-            transition: all ease-out .15s;
-            transform: translateX(-100%);
-            background-color: $clr-primary;
-            max-width: 100%;
-            height: 100vh;
-
-            .button-close {
-                position: absolute;
-                right: 0;
-                padding-top: $margin-height-mobile;
-                padding-right: $margin-width-mobile;
-            }
-
-            .slider-content {
-                @include flex-col;
-                height: 100%;
-                justify-content: center;
-                padding-inline: $margin-width-mobile;
-
-                .content {
-                    color: $clr-secondary;
-
-                    .description {
-                        &:deep(p) {
-                            color: $clr-secondary;
-                            text-align: justify;
-                        }
-                    }
-
-                }
-            }
-
-            @include media(lg){
-                flex-direction: row;
-                width: 50vw;
-                .slider-content {
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: flex-start;
-                    padding-left: initial;
-
-                    .content {
-                        max-width: 50%;
-                    }
-                }
-            }
-        }
-
-        &.toggled {
-            background-color: rgba(0, 0, 0, 0.2);
-            pointer-events: initial;
-
-            .description-slider {
-                transform: initial;
-            }
-        }
-
-        .img-wrapper {
-            max-width: 100vw;
-            object-fit: contain;
-
-            img {
-                width: 100%;
-            }
-        }
-    }
-
-</style>

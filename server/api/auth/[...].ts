@@ -1,5 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
+import { useFetch } from '@vueuse/core'
+import { PrismaClient } from '@prisma/client'
 import { NuxtAuthHandler } from '#auth'
 
 export default NuxtAuthHandler({
@@ -46,5 +48,30 @@ export default NuxtAuthHandler({
     //     }
     //   }
     // })
-  ]
+  ],
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      const prisma: PrismaClient = new PrismaClient()
+
+      const isSignIn = !!user
+      if (isSignIn) {
+        token.jwt = user ? (user as any).access_token || '' : ''
+        token.id = user ? user.id || '' : ''
+        token.role = user ? (user as any).role || '' : ''
+      }
+      return Promise.resolve(token)
+    },
+
+    // Callback whenever session is checked, see https://next-auth.js.org/configuration/callbacks#session-callback
+    session: async ({ session, token }) => {
+      (session as any).role = token.role;
+      (session as any).uid = token.id + '-test-session'
+      return Promise.resolve(session)
+    }
+    // jwt: async ({ token, user }) => {
+
+    //   return Promise.resolve(token)
+    // }
+
+  }
 })

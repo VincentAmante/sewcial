@@ -30,7 +30,9 @@ npm run dev
 ## Recommended Extensions (on top of the ones from sewcial)
 
 - [Tailwind IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
 - [Inline Fold (for hiding long Tailwind Classes)](https://marketplace.visualstudio.com/items?itemName=moalamri.inline-fold)
+- [Alternative: Tailwind Fold (Much newer but better imo)](https://marketplace.visualstudio.com/items?itemName=stivo.tailwind-fold)
 
 ## Conceptual Difference between Nuxt3 and Vue3
 
