@@ -53,15 +53,6 @@ export default NuxtAuthHandler({
     jwt: async ({ token, user }) => {
       const prisma: PrismaClient = new PrismaClient()
 
-      await prisma.contactSubmission.create({
-        data: {
-          name: 'Server Auth',
-          email: 'Does not exist',
-          mobile: 'Does not exist',
-          message: 'Someone signed in'
-        }
-      })
-
       const isSignIn = !!user
       if (isSignIn) {
         token.jwt = user ? (user as any).access_token || '' : ''
@@ -70,10 +61,11 @@ export default NuxtAuthHandler({
       }
       return Promise.resolve(token)
     },
+
     // Callback whenever session is checked, see https://next-auth.js.org/configuration/callbacks#session-callback
     session: async ({ session, token }) => {
       (session as any).role = token.role;
-      (session as any).uid = token.id + '-test-session'
+      (session as any).uid = token.id
       return Promise.resolve(session)
     }
     // jwt: async ({ token, user }) => {
