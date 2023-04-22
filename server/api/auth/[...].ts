@@ -50,7 +50,7 @@ export default NuxtAuthHandler({
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
-      await useFetch('/api/ContactSubmissions/create', {
+      await $fetch('/api/ContactSubmissions/create', {
         method: 'POST',
         body: JSON.stringify({
           name: 'Server Auth',
