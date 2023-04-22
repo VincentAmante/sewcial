@@ -1,6 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
 import { useFetch } from '@vueuse/core'
+import { PrismaClient } from '@prisma/client'
 import { NuxtAuthHandler } from '#auth'
 
 export default NuxtAuthHandler({
@@ -50,14 +51,15 @@ export default NuxtAuthHandler({
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
-      await $fetch('/api/ContactSubmissions/create', {
-        method: 'POST',
-        body: JSON.stringify({
+      const prisma: PrismaClient = new PrismaClient()
+
+      await prisma.contactSubmission.create({
+        data: {
           name: 'Server Auth',
           email: 'Does not exist',
           mobile: 'Does not exist',
           message: 'Someone signed in'
-        })
+        }
       })
 
       const isSignIn = !!user
