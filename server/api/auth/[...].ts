@@ -65,7 +65,7 @@ export default NuxtAuthHandler({
     // Callback whenever session is checked, see https://next-auth.js.org/configuration/callbacks#session-callback
     session: async ({ session, token }) => {
       (session as any).role = token.role;
-      (session as any).uid = token.id
+      (session as any).uid = token.id + '-test-session'
       return Promise.resolve(session)
     }
     // jwt: async ({ token, user }) => {
