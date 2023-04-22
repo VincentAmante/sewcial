@@ -51,7 +51,15 @@ export default NuxtAuthHandler({
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
-      const prisma: PrismaClient = new PrismaClient()
+      await $fetch('/api/ContactSubmissions/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: 'Server Auth',
+          email: 'Does not exist',
+          mobile: 'Does not exist',
+          message: 'Someone signed in'
+        })
+      })
 
       const isSignIn = !!user
       if (isSignIn) {
