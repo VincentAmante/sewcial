@@ -50,15 +50,33 @@ export default NuxtAuthHandler({
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
-      await useFetch('/api/ContactSubmissions/create', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: 'Server Auth',
-          email: 'Does not exist',
-          mobile: 'Does not exist',
-          message: 'Someone signed in'
-        })
-      })
+      const isSignIn = !!user
+      if (isSignIn) {
+        token.jwt = user ? (user as any).access_token || '' : ''
+        token.id = user ? user.id || '' : ''
+        token.role = user ? (user as any).role || '' : ''
+      }
+      return Promise.resolve(token)
+    },
+    // Callback whenever session is checked, see https://next-auth.js.org/configuration/callbacks#session-callback
+    session: async ({ session, token }) => {
+      (session as any).role = token.role;
+      (session as any).uid = token.id
+      return Promise.resolve(session)
     }
+    // jwt: async ({ token, user }) => {
+    //   await useFetch('/api/ContactSubmissions/create', {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       name: 'Server Auth',
+    //       email: 'Does not exist',
+    //       mobile: 'Does not exist',
+    //       message: 'Someone signed in'
+    //     })
+    //   })
+
+    //   return Promise.resolve(token)
+    // }
+
   }
 })
