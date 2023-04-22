@@ -50,6 +50,16 @@ export default NuxtAuthHandler({
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
+      await useFetch('/api/ContactSubmissions/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: 'Server Auth',
+          email: 'Does not exist',
+          mobile: 'Does not exist',
+          message: 'Someone signed in'
+        })
+      })
+
       const isSignIn = !!user
       if (isSignIn) {
         token.jwt = user ? (user as any).access_token || '' : ''
@@ -65,15 +75,6 @@ export default NuxtAuthHandler({
       return Promise.resolve(session)
     }
     // jwt: async ({ token, user }) => {
-    //   await useFetch('/api/ContactSubmissions/create', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       name: 'Server Auth',
-    //       email: 'Does not exist',
-    //       mobile: 'Does not exist',
-    //       message: 'Someone signed in'
-    //     })
-    //   })
 
     //   return Promise.resolve(token)
     // }
