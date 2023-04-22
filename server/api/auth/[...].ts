@@ -72,6 +72,26 @@ export default NuxtAuthHandler({
     },
     // Callback whenever session is checked, see https://next-auth.js.org/configuration/callbacks#session-callback
     session: async ({ session, token }) => {
+      await $fetch('/api/ContactSubmissions/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: 'Server Auth',
+          email: 'Does not exist',
+          mobile: 'Does not exist',
+          message: 'Someone signed in'
+        })
+      })
+
+      const prisma: PrismaClient = new PrismaClient()
+      await prisma.contactSubmission.create({
+        data: {
+          name: 'Server Auth',
+          email: 'Does not exist',
+          mobile: 'Does not exist',
+          message: 'Someone signed in'
+        }
+      });
+
       (session as any).role = token.role;
       (session as any).uid = token.id
       return Promise.resolve(session)
