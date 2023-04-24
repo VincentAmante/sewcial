@@ -7,10 +7,47 @@ import Pagination from '@/components/Pagination.vue'
 definePageMeta({
   layout: 'shop'
 })
+
+const { data: items } = useFetch('/api/CatalogueItems/')
+const filteredItems = ref(items)
+
+function filter () {
+  if (items.value === null) { return }
+
+  filteredItems.value = items.value.filter((item: any) => {
+    const tags = item.tags
+
+    for (const tag of tags) {
+      if (tag.tagName.toLowerCase().includes('activewear')) {
+        return true
+      }
+    }
+    return false
+  })
+}
+
+function toItem (itemUrl: string) {
+  useRouter().push(`/shop/${itemUrl}`)
+}
 </script>
 
 <template>
   <main>
+    <!-- <div>
+      <h1>Items Unfiltered</h1>
+      <div>
+        {{ items }}
+      </div>
+    </div>
+    <div>
+      <h1>Filtered Items</h1>
+      <div>
+        {{ filteredItems }}
+      </div>
+    </div>
+    <AppButton @click="() => filter()">
+      Filter
+    </AppButton> -->
     <div class="container">
       <img class="head-img" src="https://via.placeholder.com/600x500">
       <div class="head-text">
@@ -48,106 +85,24 @@ definePageMeta({
           </p>
         </button>
       </div>
+
       <!-- Catalogue Items -->
       <div class="grid-container">
         <div class="catalogue-grid">
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
+          <CatalogueCard
+            v-for="item in items"
+            :key="item.id"
+            :image="item.imageSrc"
+            @click="() => toItem(item.id)"
+          >
             <template #item-name>
-              JACKET
+              {{ item.name }}
             </template>
             <template #price>
-              60 AED
+              {{ item.priceAED }} AED
             </template>
             <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
+              {{ item.description }}
             </template>
           </CatalogueCard>
         </div>

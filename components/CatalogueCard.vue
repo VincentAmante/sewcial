@@ -1,38 +1,40 @@
 <script setup lang="ts">
-    // Variables passed to this component are props
-    const props = defineProps({
-        image: {
-          type: String,
-          required: true
-        },
+// Variables passed to this component are props
+const props = defineProps({
+  image: {
+    type: String,
+    required: true
+  },
 
-        available: {
-          type: String,
-          default: 'available'
-        }
-    })
+  available: {
+    type: String,
+    default: 'available'
+  }
+})
 </script>
 
 <!-- Card -->
 <template>
-    <div class="cards-container" onclick="location.href='html/image.html'">
-        <div class="card">
-          <div class="card-image" :class="available" :style="{ backgroundImage: `url(${image})` }">
-            <div class = "sold-text"><h1>SOLD</h1></div>
-          </div>
-        <div class="card-heading">
-            <h1 class = "item-name">
-              <slot name="item-name"></slot>
-            </h1>
-            <h1 class = "price">
-              <slot name="price"></slot>
-            </h1>
+  <div class="cards-container">
+    <div class="card">
+      <div class="card-image" :class="available" :style="{ backgroundImage: `url(${image})` }">
+        <div class="sold-text">
+          <h1>SOLD</h1>
         </div>
-            <p class="description">
-              <slot name="description"></slot>
-            </p>
-        </div>
+      </div>
+      <div class="card-heading">
+        <h1 class="item-name">
+          <slot name="item-name" />
+        </h1>
+        <h1 class="price">
+          <slot name="price" />
+        </h1>
+      </div>
+      <p class="description">
+        <slot name="description" />
+      </p>
     </div>
+  </div>
 </template>
 
 <!-- Scoped Styling -->
@@ -40,14 +42,14 @@
 .cards-container {
     padding: .75em;
     margin:5px;
-  
+
     .card {
       color: $clr-text;
       width: 100%; // change this depending on the thign
       border-radius:10px;
       transition: transform 0.5s;
     }
-  
+
     // Content
     .card-heading {
       display:flex;
@@ -76,7 +78,7 @@
         text-align: center;
         margin: 0;
     }
-  
+
     // Images
     .card-image{
       aspect-ratio: 3 / 4;
@@ -89,7 +91,7 @@
       vertical-align: middle;
 
       transition: transform 0.5s;
-  
+
       &:hover {
         cursor: pointer;
         transform: scale(1.1);
@@ -122,7 +124,7 @@
           color: #fff;
         }
       }
-      
+
     }
   }
 </style>
