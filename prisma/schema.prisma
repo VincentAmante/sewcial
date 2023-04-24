@@ -18,80 +18,106 @@ model Example {
 }
 
 model Author {
-  id        String     @id @default(uuid())
-  name      String
+  firstName String
+  lastName  String
   templates Template[]
+
+  @@id([firstName, lastName], name: "authorName")
 }
 
 model Template {
-  id                     String                   @id @default(uuid())
-  name                   String
-  description            String
-  detailsSrc             String
-  authorId               String
-  priceAED               Float
-  isFeatured             Boolean
-  author                 Author                   @relation(fields: [authorId], references: [id])
-  TemplateTagsOnTemplate TemplateTagsOnTemplate[]
+  id                 String               @id @default(uuid())
+  name               String
+  description        String
+  details            String
+  priceAED           Float
+  isFeatured         Boolean
+  MaterialOnTemplate MaterialOnTemplate[]
+  skill              Skill
+  CategoryTag        TemplateCategoryTag? @relation(fields: [categoryTagId], references: [id])
+  categoryTagId      String?
+  Author             Author?              @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
+  authorFirstName    String?
+  authorLastName     String?
 
-  @@index([authorId])
+  @@index([authorFirstName, authorLastName])
+  @@index([categoryTagId])
 }
 
-enum TemplateTagType {
-  CATEGORY
-  STYLE
-  SKILL
-}
-
-enum CatalogueItemTagType {
-  CATEGORY
-  STYLE
-}
-
-model TemplateTag {
-  id                     String                   @id @default(uuid())
-  name                   String
-  type                   TemplateTagType
-  TemplateTagsOnTemplate TemplateTagsOnTemplate[]
-}
-
-model TemplateTagsOnTemplate {
-  id            String      @id @default(uuid())
-  templateId    String
-  templateTagId String
-  template      Template    @relation(fields: [templateId], references: [id])
-  templateTag   TemplateTag @relation(fields: [templateTagId], references: [id])
-
-  @@index([templateId])
-  @@index([templateTagId])
+model TemplateCategoryTag {
+  id       String     @id @default(uuid())
+  name     String
+  Template Template[]
 }
 
 model CatalogueItem {
-  id                       String                         @id @default(uuid())
-  name                     String
-  description              String
-  imageSrc                 String
-  priceAED                 Float
-  isFeatured               Boolean                        @default(false)
-  CatalogueTagsOnCatalogue CatalogueTagsOnCatalogueItem[]
+  id              String                     @id @default(uuid())
+  name            String
+  description     String
+  imageSrc        String
+  priceAED        Float
+  isFeatured      Boolean                    @default(false)
+  CategoryTag     CatalogueCategoryTag?      @relation(fields: [categoryTagName], references: [name])
+  categoryTagName String?
+  sizingsData     Json?                      @default(dbgenerated())
+  materials       MaterialOnCatalogueItems[]
+
+  @@index([categoryTagName])
 }
 
-model CatalogueTag {
-  id                       String                         @id @default(uuid())
-  name                     String
-  type                     CatalogueItemTagType
-  CatalogueTagsOnCatalogue CatalogueTagsOnCatalogueItem[]
+model MaterialOnCatalogueItems {
+  id            String        @id @default(uuid())
+  catalogueId   String
+  catalogueItem CatalogueItem @relation(fields: [catalogueId], references: [id])
+  materialName  EnumMaterial
+  material      Material      @relation(fields: [materialName], references: [name])
+
+  @@index([catalogueId])
+  @@index([materialName])
 }
 
-model CatalogueTagsOnCatalogueItem {
-  id              String        @id @default(uuid())
-  catalogueItemId String
-  catalogueTagId  String
-  catalogueItem   CatalogueItem @relation(fields: [catalogueItemId], references: [id])
-  catalogueTag    CatalogueTag  @relation(fields: [catalogueTagId], references: [id])
+model Material {
+  name                     EnumMaterial               @id
+  MaterialOnCatalogueItems MaterialOnCatalogueItems[]
+  MaterialOnTemplate       MaterialOnTemplate[]
+}
 
-  @@index([catalogueItemId])
-  @@index([catalogueTagId])
+model MaterialOnTemplate {
+  id           String       @id @default(uuid())
+  templateId   String
+  template     Template     @relation(fields: [templateId], references: [id])
+  materialName EnumMaterial
+  material     Material     @relation(fields: [materialName], references: [name])
+
+  @@index([templateId])
+  @@index([materialName])
+}
+
+model CatalogueCategoryTag {
+  name           String          @id
+  sizingFormat   Json?
+  CatalogueItems CatalogueItem[]
+}
+
+enum EnumMaterial {
+  chiffon
+  cotton
+  crepe
+  denim
+  lace
+  leather
+  linen
+  satin
+  silk
+  synthetic
+  velvet
+  wool
+}
+
+enum Skill {
+  beginner
+  intermediate
+  advanced
 }
 
 model Event {
@@ -99,6 +125,18 @@ model Event {
   startTime DateTime
   endTime   DateTime
   title     String
+  details   String
+}
+
+model Workshop {
+  id          String   @id @default(uuid())
+  startTime   DateTime
+  endTime     DateTime
+  title       String
+  priceAED    Float
+  details     String
+  totalSlots  Int
+  bookedSlots Int      @default(0)
 }
 
 model ContactSubmission {
