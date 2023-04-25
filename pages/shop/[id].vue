@@ -11,8 +11,24 @@ const route = useRoute()
 if (route.params.id === undefined) {
   throw new Error('No ID provided')
 }
-// const item = ref()
 const { data: item } = useFetch(`/api/CatalogueItems/${route.params.id}`)
+
+onMounted(async () => {
+  try {
+    await item.value
+    if ((item.value.id) === undefined) {
+      showError({
+        statusCode: 404,
+        message: 'Item not found'
+      })
+    }
+  } catch {
+    showError({
+      statusCode: 404,
+      message: 'Item not found'
+    })
+  }
+})
 const sampleSizes = [
   {
     name: 'Chest',
@@ -40,23 +56,22 @@ const sampleSizes = [
 
 <template>
   <main class="flex flex-col w-full text-secondary relative items-center">
-    <div class="flex flex-col items-center justify-center mx-4 my-desktop-h gap-4 max-w-4xl desktop:flex-row ">
+    <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-12">
       <div class="uppercase self-start desktop:hidden">
         <p class="caption">
           <a href="/shop/catalogue">Catalogue</a> > {{ item?.name }}
         </p>
       </div>
       <ItemImage
-        :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'"
-        class=" max-w-md"
+        :image="item?.imageSrc"
+        class="max-w-md"
       />
-      <div>
+      <div class="w-full">
         <div class="breadcrumb uppercase self-start hidden desktop:block">
           <p class="caption">
             <a href="/shop/catalogue">Catalogue</a> > {{ item?.name }}
           </p>
         </div>
-
         <ItemDescription :sizes="sampleSizes">
           <template #item-name>
             {{ item?.name }}

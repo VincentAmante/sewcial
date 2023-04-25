@@ -29,7 +29,7 @@ model Template {
   id                 String               @id @default(uuid())
   name               String
   description        String
-  details            String
+  details            Json?
   priceAED           Float
   isFeatured         Boolean
   MaterialOnTemplate MaterialOnTemplate[]
