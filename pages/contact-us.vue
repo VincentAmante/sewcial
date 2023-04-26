@@ -34,9 +34,7 @@ async function submitContactForm () {
   mobileNumberInput.status === 'error' ||
   messageInput.status === 'error') {
   } else {
-    console.log('submission success')
-
-    const response = await useFetch('/api/ContactSubmissions/create', {
+    await useFetch('/api/ContactSubmissions/create', {
       method: 'POST',
       body: JSON.stringify({
         name: name.value,
@@ -45,18 +43,16 @@ async function submitContactForm () {
         message: message.value
       })
     })
-
-    console.log(response)
   }
 }
 </script>
 
 <template>
-  <main class="flex flex-row gap-20 mx-default-w tablet:flex-row tablet:justify-between">
-    <section class="w-full">
-      <div class="flex flex-col w-full px-1">
-        <SpeechBubble class="flex flex-col gap-6 py-8">
-          <h1>
+  <main class="flex flex-col py-default-h gap-[5vmax] mx-default-w tablet:flex-row tablet:justify-between">
+    <section class="w-full flex flex-col px-[3vw]">
+      <div class="flex flex-col w-full px-0">
+        <SpeechBubble class="flex flex-col py-4">
+          <h1 class="p-0 text-h1">
             Get in touch with us
           </h1>
         </SpeechBubble>
@@ -91,8 +87,11 @@ async function submitContactForm () {
         </SpeechBubble>
       </div>
     </section>
-    <section class="w-full">
-      <form class="flex flex-col gap-4 border-4 border-dashed border-secondary rounded-3xl p-12" @submit.prevent="submitContactForm()">
+    <section class="w-full max-w-2xl">
+      <form
+        class="flex flex-col gap-4 border-4 border-dashed border-secondary rounded-3xl p-12"
+        @submit.prevent="() => submitContactForm()"
+      >
         <ContactField v-model="name" name="name">
           Name
         </ContactField>
@@ -115,8 +114,7 @@ async function submitContactForm () {
   </main>
 </template>
 
-<style scoped lang="scss">
-
+<!-- <style scoped lang="scss">
     main {
         padding: $margin-width;
 
@@ -128,4 +126,4 @@ async function submitContactForm () {
           text-transform: none;
         }
     }
-</style>
+</style> -->
