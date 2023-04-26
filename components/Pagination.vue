@@ -1,56 +1,56 @@
 <script setup lang = "ts">
 // Computed Property
-import {computed, getCurrentInstance} from 'vue';
+import { computed, getCurrentInstance } from 'vue'
 
 // Import Chevrons
-import IconChevronLeft from './icons/IconChevronLeft.vue';
-import IconChevronRight from './icons/IconChevronRight.vue';
+import IconChevronLeft from './icons/IconChevronLeft.vue'
+import IconChevronRight from './icons/IconChevronRight.vue'
 
-const name = "Pagination";
+const name = 'Pagination'
 
 const props = defineProps({
-    totalItems: {
-        type: Number,
-        required: true,
-    },
-    itemsPerPage: {
-        type: Number,
-        required: true,
-    },
-        currentPage: {
-        type: Number,
-    required: true,
-    },
+  totalItems: {
+    type: Number,
+    required: true
+  },
+  itemsPerPage: {
+    type: Number,
+    required: true
+  },
+  currentPage: {
+    type: Number,
+    required: true
+  }
 })
 
-const totalPages = computed(() => Math.ceil(props.totalItems / props.itemsPerPage));
+const totalPages = computed(() => Math.ceil(props.totalItems / props.itemsPerPage))
 
 const visiblePages = computed(() => {
-    const pageRange = 2; // Number of pages to show on either side of the current page
-    const minPage = Math.max(1, props.currentPage - pageRange);
-    const maxPage = Math.min(totalPages.value, props.currentPage + pageRange);
-    const pages = [];
-    for (let i = minPage; i <= maxPage; i++) {
-    pages.push(i);
-    }
-    return pages;
-});
+  const pageRange = 2 // Number of pages to show on either side of the current page
+  const minPage = Math.max(1, props.currentPage - pageRange)
+  const maxPage = Math.min(totalPages.value, props.currentPage + pageRange)
+  const pages = []
+  for (let i = minPage; i <= maxPage; i++) {
+    pages.push(i)
+  }
+  return pages
+})
 
 const pages = computed(() => {
-    const pageRange = 2; // Number of pages to show on either side of the current page
-    const minPage = Math.max(1, props.currentPage - pageRange);
-    const maxPage = Math.min(totalPages.value, props.currentPage + pageRange);
-    const pages = [];
-    for (let i = minPage; i <= maxPage; i++) {
-    pages.push(i);
-    }
-    return pages;
-});
+  const pageRange = 2 // Number of pages to show on either side of the current page
+  const minPage = Math.max(1, props.currentPage - pageRange)
+  const maxPage = Math.min(totalPages.value, props.currentPage + pageRange)
+  const pages = []
+  for (let i = minPage; i <= maxPage; i++) {
+    pages.push(i)
+  }
+  return pages
+})
 
-const emit = getCurrentInstance()?.emit;
+const emit = getCurrentInstance()?.emit
 
-function changePage(pageNumber: number) {
-    emit?.('page-changed', pageNumber);
+function changePage (pageNumber: number) {
+  emit?.('page-changed', pageNumber)
 }
 </script>
 
@@ -58,26 +58,26 @@ function changePage(pageNumber: number) {
   <nav>
     <ul class="pagination">
       <li class="page-item" :class="{ disabled: currentPage === 1 }">
-        <a class = "chevron" href="#" @click="changePage(currentPage - 1)">
-          <IconChevronLeft></IconChevronLeft>
+        <a class="chevron" href="#" @click="changePage(currentPage - 1)">
+          <IconChevronLeft />
         </a>
       </li>
-      <li class="page-item" v-if="pages[0] !== 1">
+      <li v-if="pages[0] !== 1" class="page-item">
         <a class="page-link" href="#" @click="changePage(pages[0] - 1)">
           &hellip;
         </a>
       </li>
-      <li class="page-item" v-for="pageNumber in visiblePages" :key="pageNumber" :class="{ active: currentPage === pageNumber }">
+      <li v-for="pageNumber in visiblePages" :key="pageNumber" class="page-item" :class="{ active: currentPage === pageNumber }">
         <a class="page-link" href="#" @click="changePage(pageNumber)">{{ pageNumber }}</a>
       </li>
-      <li class="page-item" v-if="pages[pages.length - 1] !== totalPages">
+      <li v-if="pages[pages.length - 1] !== totalPages" class="page-item">
         <a class="page-link" href="#" @click="changePage(pages[pages.length - 1] + 1)">
           &hellip;
         </a>
       </li>
       <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-        <a class = "chevron" href="#" @click="changePage(currentPage + 1)">
-          <IconChevronRight></IconChevronRight>
+        <a class="chevron" href="#" @click="changePage(currentPage + 1)">
+          <IconChevronRight />
         </a>
       </li>
     </ul>

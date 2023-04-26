@@ -1,42 +1,42 @@
 <script setup lang="ts">
-    // Import download button
-    import DownloadButton from '@/components/DownloadButton.vue';
-    
-    // Variables passed to this component are props
-    const props = defineProps({
-        image: {
-          type: String,
-          required: true
-        }
-    })
+// Import download button
+import DownloadButton from '@/components/DownloadButton.vue'
+
+// Variables passed to this component are props
+const props = defineProps({
+  image: {
+    type: String,
+    required: true
+  }
+})
 </script>
 
 <!-- Card -->
 <template>
-    <div class="cards" onclick="location.href='html/image.html'">
-        <div class="card">
-          <div class="card-image" :style="{ backgroundImage: `url(${image})` }"></div>
-        <div class="card-info">
-            <h1>
-              <slot name="item-name"></slot>
-            </h1>
-            <h3>
-              <slot name="owner"></slot>
-            </h3>
-            <p>
-              <slot name="description"></slot>
-            </p>
-            <DownloadButton></DownloadButton>
-        </div>
-        </div>
+  <div class="cards" onclick="location.href='html/image.html'">
+    <div class="card">
+      <div class="card-image" :style="{ backgroundImage: `url(${image})` }" />
+      <div class="card-info">
+        <h1>
+          <slot name="item-name" />
+        </h1>
+        <h3>
+          <slot name="owner" />
+        </h3>
+        <p>
+          <slot name="description" />
+        </p>
+        <DownloadButton />
+      </div>
     </div>
+  </div>
 </template>
 
 <!-- Scoped Styling -->
 <style scoped lang="scss">
 .cards {
     margin: 10px;
-    
+
     .card {
       flex-direction: column;
       color: $clr-text;
@@ -49,18 +49,18 @@
         width: 260px;
         height: 370px;
       }
-  
+
       &:hover {
         cursor: pointer;
         box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
-        
+
         .card-image {
           filter: brightness(80%);
 
         }
       }
     }
-  
+
     // Content
     .card-info {
       flex-direction: column;
@@ -71,7 +71,7 @@
         margin: 0;
       }
     }
-  
+
     // Images
     .card-image{
       aspect-ratio: 1.1 / 1;
@@ -86,5 +86,5 @@
 
     }
   }
-  
+
 </style>

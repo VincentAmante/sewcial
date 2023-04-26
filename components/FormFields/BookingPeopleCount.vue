@@ -1,30 +1,30 @@
 <script setup lang="ts">
-    import { computed } from '@vue/reactivity';
+import { computed } from 'vue'
 
-    const props =  defineProps({
-        modelValue: {
-            type: Number,
-            required: true
-        }
-    })
-    const emit = defineEmits(['update:modelValue'])
-    const bookingPeople = computed({
-        get(){
-            return props.modelValue
-        },
-        set(value){
-            emit('update:modelValue', value)
-        }
-    })
+const props = defineProps({
+  modelValue: {
+    type: Number,
+    required: true
+  }
+})
+const emit = defineEmits(['update:modelValue'])
+const bookingPeople = computed({
+  get () {
+    return props.modelValue
+  },
+  set (value) {
+    emit('update:modelValue', value)
+  }
+})
 </script>
 
 <template>
-    <label for="booking-people">
-        <caption>
-          How many people?
-        </caption>
-        <input type="number" v-model="bookingPeople" min="0">
-    </label>
+  <label for="booking-people">
+    <caption>
+      How many people?
+    </caption>
+    <input v-model="bookingPeople" type="number" min="0">
+  </label>
 </template>
 
 <style scoped lang="scss">
