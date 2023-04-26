@@ -9,7 +9,7 @@ type CatalogueItemWithMaterials = CatalogueItem & MaterialsData
 export default defineEventHandler(async (event) => {
   const body: CatalogueItemWithMaterials = await readBody(event)
 
-  const sizingsData = body.sizingsData as Prisma.JsonArray
+  const sizingsData = body.sizingsData?.sizingFormat as Prisma.JsonArray
 
   const result = await event.context.prisma.catalogueItem.create({
     data: {

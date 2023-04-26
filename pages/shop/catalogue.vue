@@ -3,6 +3,7 @@ import SpeechBubble from '@/components/SpeechBubble.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
 import Pagination from '@/components/Pagination.vue'
+import CatalogueFilter from '~/components/Filters/CatalogueFilter.vue'
 
 definePageMeta({
   layout: 'shop'
@@ -11,12 +12,15 @@ definePageMeta({
 const { data: items } = useFetch('/api/CatalogueItems/')
 const filteredItems = ref(items)
 
+const catalogueItems = computed(() => {
+  filteredItems.value = items.value
+  return filteredItems.value
+})
+
 function filter () {
   if (items.value === null) { return }
-
   filteredItems.value = items.value.filter((item: any) => {
     const tags = item.tags
-
     for (const tag of tags) {
       if (tag.tagName.toLowerCase().includes('activewear')) {
         return true
@@ -70,7 +74,6 @@ function toItem (itemUrl: string) {
           </p>
         </button>
       </div>
-      {{ items }}
 
       <!-- Catalogue Items -->
       <div class="flex content-center w-full desktop:mt-8">
@@ -93,6 +96,12 @@ function toItem (itemUrl: string) {
           </CatalogueCard>
         </div>
       </div>
+    </div>
+    <div class="p-4 px-8 bg-cyan-950 text-white">
+      <p>Catalogue Items</p>
+      <code>
+        {{ catalogueItems }}
+      </code>
     </div>
     <!-- Paginate -->
     <div class="paginate my-8">
