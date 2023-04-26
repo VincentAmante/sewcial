@@ -98,73 +98,121 @@ import TemplateHoverCard from '@/components/TemplateHoverCard.vue'
 
     <!-- Browse section -->
     <section class="browse">
-        <h2>Browse</h2>
-        <div class="filter">
-            <p>400 ITEMS</p>
-            <div class="filter-options">
-                <IconFilterVue />
-                <p>Filter</p>
-            </div>
+      <h2>Browse</h2>
+      <div class="filter">
+        <p>400 ITEMS</p>
+        <div class="filter-options">
+          <IconFilterVue />
+          <p>Filter</p>
         </div>
-    
-        <div class="container">
-            <div class="column-cards">
-                <TemplateHoverCard :image="'https://i.pinimg.com/originals/81/fb/e1/81fbe1c31719a0bd6258fec7a34ad20c.jpg'">
-                    <template #item-name>ITEM NAME</template>
-                    <template #owner-name>OWNER'S NAME</template>
-                </TemplateHoverCard>
-                <TemplateHoverCard :image="'https://i.pinimg.com/564x/e4/63/98/e46398c55b4125f51c33b3742c5a6aa0.jpg'">
-                    <template #item-name>ITEM NAME</template>
-                    <template #owner-name>OWNER'S NAME</template>
-                </TemplateHoverCard>
-                <TemplateHoverCard :image="'https://i.pinimg.com/564x/03/14/5e/03145e4cc2f8a95f3bbe0028be946d91.jpg'">
-                    <template #item-name>ITEM NAME</template>
-                    <template #owner-name>OWNER'S NAME</template>
-                </TemplateHoverCard>
-                <TemplateHoverCard :image="'https://i.pinimg.com/564x/23/c4/81/23c48185983ff59bd1df6da8e50530c0.jpg'">
-                    <template #item-name>ITEM NAME</template>
-                    <template #owner-name>OWNER'S NAME</template>
-                </TemplateHoverCard>
-            </div>
-            <div class="column-cards">
-                <TemplateHoverCard :image="'https://i.pinimg.com/564x/cd/79/58/cd7958c4f5bb8af5d17b0acf9ce0a1bf.jpg'">
-                    <template #item-name>ITEM NAME</template>
-                    <template #owner-name>OWNER'S NAME</template>
-                </TemplateHoverCard>
-                <TemplateHoverCard :image="'https://i.pinimg.com/564x/c5/e3/00/c5e3007fb19097f6485d945dc212bffa.jpg'">
-                    <template #item-name>ITEM NAME</template>
-                    <template #owner-name>OWNER'S NAME</template>
-                </TemplateHoverCard>
-                <TemplateHoverCard :image="'https://i.pinimg.com/564x/b0/64/9b/b0649b47f772eff32155388dde42f478.jpg'">
-                    <template #item-name>ITEM NAME</template>
-                    <template #owner-name>OWNER'S NAME</template>
-                </TemplateHoverCard>
-                <TemplateHoverCard :image="'https://i.pinimg.com/564x/12/f4/4a/12f44a7e16756e088ed14f4f98113b7d.jpg'">
-                    <template #item-name>ITEM NAME</template>
-                    <template #owner-name>OWNER'S NAME</template>
-                </TemplateHoverCard>
-            </div>
-            <div class="hide">
-                <div class="column-cards">
-                    <TemplateHoverCard :image="'https://i.pinimg.com/564x/34/e6/75/34e6756de25e19f8799ade7a9a58ace4.jpg'">
-                        <template #item-name>ITEM NAME</template>
-                        <template #owner-name>OWNER'S NAME</template>
-                    </TemplateHoverCard>
-                    <TemplateHoverCard :image="'https://i.pinimg.com/564x/6d/44/7f/6d447f67c950729e8b2bdfc7fe37a160.jpg'">
-                        <template #item-name>ITEM NAME</template>
-                        <template #owner-name>OWNER'S NAME</template>
-                    </TemplateHoverCard>
-                    <TemplateHoverCard :image="'https://i.pinimg.com/564x/34/c1/f9/34c1f9aba7f0085ca1ea447af8920627.jpg'">
-                        <template #item-name>ITEM NAME</template>
-                        <template #owner-name>OWNER'S NAME</template>
-                    </TemplateHoverCard>
-                    <TemplateHoverCard :image="'https://i.pinimg.com/564x/99/16/ec/9916ecb60b4098637c3db2e6ec701aef.jpg'">
-                        <template #item-name>ITEM NAME</template>
-                        <template #owner-name>OWNER'S NAME</template>
-                    </TemplateHoverCard>
-                </div>
-            </div>
+      </div>
+
+      <div class="container">
+        <div class="column-cards">
+          <TemplateHoverCard :image="'https://i.pinimg.com/originals/81/fb/e1/81fbe1c31719a0bd6258fec7a34ad20c.jpg'">
+            <template #item-name>
+              ITEM NAME
+            </template>
+            <template #owner-name>
+              OWNER'S NAME
+            </template>
+          </TemplateHoverCard>
+          <TemplateHoverCard :image="'https://i.pinimg.com/564x/e4/63/98/e46398c55b4125f51c33b3742c5a6aa0.jpg'">
+            <template #item-name>
+              ITEM NAME
+            </template>
+            <template #owner-name>
+              OWNER'S NAME
+            </template>
+          </TemplateHoverCard>
+          <TemplateHoverCard :image="'https://i.pinimg.com/564x/03/14/5e/03145e4cc2f8a95f3bbe0028be946d91.jpg'">
+            <template #item-name>
+              ITEM NAME
+            </template>
+            <template #owner-name>
+              OWNER'S NAME
+            </template>
+          </TemplateHoverCard>
+          <TemplateHoverCard :image="'https://i.pinimg.com/564x/23/c4/81/23c48185983ff59bd1df6da8e50530c0.jpg'">
+            <template #item-name>
+              ITEM NAME
+            </template>
+            <template #owner-name>
+              OWNER'S NAME
+            </template>
+          </TemplateHoverCard>
         </div>
+        <div class="column-cards">
+          <TemplateHoverCard :image="'https://i.pinimg.com/564x/cd/79/58/cd7958c4f5bb8af5d17b0acf9ce0a1bf.jpg'">
+            <template #item-name>
+              ITEM NAME
+            </template>
+            <template #owner-name>
+              OWNER'S NAME
+            </template>
+          </TemplateHoverCard>
+          <TemplateHoverCard :image="'https://i.pinimg.com/564x/c5/e3/00/c5e3007fb19097f6485d945dc212bffa.jpg'">
+            <template #item-name>
+              ITEM NAME
+            </template>
+            <template #owner-name>
+              OWNER'S NAME
+            </template>
+          </TemplateHoverCard>
+          <TemplateHoverCard :image="'https://i.pinimg.com/564x/b0/64/9b/b0649b47f772eff32155388dde42f478.jpg'">
+            <template #item-name>
+              ITEM NAME
+            </template>
+            <template #owner-name>
+              OWNER'S NAME
+            </template>
+          </TemplateHoverCard>
+          <TemplateHoverCard :image="'https://i.pinimg.com/564x/12/f4/4a/12f44a7e16756e088ed14f4f98113b7d.jpg'">
+            <template #item-name>
+              ITEM NAME
+            </template>
+            <template #owner-name>
+              OWNER'S NAME
+            </template>
+          </TemplateHoverCard>
+        </div>
+        <div class="hide">
+          <div class="column-cards">
+            <TemplateHoverCard :image="'https://i.pinimg.com/564x/34/e6/75/34e6756de25e19f8799ade7a9a58ace4.jpg'">
+              <template #item-name>
+                ITEM NAME
+              </template>
+              <template #owner-name>
+                OWNER'S NAME
+              </template>
+            </TemplateHoverCard>
+            <TemplateHoverCard :image="'https://i.pinimg.com/564x/6d/44/7f/6d447f67c950729e8b2bdfc7fe37a160.jpg'">
+              <template #item-name>
+                ITEM NAME
+              </template>
+              <template #owner-name>
+                OWNER'S NAME
+              </template>
+            </TemplateHoverCard>
+            <TemplateHoverCard :image="'https://i.pinimg.com/564x/34/c1/f9/34c1f9aba7f0085ca1ea447af8920627.jpg'">
+              <template #item-name>
+                ITEM NAME
+              </template>
+              <template #owner-name>
+                OWNER'S NAME
+              </template>
+            </TemplateHoverCard>
+            <TemplateHoverCard :image="'https://i.pinimg.com/564x/99/16/ec/9916ecb60b4098637c3db2e6ec701aef.jpg'">
+              <template #item-name>
+                ITEM NAME
+              </template>
+              <template #owner-name>
+                OWNER'S NAME
+              </template>
+            </TemplateHoverCard>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 </template>
@@ -177,7 +225,7 @@ main{
 .sticker-container {
     position: absolute;
     width: 100%;
-    
+
     // Sets stickers to display only past desktop
     .sticker {
         display: none;
@@ -222,7 +270,7 @@ main{
         padding-top: 2em;
         display: flex;
         flex-direction: row;
-        justify-content: center; 
+        justify-content: center;
         gap: 1em;
         .hide{
             display: none;
@@ -267,7 +315,7 @@ main{
     h2{
         color: $clr-primary;
     }
-    
+
     .featured-cards{
     display: flex;
     overflow-x: scroll;
@@ -306,7 +354,6 @@ main{
     position: relative;
     font-size: 30px;
     margin: -20px 0 0 15px;
-
 
     @include media(tablet) {
         font-size: 50px;
