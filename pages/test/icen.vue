@@ -1,66 +1,74 @@
 <script setup lang="ts">
 import 'v-calendar/style.css'
 import { DatePicker } from 'v-calendar'
+import RichTextEditor from '~~/components/FormFields/RichTextEditor.vue'
+import CatalogueFilter from '~~/components/Filters/CatalogueFilter.vue'
+import DropDown from '~/components/FormFields/DropDown.vue'
+import CheckBox from '~/components/FormFields/CheckBox.vue'
 
 // This creates an app-wide event to toggle the description slider
 function toggleTestSlider (name: string) {
   window.dispatchEvent(new Event(`toggle-${name}`))
 }
 
-const name = ref('')
-const email = ref('')
-const message = ref('')
-const telNumber = ref('')
-
-// Returns an object with the form values
-const object = computed(() => {
-  return {
-    name: name.value,
-    email: email.value,
-    telNumber: telNumber.value,
-    message: message.value
-  }
-})
-
-function showContactObject () {
-  // console.log(object.value)
+function sampleError () {
+  showError({
+    statusCode: 500,
+    message: 'This is a sample error'
+  })
 }
 
-const date = ref(new Date())
-const startTime = ref(new Date())
-const endTime = ref(new Date())
-const peopleCount = ref(0)
+async function createCategoryTag () {
+  const { result } = await useFetch('/api/CatalogueCategoryTag/create', {
+    method: 'POST',
+    body: JSON.stringify({
+      name: 'test'
+    })
+  })
+}
+
+const options = [
+  {
+    label: 'Option 1',
+    value: 'option1'
+  },
+  {
+    label: 'Option 2',
+    value: 'option2'
+  },
+  {
+    label: 'Option 3',
+    value: 'option3'
+  }
+]
+const selectedOption = ref('Select Option')
+
+const sampleCheckBoxVal = ref(false)
+
+const { data: catalogue } = useFetch('/api/CatalogueItems')
 </script>
 <template>
-  <main>
-    <!-- <section class="banner-wrapper">
-      <div class="sticker-container">
-        <img class="sticker sticker-1" src="@/assets/images/Sticker_1.png" alt="">
-        <img class="sticker sticker-2" src="@/assets/images/Sticker_2.png" alt="">
-      </div>
-      <div class="banner">
-        <SpeechBubble>
-          <h2>ICEN</h2>
-          <p>This is a banner container</p>
-          <p>It contains stickers that are horribly implemented</p>
-        </SpeechBubble>
-      </div>
-    </section> -->
-    <!-- Just test divs, don't mind -->
-    <div class="test">
+  <main class="flex flex-col items-center justify-center gap-4">
+    <div class="max-w-full flex flex-col items-center justify-center">
       <AppButton @click="() => toggleTestSlider('cafe')">
         Sewcial Cafe
       </AppButton>
       <AppButton @click="() => toggleTestSlider('studio')">
         Sewcial Studio
       </AppButton>
-
       <AppButton @click="() => toggleTestSlider('workshop')">
         Sewcial Workshop
       </AppButton>
-
       <AppButton @click="() => toggleTestSlider('lounge')">
         Sewcial Lounge
+      </AppButton>
+
+      <AppButton @click="() => sampleError()">
+        Throw error
+      </AppButton>
+
+      <AppButton @click="() => createCategoryTag()">
+        Make CategoryTag
       </AppButton>
 
       <DescriptionSlider name="cafe" img-src="/images/placeholders/studio.png">
@@ -134,69 +142,48 @@ const peopleCount = ref(0)
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
         </template>
       </DescriptionSlider>
-      <!-- <form class="contact-field" action="">
-        <ContactField v-model="name" name="name" is-required>
-          Name
-        </ContactField>
-        <ContactField v-model="email" name="email" is-required>
-          Email
-        </ContactField>
 
-        <ContactField v-model="telNumber" name="telNumber" is-required type="tel">
-          Phone Number
-        </ContactField>
-
-        <ContactField v-model="message" name="message" is-required>
-          Message
-        </ContactField>
-
-        <AppButton @click="() => showContactObject()">
-          Send Message
-        </AppButton>
-        <div>
-          <p>
-            Output:
-          </p>
-          <div>
-            {{ object }}
-          </div>
-        </div>
-      </form> -->
+      <CheckBox v-model="sampleCheckBoxVal" label="Sample" />
+      <DropDown v-model="selectedOption" :options="options" />
+      {{ selectedOption }}
       <ClientOnly>
-        <!-- <div class="booking-sample">
+        <div class="border-black border-solid border-2 mb-20">
+          <CatalogueFilter :catalogue="catalogue" />
+        </div>
+        <!-- <div class="booking-sample flex flex-col items-center p-[3vw] rounded-xl bg-secondary gap-4 w-[90%]">
           <DatePicker v-model="date" />
-          <div class="value-display">
-            <h2>Date Value</h2>
-            <h3>
+          <div class="w-full px-4 py-2">
+            <h2 class="m-1 text-white">Date Value</h2>
+            <h3 class="m-1 text-white">
               {{ date }}
             </h3>
           </div>
-          <div class="booking-input">
+          <div class="booking-input w-full content-stretch gap-4">
             <ClientOnly>
               <StartTimePicker v-model="startTime" :date="date" />
               <EndTimePicker v-model="endTime" :is-disabled="false" :start-time="startTime" />
               <BookingPeopleCount v-model="peopleCount" />
             </ClientOnly>
           </div>
-          <div class="value-display">
-            <h2>Start Time</h2>
-            <h3>
+          <div class="w-full px-4 py-2">
+            <h2 class="m-1 text-white">Start Time</h2>
+            <h3 class="m-1 text-white">
               {{ startTime }}
             </h3>
           </div>
 
-          <div class="value-display">
-            <h2>End Time</h2>
-            <h3>
+          <div class="w-full px-4 py-2">
+            <h2 class="m-1 text-white">End Time</h2>
+            <h3 class="m-1 text-white">
               {{ endTime }}
             </h3>
           </div>
 
-          <div class="value-display">
-            <h2>
+          <div class="w-full px-4 py-2">
+            <h2 class="m-1 text-white">
               People Count
             </h2>
-            <h3>
+            <h3 class="m-1 text-white">
               {{ peopleCount }}
             </h3>
           </div>
@@ -205,106 +192,3 @@ const peopleCount = ref(0)
     </div>
   </main>
 </template>
-<style scoped lang="scss">
-    main {
-        @include flex-col;
-        align-items: center;
-        justify-content: center;
-        gap: 1em;
-    }
-
-    .test {
-        max-width: 100%;
-        @include flex-col;
-        @include flex-centered;
-    }
-
-    .value-display {
-        width: 100%;
-        padding-inline: 1em;
-        padding-block: .5em;
-    }
-
-    .booking-sample {
-        @include flex-col;
-        align-items: center;
-        padding: 3vw;
-        border-radius: 10px;
-        background-color: $clr-secondary;
-        gap: 1em;
-        width: 90%;
-
-        h2, h3 {
-            margin: .1em;
-            color: white;
-        }
-
-        .booking-input {
-            width: 100%;
-            justify-content: stretch;
-            gap: 1em;
-        }
-    }
-
-    .contact-field {
-        @include flex-col;
-        gap: 1.5em;
-        border: 4px dashed $clr-secondary;
-        border-radius: 45px;
-        margin-block: 1em;
-        // width: 100%;
-        max-width: 700px;
-        padding: 5vw;
-    }
-
-    .banner-wrapper {
-        position: relative;
-        // overflow-x: hidden;
-        border-bottom: 6px dashed $clr-secondary;
-        width: 100%;
-        height: 80svh;
-        z-index: -1;
-        padding-inline: 1em;
-        padding-block: 1em;
-
-        .banner {
-            // padding-inline: 5vw;
-            padding-inline: clamp(.5em, 15vw, 20em);
-            // display: none;
-        }
-
-        .sticker-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-
-            // Sets stickers to display only past desktop
-            .sticker {
-                // display: none;
-                @include media(desktop){
-                    display: block;
-                }
-            }
-
-            .sticker-1 {
-                position: absolute;
-                z-index: -5;
-                right: 0;
-                top: 0;
-                transform: translateX(15%) translateY(00%);
-
-                width: 12em;
-            }
-            .sticker-2 {
-                position: absolute;
-                z-index: -5;
-                top: 0;
-                left: 0;
-                transform: translateX(-30%) translateY(80%);
-
-                width: 15em;
-            }
-        }
-    }
-
-</style>

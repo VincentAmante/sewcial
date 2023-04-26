@@ -16,12 +16,6 @@ const { data: item } = useFetch(`/api/CatalogueItems/${route.params.id}`)
 onMounted(async () => {
   try {
     await item.value
-    if ((item.value.id) === undefined) {
-      showError({
-        statusCode: 404,
-        message: 'Item not found'
-      })
-    }
   } catch {
     showError({
       statusCode: 404,
@@ -29,29 +23,6 @@ onMounted(async () => {
     })
   }
 })
-const sampleSizes = [
-  {
-    name: 'Chest',
-    size: '34'
-  },
-  {
-    name: 'Waist',
-    size: '27'
-  },
-  {
-    name: 'Arms',
-    size: '30.5'
-  },
-  {
-    name: 'Neck',
-    size: '14.5'
-  },
-
-  {
-    name: 'Neck',
-    size: '14.5'
-  }
-]
 </script>
 
 <template>
@@ -66,13 +37,13 @@ const sampleSizes = [
         :image="item?.imageSrc"
         class="max-w-md"
       />
-      <div class="w-full">
+      <div class="w-full desktop:self-start flex flex-col">
         <div class="breadcrumb uppercase self-start hidden desktop:block">
           <p class="caption">
             <a href="/shop/catalogue">Catalogue</a> > {{ item?.name }}
           </p>
         </div>
-        <ItemDescription :sizes="sampleSizes">
+        <ItemDescription :sizes="item?.sizingsData">
           <template #item-name>
             {{ item?.name }}
           </template>

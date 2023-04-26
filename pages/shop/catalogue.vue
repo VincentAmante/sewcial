@@ -32,25 +32,10 @@ function toItem (itemUrl: string) {
 </script>
 
 <template>
-  <main>
-    <!-- <div>
-      <h1>Items Unfiltered</h1>
-      <div>
-        {{ items }}
-      </div>
-    </div>
-    <div>
-      <h1>Filtered Items</h1>
-      <div>
-        {{ filteredItems }}
-      </div>
-    </div>
-    <AppButton @click="() => filter()">
-      Filter
-    </AppButton> -->
-    <div class="container">
-      <img class="head-img" src="https://via.placeholder.com/600x500">
-      <div class="head-text">
+  <main class="flex flex-col items-center">
+    <div class="container flex flex-col border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row">
+      <img class="head-img w-full h-auto mobile:w-1/2" src="https://via.placeholder.com/600x500">
+      <div class="head-text flex flex-col justify-center mx-auto mb-8">
         <h1>NEW COLLECTION</h1>
         <h1>Lorem ipsum sit aset dolor</h1>
         <p>I got a condo in Manhattan, baby girl what’s happenin’?</p>
@@ -62,13 +47,13 @@ function toItem (itemUrl: string) {
       </div>
     </div>
 
-    <div class="catalogue-container">
+    <div class="catalogue-container desktop:flex-row">
       <!-- Filters -->
-      <div class="filters-dropdown">
+      <div class="filters-dropdown hidden">
         <IconFilterBlue />
         <p>FILTER</p>
       </div>
-      <div class="filters-container">
+      <div class="filters-container hidden">
         <p>HIDE FILTERS</p>
         <DropdownTab>
           <h1>SHOP BY</h1>
@@ -85,10 +70,11 @@ function toItem (itemUrl: string) {
           </p>
         </button>
       </div>
+      {{ items }}
 
       <!-- Catalogue Items -->
-      <div class="grid-container">
-        <div class="catalogue-grid">
+      <div class="flex content-center w-full desktop:mt-8">
+        <div class="grid grid-cols-2 mx-auto self-center justify-center desktop:grid-cols-3">
           <CatalogueCard
             v-for="item in items"
             :key="item.id"
@@ -109,136 +95,8 @@ function toItem (itemUrl: string) {
       </div>
     </div>
     <!-- Paginate -->
-    <div class="paginate">
+    <div class="paginate my-8">
       <Pagination :total-items="9" :items-per-page="6" :current-page="1" />
     </div>
   </main>
 </template>
-
-<!-- Styling -->
-<style scoped lang = "scss">
-    .container {
-        display: flex;
-        flex-direction: column;
-        border-bottom: 4px dashed $clr-secondary;
-
-        @include media (mobile) {
-            flex-direction: row;
-        }
-
-        .head-img {
-            width: 100%;
-            height: auto;
-
-            @include media (mobile) {
-                width: 50%;
-            }
-        }
-
-        .head-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-inline:auto;
-            margin-block: 2em;
-            align-content: center;
-            color: $clr-secondary;
-
-            h1 {
-                margin-block: 5px;
-            }
-
-        }
-    }
-
-    .catalogue-container {
-    display: flex;
-    flex-direction: column;
-
-    .filters-dropdown {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-left: auto;
-        margin-top: 1.5em;
-
-        p {
-            color: $clr-secondary;
-            margin-right: 4em;
-            margin-left: 2em;
-        }
-    }
-
-    .filters-container {
-        width: 30%;
-        border-right: 4px dashed $clr-secondary;
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        padding: 3em;
-        display: none;
-
-        p {
-            color: $clr-accent-1;
-        }
-
-        button {
-            background-color: $clr-accent-1;
-            border-radius: 10px;
-            border: none;
-            color: $clr-primary;
-
-            .button {
-                color: $clr-primary;
-            }
-        }
-    }
-
-    .grid-container {
-        display: flex;
-        align-content: center;
-        width: 100%;
-
-        .catalogue-grid {
-            display: grid;
-            grid-template-columns: 50% 50%;
-            margin-inline: auto;
-            align-self: center;
-            justify-content: center;
-
-            @include media (mobile) {
-                    grid-template-columns: 45% 45%;
-                }
-
-            .grid-item {
-                height: 10%;
-            }
-        }
-    }
-
-    @include media (desktop) {
-        flex-direction: row;
-
-        .filters-dropdown {
-            display: none;
-        }
-
-        .filters-container {
-            display: flex;
-        }
-
-        .grid-container {
-            margin-top: 2em;
-
-            .catalogue-grid{
-                grid-template-columns: 30% 30% 30%;
-            }
-        }
-    }
-}
-
-.paginate {
-        margin-block: 2em;
-    }
-
-</style>
