@@ -1,6 +1,3 @@
-<script>
-// const { data } = useSession()
-</script>
 
 <template>
   <div>
