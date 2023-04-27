@@ -26,7 +26,7 @@ const tabToggled = useVModel(props, 'modelValue', emit)
 
 <!-- Template with default text and icon -->
 <template>
-  <div class="dropdown-tab text-secondary w-full relative flex flex-col self-start" :class="alignment">
+  <div class="text-secondary w-full relative flex flex-col self-start" :class="alignment">
     <div
       class="flex w-full justify-between items-center"
       @click="() => tabToggled = !tabToggled"
