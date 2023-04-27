@@ -25,7 +25,7 @@ const tabToggled = useVModel(props, 'modelValue', emit)
 </script>
 
 <!-- Template with default text and icon -->
-<template lang="">
+<template>
   <div class="dropdown-tab text-secondary w-full relative flex flex-col self-start" :class="alignment">
     <div
       class="flex w-full justify-between items-center"
