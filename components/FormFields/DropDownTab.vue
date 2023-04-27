@@ -9,37 +9,42 @@ const props = defineProps({
     type: String,
     required: true,
     default: 'left'
+  },
+  modelValue: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 })
+
+const emit = defineEmits<{(
+  e: 'update:modelValue', value: boolean): void
+}>()
+const tabToggled = useVModel(props, 'modelValue', emit)
+
 </script>
 
 <!-- Template with default text and icon -->
 <template lang="">
-  <div class="dropdown-tab" :class="alignment">
-    <slot class="text" />
-    <IconPlus class="icon" />
+  <div class="dropdown-tab text-secondary w-full relative flex flex-col self-start" :class="alignment">
+    <div
+      class="flex w-full justify-between items-center"
+      @click="() => tabToggled = !tabToggled"
+    >
+      <h1>
+        <slot name="title" class="text">
+          Title Here
+        </slot>
+      </h1>
+      <IconPlus class="icon mx-4" />
+    </div>
+    <div
+      class="transition-all overflow-hidden"
+      :class="(tabToggled ? 'max-h-[1000px]' : 'max-h-0') + ' overflow-hidden'"
+    >
+      <slot>
+        CONTENT HERE
+      </slot>
+    </div>
   </div>
 </template>
-
-<!-- Scoped Styling -->
-<style scoped lang="scss">
-    .dropdown-tab {
-        color: $clr-secondary;
-        width: 100%; //adjusts according to the size of container
-        position: relative;
-
-        display: flex;
-        flex-direction: row;
-
-        align-self: flex-start;
-
-        max-width: 40ch; //remove if not wide enough, was added for tests
-        justify-content: space-between;
-
-        .icon {
-            align-self: center;
-            margin-inline: 1vw;
-        }
-
-    }
-</style>

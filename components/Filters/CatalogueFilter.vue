@@ -2,6 +2,7 @@
 import { CatalogueItem, EnumMaterial } from '@prisma/client'
 import { computeStyles } from '@popperjs/core'
 import DropDown from '../FormFields/DropDown.vue'
+import DropDownTab from '../FormFields/DropDownTab.vue'
 import CheckBox from '../FormFields/CheckBox.vue'
 import BaseFilter from './BaseFilter.vue'
 
@@ -18,8 +19,8 @@ type ItemWithMaterial = CatalogueItem & Material
 const props = defineProps<{
   catalogue: ItemWithMaterial[]
 }>()
-const emit = defineEmits<{
-  (e: 'apply-filter', value: ItemWithMaterial[]): void
+const emit = defineEmits<{(
+  e: 'apply-filter', value: ItemWithMaterial[]): void
 }>()
 const filteredCatalogue = ref(props.catalogue)
 
@@ -60,7 +61,6 @@ const materialArr = Object.keys(EnumMaterial).map((key: any) => EnumMaterial[key
 } as materialFilters))
 
 // Apply filter and sort
-
 function filterByMaterial () {
   // if none selected, no filtering is applied
 
@@ -70,7 +70,6 @@ function filterByMaterial () {
   }).map((material) => {
     return material.value.value
   })
-  console.log('filters:', filters)
   if (filters.length === 0) {
     return
   }
@@ -78,20 +77,15 @@ function filterByMaterial () {
   // any item with at least one of the selected materials is included
   filteredCatalogue.value = filteredCatalogue.value.filter((item) => {
     for (const material of item.materials) {
-      console.log('material.material.name: ', material.material.name)
       if (filters.includes(material.material.name)) {
-        console.log('included')
         return true
       }
     }
     return false
   })
-
-  console.log('filteredCatalogue:', filteredCatalogue.value)
 }
 
 function sort () {
-  console.log('filteredCatalogueSort: ', filteredCatalogue.value)
   filteredCatalogue.value = filteredCatalogue.value.sort((a: CatalogueItem, b: CatalogueItem) => {
     // behaviour for each sort option is defined in this switch case
     // If none of the cases match, the order is unchanged
@@ -114,8 +108,14 @@ function sort () {
   })
 }
 
+// filter toggles
+const willFilterMaterial = ref(false)
+
 function applyFilters () {
-  filterByMaterial()
+  if (willFilterMaterial.value) {
+    filteredCatalogue.value = props.catalogue
+    filterByMaterial()
+  }
   sort() // needs to be last to save performance
   emit('apply-filter', filteredCatalogue.value)
 }
@@ -156,16 +156,20 @@ function applyFilters () {
       </div>
     </div>
     <div>
-      <h1 class="text-secondary my-1">
-        Material
-      </h1>
-      <div
-        v-for="material in materialArr"
-        :key="material.value"
-        class="flex justify-between"
-      >
-        <CheckBox v-model="material.value.selected" :label="material.value.label" />
-      </div>
+      <DropDownTab v-model="willFilterMaterial">
+        <template #title>
+          Material
+        </template>
+        <template #default>
+          <div
+            v-for="material in materialArr"
+            :key="material.value"
+            class="flex justify-between"
+          >
+            <CheckBox v-model="material.value.selected" :label="material.value.label" />
+          </div>
+        </template>
+      </DropDownTab>
     </div>
   </BaseFilter>
 </template>
