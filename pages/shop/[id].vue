@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CatalogueItem, EnumMaterial } from '@prisma/client'
 import LikeMeButton from '@/components/LikeMeButton.vue'
 import ItemDescription from '@/components/ItemDescription.vue'
 import ItemImage from '@/components/ItemImage.vue'
@@ -11,11 +12,32 @@ const route = useRoute()
 if (route.params.id === undefined) {
   throw new Error('No ID provided')
 }
+
+type MaterialsData = {
+  materials?: EnumMaterial[]
+}
+type CatalogueItemWithMaterials = CatalogueItem & MaterialsData
+const itemPlaceholder: CatalogueItemWithMaterials = {
+  id: 'NULL ID',
+  name: 'loading name..',
+  description: 'loading description..',
+  priceAED: 0,
+  imageSrc: '',
+  categoryTagName: 'Loading category..',
+  isFeatured: false,
+  sizingsData: [{
+    name: 'loading size..',
+    size: 0
+  }],
+  materials: [] as EnumMaterial[]
+}
+const catalogueItem: Ref<CatalogueItem> = ref(itemPlaceholder)
 const { data: item } = useFetch(`/api/CatalogueItems/${route.params.id}`)
 
 onMounted(async () => {
   try {
     await item.value
+    catalogueItem.value = (item.value as CatalogueItemWithMaterials)
   } catch {
     showError({
       statusCode: 404,
@@ -30,7 +52,7 @@ onMounted(async () => {
     <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-12">
       <div class="uppercase self-start desktop:hidden">
         <p class="caption">
-          <a href="/shop/catalogue">Catalogue</a> > {{ item?.name }}
+          <a href="/shop/catalogue">Catalogue</a> > {{ catalogueItem.name }}
         </p>
       </div>
       <ItemImage
@@ -40,18 +62,18 @@ onMounted(async () => {
       <div class="w-full desktop:self-start flex flex-col">
         <div class="breadcrumb uppercase self-start hidden desktop:block">
           <p class="caption">
-            <a href="/shop/catalogue">Catalogue</a> > {{ item?.name }}
+            <a href="/shop/catalogue">Catalogue</a> > {{ catalogueItem.name }}
           </p>
         </div>
-        <ItemDescription :sizes="item?.sizingsData">
+        <ItemDescription :sizes="catalogueItem.sizingsData">
           <template #item-name>
-            {{ item?.name }}
+            {{ catalogueItem.name }}
           </template>
           <template #owner-name>
             <!-- {{  }} -->
           </template>
           <template #description>
-            {{ item?.description }}
+            {{ catalogueItem.description }}
           </template>
           <template #sizing>
             XS

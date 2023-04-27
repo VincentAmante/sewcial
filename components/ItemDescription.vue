@@ -12,6 +12,10 @@ const props = defineProps<{
 // The sizings grid gets screwed up CSS-wise if it's not an even number
 // so I added this cheap fix
 const sizesAdjusted = computed(() => {
+  if (props.sizes === undefined) {
+    return [{ name: 'Error loading!', size: '{}' }, { name: '', size: '' }]
+  }
+
   if (props.sizes.length % 2 === 0) {
     return props.sizes
   } else {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CatalogueItem, Material } from '@prisma/client'
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
@@ -9,34 +10,53 @@ definePageMeta({
   layout: 'shop'
 })
 
-const { data: items } = useFetch('/api/CatalogueItems/')
-const filteredItems = ref(items)
-
-const catalogueItems = computed(() => {
-  filteredItems.value = items.value
-  return filteredItems.value
-})
-
-function filter () {
-  if (items.value === null) { return }
-  filteredItems.value = items.value.filter((item: any) => {
-    const tags = item.tags
-    for (const tag of tags) {
-      if (tag.tagName.toLowerCase().includes('activewear')) {
-        return true
-      }
-    }
-    return false
-  })
+type WithMaterial<T> = T & {
+  materials: {
+    material: Material
+  }[]
 }
+type CatalogueItemsWithMaterials = WithMaterial<CatalogueItem>[]
 
+const { data: items } = useFetch('/api/CatalogueItems/')
+const catalogue: Ref<CatalogueItemsWithMaterials> = ref(items)
+const filteredCatalogue: Ref<CatalogueItemsWithMaterials | null> = ref(items)
+
+onMounted(async () => {
+  try {
+    await items.value
+    if (items.value === null) {
+      showError({
+        statusCode: 404,
+        message: 'Item not found'
+      })
+      return
+    }
+
+    catalogue.value = items.value
+    filteredCatalogue.value = items.value
+  } catch {
+    showError({
+      statusCode: 404,
+      message: 'Item not found'
+    })
+  }
+})
 function toItem (itemUrl: string) {
   useRouter().push(`/shop/${itemUrl}`)
+}
+function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
+  console.log(newFilteredCatalogue.length)
+  if (newFilteredCatalogue.length === 0) {
+    console.log(catalogue.value)
+    filteredCatalogue.value = catalogue.value
+    return
+  }
+  filteredCatalogue.value = newFilteredCatalogue
 }
 </script>
 
 <template>
-  <main class="flex flex-col items-center">
+  <main class="flex flex-col">
     <div class="container flex flex-col border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row">
       <img class="head-img w-full h-auto mobile:w-1/2" src="https://via.placeholder.com/600x500">
       <div class="head-text flex flex-col justify-center mx-auto mb-8">
@@ -51,28 +71,13 @@ function toItem (itemUrl: string) {
       </div>
     </div>
 
-    <div class="catalogue-container desktop:flex-row">
+    <div class="catalogue-container flex desktop:flex-row">
       <!-- Filters -->
-      <div class="filters-dropdown hidden">
-        <IconFilterBlue />
-        <p>FILTER</p>
-      </div>
-      <div class="filters-container hidden">
-        <p>HIDE FILTERS</p>
-        <DropdownTab>
-          <h1>SHOP BY</h1>
-        </DropdownTab>
-        <DropdownTab>
-          <h1>STYLE</h1>
-        </DropdownTab>
-        <DropdownTab>
-          <h1>PRICE</h1>
-        </DropdownTab>
-        <button>
-          <p class="button">
-            APPLY FILTERS
-          </p>
-        </button>
+      <div class="filters-dropdown">
+        <CatalogueFilter
+          :catalogue="catalogue"
+          @apply-filter="(newFilteredCatalogue) => onApplyFilter(newFilteredCatalogue)"
+        />
       </div>
 
       <!-- Catalogue Items -->
@@ -96,12 +101,6 @@ function toItem (itemUrl: string) {
           </CatalogueCard>
         </div>
       </div>
-    </div>
-    <div class="p-4 px-8 bg-cyan-950 text-white">
-      <p>Catalogue Items</p>
-      <code>
-        {{ catalogueItems }}
-      </code>
     </div>
     <!-- Paginate -->
     <div class="paginate my-8">

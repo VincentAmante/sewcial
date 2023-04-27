@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { CatalogueItem, EnumMaterial } from '@prisma/client'
+import { computeStyles } from '@popperjs/core'
 import DropDown from '../FormFields/DropDown.vue'
 import CheckBox from '../FormFields/CheckBox.vue'
 import BaseFilter from './BaseFilter.vue'
 
+// Typing for catalogue items where Materials are included
 type Material = {
   materials: {
     material: {
@@ -12,13 +14,17 @@ type Material = {
   }[]
 }
 type ItemWithMaterial = CatalogueItem & Material
+
 const props = defineProps<{
   catalogue: ItemWithMaterial[]
 }>()
+const emit = defineEmits<{
+  (e: 'apply-filter', value: ItemWithMaterial[]): void
+}>()
+const filteredCatalogue = ref(props.catalogue)
 
-const emit = defineEmits(['update:catalogue'])
-
-const sortOption = ref('')
+// Sorting parameters
+const sortOption = ref('price')
 const sortOptions = [
   {
     label: 'Price',
@@ -29,7 +35,6 @@ const sortOptions = [
     value: 'name'
   }
 ]
-
 const sortOrder = ref('asc')
 const sortOrderOptions = [
   {
@@ -42,6 +47,7 @@ const sortOrderOptions = [
   }
 ]
 
+// Material Options
 type materialFilters = {
   label: string
   value: EnumMaterial
@@ -53,8 +59,42 @@ const materialArr = Object.keys(EnumMaterial).map((key: any) => EnumMaterial[key
   selected: false
 } as materialFilters))
 
+// Apply filter and sort
+
+function filterByMaterial () {
+  // if none selected, no filtering is applied
+
+  // acquire selected filters
+  const filters = materialArr.filter((material) => {
+    return material.value.selected
+  }).map((material) => {
+    return material.value.value
+  })
+  console.log('filters:', filters)
+  if (filters.length === 0) {
+    return
+  }
+
+  // any item with at least one of the selected materials is included
+  filteredCatalogue.value = filteredCatalogue.value.filter((item) => {
+    for (const material of item.materials) {
+      console.log('material.material.name: ', material.material.name)
+      if (filters.includes(material.material.name)) {
+        console.log('included')
+        return true
+      }
+    }
+    return false
+  })
+
+  console.log('filteredCatalogue:', filteredCatalogue.value)
+}
+
 function sort () {
+  console.log('filteredCatalogueSort: ', filteredCatalogue.value)
   filteredCatalogue.value = filteredCatalogue.value.sort((a: CatalogueItem, b: CatalogueItem) => {
+    // behaviour for each sort option is defined in this switch case
+    // If none of the cases match, the order is unchanged
     switch (sortOption.value) {
       case 'price':
         if (sortOrder.value === 'asc') {
@@ -73,34 +113,16 @@ function sort () {
     }
   })
 }
-const filteredCatalogue = useVModel(props, 'catalogue', emit)
-
-function filterByMaterial () {
-  if (materialArr.length === 0) { return }
-
-  const filters = materialArr.filter((material) => {
-    return material.value.selected
-  }).map((material) => {
-    return material.value.value
-  })
-
-  filteredCatalogue.value = filteredCatalogue.value.filter((item) => {
-    for (const material of item.materials) {
-      if (filters.includes(material.material.name)) { return true }
-    }
-    return false
-  })
-}
 
 function applyFilters () {
   filterByMaterial()
-  sort()
-  console.log(filteredCatalogue.value)
+  sort() // needs to be last to save performance
+  emit('apply-filter', filteredCatalogue.value)
 }
 </script>
 
 <template>
-  <BaseFilter>
+  <BaseFilter @apply-filter="() => applyFilters()">
     <div class="flex flex-col gap-2">
       <h1 class="text-secondary my-1">
         Search
@@ -145,11 +167,5 @@ function applyFilters () {
         <CheckBox v-model="material.value.selected" :label="material.value.label" />
       </div>
     </div>
-    <div>
-      {{ filteredCatalogue }}
-    </div>
-    <AppButton @click="() => applyFilters()">
-      Apply Filters
-    </AppButton>
   </BaseFilter>
 </template>
