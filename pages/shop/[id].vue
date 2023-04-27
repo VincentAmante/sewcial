@@ -56,7 +56,7 @@ onMounted(async () => {
         </p>
       </div>
       <ItemImage
-        :image="item?.imageSrc"
+        :image="catalogueItem.imageSrc"
         class="max-w-md"
       />
       <div class="w-full desktop:self-start flex flex-col">

@@ -1,5 +1,4 @@
-import { Prisma, CatalogueItem, Material, EnumMaterial, MaterialOnCatalogueItems } from '@prisma/client'
-// // import { z } from 'zod'
+import { Prisma, CatalogueItem, EnumMaterial } from '@prisma/client'
 
 type MaterialsData = {
   materials: EnumMaterial[]

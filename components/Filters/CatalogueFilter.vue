@@ -94,7 +94,7 @@ function sort () {
         if (sortOrder.value === 'asc') {
           return (a.priceAED >= b.priceAED) ? 1 : -1
         } else {
-          return (a.priceAED <= b.priceAED) ? -1 : 1
+          return (a.priceAED <= b.priceAED) ? 1 : -1
         }
       case 'name':
         if (sortOrder.value === 'asc') {

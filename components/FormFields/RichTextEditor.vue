@@ -6,13 +6,14 @@ import { Paragraph } from '@tiptap/extension-paragraph'
 import { OrderedList } from '@tiptap/extension-ordered-list'
 import TipTapButton from './TipTapButton.vue'
 
-defineProps<{
-  modelValue: JSONContent
+const props = defineProps<{
+  modelValue: JSONContent,
+  defaultContent?: string
 }>()
 
 const emit = defineEmits(['update:modelValue'])
 const editor = useEditor({
-  content: '<p>I’m running Tiptap with Vue.js. 🎉</p>',
+  content: (props.defaultContent) ? props.defaultContent : '<p>Start typing Here..</p>',
   extensions: [
     StarterKit
   ],
