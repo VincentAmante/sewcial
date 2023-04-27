@@ -19,7 +19,7 @@ type CatalogueItemsWithMaterials = WithMaterial<CatalogueItem>[]
 
 const { data: items } = useFetch('/api/CatalogueItems/')
 const catalogue: Ref<CatalogueItemsWithMaterials> = ref(items)
-const filteredCatalogue: Ref<CatalogueItemsWithMaterials | null> = ref(items)
+const filteredCatalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
 
 onMounted(async () => {
   try {
@@ -33,7 +33,15 @@ onMounted(async () => {
     }
 
     catalogue.value = items.value
-    filteredCatalogue.value = items.value
+
+    const catalogueCopy = readonly(catalogue.value).map((item) => {
+      const materials = item.materials.map(material => material.material)
+      return {
+        ...item,
+        materials
+      }
+    }) as unknown as CatalogueItemsWithMaterials
+    filteredCatalogue.value = catalogueCopy
   } catch {
     showError({
       statusCode: 404,
@@ -45,13 +53,9 @@ function toItem (itemUrl: string) {
   useRouter().push(`/shop/${itemUrl}`)
 }
 function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
-  console.log(newFilteredCatalogue.length)
-  if (newFilteredCatalogue.length === 0) {
-    console.log(catalogue.value)
-    filteredCatalogue.value = catalogue.value
-    return
-  }
+  console.log('newFilteredCatalogue', newFilteredCatalogue)
   filteredCatalogue.value = newFilteredCatalogue
+  console.log('filteredCatalogue', filteredCatalogue.value)
 }
 </script>
 
@@ -67,6 +71,7 @@ function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
           <p class="button">
             VIEW LIMITED EDITION
           </p>
+          {{ catalogue }}
         </SpeechBubble>
       </div>
     </div>
@@ -81,10 +86,10 @@ function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
       </div>
 
       <!-- Catalogue Items -->
-      <div class="flex content-center w-full desktop:mt-8">
+      <div class="flex flex-col w-full desktop:mt-8">
         <div class="grid grid-cols-2 mx-auto self-center justify-center desktop:grid-cols-3">
           <CatalogueCard
-            v-for="item in items"
+            v-for="item in filteredCatalogue"
             :key="item.id"
             :image="item.imageSrc"
             @click="() => toItem(item.id)"
