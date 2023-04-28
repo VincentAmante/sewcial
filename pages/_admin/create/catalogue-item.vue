@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EnumMaterial, CatalogueCategoryTag } from '@prisma/client'
+import { Author, EnumMaterial, CatalogueCategoryTag } from '@prisma/client'
 import Prisma from '~/server/middleware/0.prisma'
 
 const name = ref('')
@@ -7,18 +7,19 @@ const description = ref('')
 const imageSrc = ref('')
 const priceAed = ref(0)
 const isFeatured = ref(false)
-const categoryTag = ref('')
+const chosenAuthor = ref('Select an author')
 
-const sampleMaterials: EnumMaterial[] = [
-  'linen',
-  'cotton'
-]
+type WithAuthorName<T> = T & {
+  authorName: string
+}
+const { data: authors } = useFetch('/api/Authors/')
 
 type materialOptions = {
   label: string
   value: EnumMaterial
   selected: boolean
 }
+
 const materialArr = Object.keys(EnumMaterial).map((key: any) => EnumMaterial[key]).map(material => ref({
   label: material,
   value: (material as EnumMaterial),
@@ -34,11 +35,14 @@ async function submitForm () {
   }).map((material) => {
     return material.value.value
   }) as EnumMaterial[]
+  const chosenAuthorJson = (JSON.parse(chosenAuthor.value) as WithAuthorName<Author>)
 
   const { result } = await useFetch('/api/CatalogueItems/create', {
     method: 'POST',
     body: JSON.stringify({
       name: name.value,
+      authorFirstName: chosenAuthorJson.firstName,
+      authorLastName: chosenAuthorJson.lastName,
       description: description.value,
       imageSrc: imageSrc.value,
       priceAED: priceAed.value,
@@ -84,6 +88,36 @@ const chosenFormat = computed(() => {
   return chosenFormatValues.value
 })
 // *------------------*
+
+const authorOptions = computed(() => {
+  const defAuthorVal = JSON.stringify({
+    firstName: 'MISSING NAME',
+    lastName: 'MISSING NAME',
+    authorName: 'MISSING NAME'
+  })
+  const defaultAuthor = [{
+    label: '',
+    value: defAuthorVal
+  }]
+
+  JSON.stringify({
+    label: 'No authors found',
+    value: {
+      firstName: 'MISSING NAME',
+      lastName: 'MISSING NAME',
+      authorName: 'MISSING NAME'
+    }
+  })
+
+  return authors.value?.map((author) => {
+    const authorString = {
+      label: `${author.firstName} ${author.lastName}`,
+      value: JSON.stringify(author)
+    }
+
+    return authorString || defaultAuthor
+  }) || defaultAuthor
+})
 </script>
 
 <template>
@@ -95,13 +129,18 @@ const chosenFormat = computed(() => {
           type="text"
         />
       </NFormItem>
+      <NFormItem label="Author" class="capitalize">
+        <NSelect
+          v-model:value="chosenAuthor"
+          :options="authorOptions"
+        />
+      </NFormItem>
       <NFormItem label="Description">
         <NInput
           v-model:value="description"
           type="textarea"
         />
       </NFormItem>
-
       <NFormItem label="Image Link">
         <NInput
           v-model:value="imageSrc"
@@ -146,13 +185,6 @@ const chosenFormat = computed(() => {
         <h1 class="text-white my-0">
           Materials
         </h1>
-        <!-- <div
-        v-for="material in materialArr"
-        :key="material.value"
-        class="flex justify-between"
-      >
-        <CheckBox v-model="material.value.selected" :label="material.value.label" />
-      </div> -->
         <NCheckbox
           v-for="material in materialArr"
           :key="material.value.value"
