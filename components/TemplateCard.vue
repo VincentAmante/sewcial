@@ -13,27 +13,37 @@ const props = defineProps({
 
 <!-- Card -->
 <template>
-  <div class="cards" onclick="location.href='html/image.html'">
-    <div class="card">
-      <div class="card-image" :style="{ backgroundImage: `url(${image})` }" />
-      <div class="card-info">
-        <h1>
+  <div
+    class="cards m-2 cursor-pointer group min-w-[20rem]"
+  >
+    <div class="card flex flex-col bg-primary rounded-2xl w-full h-full">
+      <div class="aspect-[1.1/1] overflow-hidden h-80">
+        <div
+          class="card-image bg-cover bg-center bg-no-repeat rounded-t-2xl align-middle brightness-100 h-full
+       transition-all group-hover:scale-105 group-hover:brightness-[80%]"
+          :style="{ backgroundImage: `url(${image})` }"
+        />
+      </div>
+      <div class="card-info flex flex-col p-4 justify-start grow items">
+        <h1 class="my-2">
           <slot name="item-name" />
         </h1>
-        <h3>
+        <h3 class="my-2 capitalize">
           <slot name="owner" />
         </h3>
-        <p>
+        <p class=" text-justify grow">
           <slot name="description" />
         </p>
-        <DownloadButton />
+        <div class="flex justify-center">
+          <DownloadButton />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <!-- Scoped Styling -->
-<style scoped lang="scss">
+<!-- <style scoped lang="scss">
 .cards {
     margin: 10px;
 
@@ -86,5 +96,4 @@ const props = defineProps({
 
     }
   }
-
-</style>
+</style> -->

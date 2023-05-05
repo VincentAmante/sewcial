@@ -30,20 +30,14 @@ const templatePlaceholder: Template = {
 }
 const template: Ref<Template> = ref(templatePlaceholder)
 
-const { data: item } = useFetch(`/api/Templates/${route.params.id}`)
-// const detailsHtml = ref('')
-
-onMounted(async () => {
-  try {
-    await item.value
-    template.value = (item.value as Template)
-  } catch {
-    showError({
-      statusCode: 404,
-      message: 'Template not found'
-    })
+const { data, pending, error, refresh } = useFetch(`/api/Templates/${route.params.id}`, {
+  onResponse ({ response }) {
+    const data = response._data as Template
+    template.value = data
   }
 })
+refresh()
+
 </script>
 
 <template>

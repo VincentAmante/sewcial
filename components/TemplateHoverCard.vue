@@ -1,30 +1,32 @@
 <script setup lang="ts">
-import ButtonDownload from '@/components/icons/ButtonDownload.vue';
+import ButtonDownload from '@/components/icons/ButtonDownload.vue'
 // Variables passed to this component are props
 const props = defineProps({
-    image: {
-        type: String,
-        required: true
-    }
+  image: {
+    type: String,
+    required: true
+  }
 })
 </script>
 
 <!-- Browse Image Card Templates -->
 <template>
-    <div class="card info-Slide-up">
-        <!-- Image -->
-            <img :src="image" />            
-        <!-- Info -->
-        <div class="info-container">
-            <div class="info-wrapper">
-                <div class="card-text">
-                    <h1><slot name="item-name"></slot></h1>
-                    <h3><slot name="owner-name"></slot></h3>
-                </div>
-                <ButtonDownload class="btn-download"></ButtonDownload>
-            </div>
+  <div class="card info-Slide-up">
+    <!-- Image -->
+    <img :src="image">
+    <!-- Info -->
+    <div class="info-container">
+      <div class="info-wrapper">
+        <div class="card-text">
+          <h1><slot name="item-name" /></h1>
+          <h3 class="capitalize">
+            <slot name="owner-name" />
+          </h3>
         </div>
+        <ButtonDownload class="btn-download" />
+      </div>
     </div>
+  </div>
 </template>
 
 <!-- Scoped Styling -->

@@ -33,6 +33,7 @@ async function submitContactForm () {
   emailInput.status === 'error' ||
   mobileNumberInput.status === 'error' ||
   messageInput.status === 'error') {
+
   } else {
     await useFetch('/api/ContactSubmissions/create', {
       method: 'POST',

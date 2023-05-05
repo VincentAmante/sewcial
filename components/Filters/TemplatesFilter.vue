@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CatalogueItem } from '@prisma/client'
+import type { Template } from '@prisma/client'
 import DropDown from '../FormFields/DropDown.vue'
 import DropDownTab from '../FormFields/DropDownTab.vue'
 import CheckBox from '../FormFields/CheckBox.vue'
@@ -8,29 +8,25 @@ import { EnumMaterial } from '~/enums/Material'
 
 // Typing for catalogue items where Materials are included
 type Material = {
-  materials: {
+  MaterialOnTemplate: {
     material: {
       name: EnumMaterial
     }
   }[]
 }
-type ItemWithMaterial = CatalogueItem & Material
+type TemplateWithMaterial = Template & Material
 
 const props = defineProps<{
-  catalogue: ItemWithMaterial[]
+  templates: TemplateWithMaterial[]
 }>()
 const emit = defineEmits<{(
-  e: 'apply-filter', value: ItemWithMaterial[]): void
+  e: 'apply-filter', value: TemplateWithMaterial[]): void
 }>()
-const filteredCatalogue = ref(props.catalogue)
+const filteredTemplates = ref(props.templates)
 
 // Sorting parameters
 const sortOption = ref('price')
 const sortOptions = [
-  {
-    label: 'Price',
-    value: 'price'
-  },
   {
     label: 'Name',
     value: 'name'
@@ -75,8 +71,8 @@ function filterByMaterial () {
   }
 
   // any item with at least one of the selected materials is included
-  filteredCatalogue.value = filteredCatalogue.value.filter((item) => {
-    for (const material of item.materials) {
+  filteredTemplates.value = filteredTemplates.value.filter((item) => {
+    for (const material of item.MaterialOnTemplate) {
       if (filters.includes(material.material.name)) {
         return true
       }
@@ -86,16 +82,16 @@ function filterByMaterial () {
 }
 
 function sort () {
-  filteredCatalogue.value = filteredCatalogue.value.sort((a: CatalogueItem, b: CatalogueItem) => {
+  filteredTemplates.value = filteredTemplates.value.sort((a: Template, b: Template) => {
     // behaviour for each sort option is defined in this switch case
     // If none of the cases match, the order is unchanged
     switch (sortOption.value) {
-      case 'price':
-        if (sortOrder.value === 'asc') {
-          return (a.priceAED >= b.priceAED) ? 1 : -1
-        } else {
-          return (a.priceAED <= b.priceAED) ? 1 : -1
-        }
+      // case 'price':
+      //   if (sortOrder.value === 'asc') {
+      //     return (a.priceAED >= b.priceAED) ? 1 : -1
+      //   } else {
+      //     return (a.priceAED <= b.priceAED) ? 1 : -1
+      //   }
       case 'name':
         if (sortOrder.value === 'asc') {
           return (a.name.localeCompare(b.name))
@@ -113,11 +109,11 @@ const willFilterMaterial = ref(false)
 
 function applyFilters () {
   if (willFilterMaterial.value) {
-    filteredCatalogue.value = props.catalogue
+    filteredTemplates.value = props.templates
     filterByMaterial()
   }
   sort() // needs to be last to save performance
-  emit('apply-filter', filteredCatalogue.value)
+  emit('apply-filter', filteredTemplates.value)
 }
 </script>
 

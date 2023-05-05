@@ -1,7 +1,4 @@
 <script setup lang = "ts">
-// Computed Property
-import { computed, getCurrentInstance } from 'vue'
-
 // Import Chevrons
 import IconChevronLeft from './icons/IconChevronLeft.vue'
 import IconChevronRight from './icons/IconChevronRight.vue'
@@ -74,7 +71,10 @@ watchEffect(() => {
 <template>
   <div>
     <ul class="flex justify-center content-center mt-3 list-none">
-      <li class="inline-block mr-2" :class="(isFirstPage) ? ['opacity-50' , 'pointer-events-none'] : ['']">
+      <li
+        class="inline-block mr-2"
+        :class="(isFirstPage) ? ['opacity-50' , 'pointer-events-none'] : ['']"
+      >
         <a class="chevron" href="#" @click="() => prev()">
           <IconChevronLeft />
         </a>
@@ -100,54 +100,3 @@ watchEffect(() => {
     </ul>
   </div>
 </template>
-
-<!-- <style scoped lang = "scss">
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin-top: 0.75em;
-  list-style: none;
-}
-
-.page-item {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.page-link {
-  padding: 0.5em;
-  padding-inline: 0.9em;
-  border-radius: 50%;
-  color: $clr-secondary;
-  text-decoration: none;
-}
-
-.chevron {
-  margin: 1em;
-}
-
-.page-link:hover {
-  color: $clr-accent-1;
-}
-
-.page-item.disabled .page-link,
-.page-item.disabled .page-link:hover {
-  color: #ccc;
-  cursor: not-allowed;
-}
-
-.page-item.active .page-link {
-  background-color: $clr-accent-1;
-  color: $clr-primary;
-}
-
-.page-item.disabled .page-link,
-.page-item.disabled .page-link:hover,
-.page-item.active .page-link:hover {
-  background-color: $clr-accent-1;
-  border-color: $clr-accent-1;
-  color: $clr-primary;
-  cursor: default;
-}
-</style> -->

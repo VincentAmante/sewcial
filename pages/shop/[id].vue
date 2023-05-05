@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { CatalogueItem, EnumMaterial } from '@prisma/client'
+import type { CatalogueItem } from '@prisma/client'
+import { EnumMaterial } from '~/enums/Material'
 import LikeMeButton from '@/components/LikeMeButton.vue'
 import ItemDescription from '@/components/ItemDescription.vue'
 import ItemImage from '@/components/ItemImage.vue'
@@ -10,7 +11,7 @@ definePageMeta({
 
 const route = useRoute()
 if (route.params.id === undefined) {
-  throw new Error('No ID provided')
+  showError('No ID provided')
 }
 
 type MaterialsData = {
@@ -54,7 +55,7 @@ onMounted(async () => {
     <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-12">
       <div class="uppercase self-start desktop:hidden">
         <p class="caption">
-          <a href="/shop/catalogue">Catalogue</a> > {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
+          <a href="/shop/catalogue">Catalogue</a> <span>&gt;</span> {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
         </p>
       </div>
       <ItemImage
@@ -64,7 +65,7 @@ onMounted(async () => {
       <div class="w-full desktop:self-start flex flex-col">
         <div class="breadcrumb uppercase self-start hidden desktop:block">
           <p class="caption">
-            <a href="/shop/catalogue">Catalogue</a> > {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
+            <a href="/shop/catalogue">Catalogue</a> <span>&gt;</span> {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
           </p>
         </div>
         <ItemDescription :sizes="catalogueItem.sizingsData">

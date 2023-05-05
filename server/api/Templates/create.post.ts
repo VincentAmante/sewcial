@@ -2,31 +2,20 @@ import { Template, Author, Skill, Prisma, EnumMaterial } from '@prisma/client'
 import { JSONContent } from '@tiptap/vue-3'
 import { z } from 'zod'
 
-type TemplateOptional = {
-  name: string,
-  description: string,
-  priceAED: number,
-  isFeatured: boolean,
-  categoryTagId: string,
-  skill: Skill,
-  authorFirstName: string,
-  authorLastName: string,
-  thumbnail: string,
-  templateImage: string,
-  materialsRequired: Prisma.JsonArray,
-  equipment: Prisma.JsonArray,
-  assembly: Prisma.JsonArray,
+type WithMaterials<T> = T & {
   materials: EnumMaterial[]
 }
 
+type TemplateWithMaterials = WithMaterials<Template>
+
 export default defineEventHandler(async (event) => {
-  const body: TemplateOptional = await readBody(event)
+  const body: TemplateWithMaterials = await readBody(event)
 
   // const details = body.details as Prisma.JsonValue
   const result = await event.context.prisma.template.create({
     data: {
       name: body.name,
-      description: body.description,
+      description: body.description as string,
       thumbnail: body.thumbnail,
       templateImage: body.templateImage,
       materialsRequired: body.materialsRequired as Prisma.JsonArray,
