@@ -1,10 +1,32 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Author, Skill, EnumMaterial, TemplateCategoryTag, Template } from '@prisma/client'
 import { JSONContent, generateHTML } from '@tiptap/vue-3'
 import { StarterKit } from '@tiptap/starter-kit'
+import type { Author, TemplateCategoryTag, Template } from '@prisma/client'
 import RichTextEditor from '~/components/FormFields/RichTextEditor.vue'
 import { content } from '~/tailwind.config'
+
+enum EnumMaterial {
+  canvas,
+  chiffon,
+  cotton,
+  crepe,
+  denim,
+  leather,
+  lace,
+  linen,
+  satin,
+  silk,
+  synthetic,
+  velvet,
+  wool
+}
+
+enum Skill {
+  beginner,
+  intermediate,
+  advanced
+}
 
 definePageMeta({
   layout: 'admin'
