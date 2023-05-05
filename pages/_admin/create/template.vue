@@ -5,22 +5,7 @@ import { StarterKit } from '@tiptap/starter-kit'
 import type { Author, TemplateCategoryTag, Template } from '@prisma/client'
 import RichTextEditor from '~/components/FormFields/RichTextEditor.vue'
 import { content } from '~/tailwind.config'
-
-enum EnumMaterial {
-  canvas,
-  chiffon,
-  cotton,
-  crepe,
-  denim,
-  leather,
-  lace,
-  linen,
-  satin,
-  silk,
-  synthetic,
-  velvet,
-  wool
-}
+import { EnumMaterial } from '~/enums/Material'
 
 enum Skill {
   beginner,
@@ -44,11 +29,13 @@ type materialOptions = {
   selected: boolean
 }
 
-const materialArr = Object.keys(EnumMaterial).map((key: any) => EnumMaterial[key]).map(material => ref({
-  label: material,
-  value: (material as EnumMaterial),
-  selected: false
-} as materialOptions))
+const materialArr = Object.keys(EnumMaterial)
+  .map((key: any) => EnumMaterial[key])
+  .map(material => ref({
+    label: material,
+    value: (material as EnumMaterial),
+    selected: false
+  } as materialOptions))
 const { data: categoryTags } = useFetch('/api/Categories')
 
 const chosenFormatStructure: Ref<string> = ref(JSON.stringify({
