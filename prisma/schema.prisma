@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,28 +8,6 @@ datasource db {
   relationMode = "prisma"
 }
 
-enum EnumMaterial {
-  chiffon
-  cotton
-  crepe
-  denim
-  lace
-  leather
-  linen
-  satin
-  silk
-  synthetic
-  velvet
-  wool
-}
-
-enum Skill {
-  beginner
-  intermediate
-  advanced
-}
-
-// schema.prisma
 model Example {
   id      String @id @default(uuid())
   details String
@@ -50,23 +25,23 @@ model Author {
 model Template {
   id                 String               @id @default(uuid())
   name               String
-  description        String
+  description        String               @db.VarChar(400)
   details            Json?
   priceAED           Float
   isFeatured         Boolean
-  MaterialOnTemplate MaterialOnTemplate[]
-  skill              Skill
-  CategoryTag        TemplateCategoryTag? @relation(fields: [categoryTagId], references: [id])
   categoryTagId      String?
-  thumbnail          String               @default("")
-  templateImage      String               @default("")
-  materialsRequired  Json?
-  equipment          Json?
-  assembly           Json?
-  createdAt          DateTime             @default(now())
-  Author             Author?              @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
   authorFirstName    String?
   authorLastName     String?
+  skill              Skill
+  assembly           Json?
+  createdAt          DateTime             @default(now())
+  equipment          Json?
+  materialsRequired  Json?
+  templateImage      String               @default("")
+  thumbnail          String               @default("")
+  MaterialOnTemplate MaterialOnTemplate[]
+  CategoryTag        TemplateCategoryTag? @relation(fields: [categoryTagId], references: [id])
+  Author             Author?              @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
 
   @@index([authorFirstName, authorLastName])
   @@index([categoryTagId])
@@ -85,15 +60,15 @@ model CatalogueItem {
   imageSrc           String
   priceAED           Float
   isFeatured         Boolean                    @default(false)
-  CategoryTag        CatalogueCategoryTag?      @relation(fields: [categoryTagName], references: [name])
+  sizingsData        Json?
   categoryTagName    String?
-  sizingsData        Json?                      @default(dbgenerated())
-  materials          MaterialOnCatalogueItems[]
-  LikedCatalogueItem LikedCatalogueItem[]
   createdAt          DateTime                   @default(now())
-  Author             Author?                    @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
   authorFirstName    String?                    @default("first name missing")
   authorLastName     String?                    @default("last name missing")
+  CategoryTag        CatalogueCategoryTag?      @relation(fields: [categoryTagName], references: [name])
+  materials          MaterialOnCatalogueItems[]
+  LikedCatalogueItem LikedCatalogueItem[]
+  Author             Author?                    @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
 
   @@index([authorFirstName, authorLastName])
   @@index([categoryTagName])
@@ -102,8 +77,8 @@ model CatalogueItem {
 model MaterialOnCatalogueItems {
   id            String        @id @default(uuid())
   catalogueId   String
-  catalogueItem CatalogueItem @relation(fields: [catalogueId], references: [id])
   materialName  EnumMaterial
+  catalogueItem CatalogueItem @relation(fields: [catalogueId], references: [id])
   material      Material      @relation(fields: [materialName], references: [name])
 
   @@index([catalogueId])
@@ -119,8 +94,8 @@ model Material {
 model MaterialOnTemplate {
   id           String       @id @default(uuid())
   templateId   String
-  template     Template     @relation(fields: [templateId], references: [id])
   materialName EnumMaterial
+  template     Template     @relation(fields: [templateId], references: [id])
   material     Material     @relation(fields: [materialName], references: [name])
 
   @@index([templateId])
@@ -138,10 +113,10 @@ model Event {
   startTime   DateTime
   endTime     DateTime
   title       String
-  description String
-  thumbnail   String     @default("")
   details     Json?
+  description String
   priceAED    Float      @default(0)
+  thumbnail   String     @default("")
   Bookings    Bookings[]
 }
 
@@ -150,12 +125,12 @@ model Workshop {
   startTime   DateTime
   endTime     DateTime
   title       String
-  thumbnail   String     @default("")
-  skill       Skill
   priceAED    Float
   details     Json?
   totalSlots  Int
   bookedSlots Int?       @default(0)
+  skill       Skill
+  thumbnail   String     @default("")
   Bookings    Bookings[]
 }
 
@@ -178,10 +153,10 @@ model User {
 
 model LikedCatalogueItem {
   id              String        @id @default(uuid())
-  user            User          @relation(fields: [userId], references: [id])
   userId          String
-  catalogueItem   CatalogueItem @relation(fields: [catalogueItemId], references: [id])
   catalogueItemId String
+  user            User          @relation(fields: [userId], references: [id])
+  catalogueItem   CatalogueItem @relation(fields: [catalogueItemId], references: [id])
 
   @@index([userId])
   @@index([catalogueItemId])
@@ -195,11 +170,33 @@ model Bookings {
   lastName   String
   email      String
   mobile     String
-  event      Event?    @relation(fields: [eventId], references: [id])
   eventId    String?
-  workshop   Workshop? @relation(fields: [workshopId], references: [id])
   workshopId String?
+  event      Event?    @relation(fields: [eventId], references: [id])
+  workshop   Workshop? @relation(fields: [workshopId], references: [id])
 
   @@index([eventId])
   @@index([workshopId])
+}
+
+enum EnumMaterial {
+  canvas
+  chiffon
+  cotton
+  crepe
+  denim
+  leather
+  lace
+  linen
+  satin
+  silk
+  synthetic
+  velvet
+  wool
+}
+
+enum Skill {
+  beginner
+  intermediate
+  advanced
 }
