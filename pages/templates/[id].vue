@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { Template, Skill } from '@prisma/client'
-import { JSONContent, generateHTML } from '@tiptap/vue-3'
-import { StarterKit } from '@tiptap/starter-kit'
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import ButtonDownload from '@/components/icons/ButtonDownload.vue'
 import ButtonFullscreen from '@/components/icons/ButtonFullscreen.vue'
@@ -16,28 +14,28 @@ const templatePlaceholder: Template = {
   name: 'loading name..',
   description: 'loading description..',
   priceAED: 0,
+  thumbnail: '',
+  templateImage: '',
   categoryTagId: 'Loading category..',
   isFeatured: false,
   skill: Skill.beginner,
-  details: {
-    type: 'doc',
-    content: [
-      { }
-    ]
-  },
+  materialsRequired: ['..'],
+  equipment: ['..'],
+  assembly: ['..'],
   authorFirstName: '..',
-  authorLastName: '..'
+  authorLastName: '..',
+  details: {},
+  createdAt: new Date()
 }
 const template: Ref<Template> = ref(templatePlaceholder)
 
 const { data: item } = useFetch(`/api/Templates/${route.params.id}`)
-const detailsHtml = ref('')
+// const detailsHtml = ref('')
 
 onMounted(async () => {
   try {
     await item.value
     template.value = (item.value as Template)
-    detailsHtml.value = generateHTML(template.value.details as JSONContent, [StarterKit])
   } catch {
     showError({
       statusCode: 404,
@@ -58,10 +56,10 @@ onMounted(async () => {
       </div>
       <div class="breadcrumbs">
         <p>TEMPLATES</p>
-        <p> > {{ template.name }}</p>
+        <p> {{ template.name }}</p>
       </div>
       <div class="template-selected">
-        <img src="https://i.pinimg.com/564x/9c/82/9e/9c829e04b5ccbee04f5fa689dcdd984b.jpg" alt="template-1">
+        <img :src="template.thumbnail" alt="template-1">
         <div class="template-info">
           <h1>{{ template.name }}</h1>
           <p>{{ template.description }}</p>
@@ -78,8 +76,8 @@ onMounted(async () => {
 
     <!-- Template Image Section -->
     <section class="template">
-      <h1>LONG SLEEVE BLAZER DRESS TEMPLATE</h1>
-      <img src="https://i.pinimg.com/originals/03/14/5e/03145e4cc2f8a95f3bbe0028be946d91.jpg">
+      <h1>{{ template.name }}</h1>
+      <img :src="template.templateImage">
       <div class="buttons">
         <ButtonDownload class="btn" />
         <ButtonFullscreen class="btn" />
@@ -88,41 +86,38 @@ onMounted(async () => {
 
     <!-- Instructions Section -->
     <section class="instructions">
-      <div v-html="detailsHtml" />
-      <!-- <div class="requirements">
-        <div class="materials" >
+      <div class="requirements">
+        <div class="materials">
           <h1>MATERIALS NEEDED</h1>
           <ul>
-            <li>Fabric scraps or fat quarters</li>
-            <li>Medium-weight fusible interfacing (Pellon 931TD)</li>
-            <li>Clear vinyl (2 gauge)</li>
-            <li>Extra wide double fold bias tape (1/2″)</li>
-            <li>Coordinating thread</li>
+            <li v-for="(material, index) in template.materialsRequired" :key="index">
+              {{ material }}
+            </li>
           </ul>
         </div>
         <div class="equipment">
           <h1>EQUIPMENTS</h1>
           <ul>
-            <li>Sewing machine</li>
-            <li>Sewing shears</li>
-            <li>Iron</li>
-            <li>Point turning tool</li>
-            <li>Measuring tape</li>
+            <li
+              v-for="(equipment, index) in template.equipment"
+              :key="index"
+            >
+              {{ equipment }}
+            </li>
           </ul>
         </div>
       </div>
       <div class="assembly">
         <h1>ASSEMBLY</h1>
         <ul>
-          <li>Cut the parts according to the template.</li>
-          <li>Place the body pieces face down on your ironing board. Center the body interfacing pieces onto the wrong side of the body pieces. </li>
-          <li>Carefully flip over the pieces, making sure the interfacing remains in place, so that the right side of the body piece is facing up. </li>
-          <li>Press on the fabric to fuse the interfacing pieces to the fabric, using a dry iron for 10-15 seconds.</li>
-          <li>Center the vinyl piece over the pocket window on the back side of the piece. Use sewing clips (or hair clips) to secure the vinyl in place. On the front side of the piece, top stitch 1/8″ around the outside edge of the window to finish the window edge and secure the vinyl to the piece.</li>
-          <li>Place the front body piece facing up on your work surface. Align the pocket piece on the front body piece, so that the wrong side of the pocket piece is facing the right side of the body piece and the lower corners of each piece are precisely aligned. Pin. Baste 1/8″ around the outer edge of the pocket to secure it to the body piece. Remove pins.</li>
-          <li>Center the strap piece along the top edge of the right side of the front body piece, so that the ends of the strap overlap the edge of the front body piece by about 1/2″. Pin. Baste 1/8″ from the edge of the front body piece to anchor the strap into place. Remove pins.</li>
+          <li
+            v-for="(step, index) in template.assembly"
+            :key="index"
+          >
+            {{ step }}
+          </li>
         </ul>
-      </div> -->
+      </div>
     </section>
   </main>
 </template>

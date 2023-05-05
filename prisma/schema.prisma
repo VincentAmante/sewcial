@@ -39,9 +39,10 @@ model Example {
 }
 
 model Author {
-  firstName String
-  lastName  String
-  templates Template[]
+  firstName     String
+  lastName      String
+  templates     Template[]
+  CatalogueItem CatalogueItem[]
 
   @@id([firstName, lastName], name: "authorName")
 }
@@ -57,6 +58,12 @@ model Template {
   skill              Skill
   CategoryTag        TemplateCategoryTag? @relation(fields: [categoryTagId], references: [id])
   categoryTagId      String?
+  thumbnail          String               @default("")
+  templateImage      String               @default("")
+  materialsRequired  Json?
+  equipment          Json?
+  assembly           Json?
+  createdAt          DateTime             @default(now())
   Author             Author?              @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
   authorFirstName    String?
   authorLastName     String?
@@ -82,10 +89,13 @@ model CatalogueItem {
   categoryTagName    String?
   sizingsData        Json?                      @default(dbgenerated())
   materials          MaterialOnCatalogueItems[]
-  userId             String?
   LikedCatalogueItem LikedCatalogueItem[]
   createdAt          DateTime                   @default(now())
+  Author             Author?                    @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
+  authorFirstName    String?                    @default("first name missing")
+  authorLastName     String?                    @default("last name missing")
 
+  @@index([authorFirstName, authorLastName])
   @@index([categoryTagName])
 }
 
@@ -129,6 +139,7 @@ model Event {
   endTime     DateTime
   title       String
   description String
+  thumbnail   String     @default("")
   details     Json?
   priceAED    Float      @default(0)
   Bookings    Bookings[]
@@ -139,6 +150,7 @@ model Workshop {
   startTime   DateTime
   endTime     DateTime
   title       String
+  thumbnail   String     @default("")
   skill       Skill
   priceAED    Float
   details     Json?

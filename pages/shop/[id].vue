@@ -29,15 +29,17 @@ const itemPlaceholder: CatalogueItemWithMaterials = {
     name: 'loading size..',
     size: 0
   }],
-  materials: [] as EnumMaterial[]
+  materials: [] as EnumMaterial[],
+  createdAt: new Date(),
+  authorFirstName: '..',
+  authorLastName: '..'
 }
 const catalogueItem: Ref<CatalogueItem> = ref(itemPlaceholder)
-const { data: item } = useFetch(`/api/CatalogueItems/${route.params.id}`)
 
 onMounted(async () => {
   try {
-    await item.value
-    catalogueItem.value = (item.value as CatalogueItemWithMaterials)
+    const { data: item } = await useFetch(`/api/CatalogueItems/${route.params.id}`)
+    catalogueItem.value = (await item.value as CatalogueItemWithMaterials)
   } catch {
     showError({
       statusCode: 404,
@@ -52,7 +54,7 @@ onMounted(async () => {
     <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-12">
       <div class="uppercase self-start desktop:hidden">
         <p class="caption">
-          <a href="/shop/catalogue">Catalogue</a> > {{ catalogueItem.name }}
+          <a href="/shop/catalogue">Catalogue</a> > {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
         </p>
       </div>
       <ItemImage
@@ -62,18 +64,18 @@ onMounted(async () => {
       <div class="w-full desktop:self-start flex flex-col">
         <div class="breadcrumb uppercase self-start hidden desktop:block">
           <p class="caption">
-            <a href="/shop/catalogue">Catalogue</a> > {{ catalogueItem.name }}
+            <a href="/shop/catalogue">Catalogue</a> > {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
           </p>
         </div>
         <ItemDescription :sizes="catalogueItem.sizingsData">
           <template #item-name>
-            {{ catalogueItem.name }}
+            {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
           </template>
           <template #owner-name>
             <!-- {{  }} -->
           </template>
           <template #description>
-            {{ catalogueItem.description }}
+            {{ catalogueItem.description || 'Loading description..' }}
           </template>
           <template #sizing>
             XS

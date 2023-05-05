@@ -6,6 +6,8 @@ import CatalogueFilter from '~~/components/Filters/CatalogueFilter.vue'
 import DropDown from '~/components/FormFields/DropDown.vue'
 import CheckBox from '~/components/FormFields/CheckBox.vue'
 
+const { data, pending, refresh } = useFetch('/api/CatalogueItems')
+
 // This creates an app-wide event to toggle the description slider
 function toggleTestSlider (name: string) {
   window.dispatchEvent(new Event(`toggle-${name}`))
@@ -46,9 +48,16 @@ const selectedOption = ref('Select Option')
 const sampleCheckBoxVal = ref(false)
 
 const { data: catalogue } = useFetch('/api/CatalogueItems')
+
+function logData () {
+  console.log('catalogue', data.value)
+}
 </script>
 <template>
   <main class="flex flex-col items-center justify-center gap-4">
+    <AppButton @click="() => logData()">
+      Log Data
+    </AppButton>
     <div class="max-w-full flex flex-col items-center justify-center">
       <AppButton @click="() => toggleTestSlider('cafe')">
         Sewcial Cafe

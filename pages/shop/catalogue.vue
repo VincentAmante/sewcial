@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CatalogueItem, Material } from '@prisma/client'
+import { CatalogueItem, EnumMaterial, Material } from '@prisma/client'
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
@@ -17,45 +17,32 @@ type WithMaterial<T> = T & {
 }
 type CatalogueItemsWithMaterials = WithMaterial<CatalogueItem>[]
 
-const { data: items } = useFetch('/api/CatalogueItems/')
-const catalogue: Ref<CatalogueItemsWithMaterials> = ref(items)
+const catalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
 const filteredCatalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
 
-onMounted(async () => {
-  try {
-    await items.value
-    if (items.value === null) {
-      showError({
-        statusCode: 404,
-        message: 'Item not found'
-      })
-      return
+const { data, pending, error, refresh } = await useFetch('/api/CatalogueItems/', {
+  onResponse ({ response }) {
+    // Needs to be converted to array
+    const responseData = { ...response._data }
+    const resList = []
+    for (const item in responseData) {
+      resList.push(responseData[item])
     }
 
-    catalogue.value = items.value
-
-    const catalogueCopy = readonly(catalogue.value).map((item) => {
-      const materials = item.materials.map(material => material.material)
-      return {
-        ...item,
-        materials
-      }
-    }) as unknown as CatalogueItemsWithMaterials
-    filteredCatalogue.value = catalogueCopy
-  } catch {
-    showError({
-      statusCode: 404,
-      message: 'Item not found'
-    })
+    catalogue.value = resList
+    filteredCatalogue.value = resList
+    console.log('loading')
   }
 })
+// Ensures fetches are made on page load
+refresh()
+
 function toItem (itemUrl: string) {
   useRouter().push(`/shop/${itemUrl}`)
 }
+
 function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
-  console.log('newFilteredCatalogue', newFilteredCatalogue)
   filteredCatalogue.value = newFilteredCatalogue
-  console.log('filteredCatalogue', filteredCatalogue.value)
 }
 </script>
 
@@ -71,7 +58,6 @@ function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
           <p class="button">
             VIEW LIMITED EDITION
           </p>
-          {{ catalogue }}
         </SpeechBubble>
       </div>
     </div>
@@ -79,15 +65,22 @@ function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
     <div class="catalogue-container flex desktop:flex-row">
       <!-- Filters -->
       <div class="filters-dropdown">
-        <CatalogueFilter
-          :catalogue="catalogue"
-          @apply-filter="(newFilteredCatalogue) => onApplyFilter(newFilteredCatalogue)"
-        />
+        <div>
+          <CatalogueFilter
+            v-if="!pending && !error && catalogue !== null"
+            :catalogue="catalogue"
+            @apply-filter="(newFilteredCatalogue) => onApplyFilter(newFilteredCatalogue)"
+          />
+        </div>
       </div>
 
       <!-- Catalogue Items -->
       <div class="flex flex-col w-full desktop:mt-8">
-        <div class="grid grid-cols-2 mx-auto self-center justify-center desktop:grid-cols-3">
+        <div
+
+          v-if="!pending && !error"
+          class="grid grid-cols-2 mx-auto self-center justify-center desktop:grid-cols-3"
+        >
           <CatalogueCard
             v-for="item in filteredCatalogue"
             :key="item.id"
