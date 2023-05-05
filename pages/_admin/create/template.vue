@@ -6,12 +6,7 @@ import type { Author, TemplateCategoryTag, Template } from '@prisma/client'
 import RichTextEditor from '~/components/FormFields/RichTextEditor.vue'
 import { content } from '~/tailwind.config'
 import { EnumMaterial } from '~/enums/Material'
-
-enum Skill {
-  beginner,
-  intermediate,
-  advanced
-}
+import { Skill } from '~/enums/Skill'
 
 definePageMeta({
   layout: 'admin'

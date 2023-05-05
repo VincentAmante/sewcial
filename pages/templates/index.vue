@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Template, Material } from '@prisma/client'
+import type { Template, Material } from '@prisma/client'
 import TiltedHeading from '@/components/TiltedHeading.vue'
 import TemplateCard from '@/components/TemplateCard.vue'
 import IconFilterVue from '@/components/icons/IconFilter.vue'

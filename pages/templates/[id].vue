@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Template, Skill } from '@prisma/client'
+import type { Template } from '@prisma/client'
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import ButtonDownload from '@/components/icons/ButtonDownload.vue'
 import ButtonFullscreen from '@/components/icons/ButtonFullscreen.vue'
+import { Skill } from '~/enums/Skill'
 
 const route = useRoute()
 if (route.params.id === undefined) {
