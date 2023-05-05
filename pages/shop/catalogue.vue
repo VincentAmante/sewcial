@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CatalogueItem, EnumMaterial, Material } from '@prisma/client'
+import type { CatalogueItem, Material } from '@prisma/client'
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
