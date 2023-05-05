@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Author, Skill, EnumMaterial, CatalogueCategoryTag } from '@prisma/client'
+import { Author, Skill, EnumMaterial, TemplateCategoryTag, Template } from '@prisma/client'
 import { JSONContent, generateHTML } from '@tiptap/vue-3'
 import { StarterKit } from '@tiptap/starter-kit'
 import RichTextEditor from '~/components/FormFields/RichTextEditor.vue'
@@ -27,7 +27,6 @@ const materialArr = Object.keys(EnumMaterial).map((key: any) => EnumMaterial[key
   value: (material as EnumMaterial),
   selected: false
 } as materialOptions))
-
 const { data: categoryTags } = useFetch('/api/Categories')
 
 const chosenFormatStructure: Ref<string> = ref(JSON.stringify({
@@ -40,7 +39,7 @@ const chosenFormatStructure: Ref<string> = ref(JSON.stringify({
 
 const categoryFormats = computed(() => {
   if (categoryTags.value && categoryTags.value.length > 0 && categoryTags.value !== null) {
-    const firstCategory = categoryTags.value[0] as CatalogueCategoryTag
+    const firstCategory = categoryTags.value[0] as TemplateCategoryTag
     chosenFormatStructure.value = JSON.stringify(firstCategory)
   }
 
@@ -81,29 +80,11 @@ const instructions = ref({
 const skillOptions = computed(() => {
   const skillArr = Object.keys(Skill).map((key: any) => Skill[key])
 
-  const materials = materialArr.filter((material) => {
-    return material.value.selected
-  }).map((material) => {
-    return material.value.value
-  }) as EnumMaterial[]
-
   return skillArr.map(skill => ({
     label: skill,
     value: (skill as Skill)
   }))
 })
-
-const sampleTemplateData = {
-  name: 'name',
-  description: 'description',
-  details: 'details',
-  priceAED: 0,
-  isFeatured: false,
-  skill: ('beginner' as Skill),
-  categoryTagId: 'shirts'
-  // authorFirstName: chosenAuthor.value.firstName,
-  // authorLastName: chosenAuthor.value.lastName
-}
 
 // TODO: Switch out all the samples with the actual data
 async function submitForm () {
@@ -114,25 +95,32 @@ async function submitForm () {
     return material.value.value
   }) as EnumMaterial[]
 
+  const templateData: Template & {
+    materials: EnumMaterial[]
+  } = {
+    name: name.value,
+    authorFirstName: chosenAuthorJson.firstName,
+    authorLastName: chosenAuthorJson.lastName,
+    description: description.value,
+    priceAED: priceAED.value,
+    isFeatured: isFeatured.value,
+    skill: (skill.value as Skill),
+    categoryTagId: chosenFormat.value.name,
+    thumbnail: imageSrc.value,
+    materials,
+    materialsRequired: instructions.value.materialsRequired,
+    equipment: instructions.value.equipment,
+    assembly: instructions.value.assembly,
+    templateImage: templateImg.value
+  }
+  console.log(templateData)
+
   const result = await useFetch('/api/Templates/create', {
     method: 'POST',
-    body: JSON.stringify({
-      name: name.value,
-      authorFirstName: chosenAuthorJson.firstName,
-      authorLastName: chosenAuthorJson.lastName,
-      description: description.value,
-      priceAED: priceAED.value,
-      isFeatured: isFeatured.value,
-      skill: (skill.value as Skill),
-      categoryTagId: sampleTemplateData.categoryTagId,
-      thumbnail: imageSrc.value,
-      materials,
-      materialsRequired: instructions.value.materialsRequired,
-      equipment: instructions.value.equipment,
-      assembly: instructions.value.assembly,
-      templateImage: templateImg.value
-    })
+    body: JSON.stringify(templateData)
   })
+
+  console.log(result)
 }
 
 // Safe to remove
