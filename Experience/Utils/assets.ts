@@ -4,6 +4,6 @@ export default [
   {
     name: 'room',
     type: 'glbModel',
-    path: '/Experience/models/sewcial-exterior-a.gltf'
+    path: '/Experience/models/sewcial-exterior-baked.gltf'
   }
 ]

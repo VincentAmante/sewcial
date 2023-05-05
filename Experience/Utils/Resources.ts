@@ -38,6 +38,8 @@ export default class Resources extends EventEmitter {
     this.loaders.dracoLoader = new DRACOLoader()
     this.loaders.dracoLoader.setDecoderPath('/Experience/draco/')
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
+
+    this.loaders.textureLoader = new THREE.TextureLoader()
   }
 
   startLoading () {
@@ -46,6 +48,15 @@ export default class Resources extends EventEmitter {
         this.loaders.gltfLoader.load(asset.path, (file: any) => {
           this.singleAssetLoaded(asset, file)
         })
+      } else if (asset.type === 'texture') {
+        this.loaders.textureLoader.load(
+          asset.path,
+          (file) => {
+            file.flipY = false
+            file.encoding = THREE.sRGBEncoding
+            this.singleAssetLoaded(asset, file)
+          }
+        )
       } else if (asset.type === 'videoTexture') {
         this.video = {}
         this.videoTexture = {}
