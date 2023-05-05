@@ -17,8 +17,14 @@ type WithMaterial<T> = T & {
 }
 type CatalogueItemsWithMaterials = WithMaterial<CatalogueItem>[]
 
+// Catalogue contains an original list of all catalogue items
 const catalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
+
+// Filtered catalogue contains a filtered list of catalogue items
+// This list tends to lose items due to filtering, so the filter reverts to ${catalogue} when no filters are applied
 const filteredCatalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
+
+const cataloguePage: Ref<CatalogueItem[]> = ref([])
 
 const { data, pending, error, refresh } = await useFetch('/api/CatalogueItems/', {
   onResponse ({ response }) {
@@ -31,7 +37,6 @@ const { data, pending, error, refresh } = await useFetch('/api/CatalogueItems/',
 
     catalogue.value = resList
     filteredCatalogue.value = resList
-    console.log('loading')
   }
 })
 // Ensures fetches are made on page load
@@ -77,12 +82,11 @@ function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
       <!-- Catalogue Items -->
       <div class="flex flex-col w-full desktop:mt-8">
         <div
-
           v-if="!pending && !error"
           class="grid grid-cols-2 mx-auto self-center justify-center desktop:grid-cols-3"
         >
           <CatalogueCard
-            v-for="item in filteredCatalogue"
+            v-for="item in cataloguePage"
             :key="item.id"
             :image="item.imageSrc"
             @click="() => toItem(item.id)"
@@ -102,7 +106,12 @@ function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
     </div>
     <!-- Paginate -->
     <div class="paginate my-8">
-      <Pagination :total-items="9" :items-per-page="6" :current-page="1" />
+      <Pagination
+        v-if="!pending && !error && filteredCatalogue"
+        v-model="cataloguePage"
+        :items-per-page="9"
+        :original-list="filteredCatalogue"
+      />
     </div>
   </main>
 </template>

@@ -6,85 +6,102 @@ import { computed, getCurrentInstance } from 'vue'
 import IconChevronLeft from './icons/IconChevronLeft.vue'
 import IconChevronRight from './icons/IconChevronRight.vue'
 
-const name = 'Pagination'
-
 const props = defineProps({
-  totalItems: {
-    type: Number,
+  modelValue: {
+    type: Array,
     required: true
   },
   itemsPerPage: {
     type: Number,
     required: true
   },
-  currentPage: {
-    type: Number,
+  originalList: {
+    type: Array,
     required: true
   }
 })
-
-const totalPages = computed(() => Math.ceil(props.totalItems / props.itemsPerPage))
-
-const visiblePages = computed(() => {
-  const pageRange = 2 // Number of pages to show on either side of the current page
-  const minPage = Math.max(1, props.currentPage - pageRange)
-  const maxPage = Math.min(totalPages.value, props.currentPage + pageRange)
-  const pages = []
-  for (let i = minPage; i <= maxPage; i++) {
-    pages.push(i)
-  }
-  return pages
+const {
+  currentPage,
+  currentPageSize,
+  pageCount,
+  isFirstPage,
+  isLastPage,
+  prev,
+  next
+} = useOffsetPagination({
+  total: props.originalList.length || 1,
+  page: 1,
+  pageSize: props.itemsPerPage,
+  onPageChange: getPage,
+  onPageSizeChange: getPage
 })
 
-const pages = computed(() => {
-  const pageRange = 2 // Number of pages to show on either side of the current page
-  const minPage = Math.max(1, props.currentPage - pageRange)
-  const maxPage = Math.min(totalPages.value, props.currentPage + pageRange)
-  const pages = []
-  for (let i = minPage; i <= maxPage; i++) {
-    pages.push(i)
+const origList = ref([...props.originalList])
+
+const emit = defineEmits(['update:modelValue'])
+const page = useVModel(props, 'modelValue', emit)
+
+function getPage ({ currentPage, currentPageSize }) {
+  page.value = []
+
+  const startIndex = (currentPage - 1) * currentPageSize
+  const endIndex = startIndex + currentPageSize
+  const currPage = []
+
+  for (const item in origList.value) {
+    const index = parseInt(item)
+    if (index >= startIndex && index < endIndex) {
+      currPage.push(origList.value[index])
+    }
   }
-  return pages
-})
 
-const emit = getCurrentInstance()?.emit
-
-function changePage (pageNumber: number) {
-  emit?.('page-changed', pageNumber)
+  page.value = currPage
 }
+
+onMounted(() => {
+  getPage({ currentPage: 1, currentPageSize: currentPageSize.value })
+})
+
+watch(() => currentPage, () => {
+  getPage({ currentPage: currentPage.value, currentPageSize: currentPageSize.value })
+})
+watchEffect(() => {
+  origList.value = [...props.originalList]
+  getPage({ currentPage: 1, currentPageSize: currentPageSize.value })
+})
 </script>
 
 <template>
-  <nav>
-    <ul class="pagination">
-      <li class="page-item" :class="{ disabled: currentPage === 1 }">
-        <a class="chevron" href="#" @click="changePage(currentPage - 1)">
+  <div>
+    <ul class="flex justify-center content-center mt-3 list-none">
+      <li class="inline-block mr-2" :class="(isFirstPage) ? ['opacity-50' , 'pointer-events-none'] : ['']">
+        <a class="chevron" href="#" @click="() => prev()">
           <IconChevronLeft />
         </a>
       </li>
-      <li v-if="pages[0] !== 1" class="page-item">
-        <a class="page-link" href="#" @click="changePage(pages[0] - 1)">
-          &hellip;
-        </a>
+      <li
+        v-for="pageNum in pageCount"
+        :key="pageNum"
+        class="inline-block mr-2"
+        :class="(currentPage !== pageNum) ? ['hover:opacity-75'] : ['cursor-default']"
+      >
+        <a
+          class="page-link p-2 px-4 rounded-full"
+          href="#"
+          :class="(currentPage === pageNum) ? ['bg-accent-1', 'text-primary', 'cursor-default', 'pointer-events-none'] : ['']"
+          @click="currentPage = pageNum"
+        >{{ pageNum }}</a>
       </li>
-      <li v-for="pageNumber in visiblePages" :key="pageNumber" class="page-item" :class="{ active: currentPage === pageNumber }">
-        <a class="page-link" href="#" @click="changePage(pageNumber)">{{ pageNumber }}</a>
-      </li>
-      <li v-if="pages[pages.length - 1] !== totalPages" class="page-item">
-        <a class="page-link" href="#" @click="changePage(pages[pages.length - 1] + 1)">
-          &hellip;
-        </a>
-      </li>
-      <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-        <a class="chevron" href="#" @click="changePage(currentPage + 1)">
+      <li class="inline-block mr-2" :class="(isLastPage) ? ['opacity-50' , 'pointer-events-none'] : ['']">
+        <a class="chevron" href="#" @click="() => next()">
           <IconChevronRight />
         </a>
       </li>
     </ul>
-  </nav>
+  </div>
 </template>
 
-<style scoped lang = "scss">
+<!-- <style scoped lang = "scss">
 .pagination {
   display: flex;
   justify-content: center;
@@ -133,4 +150,4 @@ function changePage (pageNumber: number) {
   color: $clr-primary;
   cursor: default;
 }
-</style>
+</style> -->
