@@ -26,7 +26,10 @@ const { data, pending, error, refresh } = await useFetch('/api/Templates/', {
       resList.push(responseData[item])
     }
     templates.value = resList
+
+    // Featured templates won't go through filters and sorting anyway  
     filteredTemplates.value = resList
+      .filter((template: TemplateWithMaterials) => !template.isFeatured)
   }
 })
 // Ensures fetches are made on page load

@@ -64,6 +64,7 @@ watch(() => currentPage, () => {
 })
 watchEffect(() => {
   origList.value = [...props.originalList]
+  currentPage.value = 1
   getPage({ currentPage: 1, currentPageSize: currentPageSize.value })
 })
 </script>
