@@ -1,50 +1,92 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import type { Workshop } from '@prisma/client'
 import AppButton from '@/components/AppButton.vue'
 import PageCounter from '@/components/PageCounter.vue'
 import Incrementor from '@/components/Incrementor.vue'
 import EventField from '@/components/FormFields/EventField.vue'
 import BookingSummary from '@/components/BookingSummary.vue'
 
-const maxPages = 5
-const page = ref(1)
-const incrementPage = () => {
-  if (page.value < maxPages) { page.value++ }
-}
-const decrementPage = () => {
-  if (page.value > 1) { page.value-- }
+// Route Params
+const route = useRoute()
+const type = ref(route.params.type)
+const id = ref(route.params.id)
+if (type.value === undefined ||
+id.value === undefined) {
+  showError('Invalid params')
 }
 
-// Booking 1 - Workshops
-const sampleWorkshops = ref([
-  {
-    activity: 'Kids & Teens Sewing Club',
-    price: 45,
-    slots: 0
-  },
-  {
-    activity: 'Lorem Ipsew',
-    price: 15,
-    slots: 0
-  },
-  {
-    activity: 'Needlework Socialist Society',
-    price: 20,
-    slots: 0
+const date = ref(new Date())
+if (route.params.id !== undefined) {
+  if (Array.isArray(route.params.date)) {
+    date.value = new Date(parseInt(route.params.date[0]))
+  } else {
+    date.value = new Date(parseInt(route.params.date))
   }
-])
+}
+
+const maxPages = 5
+const page = ref(1)
+
+if (type.value === 'session') {
+  page.value = 3
+}
+if (type.value === 'event') {
+  page.value = 2
+}
+
+const incrementPage = () => {
+  if (page.value === maxPages) { return }
+  (type.value === 'event' && page.value === 2) ? page.value = 5 : page.value++
+}
+const decrementPage = () => {
+  if (page.value <= 1) { return }
+  if (type.value === 'event' && page.value === 5) {
+    page.value = 2
+    return
+  }
+  if (type.value === 'event' && page.value === 2) {
+    return
+  }
+  if (type.value === 'session' && page.value === 3) {
+
+  } else {
+    page.value--
+  }
+}
+
+const workshops = ref<Workshop[]>([])
+const { data: workshopData, pending: workshopPending, error: workshopError, refresh: refreshWorkshops } = useFetch('/api/Workshops', {
+  onResponse ({ response }) {
+    const data = response._data as Workshop[]
+    workshops.value = data.map((workshop) => {
+      workshop.startTime = new Date(workshop.startTime)
+      workshop.endTime = new Date(workshop.endTime)
+
+      if (workshop.bookedSlots === null) {
+        workshop.bookedSlots = 0
+      }
+      return {
+        ...workshop,
+        slots: 0
+      }
+    })
+  }
+})
+refreshWorkshops()
+
 const totalSlots = computed(() => {
   let total = 0
-  sampleWorkshops.value.forEach((workshop) => {
-    total += workshop.slots
+  workshops.value.forEach((workshop) => {
+    if (workshop.bookedSlots) { total += workshop.bookedSlots }
   })
 
   return total
 })
 const totalCost = computed(() => {
   let total = 0
-  sampleWorkshops.value.forEach((workshop) => {
-    total += workshop.price * workshop.slots
+  workshops.value.forEach((workshop) => {
+    if (workshop.bookedSlots) { total += workshop.priceAED * workshop.bookedSlots }
   })
 
   return total
@@ -123,12 +165,15 @@ function setPaymentOption (option: string) {
           <Transition mode="out-in">
             <section v-if="page === 1" id="workshops">
               <ul>
-                <li v-for="workshop in sampleWorkshops">
+                <li
+                  v-for="workshop in workshops"
+                  :key="workshop.id"
+                >
                   <div>
-                    <h3>{{ workshop.activity }}</h3>
-                    <p>AED {{ workshop.price }}</p>
+                    <h3>{{ workshop.title }}</h3>
+                    <p>AED {{ workshop.priceAED }}</p>
                   </div>
-                  <Incrementor v-model="workshop.slots" :text="workshop.activity" />
+                  <Incrementor v-model="workshop.bookedSlots" :text="workshop.title" />
                 </li>
               </ul>
               <div class="totals">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import 'v-calendar/style.css'
+// import 'v-calendar/style.css'
 import { DatePicker } from 'v-calendar'
 import RichTextEditor from '~~/components/FormFields/RichTextEditor.vue'
 import CatalogueFilter from '~~/components/Filters/CatalogueFilter.vue'

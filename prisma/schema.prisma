@@ -109,15 +109,13 @@ model CatalogueCategoryTag {
 }
 
 model Event {
-  id          String     @id @default(uuid())
-  startTime   DateTime
-  endTime     DateTime
-  title       String
-  details     Json?
-  description String
-  priceAED    Float      @default(0)
-  thumbnail   String     @default("")
-  Bookings    Bookings[]
+  id        String     @id @default(uuid())
+  startTime DateTime
+  endTime   DateTime
+  title     String
+  details   Json?
+  thumbnail String     @default("")
+  Bookings  Bookings[]
 }
 
 model Workshop {
