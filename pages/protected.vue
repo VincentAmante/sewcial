@@ -2,9 +2,9 @@
 <script setup lang="ts">
 definePageMeta({ middleware: 'auth' })
 
-const { data, signOut } = useSession()
+const { data, signOut } = useAuth()
 
-const session = useSession().getSession()
+const session = useAuth().getSession()
 </script>
 
 <template>
