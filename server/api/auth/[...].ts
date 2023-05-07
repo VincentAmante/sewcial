@@ -1,13 +1,13 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
-import { useFetch } from '@vueuse/core'
 import { PrismaClient } from '@prisma/client'
-import type { User } from '@prisma/client'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { NuxtAuthHandler } from '#auth'
 
 export default NuxtAuthHandler({
   // TODO: SET A STRONG SECRET, SEE https://sidebase.io/nuxt-auth/configuration/nuxt-auth-handler#secret
   secret: process.env.AUTH_SECRET,
+  adapter: PrismaAdapter(event.context.prisma),
   // TODO: ADD YOUR OWN AUTHENTICATION PROVIDER HERE, READ THE DOCS FOR MORE: https://sidebase.io/nuxt-auth
   providers: [
     // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
@@ -17,24 +17,9 @@ export default NuxtAuthHandler({
     })
   ],
   callbacks: {
-    jwt: async ({ token, user }) => {
-      // const email = user ? user.email || '' : ''
-
-      // const userData = await $fetch(`/api/User/${email}`)
-      const isSignIn = !!user
-      if (isSignIn) {
-        token.id = user ? user.id || '' : ''
-        token.role = user ? (user as any).role || '' : ''
-      }
-      return Promise.resolve(token)
-    },
-
-    // Callback whenever session is checked, see https://next-auth.js.org/configuration/callbacks#session-callback
-    session: async ({ session, token }) => {
-      const { userData } = await $fetch(`/api/User/${token.email}`);
-      (session as any).role = token.role;
-      (session as any).uid = token.id
-      return Promise.resolve(session)
+    async session ({ session, user }) {
+      session.user.id = user.id
+      return session
     }
   }
 })
