@@ -20,7 +20,6 @@ export default NuxtAuthHandler({
     jwt: async ({ token, user }) => {
       if (token) {
         const userData = await $fetch(`/api/User/${token.email}`)
-        token.userId = userData.id || ''
       }
       // const email = user ? user.email || '' : ''
 
@@ -36,8 +35,7 @@ export default NuxtAuthHandler({
     // Callback whenever session is checked, see https://next-auth.js.org/configuration/callbacks#session-callback
     session: async ({ session, token }) => {
       (session as any).role = token.role;
-      (session as any).uid = token.id;
-      (session as any).userId = token.userId
+      (session as any).uid = token.id
       return Promise.resolve(session)
     }
   }
