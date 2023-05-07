@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
   const user = await event.context.prisma.user.findUnique({
     where: {
-      email: 'icenamante67@gmail.com'
+      email
     }
   })
 
