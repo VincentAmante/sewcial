@@ -14,7 +14,6 @@ const disabledStyling = computed(() => {
   return props.isDisabled ? ['opacity-50', 'cursor-not-allowed'] : ''
 })
 const activeStyling = computed(() => {
-  console.log(props.isActive)
   return props.isActive ? ['border-slate-400', 'text-dark'] : ['border-transparent', 'text-gray-400']
 })
 </script>
