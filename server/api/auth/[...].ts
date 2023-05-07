@@ -20,7 +20,6 @@ export default NuxtAuthHandler({
     jwt: async ({ token, user }) => {
       const isSignIn = !!user
       if (isSignIn) {
-        token.jwt = user ? (user as any).access_token || '' : ''
         token.id = user ? user.id || '' : ''
         token.role = user ? (user as any).role || '' : ''
       }
