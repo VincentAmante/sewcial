@@ -15,11 +15,5 @@ export default NuxtAuthHandler({
       clientId: process.env.GITHUB_CLIENT_ID || 'enter-your-client-id-here',
       clientSecret: process.env.GITHUB_CLIENT_SECRET || 'enter-your-client-secret-here' // TODO: Replace this with an env var like "process.env.GITHUB_CLIENT_SECRET". The secret should never end up in your github repository
     })
-  ],
-  callbacks: {
-    async session ({ session, user }) {
-      session.user.id = user.id
-      return session
-    }
-  }
+  ]
 })
