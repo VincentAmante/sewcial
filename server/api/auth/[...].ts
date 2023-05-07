@@ -18,13 +18,10 @@ export default NuxtAuthHandler({
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
-      const email = (user as any).email || ''
-      const userData: User = await $fetch(`/api/user/${email}`)
-
       const isSignIn = !!user
       if (isSignIn) {
         token.jwt = user ? (user as any).access_token || '' : ''
-        token.id = user ? userData?.id || '' : ''
+        token.id = user ? user.id || '' : ''
         token.role = user ? (user as any).role || '' : ''
       }
       return Promise.resolve(token)
