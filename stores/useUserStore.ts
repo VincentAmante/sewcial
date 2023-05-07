@@ -26,10 +26,12 @@ export const useUserStore = defineStore('user', () => {
     id.value = ''
   }
 
-  function initialise (userInfo: User) {
-    name.value = userInfo.name
-    email.value = userInfo.email
-    id.value = userInfo.id
+  function initialise (userInfo: string) {
+    const userJson = JSON.parse(userInfo) as User
+
+    name.value = userJson.name
+    email.value = userJson.email
+    id.value = userJson.id
   }
 
   return { user, $reset, initialise, isSet }

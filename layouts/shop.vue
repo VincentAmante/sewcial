@@ -14,11 +14,11 @@ onMounted(async () => {
     const { data, pending, error, refresh } = await useFetch(`/api/User/${email}`, {
       onResponse ({ response }) {
         console.log(response._data)
-        user.initialise({
+        user.initialise(JSON.stringify({
           email: response._data.email,
           name: '',
           id: response._data.id
-        })
+        }))
       }
     })
   }
