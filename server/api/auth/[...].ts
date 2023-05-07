@@ -18,10 +18,10 @@ export default NuxtAuthHandler({
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
-      if (token) {
-        // const userData = await $fetch(`/api/User/${token.email}`)
-      }
-      console.log(token.email)
+      // if (token) {
+      //   // const userData = await $fetch(`/api/User/${token.email}`)
+      // }
+      console.log(token)
       // const email = user ? user.email || '' : ''
 
       // const userData = await $fetch(`/api/User/${email}`)
