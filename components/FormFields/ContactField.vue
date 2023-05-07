@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 const props = defineProps({
   modelValue: {
-    type: String,
+    type: [String, Number],
     required: true
   },
   name: {
@@ -35,11 +35,17 @@ const textInput = computed({
 </script>
 
 <template>
-  <label :for="name" class="error">
-    <p><slot>MISSING LABEL</slot></p>
+  <label
+    :for="name"
+    class="flex flex-col gap-0 text-secondary w-full"
+  >
+    <p class="m-0 pb-1">
+      <slot>MISSING LABEL</slot>
+    </p>
     <input
       id=""
       v-model.lazy="textInput"
+      class=" rounded-md border-2 border-solid border-secondary bg-none pb-2 px-1 focus:outline-none"
       :type="type"
       :name="name"
       :placeholder="placeholder"
@@ -47,34 +53,3 @@ const textInput = computed({
     >
   </label>
 </template>
-
-<style scoped lang="scss">
-    label {
-        @include flex-col;
-        gap: 0;
-        color: $clr-secondary;
-        width: 100%;
-
-        p {
-            margin: 0;
-            padding-bottom: .25em;
-
-            span {
-                padding-left: .1em;
-            }
-        }
-
-        input {
-            border-radius: 10px;
-            border: 3px solid $clr-secondary;
-            background: none;
-            padding-block: .5em;
-            padding-inline: .25em;
-
-            &:focus {
-                outline: none;
-                // border: 4px solid $clr-secondary;
-            }
-        }
-    }
-</style>

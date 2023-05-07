@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,94 +8,128 @@ datasource db {
   relationMode = "prisma"
 }
 
-// schema.prisma
 model Example {
   id      String @id @default(uuid())
   details String
 }
 
 model Author {
-  id        String     @id @default(uuid())
-  name      String
-  templates Template[]
+  firstName     String
+  lastName      String
+  templates     Template[]
+  CatalogueItem CatalogueItem[]
+
+  @@id([firstName, lastName], name: "authorName")
 }
 
 model Template {
-  id                     String                   @id @default(uuid())
-  name                   String
-  description            String
-  detailsSrc             String
-  authorId               String
-  priceAED               Float
-  isFeatured             Boolean
-  author                 Author                   @relation(fields: [authorId], references: [id])
-  TemplateTagsOnTemplate TemplateTagsOnTemplate[]
+  id                 String               @id @default(uuid())
+  name               String
+  description        String               @db.VarChar(400)
+  details            Json?
+  priceAED           Float
+  isFeatured         Boolean
+  categoryTagId      String?
+  authorFirstName    String?
+  authorLastName     String?
+  skill              Skill
+  assembly           Json?
+  createdAt          DateTime             @default(now())
+  equipment          Json?
+  materialsRequired  Json?
+  templateImage      String               @default("")
+  thumbnail          String               @default("")
+  MaterialOnTemplate MaterialOnTemplate[]
+  CategoryTag        TemplateCategoryTag? @relation(fields: [categoryTagId], references: [id])
+  Author             Author?              @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
 
-  @@index([authorId])
+  @@index([authorFirstName, authorLastName])
+  @@index([categoryTagId])
 }
 
-enum TemplateTagType {
-  CATEGORY
-  STYLE
-  SKILL
-}
-
-enum CatalogueItemTagType {
-  CATEGORY
-  STYLE
-}
-
-model TemplateTag {
-  id                     String                   @id @default(uuid())
-  name                   String
-  type                   TemplateTagType
-  TemplateTagsOnTemplate TemplateTagsOnTemplate[]
-}
-
-model TemplateTagsOnTemplate {
-  id            String      @id @default(uuid())
-  templateId    String
-  templateTagId String
-  template      Template    @relation(fields: [templateId], references: [id])
-  templateTag   TemplateTag @relation(fields: [templateTagId], references: [id])
-
-  @@index([templateId])
-  @@index([templateTagId])
+model TemplateCategoryTag {
+  id       String     @id @default(uuid())
+  name     String
+  Template Template[]
 }
 
 model CatalogueItem {
-  id                       String                         @id @default(uuid())
-  name                     String
-  description              String
-  imageSrc                 String
-  priceAED                 Float
-  isFeatured               Boolean                        @default(false)
-  CatalogueTagsOnCatalogue CatalogueTagsOnCatalogueItem[]
+  id                 String                     @id @default(uuid())
+  name               String
+  description        String
+  imageSrc           String
+  priceAED           Float
+  isFeatured         Boolean                    @default(false)
+  sizingsData        Json?
+  categoryTagName    String?
+  createdAt          DateTime                   @default(now())
+  authorFirstName    String?                    @default("first name missing")
+  authorLastName     String?                    @default("last name missing")
+  CategoryTag        CatalogueCategoryTag?      @relation(fields: [categoryTagName], references: [name])
+  materials          MaterialOnCatalogueItems[]
+  LikedCatalogueItem LikedCatalogueItem[]
+  Author             Author?                    @relation(fields: [authorFirstName, authorLastName], references: [firstName, lastName])
+
+  @@index([authorFirstName, authorLastName])
+  @@index([categoryTagName])
 }
 
-model CatalogueTag {
-  id                       String                         @id @default(uuid())
-  name                     String
-  type                     CatalogueItemTagType
-  CatalogueTagsOnCatalogue CatalogueTagsOnCatalogueItem[]
+model MaterialOnCatalogueItems {
+  id            String        @id @default(uuid())
+  catalogueId   String
+  materialName  EnumMaterial
+  catalogueItem CatalogueItem @relation(fields: [catalogueId], references: [id])
+  material      Material      @relation(fields: [materialName], references: [name])
+
+  @@index([catalogueId])
+  @@index([materialName])
 }
 
-model CatalogueTagsOnCatalogueItem {
-  id              String        @id @default(uuid())
-  catalogueItemId String
-  catalogueTagId  String
-  catalogueItem   CatalogueItem @relation(fields: [catalogueItemId], references: [id])
-  catalogueTag    CatalogueTag  @relation(fields: [catalogueTagId], references: [id])
+model Material {
+  name                     EnumMaterial               @id
+  MaterialOnCatalogueItems MaterialOnCatalogueItems[]
+  MaterialOnTemplate       MaterialOnTemplate[]
+}
 
-  @@index([catalogueItemId])
-  @@index([catalogueTagId])
+model MaterialOnTemplate {
+  id           String       @id @default(uuid())
+  templateId   String
+  materialName EnumMaterial
+  template     Template     @relation(fields: [templateId], references: [id])
+  material     Material     @relation(fields: [materialName], references: [name])
+
+  @@index([templateId])
+  @@index([materialName])
+}
+
+model CatalogueCategoryTag {
+  name           String          @id
+  sizingFormat   Json?
+  CatalogueItems CatalogueItem[]
 }
 
 model Event {
-  id        String   @id @default(uuid())
+  id        String     @id @default(uuid())
   startTime DateTime
   endTime   DateTime
   title     String
+  details   Json?
+  thumbnail String     @default("")
+  Bookings  Bookings[]
+}
+
+model Workshop {
+  id          String     @id @default(uuid())
+  startTime   DateTime
+  endTime     DateTime
+  title       String
+  priceAED    Float
+  details     Json?
+  totalSlots  Int
+  bookedSlots Int?       @default(0)
+  skill       Skill
+  thumbnail   String     @default("")
+  Bookings    Bookings[]
 }
 
 model ContactSubmission {
@@ -108,4 +139,62 @@ model ContactSubmission {
   mobile    String
   message   String
   createdAt DateTime @default(now())
+}
+
+model User {
+  id         String               @id @default(uuid())
+  email      String               @unique
+  createdAt  DateTime             @default(now())
+  updatedAt  DateTime             @updatedAt
+  likedItems LikedCatalogueItem[]
+}
+
+model LikedCatalogueItem {
+  id              String        @id @default(uuid())
+  userId          String
+  catalogueItemId String
+  user            User          @relation(fields: [userId], references: [id])
+  catalogueItem   CatalogueItem @relation(fields: [catalogueItemId], references: [id])
+
+  @@index([userId])
+  @@index([catalogueItemId])
+}
+
+model Bookings {
+  id         String    @id @default(uuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  firstName  String
+  lastName   String
+  email      String
+  mobile     String
+  eventId    String?
+  workshopId String?
+  event      Event?    @relation(fields: [eventId], references: [id])
+  workshop   Workshop? @relation(fields: [workshopId], references: [id])
+
+  @@index([eventId])
+  @@index([workshopId])
+}
+
+enum EnumMaterial {
+  canvas
+  chiffon
+  cotton
+  crepe
+  denim
+  leather
+  lace
+  linen
+  satin
+  silk
+  synthetic
+  velvet
+  wool
+}
+
+enum Skill {
+  beginner
+  intermediate
+  advanced
 }

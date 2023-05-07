@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     '@nuxtjs/tailwindcss',
     '@nuxt/devtools',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    '@huntersofbook/naive-ui-nuxt'
   ],
   build: {
     transpile: [

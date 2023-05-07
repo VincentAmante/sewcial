@@ -37,7 +37,7 @@ module.exports = {
         '2xl': 'clamp(20px, 2.4vw, 16px)', // h2
         '3xl': 'clamp(16px, 2.5vmax, 20px)', // h1
         '4xl': 'clamp(18px, 2.5vmax, 50px)', // tilted
-        '5xl': 'clamp(30px, 5vmax, 90px)', // big boy
+        '5xl': 'clamp(30px, 4.5vmax, 90px)', // big boy
         '6xl': 'clamp(55px, 5vmax, 150px)' // giant
       },
       spacing: {

@@ -29,6 +29,15 @@ export default class Room {
           groupChild.receiveShadow = true
         })
       }
+
+      if (child.name === 'WindowGlass' || child.name === 'WindowGlass2') {
+        child.material = new THREE.MeshPhysicalMaterial()
+        child.material.roughness = 0
+        child.material.color.set(0xFFFFFF)
+        child.material.ior = 3
+        child.material.transmission = 1
+        child.material.opacity = 1
+      }
     })
 
     this.scene.add(this.actualRoom)

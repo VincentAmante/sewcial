@@ -1,19 +1,61 @@
 <script setup lang="ts">
+import type { CatalogueItem, Material } from '@prisma/client'
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
 import Pagination from '@/components/Pagination.vue'
+import CatalogueFilter from '~/components/Filters/CatalogueFilter.vue'
 
 definePageMeta({
   layout: 'shop'
 })
+
+type WithMaterial<T> = T & {
+  materials: {
+    material: Material
+  }[]
+}
+type CatalogueItemsWithMaterials = WithMaterial<CatalogueItem>[]
+
+// Catalogue contains an original list of all catalogue items
+const catalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
+
+// Filtered catalogue contains a filtered list of catalogue items
+// This list tends to lose items due to filtering, so the filter reverts to ${catalogue} when no filters are applied
+const filteredCatalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
+
+const cataloguePage: Ref<CatalogueItem[]> = ref([])
+
+const { data, pending, error, refresh } = await useFetch('/api/CatalogueItems/', {
+  onResponse ({ response }) {
+    // Needs to be converted to array
+    const responseData = { ...response._data }
+    const resList = []
+    for (const item in responseData) {
+      resList.push(responseData[item])
+    }
+
+    catalogue.value = resList
+    filteredCatalogue.value = resList
+  }
+})
+// Ensures fetches are made on page load
+refresh()
+
+function toItem (itemUrl: string) {
+  useRouter().push(`/shop/${itemUrl}`)
+}
+
+function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
+  filteredCatalogue.value = newFilteredCatalogue
+}
 </script>
 
 <template>
-  <main>
-    <div class="container">
-      <img class="head-img" src="https://via.placeholder.com/600x500">
-      <div class="head-text">
+  <main class="flex flex-col">
+    <div class="container flex flex-col border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row">
+      <img class="head-img w-full h-auto mobile:w-1/2" src="https://via.placeholder.com/600x500">
+      <div class="head-text flex flex-col justify-center mx-auto mb-8">
         <h1>NEW COLLECTION</h1>
         <h1>Lorem ipsum sit aset dolor</h1>
         <p>I got a condo in Manhattan, baby girl what’s happenin’?</p>
@@ -25,265 +67,51 @@ definePageMeta({
       </div>
     </div>
 
-    <div class="catalogue-container">
+    <div class="catalogue-container flex desktop:flex-row">
       <!-- Filters -->
       <div class="filters-dropdown">
-        <IconFilterBlue />
-        <p>FILTER</p>
+        <div>
+          <CatalogueFilter
+            v-if="!pending && !error && catalogue !== null"
+            :catalogue="catalogue"
+            @apply-filter="(newFilteredCatalogue) => onApplyFilter(newFilteredCatalogue)"
+          />
+        </div>
       </div>
-      <div class="filters-container">
-        <p>HIDE FILTERS</p>
-        <DropdownTab>
-          <h1>SHOP BY</h1>
-        </DropdownTab>
-        <DropdownTab>
-          <h1>STYLE</h1>
-        </DropdownTab>
-        <DropdownTab>
-          <h1>PRICE</h1>
-        </DropdownTab>
-        <button>
-          <p class="button">
-            APPLY FILTERS
-          </p>
-        </button>
-      </div>
+
       <!-- Catalogue Items -->
-      <div class="grid-container">
-        <div class="catalogue-grid">
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
+      <div class="flex flex-col w-full desktop:mt-8">
+        <div
+          v-if="!pending && !error"
+          class="grid grid-cols-2 mx-auto self-center justify-center desktop:grid-cols-3"
+        >
+          <CatalogueCard
+            v-for="item in cataloguePage"
+            :key="item.id"
+            :image="item.imageSrc"
+            @click="() => toItem(item.id)"
+          >
             <template #item-name>
-              JACKET
+              {{ item.name }}
             </template>
             <template #price>
-              60 AED
+              {{ item.priceAED }} AED
             </template>
             <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
+              {{ item.description }}
             </template>
           </CatalogueCard>
         </div>
       </div>
     </div>
     <!-- Paginate -->
-    <div class="paginate">
-      <Pagination :total-items="9" :items-per-page="6" :current-page="1" />
+    <div class="paginate my-8">
+      <Pagination
+        v-if="!pending && !error && filteredCatalogue"
+        v-model="cataloguePage"
+        :items-per-page="9"
+        :original-list="filteredCatalogue"
+      />
     </div>
   </main>
 </template>
-
-<!-- Styling -->
-<style scoped lang = "scss">
-    .container {
-        display: flex;
-        flex-direction: column;
-        border-bottom: 4px dashed $clr-secondary;
-
-        @include media (mobile) {
-            flex-direction: row;
-        }
-
-        .head-img {
-            width: 100%;
-            height: auto;
-
-            @include media (mobile) {
-                width: 50%;
-            }
-        }
-
-        .head-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-inline:auto;
-            margin-block: 2em;
-            align-content: center;
-            color: $clr-secondary;
-
-            h1 {
-                margin-block: 5px;
-            }
-
-        }
-    }
-
-    .catalogue-container {
-    display: flex;
-    flex-direction: column;
-
-    .filters-dropdown {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-left: auto;
-        margin-top: 1.5em;
-
-        p {
-            color: $clr-secondary;
-            margin-right: 4em;
-            margin-left: 2em;
-        }
-    }
-
-    .filters-container {
-        width: 30%;
-        border-right: 4px dashed $clr-secondary;
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        padding: 3em;
-        display: none;
-
-        p {
-            color: $clr-accent-1;
-        }
-
-        button {
-            background-color: $clr-accent-1;
-            border-radius: 10px;
-            border: none;
-            color: $clr-primary;
-
-            .button {
-                color: $clr-primary;
-            }
-        }
-    }
-
-    .grid-container {
-        display: flex;
-        align-content: center;
-        width: 100%;
-
-        .catalogue-grid {
-            display: grid;
-            grid-template-columns: 50% 50%;
-            margin-inline: auto;
-            align-self: center;
-            justify-content: center;
-
-            @include media (mobile) {
-                    grid-template-columns: 45% 45%;
-                }
-
-            .grid-item {
-                height: 10%;
-            }
-        }
-    }
-
-    @include media (desktop) {
-        flex-direction: row;
-
-        .filters-dropdown {
-            display: none;
-        }
-
-        .filters-container {
-            display: flex;
-        }
-
-        .grid-container {
-            margin-top: 2em;
-
-            .catalogue-grid{
-                grid-template-columns: 30% 30% 30%;
-            }
-        }
-    }
-}
-
-.paginate {
-        margin-block: 2em;
-    }
-
-</style>

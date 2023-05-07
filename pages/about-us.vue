@@ -3,23 +3,23 @@
 </script>
 
 <template>
-  <main>
+  <main class="relative overflow-x-hidden">
     <!-- Stickers -->
-    <div class="sticker-container">
-        <img class="sticker sticker-1" src="@/assets/images/Sticker_7.png" alt="">
+    <div class="sticker-container absolute w-full ">
+      <img class="sticker sticker-1 hidden desktop:block absolute -z-10 right-0 top-0 transform translate-x-[20%] translate-y-[-3%] w-[32rem]" src="@/assets/images/Sticker_7.png" alt="">
     </div>
 
     <div class="about-container">
-      <div class="splash-greeting">
-        <h1 class="text-h-giant blue-h">
+      <div class="splash-greeting flex flex-col items-center gap-2 p-4 py-16 desktop:p-20">
+        <h1 class="text-h-giant m-0 text-secondary lowercase">
           hello my
         </h1>
-        <SpeechBubble alignment="right" class="tilted-splash-heading">
-          <h1 class="text-h-giant">
+        <SpeechBubble alignment="right" colour-override="accent-1" class="transform -rotate-6 -translate-x-3 self-center flex flex-col gap-2 py-0">
+          <h1 class="text-h-giant uppercase">
             cute cute
-          </h1>      
+          </h1>
         </SpeechBubble>
-        <h1 class="text-h-giant blue-h">
+        <h1 class="text-h-giant text-secondary lowercase">
           sewdents
         </h1>
       </div>
@@ -28,21 +28,21 @@
         <img src="../assets/images/third-place.png" alt="about us">
         <div class="about-wrapper">
           <div class="heading">
-            <div class="part-1">
-              <h1 class="text-h-big-boy pink-h">
-                A
-              </h1>
-              <h1 class="text-h-big-boy cream-h">
-                third place
+            <div class="flex">
+              <h1 class="text-h-big-boy p-0">
+                <span class="text-accent-1">A</span> <span class="text-primary lowercase">third place</span>
               </h1>
             </div>
-            <div class="part-2">
-              <TiltedHeading class="and">
-                <h1>and</h1>
+            <div class="flex gap-4 items-center">
+              <TiltedHeading class="and bg-primary text-accent-1 p-0 px-4 flex items-center transform translate-y-3">
+                and
               </TiltedHeading>
-              <h1 class="text-h-big-boy pink-h-small">
-                creative space
+              <h1 class="text-h-big-boy p-0 ">
+                <span class="flex text-h-big-boy text-primary lowercase">
+                  creative space
+                </span>
               </h1>
+              <!-- <h1 class="text-h-big-boy pink-h-small" /> -->
             </div>
           </div>
 
@@ -67,8 +67,8 @@
           <h1 class="text-h-big-boy cream-h">
             Meet
           </h1>
-          <TiltedHeading class="the">
-            <h1>THE</h1>
+          <TiltedHeading class="bg-secondary text-accent-1 py-0 px-4 rounded-lg uppercase the">
+            The
           </TiltedHeading>
           <h1 class="text-h-big-boy cream-h">
             Team!
@@ -165,63 +165,13 @@
     </div>
   </main>
 </template>
+
 <style scoped lang="scss">
-main{
-    position: relative;
-    overflow-x: hidden;
-}
-.sticker-container {
-    position: absolute;
-    width: 100%;
-
-    // Sets stickers to display only past desktop
-    .sticker {
-        display: none;
-        @include media(desktop){
-            display: block;
-        }
-    }
-
-    .sticker-1 {
-        position: absolute;
-        z-index: -10;
-        right: 0;
-        top: 0;
-        transform: translateX(20%) translateY(-3%);
-        width: 32em;
-    }
-}
 .about-container{
-    .text-h-giant{
-        margin: 0;
-    }
     .splash-greeting{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: .5em;
-        padding: 2em;
         h1{
+        margin: 0;
             text-transform: lowercase;
-        }
-        .blue-h{
-            color: $clr-secondary;
-        }
-        .tilted-splash-heading{
-            border-radius: 20px;
-            padding-block: 0;
-            padding-inline: 1.2em;
-            align-self: center;
-            background-color: $clr-accent-1;
-            rotate: -5deg;
-
-            @include media (desktop) {
-              // align-self: flex-start;
-            }
-        }
-        @include media (desktop) {
-          padding: 5em;
-          // align-items: flex-start;
         }
     }
 }
@@ -258,22 +208,6 @@ main{
         display: flex;
         flex-direction: column;
     }
-    .part-1{
-        display: flex;
-        gap: 20px;
-    }
-    .part-2{
-        @extend .part-1;
-        align-items: center;
-        gap: 1.2em;
-    }
-    .pink-h{
-        color: $clr-accent-1;
-    }
-    .cream-h{
-        color: $clr-primary;
-        text-transform: lowercase;
-    }
     .pink-h-small{
         color: $clr-accent-1;
         text-transform: lowercase;
@@ -281,8 +215,6 @@ main{
     .and{
         background-color: $clr-primary;
         color: $clr-accent-1;
-        padding-block: 0;
-        padding-inline: 15px;
     }
     .para{
         color: $clr-primary;
@@ -313,9 +245,6 @@ main{
     .the{
         background-color: $clr-secondary;
         color: $clr-accent-1;
-        padding-block: 0;
-        padding-inline: 15px;
-        border-radius: 10px;
     }
     .team-members{
         display: flex;

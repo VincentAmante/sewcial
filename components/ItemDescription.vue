@@ -1,83 +1,65 @@
 <script setup lang = "ts">
+
+type Size = {
+  name: string
+  size: string
+}
+
+const props = defineProps<{
+  sizes: Size[]
+}>()
+
+// The sizings grid gets screwed up CSS-wise if it's not an even number
+// so I added this cheap fix
+const sizesAdjusted = computed(() => {
+  if (props.sizes === undefined) {
+    return [{ name: 'Error loading!', size: '{}' }, { name: '', size: '' }]
+  }
+
+  if (props.sizes.length % 2 === 0) {
+    return props.sizes
+  } else {
+    return [...props.sizes, { name: '', size: '' }]
+  }
+})
 </script>
 
 <template lang="">
-  <div class="item-description">
-    <h1 class="item-name">
+  <div class="flex flex-col text-secondary mt-6 w-full tablet:mt-0">
+    <h1 class="mb-1">
       <slot name="item-name" />
     </h1>
 
-    <h3 class="owner-name">
+    <h3 class="mb-1">
       <slot name="owner-name" />
     </h3>
 
-    <p class="description">
+    <p class="mb-1">
       <slot name="description" />
     </p>
 
-    <div class="sizing">
-      <h3>SIZING</h3>
-      <h3><slot name="sizing" /></h3>
-    </div>
+    <h3 class="sizing flex mt-4 gap-2 text-xl">
+      SIZING
+      <span><slot name="sizing">SIZING MISSING</slot>
+      </span>
+    </h3>
+  </div>
 
-    <div class="table">
-      <table>
-        <tr>
-          <th><p>Chest</p></th>
-          <th><p><slot name="chest-size" /></p></th>
-          <th><p>Neck</p></th>
-          <th><p><slot name="neck-size" /></p></th>
-        </tr>
-        <tr>
-          <th><p>Waist</p></th>
-          <th><p><slot name="waist-size" /></p></th>
-          <th><p>Arm Length</p></th>
-          <th><p><slot name="arm-size" /></p></th>
-        </tr>
-      </table>
-    </div>
+  <div class="table">
+    <ul class="grid grid-cols-2">
+      <li
+        v-for="(size, index) in sizesAdjusted"
+        :key="size.name"
+        class="grid grid-cols-2 border-[1px] border-secondary ml-[-1px] mt-[-1px]"
+        :class="[(index % 2 === 0) ? 'border-r-0' : '']"
+      >
+        <p class="border-r-[1px] border-solid border-secondary m-0 p-2">
+          {{ size.name }}
+        </p>
+        <p class="m-0 p-2">
+          {{ size.size }}
+        </p>
+      </li>
+    </ul>
   </div>
 </template>
-
-<!-- Scoped Styling -->
-<style scoped lang="scss">
-.item-description {
-    display: flex;
-    flex-direction: column;
-    color: $clr-secondary;
-    margin-top: 1.5em;
-    width: auto;
-    .item-name, .owner-name, .description {
-        margin-block: 0.25em;
-    }
-
-    .sizing {
-        display: flex;
-        flex-direction: row;
-        margin-top: 1em;
-        gap: 0.5em;
-    }
-
-    table {
-        border: 1px solid;
-        border-collapse: collapse;
-        margin-bottom: 1em;
-
-        th {
-            border: 1px solid;
-            padding-inline: 1.49em;
-            padding-block: 0.25em;
-            text-align: left;
-
-            p {
-                margin: auto;
-            }
-        }
-    }
-
-    @include media (tablet) {
-        margin-top: 0%;
-    }
-}
-
-</style>
