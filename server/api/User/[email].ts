@@ -3,10 +3,14 @@ export default defineEventHandler(async (event) => {
   //   throw new Error('Missing id')
   // }
 
-  const email = event.context.params?.email
+  const email = event.context.params?.email || ''
 
-  const user = await event.context.prisma.user.findUnique({
+  const user = await event.context.prisma.user.upsert({
     where: {
+      email
+    },
+    update: {},
+    create: {
       email
     }
   })
