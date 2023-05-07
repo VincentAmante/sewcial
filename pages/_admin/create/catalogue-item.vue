@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Author, EnumMaterial, CatalogueCategoryTag } from '@prisma/client'
-import Prisma from '~/server/middleware/0.prisma'
+import type { Author, CatalogueCategoryTag } from '../../../node_modules/.prisma/client'
+import { EnumMaterial } from '~/enums/Material'
 
 const name = ref('')
 const description = ref('')
@@ -19,12 +19,13 @@ type materialOptions = {
   value: EnumMaterial
   selected: boolean
 }
-
-const materialArr = Object.keys(EnumMaterial).map((key: any) => EnumMaterial[key]).map(material => ref({
-  label: material,
-  value: (material as EnumMaterial),
-  selected: false
-} as materialOptions))
+const materialArr = Object.keys(EnumMaterial)
+  .map((key: any) => EnumMaterial[key])
+  .map(material => ref({
+    label: material,
+    value: (material as EnumMaterial),
+    selected: false
+  } as materialOptions))
 
 // *------------------*
 

@@ -3,8 +3,6 @@ import { ref } from 'vue'
 import { JSONContent, generateHTML } from '@tiptap/vue-3'
 import { StarterKit } from '@tiptap/starter-kit'
 import type { Author, TemplateCategoryTag, Template } from '@prisma/client'
-import RichTextEditor from '~/components/FormFields/RichTextEditor.vue'
-import { content } from '~/tailwind.config'
 import { EnumMaterial } from '~/enums/Material'
 import { Skill } from '~/enums/Skill'
 
