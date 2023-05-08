@@ -9,4 +9,6 @@ export default defineEventHandler(async (event) => {
       catalogueItem: true
     }
   })
+
+  return result
 })
