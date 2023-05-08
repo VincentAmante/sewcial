@@ -12,6 +12,7 @@ definePageMeta({
 })
 const { user } = useUserStore()
 const { data, pending, error, refresh } = useFetch('/api/CatalogueItems/getLiked', {
+  method: 'POST',
   body: JSON.stringify({
     userId: user.id
   }),
