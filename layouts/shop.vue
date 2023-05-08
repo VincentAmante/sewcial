@@ -22,6 +22,7 @@ onMounted(async () => {
 <template>
   <div>
     {{ user }}
+    {{ useAuth().status.value }}
     <TheHeader format="shop" />
     <NuxtPage />
   </div>
