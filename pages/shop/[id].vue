@@ -76,13 +76,13 @@ onMounted(async () => {
 
 function onLike () {
   itemIsLiked.value = !itemIsLiked.value
-  const user = useUserStore()
-  if (user.isUserSet) {
+  const { user, isUserSet } = useUserStore()
+  if (isUserSet) {
     const url = itemIsLiked.value ? '/api/CatalogueItems/likeItem' : '/api/CatalogueItems/unlikeItem'
     useFetch(url, {
       method: 'POST',
       body: JSON.stringify({
-        userId: user.user.id,
+        userId: user.id,
         catalogueItemId: catalogueItem.value.id
       })
     })
