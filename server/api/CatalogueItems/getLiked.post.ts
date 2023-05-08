@@ -10,5 +10,6 @@ export default defineEventHandler(async (event) => {
     }
   })
 
+  console.log(result)
   return result
 })
