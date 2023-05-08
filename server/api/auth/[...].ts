@@ -1,8 +1,4 @@
-import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
-import { useFetch } from '@vueuse/core'
-import { PrismaClient } from '@prisma/client'
-import type { User } from '@prisma/client'
 import { NuxtAuthHandler } from '#auth'
 
 export default NuxtAuthHandler({
@@ -16,6 +12,7 @@ export default NuxtAuthHandler({
       clientSecret: process.env.GITHUB_CLIENT_SECRET || 'enter-your-client-secret-here' // TODO: Replace this with an env var like "process.env.GITHUB_CLIENT_SECRET". The secret should never end up in your github repository
     })
   ],
+
   callbacks: {
     jwt: async ({ token, user }) => {
       const isSignIn = !!user

@@ -23,9 +23,7 @@ const catalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
 // Filtered catalogue contains a filtered list of catalogue items
 // This list tends to lose items due to filtering, so the filter reverts to ${catalogue} when no filters are applied
 const filteredCatalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
-
 const cataloguePage: Ref<CatalogueItem[]> = ref([])
-
 const { data, pending, error, refresh } = await useFetch('/api/CatalogueItems/', {
   onResponse ({ response }) {
     // Needs to be converted to array
@@ -49,13 +47,14 @@ function toItem (itemUrl: string) {
 function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
   filteredCatalogue.value = newFilteredCatalogue
 }
+
 </script>
 
 <template>
   <main class="flex flex-col">
-    <div class="container flex flex-col border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row">
-      <img class="head-img w-full h-auto mobile:w-1/2" src="https://via.placeholder.com/600x500">
-      <div class="head-text flex flex-col justify-center mx-auto mb-8">
+    <div class="flex flex-col border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row">
+      <img class="w-full h-auto mobile:w-1/2" src="https://via.placeholder.com/600x500">
+      <div class="flex flex-col justify-center mx-auto mb-8">
         <h1>NEW COLLECTION</h1>
         <h1>Lorem ipsum sit aset dolor</h1>
         <p>I got a condo in Manhattan, baby girl what’s happenin’?</p>

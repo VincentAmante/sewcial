@@ -4,6 +4,7 @@ import { EnumMaterial } from '~/enums/Material'
 import LikeMeButton from '@/components/LikeMeButton.vue'
 import ItemDescription from '@/components/ItemDescription.vue'
 import ItemImage from '@/components/ItemImage.vue'
+import { useUserStore } from '~/stores/useUserStore'
 
 definePageMeta({
   layout: 'shop'
@@ -37,17 +38,56 @@ const itemPlaceholder: CatalogueItemWithMaterials = {
 }
 const catalogueItem: Ref<CatalogueItem> = ref(itemPlaceholder)
 
+const itemIsLiked = ref(false)
+const { data, pending, error, refresh } = useFetch(`/api/CatalogueItems/${route.params.id}`, {
+  onResponse ({ response }) {
+    const data = response._data as CatalogueItem
+    catalogueItem.value = data
+  }
+})
+refresh()
+
 onMounted(async () => {
   try {
-    const { data: item } = await useFetch(`/api/CatalogueItems/${route.params.id}`)
-    catalogueItem.value = (await item.value as CatalogueItemWithMaterials)
+
   } catch {
     showError({
       statusCode: 404,
       message: 'Item not found'
     })
   }
+
+  const user = useUserStore()
+  onMounted(async () => {
+    if (user.isUserSet) {
+      await useFetch('/api/CatalogueItems/isLiked', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: user.user.id,
+          catalogueItemId: catalogueItem.value.id
+        }),
+        onResponse ({ response }) {
+          itemIsLiked.value = response._data
+        }
+      })
+    }
+  })
 })
+
+function onLike () {
+  itemIsLiked.value = !itemIsLiked.value
+  const user = useUserStore()
+  if (user.isUserSet) {
+    const url = itemIsLiked.value ? '/api/CatalogueItems/likeItem' : '/api/CatalogueItems/unlikeItem'
+    useFetch(url, {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: user.user.id,
+        catalogueItemId: catalogueItem.value.id
+      })
+    })
+  }
+}
 </script>
 
 <template>
@@ -84,7 +124,10 @@ onMounted(async () => {
         </ItemDescription>
 
         <div class="w-full flex items-center justify-center">
-          <LikeMeButton />
+          <LikeButton
+            :is-liked="itemIsLiked"
+            @click="() => onLike()"
+          />
         </div>
       </div>
     </div>

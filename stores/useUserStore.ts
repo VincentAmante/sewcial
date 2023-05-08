@@ -10,7 +10,11 @@ export const useUserStore = defineStore('user', () => {
   const name = ref('')
   const email = ref('')
   const id = ref('')
-  const isSet = computed(() => name.value !== '' && email.value !== '' && id.value !== '')
+  const isSet = ref(false)
+
+  const isUserSet = computed(() => {
+    return isSet.value
+  })
 
   const user = computed(() => {
     return {
@@ -24,15 +28,16 @@ export const useUserStore = defineStore('user', () => {
     name.value = ''
     email.value = ''
     id.value = ''
+    isSet.value = false
   }
 
-  function initialise (userInfo: string) {
-    const userJson = JSON.parse(userInfo) as User
-
-    name.value = userJson.name
-    email.value = userJson.email
-    id.value = userJson.id
+  function initialise (userName: string, userEmail: string, userId: string) {
+    // const userJson = JSON.parse(userInfo) as User
+    name.value = userName
+    email.value = userEmail
+    id.value = userId
+    isSet.value = true
   }
 
-  return { user, $reset, initialise, isSet }
+  return { user, $reset, initialise, isUserSet }
 })

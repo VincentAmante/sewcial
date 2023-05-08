@@ -5,22 +5,16 @@ const user = useUserStore()
 const userData = user.user
 
 onMounted(async () => {
-  if (!user.isSet) {
-    const email = useAuth().data.value?.user?.email
-    if (email === undefined) {
-      return
-    }
-
+  if (!user.isUserSet && useAuth().status.value === 'authenticated') {
+    let email = useAuth().data.value?.user?.email
+    email = 'icenamante67@gmail.com'
     const { data, pending, error, refresh } = await useFetch(`/api/User/${email}`, {
       onResponse ({ response }) {
-        console.log(response._data)
-        user.initialise(JSON.stringify({
-          email: response._data.email,
-          name: '',
-          id: response._data.id
-        }))
+        const data = response._data
+        user.initialise('name', data.email, data.id)
       }
     })
+    refresh()
   }
 })
 // const email = useAuth().data.value?.user?.email
@@ -28,9 +22,6 @@ onMounted(async () => {
 
 <template>
   <div>
-    <div>
-      {{ user }}
-    </div>
     <TheHeader format="shop" />
     <NuxtPage />
   </div>

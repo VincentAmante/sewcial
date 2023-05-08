@@ -13,15 +13,15 @@ definePageMeta({
   <main>
     <div class="container">
       <!-- Left sticker -->
-      <img class="elements-left" src="@/assets/images/Sticker_1.png" width="190" height="250" alt="">
+      <img class="elements-left hidden absolute right-[90%] top-[15%] desktop:flex" src="@/assets/images/Sticker_1.png" width="190" height="250" alt="">
 
       <!-- Page Heading -->
-      <div class="heading-container">
+      <div class="heading-container flex flex-row content-center justify-center py-8 tablet:py-20">
         <div class="page-heading">
           <TiltedHeading>
             your liked
           </TiltedHeading>
-          <h1 class="text-h-big-boy main-heading">
+          <h1 class="text-h-big-boy capitalize text-secondary relative">
             Products
           </h1>
         </div>
@@ -34,7 +34,7 @@ definePageMeta({
     </div>
 
     <!-- Browse section -->
-    <section class="browse-container">
+    <section class="browse-container text-primary flex justify-between pt-12 my-8">
       <!-- Filters -->
       <div class="filter">
         <p>400 ITEMS</p>
