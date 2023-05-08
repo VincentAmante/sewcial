@@ -165,7 +165,7 @@ const { data, pending, error, refresh } = useFetch('/api/CatalogueItems/getLiked
     </section>
     <!-- Paginate -->
     <div class="paginate">
-      <Pagination :total-items="9" :items-per-page="6" :current-page="1" />
+      <!-- <Pagination :total-items="9" :items-per-page="6" :current-page="1" /> -->
     </div>
   </main>
 </template>
