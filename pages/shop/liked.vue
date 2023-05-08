@@ -1,11 +1,24 @@
 <script setup lang = "ts">
+import type { CatalogueItem } from '@prisma/client'
 import TiltedHeading from '@/components/TiltedHeading.vue'
 import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import Pagination from '@/components/Pagination.vue'
+import { useUserStore } from '~/stores/useUserStore'
 
 definePageMeta({
-  layout: 'shop'
+  layout: 'shop',
+  middleware: 'auth'
+})
+const { user } = useUserStore()
+const { data, pending, error, refresh } = useFetch('/api/CatalogueItems/getLiked', {
+  body: JSON.stringify({
+    userId: user.id
+  }),
+  onResponse ({ response }) {
+    const data = response._data
+    console.log(data)
+  }
 })
 </script>
 
