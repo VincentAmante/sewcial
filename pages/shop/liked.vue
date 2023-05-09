@@ -23,10 +23,6 @@ refresh()
 
 <template>
   <main>
-    <div>
-      data:
-      {{ data }}
-    </div>
     <div class="container">
       <!-- Left sticker -->
       <img class="elements-left hidden absolute right-[90%] top-[15%] desktop:flex" src="@/assets/images/Sticker_1.png" width="190" height="250" alt="">
