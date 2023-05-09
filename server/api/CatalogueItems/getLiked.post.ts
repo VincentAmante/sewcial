@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     where: {
       userId: 'c336c2f7-1f04-4613-97fa-fb68777c420e'
     },
-    select: {
+    include: {
       catalogueItem: {
         select: {
           id: true,
