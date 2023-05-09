@@ -32,64 +32,188 @@ const props = defineProps({
 
 // Computed property, should theoretically react if any element inside changes
 const navStyle = computed(() => {
-  return (props.isToggled) ? 'toggled' : ''
+  return (props.isToggled) ? ['transform-none'] : ''
 })
 
+const navColour = computed(() => {
+  switch (props.colour) {
+    case 'primary':
+      return {
+        alt: 'secondary',
+        bg: 'bg-primary',
+        text: 'text-primary',
+        bgAlt: 'bg-secondary',
+        textAlt: 'text-secondary'
+      }
+    case 'secondary':
+      return {
+        alt: 'primary',
+        bg: 'bg-secondary',
+        text: 'text-secondary',
+        bgAlt: 'bg-primary',
+        textAlt: 'text-primary'
+
+      }
+    case 'accent-1':
+      return {
+        alt: 'accent-2',
+        bg: 'bg-accent-1',
+        text: 'text-accent-1',
+        bgAlt: 'bg-accent-2',
+        textAlt: 'text-accent-2'
+      }
+    case 'accent-2':
+      return {
+        alt: 'accent-1',
+        bg: 'bg-accent-2',
+        text: 'text-accent-2',
+        bgAlt: 'bg-accent-1',
+        textAlt: 'text-accent-1'
+      }
+    default:
+      return {
+        bg: 'bg-primary',
+        text: 'text-primary',
+        bgAlt: 'bg-secondary',
+        textAlt: 'text-secondary'
+      }
+  }
+})
 const secondaryColour = computed(() => {
   return (props.colour === 'primary') ? 'secondary' : 'primary'
 })
 </script>
 
 <template>
-  <nav :class="[navStyle, colour]">
-    <div class="logo-container">
+  <nav
+    class="flex flex-col justify-around pb-10 fixed gap-1 top-0 right-0 w-screen h-full transition-all transform translate-x-full z-[120] max-w-lg"
+    :class="[navStyle, colour, navColour.bg]"
+  >
+    <div class="logo-container flex items-center justify-start absolute top-0 px-mobile-w tablet:px-12 h-[70px] tablet:h-[90px]">
       <HeaderLogo class="logo" :colour="secondaryColour" />
     </div>
-    <ul class="routes uppercase">
-      <li id="nav-home">
-        <a href="/">
+    <ul class="routes flex flex-col uppercase px-12 mt-20">
+      <li
+        id="nav-home"
+        class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
+        :class="[navColour.textAlt]"
+      >
+        <a
+          class="text-2xl font-bold no-underline my-4
+         mobile:w-full mobile:text-left"
+          href="/"
+        >
           Map
         </a>
-        <font-awesome-icon :icon="['fas', 'chevron-right']" class="right" />
+        <font-awesome-icon
+          :icon="['fas', 'chevron-right']"
+          class="right hidden invisible h-5
+        mobile:visible mobile:block mobile:absolute mobile:right-0"
+        />
       </li>
-      <li id="nav-about">
-        <a href="/about-us">
+      <li
+        id="nav-about"
+        class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
+        :class="[navColour.textAlt]"
+      >
+        <a
+          class="text-2xl font-bold no-underline my-3
+         mobile:w-full mobile:text-left"
+          href="/about-us"
+        >
           About Us
         </a>
-        <font-awesome-icon :icon="['fas', 'chevron-right']" class="right" />
+        <font-awesome-icon
+          :icon="['fas', 'chevron-right']"
+          class="right hidden invisible h-5
+        mobile:visible mobile:block mobile:absolute mobile:right-0"
+        />
       </li>
-      <li id="nav-discover">
-        <a href="/test/icen">
-          Discover (Test Icen)
+      <li
+        id="nav-discover"
+        class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
+        :class="[navColour.textAlt]"
+      >
+        <a
+          class="text-2xl font-bold no-underline my-3
+         mobile:w-full mobile:text-left"
+          href="/shop"
+        >
+          Discover
         </a>
-        <font-awesome-icon :icon="['fas', 'chevron-right']" class="right" />
+        <font-awesome-icon
+          :icon="['fas', 'chevron-right']"
+          class="right hidden invisible h-5
+        mobile:visible mobile:block mobile:absolute mobile:right-0"
+        />
       </li>
-      <li id="nav-contact-us">
-        <a href="/contact-us">
+      <li
+        id="nav-contact-us"
+        class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
+        :class="[navColour.textAlt]"
+      >
+        <a
+          class="text-2xl font-bold no-underline my-3
+         mobile:w-full mobile:text-left"
+          href="/contact-us"
+        >
           Contact Us
         </a>
-        <font-awesome-icon :icon="['fas', 'chevron-right']" class="right" />
+        <font-awesome-icon
+          :icon="['fas', 'chevron-right']"
+          class="right hidden invisible h-5
+        mobile:visible mobile:block mobile:absolute mobile:right-0"
+        />
       </li>
-      <li id="nav-donate">
-        <a href="/donate">
+      <li
+        id="nav-donate"
+        class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
+        :class="[navColour.textAlt]"
+      >
+        <a
+          class="text-2xl font-bold no-underline my-3
+         mobile:w-full mobile:text-left"
+          href="/donate"
+        >
           Donate
         </a>
-        <font-awesome-icon :icon="['fas', 'chevron-right']" class="right" />
+        <font-awesome-icon
+          :icon="['fas', 'chevron-right']"
+          class="right hidden invisible h-5
+        mobile:visible mobile:block mobile:absolute mobile:right-0"
+        />
       </li>
-      <li id="nav-templates">
-        <a href="/templates">
+      <li
+        id="nav-templates"
+        class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
+        :class="[navColour.textAlt]"
+      >
+        <a
+          class="text-2xl font-bold no-underline my-3
+         mobile:w-full mobile:text-left"
+          href="/templates"
+        >
           Templates
         </a>
-        <font-awesome-icon :icon="['fas', 'chevron-right']" class="right" />
+        <font-awesome-icon
+          :icon="['fas', 'chevron-right']"
+          class="right hidden invisible h-5
+        mobile:visible mobile:block mobile:absolute mobile:right-0"
+        />
       </li>
     </ul>
 
-    <div class="other">
-      <DevSelect class="dev-select" />
-      <AppButton class="btn">
+    <div class="other flex flex-col items-center px-mobile-w justify-center gap-2">
+      <!-- <DevSelect class="dev-select bg-white" /> -->
+      <AppButton
+        class="w-full"
+        :class="[navColour.text]"
+        :bg-colour="navColour.alt"
+        :text-colour="colour"
+      >
         Book
       </AppButton>
-      <div class="social-media-btns">
+      <div class="social-media-btns text-accent-1 flex justify-between w-full mobile:justify-around">
         <ButtonTwitter />
         <ButtonFacebook />
         <ButtonInstagram />
@@ -97,118 +221,3 @@ const secondaryColour = computed(() => {
     </div>
   </nav>
 </template>
-
-<style scoped lang="scss">
-    nav {
-        @include flex-col;
-        @include conditional-bg;
-        @include conditional-text-alt('a');
-        @include conditional-text-alt('.right');
-        @include conditional-text('.btn');
-        @include conditional-bg-alt('.btn');
-
-        position: fixed;
-        padding-top: clamp(50px, 6vh, 200px);
-        gap: 5px;
-        z-index: 100;
-        top: 0;
-        right: 0;
-        width: 100vw;
-        height: 100%;
-        transition: all ease-out .25s;
-        transform: translateX(100%);
-
-        justify-content: center;
-
-        &.toggled {
-            transform: translateX(0);
-        }
-        pointer-events: initial;
-
-        @include media(mobile){
-            width: clamp(350px, 70vw, 450px);
-        }
-    }
-
-    .routes {
-        @include flex-col;
-        list-style: none;
-        padding-inline: 50px;
-        // gap: clamp(5px, 5.5vh, 44px);
-
-        li {
-            display: flex;
-            // justify-content: center;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            opacity: .5;
-            transition: all ease-out .15s;
-
-            &:hover {
-                opacity: .9;
-            }
-
-            .right {
-                display: none;
-                visibility: hidden;
-                height: 1.25em;
-            }
-            a {
-                @extend .text-h2;
-                text-decoration: none;
-                text-align: center;
-            }
-
-            @include media(mobile) {
-                justify-content: space-between;
-                .right {
-                    display: initial;
-                    visibility: visible;
-                    position: absolute;
-                    right: 0;
-                }
-
-                a {
-                    width: 100%;
-                    text-align: left;
-                }
-            }
-        }
-    }
-
-    .other {
-        @include flex-col;
-        align-items: center;
-        justify-content: center;
-        padding-inline: clamp(50px, 7.5vmax, 95px);
-        gap: clamp(5px, 2svh, 2.5em);
-        .btn {
-            width: 100%;
-        }
-
-        .social-media-btns {
-            @include flex;
-            justify-content: space-between;
-            width: 100%;
-
-            & > * {
-                color: $clr-accent-1;
-            }
-        }
-    }
-
-    li:has(.router-link-active) {
-        opacity: 1;
-    }
-
-    .logo-container {
-        @include flex;
-        align-items: center;
-        justify-content: flex-start;
-        position: absolute;
-        top: 0;
-        padding-inline: clamp($margin-width-mobile, 5vw, 50px);
-        height: clamp(70px, 15vw, 90px);
-    }
-</style>

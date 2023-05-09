@@ -23,69 +23,76 @@ const toggleBurger = useToggle(isToggled)
 const burgerToggled = computed(() => {
   return (isToggled.value) ? 'toggled' : 'not-toggled'
 })
+
+const navColour = computed(() => {
+  switch (props.colour) {
+    case 'primary':
+      return {
+        bg: 'bg-primary',
+        bgAlt: 'bg-secondary'
+      }
+    case 'secondary':
+      return {
+        bg: 'bg-secondary',
+        bgAlt: 'bg-primary'
+      }
+    case 'accent-1':
+      return {
+        bg: 'bg-accent-1',
+        bgAlt: 'bg-accent-2'
+      }
+    case 'accent-2':
+      return {
+        bg: 'bg-accent-2',
+        bgAlt: 'bg-accent-1'
+      }
+    default:
+      return {
+        bg: 'bg-primary',
+        bgAlt: 'bg-secondary'
+      }
+  }
+})
+
+const toggledStyles = computed(() => {
+  if (isToggled.value) {
+    return {
+      div1: [navColour.value.bgAlt, 'transform', 'scale-x-100', 'translate-x-0', 'translate-y-[0px]', 'rotate-[45deg]', 'tablet:translate-y-[1px]'],
+      div2: [navColour.value.bgAlt, 'opacity-0'],
+      div3: [navColour.value.bgAlt, 'transform', 'scale-x-100', 'translate-x-0', 'translate-y-[-16px]', 'rotate-[-45deg]']
+    }
+  } else {
+    return {
+      div1: [navColour.value.bg],
+      div2: [navColour.value.bg],
+      div3: [navColour.value.bg]
+    }
+  }
+})
 </script>
 
 <template>
   <label for="burgerToggle" class="burger-label">
-    <input id="" v-model="isToggled" type="checkbox" name="burgerToggle">
-    <div class="burger" :class="[colour, burgerToggled]" @click="toggleBurger()">
-      <div v-for="i in 3" :class="colour" />
+    <input
+      id=""
+      v-model="isToggled"
+      class="hidden"
+      type="checkbox"
+      name="burgerToggle"
+    >
+    <div class="burger flex flex-col justify-between h-5 aspect-square cursor-pointer pointer-events-auto" :class="[colour, burgerToggled]" @click="toggleBurger()">
+      <div
+        class="w-[30px] h-[16%] rounded transition-all transform"
+        :class="[colour, ...toggledStyles.div1]"
+      />
+      <div
+        class="w-[30px] h-[16%] rounded transition-all transform"
+        :class="[colour, ...toggledStyles.div2]"
+      />
+      <div
+        class="w-[30px] h-[16%] rounded transition-all transform"
+        :class="[colour, ...toggledStyles.div3]"
+      />
     </div>
   </label>
 </template>
-
-<style scoped lang="scss">
-    .burger-label {
-        input {
-            // position: absolute;
-            display: none;
-        }
-    }
-
-    .burger {
-        @include flex-col;
-        justify-content: space-between;
-        height: 20px;
-        aspect-ratio: 1;
-        cursor: pointer;
-        pointer-events: visible;
-
-        div {
-            width: 30px;
-            height: 16%;
-            border-radius: 5px;
-            transition: all ease-in .15s;
-
-            @include conditional-bg;
-        }
-
-        @include media(tablet){
-            height: 25px;
-
-            div {
-                width: 35px;
-            }
-        }
-        &.toggled {
-            div {
-                @include conditional-bg-alt;
-            }
-
-            div:nth-child(1){
-                transform: scaleX(1) translateX(0px) translateY(0.5px) rotate(45deg);
-                @include media(tablet) {
-                    transform: scaleX(1) translateX(0px) translateY(4.5px) rotate(45deg);
-                }
-            }
-            div:nth-child(2){
-                opacity: 0;
-            }
-            div:nth-child(3){
-                transform: scaleX(1) translateX(0px) translateY(-16px) rotate(-45deg);
-                @include media(tablet) {
-                    transform: scaleX(1) translateX(0px) translateY(-16px) rotate(-45deg);
-                }
-            }
-        }
-    }
-</style>

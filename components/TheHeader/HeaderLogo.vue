@@ -32,7 +32,7 @@ const colours = computed(() => {
   }
 })
 const visibility = computed(() => {
-  return (props.headerToggled) ? 'hidden' : 'visible'
+  return (props.headerToggled) ? ['pointer-events-none', 'opacity-0'] : ['pointer-events-auto', 'opacity-1']
 })
 </script>
 
@@ -72,22 +72,9 @@ const visibility = computed(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
-    .app-logo {
-      transition: all .1s ease-out;
-
-      svg {
+<style scoped>
+    svg {
         height: clamp(20px, 6vmax, 50px);
         display: block;
       }
-
-      &.hidden {
-        pointer-events: none;
-        opacity: 0;
-      }
-      &.visible {
-        pointer-events: auto;
-        opacity: 1;
-      }
-    }
 </style>

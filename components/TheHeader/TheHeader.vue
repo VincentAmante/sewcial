@@ -5,7 +5,6 @@ import ButtonLikedPage from '../icons/ButtonLikedPage.vue'
 
 import BurgerButton from './BurgerButton.vue'
 import Navigation from './Navigation.vue'
-import HeaderLogo from '@/components/TheHeader/HeaderLogo.vue'
 
 const props = defineProps({
   format: {
@@ -51,28 +50,40 @@ const formatStyle = computed(() => {
   switch (props.format) {
     case 'home':
     case '':
-      return 'home'
+      return {
+        header: ['z-1', 'fixed', 'border-none', 'pointer-events-none'],
+        logo: ['tablet:justify-start']
+      }
     case 'about':
     case 'shop':
-      return 'shop'
+      return {
+        header: ['z-[135]'],
+        logo: ['tablet:justify-start']
+      }
     default:
-      return 'base'
+      return {
+        header: ['z-[135]'],
+        logo: ['tablet:justify-start']
+      }
   }
 })
 </script>
 <template>
   <header
-    :class="formatStyle"
-    class="flex items-center justify-end w-full border-b-4 border-dashed border-secondary static top-0 z-[105]"
+    :class="formatStyle.header"
+    class="flex items-center justify-end w-full border-b-4 border-dashed border-secondary static top-0 px-mobile-w"
   >
     <TheHeaderLogo
-      :class="formatStyle"
+      :class="formatStyle.logo"
       :colour="navColour"
       :header-toggled="headerToggled"
-      class="logo w-full left-0 right-0 flex justify-start absolute tablet:justify-center"
+      class="logo w-full left-0 right-0 flex justify-start absolute z-0"
     />
-    <div class="flex items-center gap-2 z-[105] fixed">
-      <ButtonLikedPage class="btn-liked-page h-6 tablet:h-[30px]" />
+    <div class="flex items-center gap-2 z-[135] fixed">
+      <ButtonLikedPage
+        class="btn-liked-page h-6 tablet:h-[30px]"
+        :class="(page === 'shop') ? 'block' : 'hidden'"
+      />
       <BurgerButton v-model="headerToggled" class="burger-btn" :colour="navColour" />
     </div>
   </header>
@@ -85,17 +96,7 @@ const formatStyle = computed(() => {
 header {
     padding-inline: clamp($margin-width-mobile, 5vw, 50px);
     height: clamp(70px, 15vw, 90px);
-    &.home {
-        border: none
     }
-    &.home { position: fixed; }
-    &:not(.shop){
-        .btn-liked-page {
-            display: none;
-        }
-    }
-}
-
 .logo {
     padding-inline: clamp($margin-width-mobile, 5vw, 50px);
 }

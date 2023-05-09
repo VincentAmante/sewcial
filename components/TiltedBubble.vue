@@ -2,13 +2,13 @@
 </script>
 
 <template lang="">
-    <div class="speech-bubble" :class="alignment">
-        <slot name="icon"></slot>
-        <p class = "big-text">
-            <slot class="text"></slot>
-        </p>
-        <div class="arrow"></div>
-    </div>
+  <div class="speech-bubble" :class="alignment">
+    <slot name="icon" />
+    <p class="big-text">
+      <slot class="text" />
+    </p>
+    <div class="arrow" />
+  </div>
 </template>
 
 <!-- Scoped Styling -->
@@ -38,8 +38,8 @@
 
             .arrow {
                 z-index: -1;
-                width: 0; 
-                height: 0; 
+                width: 0;
+                height: 0;
                 border-bottom: 20px solid $clr-accent-1;
                 border-right: 50px solid transparent;
                 right: 0px;
