@@ -35,7 +35,6 @@ export default class Camera {
     this.instance.position.x = -10
     this.instance.position.y = -6.8
     this.instance.position.z = -20
-    console.log(this.instance.position)
 
     this.scene.add(this.instance)
   }
