@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
 
   const result = await event.context.prisma.likedCatalogueItem.deleteMany({
     where: {
-      catalogueItemId: body.catalogueItemId,
+      // catalogueItemId: body.catalogueItemId,
       userId: body.userId
     }
   })
