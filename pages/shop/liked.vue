@@ -11,15 +11,12 @@ definePageMeta({
   middleware: 'auth'
 })
 const { user } = useUserStore()
+
 const { data, pending, error, refresh } = useFetch('/api/CatalogueItems/getLiked', {
   method: 'POST',
   body: JSON.stringify({
     userId: user.id
-  }),
-  onResponse ({ response }) {
-    const data = response._data
-    console.log(data)
-  }
+  })
 })
 refresh()
 </script>
@@ -67,105 +64,23 @@ refresh()
       <!-- Template Grid -->
       <div class="grid-container">
         <div class="catalogue-grid">
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
-          <CatalogueCard :image="'https://i.pinimg.com/564x/e1/cf/a1/e1cfa1a284fb717a0ef3023d7ee3e924.jpg'">
-            <template #item-name>
-              JACKET
-            </template>
-            <template #price>
-              60 AED
-            </template>
-            <template #description>
-              Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
-            </template>
-          </CatalogueCard>
+          <template v-if="!pending && !error && data">
+            <CatalogueCard
+              v-for="item in data"
+              :key="item.id"
+              :image="item.catalogueItem.imageSrc"
+            >
+              <template #item-name>
+                {{ item.catalogueItem.name }}
+              </template>
+              <template #price>
+                60 AED
+              </template>
+              <template #description>
+                Lorem ipsum dolor sit amet consectet. Faucibus mattis sceleris.
+              </template>
+            </CatalogueCard>
+          </template>
         </div>
       </div>
     </section>
