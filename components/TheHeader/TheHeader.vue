@@ -67,6 +67,8 @@ const formatStyle = computed(() => {
       }
   }
 })
+
+const emit = defineEmits(['clickedLikedBtn'])
 </script>
 <template>
   <header
@@ -82,7 +84,8 @@ const formatStyle = computed(() => {
     <div class="flex items-center gap-2 z-[150] fixed">
       <ButtonLikedPage
         class="btn-liked-page h-6 tablet:h-[30px]"
-        :class="(page === 'shop') ? 'block' : 'hidden'"
+        :class="(page === '/shop') ? 'block' : 'hidden'"
+        @click="$emit('clickedLikedBtn')"
       />
       <BurgerButton v-model="headerToggled" class="burger-btn z-[150]" :colour="navColour" />
     </div>
