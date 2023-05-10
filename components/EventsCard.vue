@@ -13,7 +13,9 @@ const props = defineProps({
 
 <!-- Card -->
 <template>
-  <div class="cards m-1 h-full w-full flex flex-col items-center" onclick="location.href='html/image.html'">
+  <div
+    class="cards m-1 h-full w-full flex flex-col items-center"
+  >
     <div class="card flex flex-col text-dark bg-primary w-full max-w-sm rounded-2xl transition-all hover:cursor-pointer group group-hover:transform">
       <img
         class="card-image aspect-[1.1/1] overflow-hidden object-cover object-center rounded-t-2xl w-full align-middle filter brightness-90 transition-all group-hover:brightness-[100%]"

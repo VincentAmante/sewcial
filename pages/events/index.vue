@@ -1,5 +1,5 @@
 <script setup lang = "ts">
-import { Workshop } from '@prisma/client'
+import type { Workshop, Event } from '@prisma/client'
 // import { DatePicker } from 'v-calendar'
 import TiltedBubble from '@/components/TiltedBubble.vue'
 import TiltedHeading from '@/components/TiltedHeading.vue'
@@ -43,6 +43,19 @@ const { data: workshopData, pending: workshopPending, error: workshopError, refr
     })
   }
 })
+
+const events = ref<Event[]>([])
+const { data: eventsData, pending: eventsPending, error: eventsError, refresh: refreshEvents } = useFetch('/api/Events', {
+  onResponse ({ response }) {
+    const data = response._data as Event[]
+    events.value = data.map((event) => {
+      event.startTime = new Date(event.startTime)
+      event.endTime = new Date(event.endTime)
+      return event
+    })
+  }
+})
+refreshEvents()
 refreshWorkshops()
 
 const workshopsOfDay = computed(() => {
@@ -78,12 +91,12 @@ function diffHours (dateOlder: Date, dateEarlier: Date) {
 }
 
 const router = useRouter()
-function bookEvent () {
+function bookEvent (id: string) {
   router.push({
-    path: '/booking',
-    query: {
+    name: 'events-booking_type_id_date',
+    params: {
       type: 'event',
-      id: 'a',
+      id,
       date: chosenDate.value
     }
   })
@@ -112,13 +125,18 @@ function bookSession () {
 
 <template>
   <main>
-    <div>{{ workshopsOfDay }}</div>
     <section
       class="events-splash flex flex-col items-center justify-center my-12
     tablet:flex-row tablet:gap-8"
     >
       <!-- Left Sticker -->
-      <img class="splash-sticker-l hidden" src="@/assets/images/Events_Stickers_L.png" width="190" height="250" alt="">
+      <img
+        class="splash-sticker-l hidden"
+        src="@/assets/images/Events_Stickers_L.png"
+        width="190"
+        height="250"
+        alt=""
+      >
 
       <div class="splash-heading flex flex-col text-secondary mb-12">
         <p class="text-h-giant relative">
@@ -145,7 +163,6 @@ function bookSession () {
 
       <div class="flex flex-col items-center justify-center bg-secondary p-6 rounded-lg">
         <VDatePicker v-model="bookingDate" class="date-picker" />
-
         <div class="booking-input my-4">
           <div class="time-picker flex gap-4">
             <StartTimePicker v-model="startTime" :date="bookingDate" />
@@ -184,35 +201,26 @@ function bookSession () {
       <div class="card-container">
         <div class="grid-container mx-4 tablet:mx-auto">
           <div
-            class="card-grid grid w-full content-center
-        tablet:grid-cols-3 tablet:justify-center"
+            v-if="!eventsPending && !eventsError && eventsData"
+            class="flex flex-col overflow-x-scroll items pl-8 gap-2 pb-10
+            tablet:flex-row"
           >
-            <EventsCard
-              :image="'src/assets/images/OpenMic.png'"
+            <template
+              v-for="event in events"
+              :key="event.id"
             >
-              <template #event-name>
-                OPEN MIC
-              </template>
-              <template #date>
-                Saturday, Your Mom
-              </template>
-            </EventsCard>
-            <EventsCard :image="'src/assets/images/BoardGamesNight.png'">
-              <template #event-name>
-                ITEM NAME
-              </template>
-              <template #date>
-                OWNER
-              </template>
-            </EventsCard>
-            <EventsCard :image="'src/assets/images/CommunitySale.png'">
-              <template #event-name>
-                ITEM NAME
-              </template>
-              <template #date>
-                OWNER
-              </template>
-            </EventsCard>
+              <EventsCard
+                :image="event.thumbnail"
+                @click="() => router.push(`/events/event-${event.id}`)"
+              >
+                <template #event-name>
+                  {{ event.title }}
+                </template>
+                <template #date>
+                  Saturday, Your Mom
+                </template>
+              </EventsCard>
+            </template>
           </div>
         </div>
       </div>
