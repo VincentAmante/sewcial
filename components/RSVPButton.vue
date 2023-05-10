@@ -3,9 +3,11 @@
 
 <!-- Template with default text and icon -->
 <template lang="">
-    <div class="download" :class="alignment">
-        <p style="font-weight: 500">RSVP</p>
-    </div>
+  <div class="download" :class="alignment">
+    <p style="font-weight: 500">
+      RSVP
+    </p>
+  </div>
 </template>
 
 <!-- Scoped Styling -->
@@ -21,7 +23,7 @@
 
         align-self: flex-start;
         justify-content: center;
-        
+
         .icon {
             justify-self: center;
             align-self: center;
