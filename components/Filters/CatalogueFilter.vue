@@ -21,7 +21,8 @@ const props = defineProps<{
   catalogue: ItemWithMaterial[]
 }>()
 const emit = defineEmits<{(
-  e: 'apply-filter', value: ItemWithMaterial[]): void
+  e: 'apply-filter', value: ItemWithMaterial[]): void,
+  (e: 'hide-filter'): void
 }>()
 const filteredCatalogue = ref(props.catalogue)
 
@@ -244,10 +245,14 @@ function applyFilters () {
   sort() // needs to be last to save performance
   emit('apply-filter', filteredCatalogue.value)
 }
+
+function hideFilter () {
+  emit('hide-filter')
+}
 </script>
 
 <template>
-  <BaseFilter @apply-filter="() => applyFilters()">
+  <BaseFilter @apply-filter="() => applyFilters()" @hide-filter="() => hideFilter()">
     <div class="flex flex-col gap-2">
       <h1 class="text-secondary my-1">
         Search

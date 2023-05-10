@@ -22,7 +22,8 @@ const props = defineProps<{
   templates: TemplateWithMaterial[]
 }>()
 const emit = defineEmits<{(
-  e: 'apply-filter', value: TemplateWithMaterial[]): void
+  e: 'apply-filter', value: TemplateWithMaterial[]): void,
+  (e: 'hide-filter'): void
 }>()
 const filteredTemplates = ref(props.templates)
 
@@ -198,10 +199,14 @@ function applyFilters () {
   sort() // needs to be last to save performance
   emit('apply-filter', filteredTemplates.value)
 }
+
+function hideFilter () {
+  emit('hide-filter')
+}
 </script>
 
 <template>
-  <BaseFilter @apply-filter="() => applyFilters()">
+  <BaseFilter @apply-filter="() => applyFilters()" @hide-filter="() => hideFilter()">
     <div class="flex flex-col gap-2">
       <h1 class="text-secondary my-1">
         Search

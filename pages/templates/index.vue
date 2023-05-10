@@ -42,6 +42,14 @@ function toTemplate (templateUrl: string) {
 function onApplyFilter (newFilteredTemplates: TemplateWithMaterials) {
   filteredTemplates.value = newFilteredTemplates
 }
+
+const filterToggled = ref(false)
+function onHideFilter () {
+  filterToggled.value = false
+}
+function onShowFilter () {
+  filterToggled.value = true
+}
 </script>
 
 <template>
@@ -113,16 +121,22 @@ function onApplyFilter (newFilteredTemplates: TemplateWithMaterials) {
         </p>
         <div class="group relative flex flex-col">
           <div class="filter-options flex items-center gap-2 cursor-pointer uppercase bg-primary bg-opacity-20 rounded-lg px-4">
-            <IconFilterVue />
-            <p class="text-primary">
-              Filter
-            </p>
+            <div
+              class="flex flex-row items-center justify-around gap-2"
+              @click="() => onShowFilter()"
+            >
+              <IconFilterVue />
+              <p class="text-primary">
+                Filter
+              </p>
+            </div>
             <div class="desktop:relative mt-5">
               <TemplatesFilter
-                v-if="!pending && !error && templates"
+                v-if="!pending && !error && templates && filterToggled"
                 :templates="templates"
                 class="absolute top-0 right-0 z-50 w-screen rounded-lg mt-5"
                 @apply-filter="(newFilteredTemplates) => onApplyFilter(newFilteredTemplates)"
+                @hide-filter="() => onHideFilter()"
               />
             </div>
           </div>
