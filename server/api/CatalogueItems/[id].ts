@@ -16,6 +16,8 @@ export default defineEventHandler(async (event) => {
     typeof item.sizingsData === 'object' &&
     Array.isArray(item?.sizingsData)) {
     sizingsData = item?.sizingsData as Prisma.JsonArray
+  } else {
+    sizingsData = []
   }
 
   return {

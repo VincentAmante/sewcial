@@ -7,4 +7,6 @@ export default defineEventHandler(async (event) => {
       userId: body.userId
     }
   })
+
+  return result
 })
