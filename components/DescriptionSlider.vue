@@ -16,17 +16,30 @@ const props = defineProps({
     required: true
   }
 })
+const noSliderOpen = ref(true)
 
 onMounted(() => {
   // Listens for an event based on the prop<name> to open
   // See TestViewIcen to see how that operates
+
+  window.addEventListener('slider-opened', () => {
+    noSliderOpen.value = false
+  })
+  window.addEventListener('slider-closed', () => {
+    noSliderOpen.value = true
+  })
+
   window.addEventListener(`toggle-${props.name}`, () => {
-    isOpen.value = true
+    if (noSliderOpen.value) {
+      isOpen.value = true
+      window.dispatchEvent(new Event('slider-opened'))
+    }
   })
 })
 
 function close () {
   isOpen.value = false
+  window.dispatchEvent(new Event('slider-closed'))
 }
 
 // Computed variables will watch for certain variables inside its code
@@ -52,19 +65,23 @@ const toggledStyle = computed(() => {
   >
     <div
       :class="toggledStyle.slider"
-      class="relative pointer-events-auto -translate-x-full bg-primary max-w-full h-full transition-all ease-out duration-150 desktop:flex-row desktop:w-1/2"
+      class="relative pointer-events-auto -translate-x-full bg-primary max-w-full h-full transition-all ease-out duration-150 overflow-y-scroll no-scrollbar
+      desktop:flex-row desktop:w-1/2 desktop:gap-8"
     >
       <div class="absolute right-0 pt-mobile-h pr-mobile-w">
         <!-- DEV: ButtonClose has a function for when the 'close-btn-clicked' emit is triggered -->
         <ButtonClose @close-btn-clicked="close" />
       </div>
-      <div class="flex flex-col h-full justify-center desktop:flex-row desktop:items-center desktop:justify-start desktop:grid desktop:grid-flow-col px-mobile-w">
+      <div
+        class="flex flex-col h-full justify-center px-mobile-w pt-4
+        desktop:flex-row desktop:items-center desktop:justify-start desktop:grid desktop:grid-flow-col"
+      >
         <img
           :src="imgSrc"
           alt=""
           class="w-full object-contain max-h-80"
         >
-        <div class="content text-secondary">
+        <div class="content text-secondary px-8">
           <h1>
             <slot name="title" />
           </h1>

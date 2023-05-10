@@ -40,37 +40,38 @@ export default class Raycaster {
     // wait for assets to load
     this.resources.on('assets-ready', () => {
       this.loungeMarkerHitBox = new THREE.Mesh(
-        new THREE.BoxGeometry(0.5, 0.5, 0.5),
+        new THREE.BoxGeometry(0.35, 0.5, 0.35),
         this.hitBoxMaterial
       )
       this.loungeMarkerHitBox.position.set(-0.65, 1.75, -1)
-      this.loungeMarkerHitBox.visible = true
+      this.loungeMarkerHitBox.visible = false
       this.scene.add(this.loungeMarkerHitBox)
 
       this.cafeMarkerHitBox = new THREE.Mesh(
-        new THREE.BoxGeometry(0.5, 0.5, 0.5),
+        new THREE.BoxGeometry(0.35, 0.5, 0.35),
         this.hitBoxMaterial
       )
-      this.cafeMarkerHitBox.position.set(-0.65, 1.6, 1)
-      this.loungeMarkerHitBox.visible = true
+      this.cafeMarkerHitBox.position.set(-0.65, 1.55, 1)
+      this.cafeMarkerHitBox.visible = false
       this.scene.add(this.cafeMarkerHitBox)
 
       this.shopMarkerHitBox = new THREE.Mesh(
-        new THREE.BoxGeometry(0.5, 0.5, 0.5),
+        new THREE.BoxGeometry(0.35, 0.5, 0.35),
         this.hitBoxMaterial
       )
-      this.shopMarkerHitBox.position.set(-0.2, 1.4, -0.75)
-      this.shopMarkerHitBox.visible = true
+      this.shopMarkerHitBox.position.set(-0.2, 1.35, -0.75)
+      this.shopMarkerHitBox.visible = false
       this.scene.add(this.shopMarkerHitBox)
 
       this.studioMarkerHitBox = new THREE.Mesh(
-        new THREE.BoxGeometry(0.5, 0.5, 0.5),
+        new THREE.BoxGeometry(0.35, 0.5, 0.35),
         this.hitBoxMaterial
       )
       this.scene.add(this.studioMarkerHitBox)
-      this.studioMarkerHitBox.position.set(1.5, 1.6, -1)
-      this.studioMarkerHitBox.visible = true
+      this.studioMarkerHitBox.position.set(1.5, 1.55, -1)
+      this.studioMarkerHitBox.visible = false
       this.scene.add(this.studioMarkerHitBox)
+
       // raycaster
       this.raycaster = new THREE.Raycaster()
       this.cursorDown = new THREE.Vector2()
@@ -129,6 +130,13 @@ export default class Raycaster {
     this.raycaster.setFromCamera(this.pointer, this.camera.instance)
     this.intersectsObjects = this.raycaster.intersectObjects(this.objectsToTest)
 
+    this.experience.world.markerLounge.unhover()
+    this.experience.world.markerCafe.unhover()
+    this.experience.world.markerShop.unhover()
+    this.experience.world.markerStudio.unhover()
+
+    window.document.querySelector('body').style.cursor = 'default'
+
     if (this.intersectsObjects.length > 0) {
       this.selectedModel = this.intersectsObjects[0].object
 
@@ -159,13 +167,6 @@ export default class Raycaster {
           window.document.querySelector('body').style.cursor = 'pointer'
           break
       }
-    } else {
-      this.experience.world.markerLounge.unhover()
-      this.experience.world.markerCafe.unhover()
-      this.experience.world.markerShop.unhover()
-      this.experience.world.markerStudio.unhover()
-
-      window.document.querySelector('body').style.cursor = 'default'
     }
   }
 

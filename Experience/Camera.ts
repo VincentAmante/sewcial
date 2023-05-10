@@ -32,8 +32,8 @@ export default class Camera {
     // Switch between either perspective or ortho
     this.instance = this.createOrthographicCamera()
 
-    this.instance.position.x = -10
-    this.instance.position.y = -6.8
+    this.instance.position.x = -9
+    this.instance.position.y = -10
     this.instance.position.z = -20
 
     this.scene.add(this.instance)
@@ -55,6 +55,13 @@ export default class Camera {
       100
     )
 
+    let zoom = (this.sizes.width / 1080)
+    if (zoom > 1 && this.sizes.width > 1080) {
+      zoom = 1
+    } else if (zoom < 0.5) {
+      zoom = 0.5
+    }
+    this.orthographicCamera.zoom = zoom
     return this.orthographicCamera
   }
 
@@ -78,6 +85,13 @@ export default class Camera {
     this.orthographicCamera.top = this.sizes.frustrum / 2
     this.orthographicCamera.bottom = -this.sizes.frustrum / 2
 
+    let zoom = (this.sizes.width / 1080)
+    if (zoom > 1 && this.sizes.width > 1080) {
+      zoom = 1
+    } else if (zoom < 0.5) {
+      zoom = 0.5
+    }
+    this.orthographicCamera.zoom = zoom
     this.instance = this.orthographicCamera
   }
 
@@ -101,7 +115,7 @@ export default class Camera {
     this.controls.minPolarAngle = Math.PI * 0.35
     this.controls.maxPolarAngle = Math.PI * 0.40
     this.controls.maxZoom = 1.5
-    this.controls.minZoom = 0.9
+    this.controls.minZoom = 0.5
     this.cam = false
   }
 

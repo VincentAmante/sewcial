@@ -35,6 +35,7 @@ const navStyle = computed(() => {
   return (props.isToggled) ? ['transform-none'] : ''
 })
 
+// Provies alt colours based on the main colour
 const navColour = computed(() => {
   switch (props.colour) {
     case 'primary':
@@ -86,13 +87,16 @@ const secondaryColour = computed(() => {
 
 <template>
   <nav
-    class="flex flex-col justify-around pb-10 fixed gap-1 top-0 right-0 w-screen h-full transition-all transform translate-x-full z-[120] max-w-lg"
+    class="flex flex-col justify-around pb-10 fixed gap-1 top-0 right-0 w-screen h-full transition-all transform translate-x-full z-[105] max-w-lg"
     :class="[navStyle, colour, navColour.bg]"
   >
-    <div class="logo-container flex items-center justify-start absolute top-0 px-mobile-w tablet:px-12 h-[70px] tablet:h-[90px]">
+    <div
+      class="flex items-center justify-start absolute top-0 px-mobile-w
+    tablet:px-12 h-[70px] tablet:h-[90px]"
+    >
       <HeaderLogo class="logo" :colour="secondaryColour" />
     </div>
-    <ul class="routes flex flex-col uppercase px-12 mt-20">
+    <ul class="flex flex-col uppercase px-12 mt-20">
       <li
         id="nav-home"
         class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"

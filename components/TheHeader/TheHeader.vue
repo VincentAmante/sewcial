@@ -51,7 +51,7 @@ const formatStyle = computed(() => {
     case 'home':
     case '':
       return {
-        header: ['z-1', 'fixed', 'border-none', 'pointer-events-none'],
+        header: ['z-[135]', 'fixed', 'border-none', 'pointer-events-none'],
         logo: ['tablet:justify-start']
       }
     case 'about':
@@ -77,14 +77,14 @@ const formatStyle = computed(() => {
       :class="formatStyle.logo"
       :colour="navColour"
       :header-toggled="headerToggled"
-      class="logo w-full left-0 right-0 flex justify-start absolute z-0"
+      class="logo w-full left-0 right-0 flex justify-start absolute"
     />
-    <div class="flex items-center gap-2 z-[135] fixed">
+    <div class="flex items-center gap-2 z-[150] fixed">
       <ButtonLikedPage
         class="btn-liked-page h-6 tablet:h-[30px]"
         :class="(page === 'shop') ? 'block' : 'hidden'"
       />
-      <BurgerButton v-model="headerToggled" class="burger-btn" :colour="navColour" />
+      <BurgerButton v-model="headerToggled" class="burger-btn z-[150]" :colour="navColour" />
     </div>
   </header>
 
