@@ -74,7 +74,7 @@ const toggledStyle = computed(() => {
       </div>
       <div
         class="flex flex-col h-full justify-center px-mobile-w pt-4
-        desktop:flex-row desktop:items-center desktop:justify-start desktop:grid desktop:grid-flow-col"
+        desktop:flex-row desktop:items-center desktop:justify-start"
       >
         <img
           :src="imgSrc"

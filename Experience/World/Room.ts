@@ -30,7 +30,9 @@ export default class Room {
         })
       }
 
-      if (child.name === 'WindowGlass' || child.name === 'WindowGlass2') {
+      if (child.name === 'WindowGlass' ||
+      child.name === 'WindowGlass2' ||
+      child.name === 'WindowGlass3') {
         child.material = new THREE.MeshPhysicalMaterial()
         child.material.roughness = 0
         child.material.color.set(0xFFFFFF)

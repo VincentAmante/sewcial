@@ -12,6 +12,72 @@ definePageMeta({
   layout: 'home'
 })
 
+useHead({
+  title: 'Sewcial',
+  meta: [
+    {
+      hid: 'description',
+      name: 'description',
+      content: 'Your new third place for creativity, sustainability, and community. Upcycle clothes, make friends and build a better future! 🌍🧵🪡'
+    },
+    {
+      hid: 'twitter:card',
+      name: 'twitter:card',
+      content: 'summary_large_image'
+    },
+    {
+      hid: 'twitter:title',
+      name: 'twitter:title',
+      content: 'Sewcial'
+    },
+    {
+      hid: 'twitter:description',
+      name: 'twitter:description',
+      content: 'Your new third place for creativity, sustainability, and community. Upcycle clothes, make friends and build a better future! 🌍🧵🪡'
+    },
+    {
+      hid: 'theme-color',
+      name: 'theme-color',
+      content: '#FF96C3'
+    },
+    {
+      hid: 'twitter:image',
+      name: 'twitter:image',
+      content: 'https://sewcial.space/images/thumbnail.png'
+    },
+    {
+      hid: 'og:title',
+      property: 'og:title',
+      content: 'Sewcial'
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: 'Your new third place for creativity, sustainability, and community. Upcycle clothes, make friends and build a better future! 🌍🧵🪡'
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: 'https://sewcial.space/images/thumbnail.png'
+    },
+    {
+      hid: 'og:url',
+      property: 'og:url',
+      content: 'https://sewcial.space'
+    },
+    {
+      hid: 'og:site_name',
+      property: 'og:site_name',
+      content: 'Sewcial'
+    },
+    {
+      hid: 'og:type',
+      property: 'og:type',
+      content: 'website'
+    }
+  ]
+})
+
 const experience = ref<Experience>()
 onMounted(() => {
   window.addEventListener(
