@@ -34,7 +34,7 @@ export default class World {
     this.resources.on('assets-ready', () => {
       this.room = new Room()
       this.environment = new Environment()
-      this.floor = new Floor()
+      // this.floor = new Floor()
       this.markerLounge = new Marker('Lounge')
       this.markerLounge.setLocation(-0.75, 1.75, -1.15)
 
@@ -49,7 +49,14 @@ export default class World {
     })
   }
 
-  update () {}
+  update () {
+    if (this.markerLounge) {
+      this.markerLounge.update()
+      this.markerCafe.update()
+      this.markerShop.update()
+      this.markerStudio.update()
+    }
+  }
 
   resize () {}
 }

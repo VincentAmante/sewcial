@@ -90,6 +90,8 @@ export default class Resources extends EventEmitter {
 
     if (this.loaded === this.queue) {
       this.emit('assets-ready')
+    } else {
+      this.emit('item-loaded')
     }
   }
 }

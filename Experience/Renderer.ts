@@ -27,7 +27,7 @@ export default class Renderer {
       alpha: true
     })
 
-    this.instance.physicallyCorrectLights = true
+    this.instance.useLegacyLights = false
     this.instance.outputEncoding = THREE.sRGBEncoding
     this.instance.toneMapping = THREE.CineonToneMapping
     this.instance.toneMappingExposure = 1.75
@@ -35,6 +35,8 @@ export default class Renderer {
     this.instance.shadowMap.type = THREE.PCFSoftShadowMap
     this.instance.setSize(this.sizes.width, this.sizes.height)
     this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))
+    // this.instance.gammaInput = true
+    // this.instance.gammaOutput = true
   }
 
   update () {
