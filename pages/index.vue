@@ -79,6 +79,11 @@ useHead({
 })
 
 const experience = ref<Experience>()
+
+const loadingScreenStyle = ref({
+  background: [''],
+  screen: ['']
+})
 onMounted(() => {
   window.addEventListener(
     'triggerMessage',
@@ -90,6 +95,16 @@ onMounted(() => {
   if (appElem != null) {
     experience.value = new Experience(appElem)
   }
+
+  window.addEventListener('done-loading', () => {
+    const loadingScreen = document.querySelector('#loading-screen')
+    if (loadingScreen != null) {
+      loadingScreenStyle.value = {
+        background: ['bg-secondary', 'bg-opacity-0', 'pointer-events-none'],
+        screen: ['transform', 'translate-y-[-100%]', 'opacity-0']
+      }
+    }
+  })
 })
 
 // FIXME: Improve canvas unmount handling
@@ -101,36 +116,33 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main>
-    <div class="canvas-wrapper">
-      <canvas id="canvas" />
+  <main class="overflow-hidden">
+    <div
+      id="loading-screen"
+      class="absolute w-full h-full flex justify-center items-center z-50 bg-secondary transition-all duration-1000"
+      :class="loadingScreenStyle.background"
+    >
+      <div
+        class="m-4 mx-8 bg-accent-1 rounded-3xl bg-opacity-60 transition-all duration-1000 max-w-md w-full py-4"
+        :class="loadingScreenStyle.screen"
+      >
+        <h1 class="text-h-big-boy text-primary text-center">
+          Loading..
+        </h1>
+        <h2
+          id="loading-type"
+          class="w-full font-light text-primary text-center"
+        >
+          Downloading Assets -
+          <span id="loading-bar">0</span>
+        </h2>
+      </div>
+    </div>
+    <div class="canvas-wrapper w-[100vw] h-[100vh] pointer-events-none overflow-hidden absolute z-[-100]">
+      <canvas
+        id="canvas"
+        class="w-full h-full bg-secondary pointer-events-auto"
+      />
     </div>
   </main>
 </template>
-
-<style scoped lang="scss">
-
-  main {
-    overflow: hidden;
-  }
-  .canvas-wrapper {
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    overflow: hidden;
-    position: absolute;
-    z-index: -100;
-  }
-  canvas {
-    width: 100%;
-    height: 100%;
-    background-color: $clr-secondary;
-    pointer-events: initial;
-  }
-
-  .logo-white {
-    position: absolute;
-    padding-top: 50px;
-    padding-left: 50px;
-  }
-</style>
