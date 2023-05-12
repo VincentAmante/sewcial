@@ -8,6 +8,8 @@ import World from './World/World'
 import Resources from './Utils/Resources'
 import Raycaster from './Raycaster'
 import assets from './Utils/assets'
+import Preloader from './PreLoader'
+// import Composer from './Composer'
 
 let instance: Experience | null = null
 
@@ -24,6 +26,8 @@ export default class Experience {
   world!: World
   raycaster!: Raycaster
   isActive: Boolean = true
+  preloader!: Preloader
+  // composer!: Composer
 
   // * Type declarations were added to this parameter to account for the possibility that this could be either an HTMLCanvasElement or null
   // * If you hover over querySelector, you can see that it returns HTMLCanvasElement or null, which is why the parameter has to include it
@@ -50,6 +54,8 @@ export default class Experience {
     this.resources = new Resources(assets)
     this.world = new World()
     this.raycaster = new Raycaster()
+    this.preloader = new Preloader()
+    // this.composer = new Composer()
 
     // const gridHelper = new THREE.GridHelper(200, 50)
     // this.scene.add(gridHelper)
@@ -72,11 +78,14 @@ export default class Experience {
   }
 
   update () {
+    this.world.update()
     this.camera.update()
     this.renderer.update()
+    // this.composer.update()
   }
 
   unmount () {
+    // this.renderer.instance.dispose()
     if (instance != null) {
       instance = null
     }
