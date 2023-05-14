@@ -14,7 +14,7 @@ const props = defineProps({
 <!-- Card -->
 <template>
   <div
-    class="cards m-2 cursor-pointer group min-w-[20rem]"
+    class="cards m-2 cursor-pointer group min-w-[20rem] select-none"
   >
     <div class="card flex flex-col bg-primary rounded-2xl w-full h-full">
       <div class="aspect-[1.1/1] overflow-hidden h-80">

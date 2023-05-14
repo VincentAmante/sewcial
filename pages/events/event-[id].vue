@@ -35,9 +35,13 @@ function bookEvent (id: string) {
   if (event.value?.startTime === undefined) {
     showError('Invalid event')
   }
+  if (event.value === null) {
+    showError('Invalid event data')
+    return
+  }
 
   router.push({
-    name: 'events-booking_type_id_date',
+    name: 'events-booking-type-id-date',
     params: {
       type: 'event',
       id,
@@ -68,7 +72,7 @@ function bookEvent (id: string) {
 
           <div class="flex flex-col gap-1">
             <h1 class="my-0">
-              {{ event?.name }}
+              {{ event?.title }}
             </h1>
             <h2 class="my-0">
               March 18 (Saturday)
@@ -96,7 +100,6 @@ function bookEvent (id: string) {
           && !error
           && event.details"
         class=" break-words"
-
         v-html="content"
       />
     </div>

@@ -9,29 +9,34 @@ const props = defineProps({
     required: true
   }
 })
+
+defineEmits(['clickedRsvp'])
 </script>
 
 <!-- Card -->
 <template>
   <div
-    class="cards m-1 h-full w-full flex flex-col items-center"
+    class="cards m-2 cursor-pointer group min-w-[20rem] select-none"
   >
-    <div class="card flex flex-col text-dark bg-primary w-full max-w-sm rounded-2xl transition-all hover:cursor-pointer group group-hover:transform">
-      <img
-        class="card-image aspect-[1.1/1] overflow-hidden object-cover object-center rounded-t-2xl w-full align-middle filter brightness-90 transition-all group-hover:brightness-[100%]"
-        :src="image || ''"
-      >
-      <div class="card-info flex flex-col p-7 text-left">
-        <h1 class="my-1">
+    <div class="card flex flex-col text-dark bg-primary w-full h-full rounded-2xl transition-all group-hover:transform">
+      <div class="aspect-[1.1/1] overflow-hidden h-80">
+        <div
+          class="card-image bg-cover bg-center bg-no-repeat rounded-t-2xl align-middle brightness-100 h-full
+       transition-all group-hover:scale-105 group-hover:brightness-[80%]"
+          :style="{ backgroundImage: `url(${image})` }"
+        />
+      </div>
+      <div class="card-info flex flex-col p-4 justify-start grow items">
+        <h1 class="my-2 break-words">
           <slot name="event-name" />
         </h1>
-        <h3 class="my-1">
+        <h3 class="my-2">
           <slot name="date" />
         </h3>
-        <h3 class="disclaimer pt-2 my-6">
+        <h3 class="disclaimer pt-2 my-6 grow">
           FREE ENTRY!
         </h3>
-        <RSVPButton />
+        <RSVPButton @click.stop="() => $emit('clickedRsvp')" />
       </div>
     </div>
   </div>

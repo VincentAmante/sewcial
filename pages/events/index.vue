@@ -1,6 +1,8 @@
 <script setup lang = "ts">
 import type { Workshop, Event } from '@prisma/client'
 // import { DatePicker } from 'v-calendar'
+import { v4 as uuidv4 } from 'uuid'
+import { DateRange } from 'v-calendar/dist/types/src/utils/date/range'
 import TiltedBubble from '@/components/TiltedBubble.vue'
 import TiltedHeading from '@/components/TiltedHeading.vue'
 import EventsCard from '@/components/EventsCard.vue'
@@ -11,6 +13,7 @@ import BookingPeopleCount from '@/components/FormFields/BookingPeopleCount.vue'
 const bookingDate = ref(new Date())
 const startTime = ref(new Date())
 const endTime = ref(new Date())
+const currentDefaultDate = ref(new Date())
 const peopleCount = ref(0)
 
 const anchorDate = ref(new Date())
@@ -91,9 +94,10 @@ function diffHours (dateOlder: Date, dateEarlier: Date) {
 }
 
 const router = useRouter()
+
 function bookEvent (id: string) {
   router.push({
-    name: 'events-booking_type_id_date',
+    name: 'events-booking-type-id-date',
     params: {
       type: 'event',
       id,
@@ -101,37 +105,61 @@ function bookEvent (id: string) {
     }
   })
 }
-function bookWorkshop () {
+
+function bookWorkshop (id: string) {
   router.push({
-    name: 'events-booking_type_id_date',
+    name: 'events-booking-type-id-date',
     params: {
       type: 'event',
-      id: 'a',
+      id,
       date: chosenDate.value
     }
   })
 }
 function bookSession () {
   router.push({
-    name: 'events-booking_type_id',
+    name: 'events-booking-type-id-date',
     params: {
       type: 'session',
-      id: 'a',
+      id: uuidv4(),
       date: chosenDate.value
     }
   })
+}
+
+function validateBooking () {
+  let error = false
+
+  if (bookingDate.value === undefined) {
+    error = true
+  }
+  if (startTime.value === undefined || startTime.value.getTime() === currentDefaultDate.value.getTime()) {
+    error = true
+  }
+  if (endTime.value === undefined || endTime.value.getTime() === currentDefaultDate.value.getTime()) {
+    error = true
+  }
+  if (peopleCount.value === undefined || peopleCount.value <= 0) {
+    error = true
+  }
+
+  if (!error) {
+    bookSession()
+  } else {
+    console.log('error')
+  }
 }
 </script>
 
 <template>
   <main>
     <section
-      class="events-splash flex flex-col items-center justify-center my-12
-    tablet:flex-row tablet:gap-8"
+      class="events-splash flex flex-col items-center justify-center my-12 relative
+    tablet:flex-row tablet:gap-20"
     >
       <!-- Left Sticker -->
       <img
-        class="splash-sticker-l hidden"
+        class="splash-sticker-l hidden tablet:block absolute top-0 left-0 transform translate-x-[-30%]"
         src="@/assets/images/Events_Stickers_L.png"
         width="190"
         height="250"
@@ -161,10 +189,10 @@ function bookSession () {
         >
       </div>
 
-      <div class="flex flex-col items-center justify-center bg-secondary p-6 rounded-lg">
-        <VDatePicker v-model="bookingDate" class="date-picker" />
-        <div class="booking-input my-4">
-          <div class="time-picker flex gap-4">
+      <div class="flex flex-col items-center justify-center bg-secondary p-6 rounded-lg w-full max-w-sm">
+        <VDatePicker v-model="bookingDate" class="date-picker w-full" />
+        <div class="booking-input my-4 w-full">
+          <div class="time-picker flex gap-4 w-full">
             <StartTimePicker v-model="startTime" :date="bookingDate" />
             <EndTimePicker v-model="endTime" :is-disabled="false" :start-time="startTime" />
           </div>
@@ -174,20 +202,24 @@ function bookSession () {
           <p class="text-sm font-bold text-primary mb-0">
             Total Amount (VAT inclusive): 25 AED
           </p>
-          <button class=" border-none rounded-lg bg-accent-1 text-primary w-full mb-2 p-4">
-            <h>BOOK NOW!</h>
+          <button
+            class=" border-none rounded-lg bg-accent-1 text-primary w-full mb-2 p-2"
+            @click="() => validateBooking()"
+          >
+            <h1>BOOK NOW!</h1>
           </button>
         </div>
       </div>
     </section>
 
-    <section class="upcoming-events bg-accent-1">
+    <section class="upcoming-events bg-accent-1 py-4 desktop:p-16">
       <!-- Page Heading -->
-      <div class="flex align-center justify-center py-8">
+      <div class="flex align-center justify-center py-4">
         <div class="page-heading">
           <TiltedHeading
+            big
             text-color="accent-1"
-            class="tilted-heading bg-secondary text-accent-1"
+            class="tilted-heading bg-secondary desktop:bg-accent-2 text-accent-1 transform translate-y-6"
           >
             upcoming
           </TiltedHeading>
@@ -198,31 +230,30 @@ function bookSession () {
       </div>
 
       <!-- Cards -->
-      <div class="card-container">
-        <div class="grid-container mx-4 tablet:mx-auto">
-          <div
-            v-if="!eventsPending && !eventsError && eventsData"
-            class="flex flex-col overflow-x-scroll items pl-8 gap-2 pb-10
-            tablet:flex-row"
+      <div
+        v-if="!eventsPending && !eventsError && eventsData"
+        class="flex flex-col desktop:flex-row overflow-x-scroll no-scrollbar"
+      >
+        <template
+          v-for="event in events"
+          :key="event.id"
+        >
+          <EventsCard
+            v-if="event.startTime > new Date()"
+            :image="event.thumbnail"
+            @click="() => router.push(`/events/event-${event.id}`)"
+            @clicked-rsvp="() => bookEvent(event.id)"
           >
-            <template
-              v-for="event in events"
-              :key="event.id"
-            >
-              <EventsCard
-                :image="event.thumbnail"
-                @click="() => router.push(`/events/event-${event.id}`)"
-              >
-                <template #event-name>
-                  {{ event.title }}
-                </template>
-                <template #date>
-                  Saturday, Your Mom
-                </template>
-              </EventsCard>
+            <template #event-name>
+              {{ event.title }}
             </template>
-          </div>
-        </div>
+            <template #date>
+              {{ event.startTime.toLocaleDateString(undefined, {weekday: 'long'}) }},
+              {{ event.startTime.getDate() }}
+              {{ event.startTime.toLocaleDateString(undefined, {month: 'long'}) }}
+            </template>
+          </EventsCard>
+        </template>
       </div>
     </section>
 

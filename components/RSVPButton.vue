@@ -1,9 +1,12 @@
 <script setup lang="ts">
 </script>
-
+  
 <!-- Template with default text and icon -->
 <template lang="">
-  <div class="download" :class="alignment">
+  <div
+    class="download"
+    :class="alignment"
+  >
     <p style="font-weight: 500">
       RSVP
     </p>
