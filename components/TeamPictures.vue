@@ -1,7 +1,6 @@
 <script setup lang="ts">
-
 // Variables passed to this component are props
-const props = defineProps({
+defineProps({
   alignment: {
     type: String,
     default: 'center'
@@ -17,47 +16,22 @@ const props = defineProps({
 <!-- Team Member Card -->
 <template>
   <!-- <div class="team-container"> -->
-  <div class="member-card">
-    <div class="member-image">
-      <img :src="imgSrc">
+  <div class="text-center m-2 transition-all hover:transform hover:scale-110 cursor-pointer">
+    <div>
+      <img
+        class="w-full"
+        :src="imgSrc"
+      >
     </div>
-    <div class="member-details">
-      <div class="member-name" :class="alignment">
+    <div>
+      <div class="text-primary font-medium" :class="alignment">
         <p><slot name="name" /></p>
       </div>
 
-      <div class="member-role">
+      <div class="text-accent-2">
         <p><slot name="role" /></p>
       </div>
     </div>
   </div>
 <!-- </div> -->
 </template>
-
-<!-- Scoped Styling -->
-<style scoped lang="scss">
-
-.member-card{
-    text-align: center;
-    margin: 10px;
-}
-img{
-    width: 100%;
-}
-.member-card:hover{
-    transform: scale(1.1);
-    transition: transform 0.5s;
-    transition-timing-function: ease-in-out;
-    cursor: pointer;
-}
-.member-role{
-    margin-top: -10px;
-}
-.member-name p{
-    color: $clr-primary;
-    font-weight: 500;
-}
-.member-role p{
-    color: $clr-accent-2;
-}
-</style>

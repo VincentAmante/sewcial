@@ -2,6 +2,7 @@
 // Import of a speechbubble
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import TiltedHeading from '@/components/TiltedHeading.vue'
+
 </script>
 <template>
   <main>
@@ -9,7 +10,7 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
     <section class="flex flex-col items-center text-center text-secondary my-default-h gap-[4vw]">
       <div class="text-6xl flex flex-col items-center justify-center text-secondary font-bold pt-5 gap-0 tablet:flex-row tablet:gap-4">
         <span>Support</span>
-        <TiltedHeading>
+        <TiltedHeading class="bg-accent-1">
           THE
         </TiltedHeading>
         <span>community</span>

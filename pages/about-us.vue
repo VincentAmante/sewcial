@@ -18,12 +18,12 @@
         <h1 class="text-h-giant m-0 text-secondary lowercase">
           hello my
         </h1>
-        <SpeechBubble alignment="right" colour-override="accent-1" class="transform -rotate-6 -translate-x-3 -translate-y-3 self-center flex flex-col gap-2 py-0">
-          <h1 class="text-h-giant uppercase">
+        <SpeechBubbleRaw alignment="right" colour-override="accent-1" class="transform -rotate-6 -translate-x-3 -translate-y-0 self-center flex flex-col gap-2 py-0 my-0 scale-90 mobile:px-8">
+          <h1 class="text-[55px] w-full uppercase text-center transform my-0 py-2 px-2">
             cute cute
           </h1>
-        </SpeechBubble>
-        <h1 class="text-h-giant text-secondary lowercase">
+        </SpeechBubbleRaw>
+        <h1 class="text-h-giant text-secondary lowercase mt-0 -translate-y-4">
           sewdents
         </h1>
       </div>
@@ -37,10 +37,10 @@
           src="../assets/images/third-place.png"
           alt="about us"
         >
-        <div class="about-wrapper p-8 pb-0 desktop:p-20 desktop:pl-0">
+        <div class="about-wrapper p-8 pb-0 desktop:p-20 desktop:pl-0 py-16">
           <div class="heading flex flex-col">
             <div class="flex">
-              <h1 class="text-h-big-boy p-0">
+              <h1 class="text-h-big-boy p-0  my-0">
                 <span class="text-accent-1">A</span> <span class="text-primary lowercase">third place</span>
               </h1>
             </div>
@@ -157,12 +157,12 @@
             </div>
 
             <div class="aspect-square flex flex-col items-center justify-center text-secondary border-[1px] border-solid border-secondary">
-              <h1 class="lowercase text-h1">
+              <h1 class="lowercase text-3xl">
                 "mother"
               </h1>
             </div>
             <div class="aspect-square flex flex-col items-center justify-start text-primary text-center bg-accent-2 border-[2px] border-solid border-secondary p-2">
-              <h1 class="lowercase text-h1 text-left">
+              <h1 class="lowercase text-3xl text-left">
                 "fav hangout spots 4evs"
               </h1>
             </div>
@@ -182,13 +182,13 @@
               >
             </div>
             <div class="aspect-square flex flex-col items-center justify-center text-primary bg-accent-2 p-1">
-              <h1 class="lowercase text-h1">
+              <h1 class="lowercase text-3xl">
                 "grape"
               </h1>
             </div>
 
             <div class="aspect-square flex flex-col items-center justify-center text-secondary border-[1px] border-solid border-secondary p-1">
-              <h1 class="lowercase text-h1">
+              <h1 class="lowercase text-3xl">
                 "so slay pussy queen"
               </h1>
             </div>
@@ -258,165 +258,3 @@
     </div>
   </main>
 </template>
-
-<!-- <style scoped lang="scss">
-.about-container{
-    .splash-greeting{
-        h1{
-        margin: 0;
-            text-transform: lowercase;
-        }
-    }
-}
-.about-info{
-    background-color: $clr-secondary;
-    outline: 4px dashed $clr-secondary;
-    display: flex;
-    flex-direction: column-reverse;
-
-    @include media(desktop){
-        flex-direction: row;
-        align-items: center;
-        // align-items: stretch;
-    }
-
-    img{
-        padding: 0 2em 2em 2em;
-        width: 100%;
-        @include media(desktop){
-            padding: 5em 0 5em 0;
-            width: 50%;
-            position: relative;
-            transform: translateX(-20%);
-        }
-    }
-
-    .about-wrapper{
-        padding: 2em 2em 0 2em;
-        @include media(desktop){
-            padding: 5em 5em 5em 0;
-        }
-    }
-    .heading{
-        display: flex;
-        flex-direction: column;
-    }
-    .pink-h-small{
-        color: $clr-accent-1;
-        text-transform: lowercase;
-    }
-    .and{
-        background-color: $clr-primary;
-        color: $clr-accent-1;
-    }
-    .para{
-        color: $clr-primary;
-        line-height: 1.2em;
-    }
-}
-.team-container{
-    background-color: $clr-accent-1;
-    outline: 4px dashed $clr-accent-1;
-    margin-top: -1px;
-    position: relative;
-    z-index: 100;
-    padding: 2em;
-    @include media(desktop){
-        padding: 5em;
-    }
-    .team-heading{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding-bottom: 2em;
-    }
-    .cream-h{
-        color: $clr-primary;
-        text-transform: capitalize;
-    }
-    .the{
-        background-color: $clr-secondary;
-        color: $clr-accent-1;
-    }
-    .team-members{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        @include media(desktop){
-            flex-direction: row;
-            justify-content: space-evenly;
-            padding-inline: 3em;
-        }
-    }
-    .one, .two, .three{
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        @include media(desktop){
-            gap: 0;
-        }
-    }
-}
-
-.banner{
-    padding: 2em;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    h1{
-      font-size: 50px;
-    }
-
-    @include media(tablet){
-        .wrapper-1, .wrapper-2{
-            width: 50%;
-        }
-        padding: 5em;
-        flex-direction: row;
-        align-items: stretch;
-    }
-    .container{
-        display: flex;
-        align-items: stretch;
-        img{
-            width: 50%;
-            height: auto;
-        }
-        .card{
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        }
-    }
-
-    .light{
-        background-color: $clr-primary;
-        outline: 1px $clr-secondary solid;
-        h1{
-            color: $clr-secondary;
-            text-transform: lowercase;
-            text-align: center;
-            padding: 0.5em;
-        }
-    }
-    .dark{
-        background-color: $clr-accent-2;
-        outline: 1px $clr-secondary solid;
-        h1{
-            color: $clr-primary;
-            text-shadow:
-            -1px -1px 0 $clr-secondary,
-            1px -1px 0 $clr-secondary,
-            -1px  1px 0 $clr-secondary,
-            1px  1px 0 $clr-secondary;
-            text-transform: lowercase;
-            text-align: center;
-            padding: 0.5em;
-        }
-    }
-}
-
-</style> -->
