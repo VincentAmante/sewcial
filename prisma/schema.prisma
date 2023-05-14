@@ -126,7 +126,7 @@ model Workshop {
   priceAED    Float
   details     Json?
   totalSlots  Int
-  bookedSlots Int?       @default(0)
+  bookedSlots Int       @default(0)
   skill       Skill
   thumbnail   String     @default("")
   Bookings    Bookings[]
