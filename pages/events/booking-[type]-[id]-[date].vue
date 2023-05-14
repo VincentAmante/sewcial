@@ -40,7 +40,9 @@ const incrementPage = () => {
   (type.value === 'event' && page.value === 2) ? page.value = 5 : page.value++
 }
 const decrementPage = () => {
-  if (page.value <= 1) { return }
+  if (page.value <= 1) {
+    return
+  }
   if (type.value === 'event' && page.value === 5) {
     page.value = 2
     return
@@ -49,33 +51,37 @@ const decrementPage = () => {
     return
   }
   if (type.value === 'session' && page.value === 3) {
-
-  } else {
-    page.value--
+    return
   }
+
+  page.value--
 }
 
 const workshops = ref<Workshop[]>([])
-const { data: workshopData, pending: workshopPending, error: workshopError, refresh: refreshWorkshops } = useFetch('/api/Workshops', {
-  onResponse ({ response }) {
-    const data = response._data as Workshop[]
-    workshops.value = data.map((workshop) => {
-      workshop.startTime = new Date(workshop.startTime)
-      workshop.endTime = new Date(workshop.endTime)
+if (type.value === 'workshop') {
+  const { refresh: refreshWorkshops } = useFetch('/api/Workshops', {
+    onResponse ({ response }) {
+      const data = response._data as Workshop[]
+      workshops.value = data.map((workshop) => {
+        workshop.startTime = new Date(workshop.startTime)
+        workshop.endTime = new Date(workshop.endTime)
 
-      if (workshop.bookedSlots === null) {
-        workshop.bookedSlots = 0
-      }
-      return {
-        ...workshop,
-        slots: 0
-      }
-    })
-  }
-})
-refreshWorkshops()
+        if (workshop.bookedSlots === null) {
+          workshop.bookedSlots = 0
+        }
+        return {
+          ...workshop,
+          slots: 0
+        }
+      })
+    }
+  })
+  refreshWorkshops()
+}
 
 const totalSlots = computed(() => {
+  if (type.value !== 'workshop') { return 0 }
+
   let total = 0
   workshops.value.forEach((workshop) => {
     if (workshop.bookedSlots) { total += workshop.bookedSlots }
@@ -84,6 +90,7 @@ const totalSlots = computed(() => {
   return total
 })
 const totalCost = computed(() => {
+  if (type.value !== 'workshop') { return }
   let total = 0
   workshops.value.forEach((workshop) => {
     if (workshop.bookedSlots) { total += workshop.priceAED * workshop.bookedSlots }
@@ -173,7 +180,11 @@ function setPaymentOption (option: string) {
                     <h3>{{ workshop.title }}</h3>
                     <p>AED {{ workshop.priceAED }}</p>
                   </div>
-                  <Incrementor v-model="workshop.bookedSlots" :text="workshop.title" />
+                  <Incrementor
+                    v-if="workshops.length > 0"
+                    v-model="workshop.bookedSlots"
+                    :text="workshop.title"
+                  />
                 </li>
               </ul>
               <div class="totals">
@@ -212,8 +223,11 @@ function setPaymentOption (option: string) {
                 <div>
                   <h3>Booking Summary</h3>
                 </div>
-                <ul class="booking-list">
-                  <li v-for="workshop in sampleWorkshops">
+                <ul v-if="type === 'workshop'" class="booking-list">
+                  <li
+                    v-for="workshop in workshops"
+                    :key="workshop.id"
+                  >
                     <BookingSummary v-if="workshop.slots > 0">
                       <template #date>
                         Saturday, 18 March 2023
@@ -246,8 +260,8 @@ function setPaymentOption (option: string) {
                   <label class="payment-option" for="credit-debit">
                     <div>
                       <div class="custom-radio" @click="setPaymentOption('credit-debit')">
-                        <font-awesome-icon v-if="paymentOption != 'credit-debit'" :icon="['far', 'circle']" />
-                        <font-awesome-icon v-else :icon="['far', 'circle-dot']" />
+                        <AppIcon v-if="paymentOption != 'credit-debit'" :icon="['far', 'circle']" />
+                        <AppIcon v-else :icon="['far', 'circle-dot']" />
                       </div>
                       <input id="" type="radio" name="payment-type" value="credit-debit">
                       <p>Credit or Debit Card</p>
@@ -275,8 +289,8 @@ function setPaymentOption (option: string) {
                   <label class="payment-option" for="paypal">
                     <div>
                       <div class="custom-radio" @click="setPaymentOption('paypal')">
-                        <font-awesome-icon v-if="paymentOption != 'paypal'" :icon="['far', 'circle']" />
-                        <font-awesome-icon v-else :icon="['far', 'circle-dot']" />
+                        <AppIcon v-if="paymentOption != 'paypal'" :icon="['far', 'circle']" />
+                        <AppIcon v-else :icon="['far', 'circle-dot']" />
                       </div>
                       <input id="" type="radio" name="payment-type" value="paypal">
                       <p>Paypal</p>
@@ -302,15 +316,18 @@ function setPaymentOption (option: string) {
               <div class="text-h1">
                 Booking Confirmed
               </div>
-              <p>Your booking code is SW898LVMB4. We’ve sent you the details in your email.</p>
+              <p>Your booking code is {{ id }}. We’ve sent you the details in your email.</p>
               <ul class="booking-list">
-                <li v-for="workshop in sampleWorkshops">
-                  <BookingSummary v-if="workshop.slots > 0">
+                <li
+                  v-for="workshop in workshops"
+                  :key="workshop.id"
+                >
+                  <BookingSummary v-if="totalSlots > 0">
                     <template #date>
                       Saturday, 18 March 2023
                     </template>
                     <template #name>
-                      {{ workshop.activity }}
+                      {{ workshop.title }}
                     </template>
                     <template #time>
                       10:00am - 11:00am
@@ -319,10 +336,10 @@ function setPaymentOption (option: string) {
                       SW898LVMB4
                     </template>
                     <template #price>
-                      {{ workshop.price * workshop.slots }}
+                      {{ workshop.priceAED * totalSlots }}
                     </template>
                     <template #count>
-                      {{ workshop.slots }}
+                      {{ totalSlots }}
                     </template>
                   </BookingSummary>
                 </li>
