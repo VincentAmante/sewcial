@@ -1,4 +1,4 @@
-<script setup lang = "ts">
+<script setup lang="ts">
 import type { CatalogueItem } from '@prisma/client'
 import TiltedHeading from '@/components/TiltedHeading.vue'
 import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
@@ -49,7 +49,7 @@ refresh()
     <section class="browse-container text-primary flex justify-between pt-12 my-8">
       <!-- Filters -->
       <div class="filter">
-        <p>400 ITEMS</p>
+        <p>{{ data?.length }} Items</p>
 
         <div class="filter-dropdown">
           <IconFilterBlue />
