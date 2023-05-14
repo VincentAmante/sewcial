@@ -5,8 +5,7 @@ const { user, isUserSet, initialise } = useUserStore()
 
 onMounted(async () => {
   if (!isUserSet && useAuth().status.value === 'authenticated') {
-    let email = useAuth().data.value?.user?.email
-    email = 'icenamante67@gmail.com'
+    const email = useAuth().data.value?.user?.email
     const { data, pending, error, refresh } = await useFetch(`/api/User/${email}`, {
       onResponse ({ response }) {
         const data = response._data

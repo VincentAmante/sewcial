@@ -253,7 +253,7 @@ function hideFilter () {
 
 <template>
   <BaseFilter @apply-filter="() => applyFilters()" @hide-filter="() => hideFilter()">
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 gap-y-4">
       <h1 class="text-secondary my-1">
         Search
       </h1>

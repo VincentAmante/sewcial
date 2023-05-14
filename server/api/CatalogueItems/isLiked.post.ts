@@ -8,5 +8,5 @@ export default defineEventHandler(async (event) => {
     }
   })
 
-  return result.length > 0
+  return (result.length > 0)
 })

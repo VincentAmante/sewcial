@@ -58,18 +58,21 @@ function onShowFilter () {
 
 const filterToggleStyling = computed(() => {
   if (filterToggled.value) {
-    return ['desktop:translate-x-[0%]', 'absolute', 'desktop:block']
+    return ['desktop:translate-x-[0%]', 'desktop:block']
   } else {
-    return ['desktop:translate-x-[-100%]', 'hidden']
+    return ['desktop:translate-x-[-100%]', 'hidden', 'desktop:block']
   }
 })
 </script>
 
 <template>
   <main class="flex flex-col">
-    <div class="flex flex-col border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row">
-      <img class="w-full h-auto mobile:w-1/2" src="https://via.placeholder.com/600x500">
-      <div class="flex flex-col justify-center mx-auto mb-8">
+    <div class="flex flex-col border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row  min-h-[30rem]">
+      <img
+        class="w-full h-auto mobile:w-1/2"
+        src="https://via.placeholder.com/600x500"
+      >
+      <div class="flex flex-col justify-center mx-auto mb-8 min-h-[30vh]">
         <h1>NEW COLLECTION</h1>
         <h1>Lorem ipsum sit aset dolor</h1>
         <p>I got a condo in Manhattan, baby girl what’s happenin’?</p>
@@ -83,9 +86,9 @@ const filterToggleStyling = computed(() => {
 
     <div class="catalogue-container flex flex-col desktop:flex-row">
       <!-- Filters -->
-      <div class="flex flex-col">
+      <div class="flex flex-col border-b-4 desktop:border-b-0 border-dashed border-secondary desktop:border-none w-full self-start desktop:max-w-md p-4 h-full">
         <div
-          class="flex flex-row items-center justify-end w-full gap-2 px-8 pt-4"
+          class="flex flex-row items-center justify-end desktop:justify-start w-full gap-2 px-8 pt-4"
           @click="() => onShowFilter()"
         >
           <IconFilterBlue />
@@ -95,12 +98,12 @@ const filterToggleStyling = computed(() => {
         </div>
 
         <div
-          class="mt-5 flex flex-col items-center rounded-2xl desktop:items-start"
+          class="mt-5 flex flex-col items-center rounded-2xl desktop:items-start "
         >
           <CatalogueFilter
             v-if="!pending && !error && catalogue !== null"
             :catalogue="catalogue"
-            class="w-full"
+            class="w-full z-[100] max-w-lg transition-all duration-500 ease-in-out pt-0"
             :class="filterToggleStyling"
             @apply-filter="(newFilteredCatalogue) => onApplyFilter(newFilteredCatalogue)"
             @hide-filter="() => onHideFilter()"
@@ -109,10 +112,10 @@ const filterToggleStyling = computed(() => {
       </div>
 
       <!-- Catalogue Items -->
-      <div class="flex flex-col w-full desktop:mt-8">
+      <div class="flex flex-col w-full desktop:pt-8 desktop:border-l-4 desktop:border-dashed desktop:border-secondary h-full">
         <div
           v-if="!pending && !error"
-          class="grid grid-cols-2 mx-auto self-center justify-center desktop:grid-cols-3"
+          class="grid grid-cols-2 self-center justify-center desktop:grid-cols-3 gap-4 tablet:gap-8 px-4"
         >
           <CatalogueCard
             v-for="item in cataloguePage"

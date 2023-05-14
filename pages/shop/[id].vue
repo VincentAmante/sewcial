@@ -48,30 +48,20 @@ const { data, pending, error, refresh } = useFetch(`/api/CatalogueItems/${route.
 refresh()
 
 onMounted(async () => {
-  try {
-
-  } catch {
-    showError({
-      statusCode: 404,
-      message: 'Item not found'
+  const { user, isUserSet } = useUserStore()
+  if (isUserSet) {
+    const { refresh: refreshIsLiked } = await useFetch('/api/CatalogueItems/isLiked', {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: user.id,
+        catalogueItemId: route.params.id
+      }),
+      onResponse ({ response }) {
+        itemIsLiked.value = response._data
+      }
     })
+    refreshIsLiked()
   }
-
-  const user = useUserStore()
-  onMounted(async () => {
-    if (user.isUserSet) {
-      await useFetch('/api/CatalogueItems/isLiked', {
-        method: 'POST',
-        body: JSON.stringify({
-          userId: user.user.id,
-          catalogueItemId: catalogueItem.value.id
-        }),
-        onResponse ({ response }) {
-          itemIsLiked.value = response._data
-        }
-      })
-    }
-  })
 })
 
 function onLike () {
