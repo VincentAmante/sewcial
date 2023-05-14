@@ -109,7 +109,7 @@ const secondaryColour = computed(() => {
         >
           Map
         </a>
-        <font-awesome-icon
+        <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
         mobile:visible mobile:block mobile:absolute mobile:right-0"
@@ -127,7 +127,7 @@ const secondaryColour = computed(() => {
         >
           About Us
         </a>
-        <font-awesome-icon
+        <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
         mobile:visible mobile:block mobile:absolute mobile:right-0"
@@ -145,7 +145,7 @@ const secondaryColour = computed(() => {
         >
           Discover
         </a>
-        <font-awesome-icon
+        <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
         mobile:visible mobile:block mobile:absolute mobile:right-0"
@@ -163,7 +163,7 @@ const secondaryColour = computed(() => {
         >
           Contact Us
         </a>
-        <font-awesome-icon
+        <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
         mobile:visible mobile:block mobile:absolute mobile:right-0"
@@ -181,7 +181,7 @@ const secondaryColour = computed(() => {
         >
           Donate
         </a>
-        <font-awesome-icon
+        <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
         mobile:visible mobile:block mobile:absolute mobile:right-0"
@@ -199,7 +199,7 @@ const secondaryColour = computed(() => {
         >
           Templates
         </a>
-        <font-awesome-icon
+        <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
         mobile:visible mobile:block mobile:absolute mobile:right-0"
@@ -214,6 +214,7 @@ const secondaryColour = computed(() => {
         :class="[navColour.text]"
         :bg-colour="navColour.alt"
         :text-colour="colour"
+        @click="() => useRouter().push('/events')"
       >
         Book
       </AppButton>

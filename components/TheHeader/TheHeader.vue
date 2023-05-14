@@ -84,14 +84,22 @@ const emit = defineEmits(['clickedLikedBtn'])
     <div class="flex items-center gap-2 z-[150] fixed">
       <ButtonLikedPage
         class="btn-liked-page h-6 tablet:h-[30px]"
-        :class="(page === '/shop') ? 'block' : 'hidden'"
+        :class="(format === 'shop') ? 'block' : 'hidden'"
         @click="$emit('clickedLikedBtn')"
       />
-      <BurgerButton v-model="headerToggled" class="burger-btn z-[150]" :colour="navColour" />
+      <BurgerButton
+        v-model="headerToggled"
+        class="burger-btn z-[150]"
+        :colour="navColour"
+      />
     </div>
   </header>
 
-  <Navigation :is-toggled="headerToggled" :colour="navColour" :page="page" />
+  <Navigation
+    :is-toggled="headerToggled"
+    :colour="navColour"
+    :page="page"
+  />
 </template>
 
 <style scoped lang="scss">
