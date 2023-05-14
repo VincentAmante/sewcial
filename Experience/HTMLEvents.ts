@@ -1,10 +1,10 @@
 
 export default class HTMLEvents {
-    constructor(){
-        
-    }
- 
-    setMessage(domElement: any, message: any){
-        let dom = document.querySelector(domElement)  
-    }
+  constructor () {
+
+  }
+
+  setMessage (domElement: any, message: any) {
+    const dom = document.querySelector(domElement)
+  }
 }

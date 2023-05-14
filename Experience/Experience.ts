@@ -57,11 +57,6 @@ export default class Experience {
     this.preloader = new Preloader()
     // this.composer = new Composer()
 
-    // const gridHelper = new THREE.GridHelper(200, 50)
-    // this.scene.add(gridHelper)
-    // const axesHelper = new THREE.AxesHelper(10)
-    // this.scene.add(axesHelper)
-
     // Listens for an event called 'update', see 'Utils/Time.js' for the emit
     this.time.on('update', () => {
       this.update()
@@ -90,9 +85,5 @@ export default class Experience {
       instance = null
     }
     (window as any).experience = null
-
-    console.log('unmounting..')
-    console.log('instance: ', instance)
-    console.log('window.experience: ', (window as any).experience)
   }
 }

@@ -110,10 +110,10 @@ export default class Camera {
     // Set Limitations
     this.controls.minDistance = 7
     this.controls.maxDistance = 50
-    this.controls.minAzimuthAngle = Math.PI * 0.2
-    this.controls.maxAzimuthAngle = Math.PI * 0.25
-    this.controls.minPolarAngle = Math.PI * 0.35
-    this.controls.maxPolarAngle = Math.PI * 0.40
+    this.controls.minAzimuthAngle = Math.PI * 0.15
+    this.controls.maxAzimuthAngle = Math.PI * 0.3
+    this.controls.minPolarAngle = Math.PI * 0.3
+    this.controls.maxPolarAngle = Math.PI * 0.45
     this.controls.maxZoom = 1.5
     this.controls.minZoom = 0.5
     this.cam = false
