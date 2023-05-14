@@ -1,7 +1,7 @@
 <template>
-    <a href="https://www.twitter.com">
-        <font-awesome-icon icon="fa-brands fa-twitter"/>
-    </a>
+  <a href="https://open.spotify.com/user/31dhsck6khw7xoxyfb3yeijlp4zq?si=75a05a9f392a46bc">
+    <AppIcon :icon="['fa-brands', 'fa-spotify']" />
+  </a>
 </template>
 
 <style scoped lang="scss">

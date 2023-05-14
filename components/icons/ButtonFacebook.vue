@@ -1,7 +1,7 @@
 <template>
-    <a href="https://www.facebook.com">
-        <font-awesome-icon icon="fa-brands fa-facebook" />
-    </a>
+  <a href="https://www.facebook.com/sewcialspace">
+    <AppIcon :icon="['fa-brands', 'fa-facebook']" />
+  </a>
 </template>
 
 <style scoped lang="scss">

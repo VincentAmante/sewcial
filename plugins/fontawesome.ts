@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library, config } from '@fortawesome/fontawesome-svg-core'
 import {
   faInstagram,
-  faTwitter,
+  faSpotify,
   faFacebook
 } from '@fortawesome/free-brands-svg-icons'
 
@@ -22,7 +22,7 @@ import {
 
 const icons = [
   faInstagram,
-  faTwitter,
+  faSpotify,
   faFacebook,
   faXmark,
   faChevronRight,
