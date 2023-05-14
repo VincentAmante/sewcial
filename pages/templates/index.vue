@@ -57,7 +57,7 @@ function onShowFilter () {
     <!--Stickers-->
     <div class="sticker-container absolute w-full">
       <img class="hidden absolute -z-[5] left-0 top-0 transform translate-x-[-30%] translate-y-[20%] w-48 desktop:block" src="@/assets/images/Sticker_1.png" alt="">
-      <img class="hidden absolute -z-[5] right-0 top-0 transform translate-x-[30%] translate-y-[10%] w-48 desktop:block" src="@/assets/images/Sticker_2.png" alt="">
+      <img class="hidden absolute -z-[5] right-0 top-0 transform translate-x-[50%] translate-y-[10%] w-48 desktop:block" src="@/assets/images/Sticker_2.png" alt="">
     </div>
     <!-- Page Heading -->
     <div
@@ -134,7 +134,7 @@ function onShowFilter () {
               <TemplatesFilter
                 v-if="!pending && !error && templates && filterToggled"
                 :templates="templates"
-                class="absolute top-0 right-0 z-50 w-screen rounded-lg mt-5"
+                class="absolute top-0 right-0 z-50 w-screen rounded-lg mt-5 max-w-md"
                 @apply-filter="(newFilteredTemplates) => onApplyFilter(newFilteredTemplates)"
                 @hide-filter="() => onHideFilter()"
               />
