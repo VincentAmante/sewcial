@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { CatalogueItem } from '@prisma/client'
 import { EnumMaterial } from '~/enums/Material'
-import LikeMeButton from '@/components/LikeMeButton.vue'
 import ItemDescription from '@/components/ItemDescription.vue'
 import ItemImage from '@/components/ItemImage.vue'
 import { useUserStore } from '~/stores/useUserStore'
@@ -49,6 +48,7 @@ refresh()
 
 onMounted(async () => {
   const { user, isUserSet } = useUserStore()
+  console.log(user, isUserSet)
   if (isUserSet) {
     const { refresh: refreshIsLiked } = await useFetch('/api/CatalogueItems/isLiked', {
       method: 'POST',
