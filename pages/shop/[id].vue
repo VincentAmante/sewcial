@@ -4,6 +4,7 @@ import { EnumMaterial } from '~/enums/Material'
 import ItemDescription from '@/components/ItemDescription.vue'
 import ItemImage from '@/components/ItemImage.vue'
 import { useUserStore } from '~/stores/useUserStore'
+import IconChevronRight from '@/components/icons/IconChevronRight.vue'
 
 definePageMeta({
   layout: 'shop'
@@ -82,11 +83,12 @@ function onLike () {
     <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-12">
       <div class="uppercase self-start desktop:hidden">
         <p class="caption">
-          <NuxtLink to="/shop/catalogue">
+          <NuxtLink to="/shop">
             Catalogue
           </NuxtLink>
-          <span>&gt;</span>
-          {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
+          <IconChevronRight>
+            {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
+          </iconchevronright>
         </p>
       </div>
       <ItemImage
@@ -96,7 +98,7 @@ function onLike () {
       <div class="w-full desktop:self-start flex flex-col">
         <div class="breadcrumb uppercase self-start hidden desktop:block">
           <p class="caption">
-            <NuxtLink to="/shop/catalogue">
+            <NuxtLink to="/shop">
               Catalogue
               <span>&gt;</span>
               {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
