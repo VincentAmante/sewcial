@@ -12,7 +12,9 @@ import {
   faXmark,
   faChevronRight,
   faChevronLeft,
-  faCircle as fasCircle
+  faCircle as fasCircle,
+  faSpinner,
+  faRightFromBracket
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -29,7 +31,9 @@ const icons = [
   faChevronLeft,
   fasCircle,
   farCircle,
-  faCircleDot
+  faCircleDot,
+  faSpinner,
+  faRightFromBracket
 ]
 library.add(...icons)
 
