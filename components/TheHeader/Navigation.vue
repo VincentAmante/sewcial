@@ -102,13 +102,13 @@ const secondaryColour = computed(() => {
         class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
         :class="[navColour.textAlt]"
       >
-        <a
+        <NuxtLink
           class="text-2xl font-bold no-underline my-4
          mobile:w-full mobile:text-left"
-          href="/"
+          to="/"
         >
           Map
-        </a>
+        </NuxtLink>
         <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
@@ -120,13 +120,13 @@ const secondaryColour = computed(() => {
         class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
         :class="[navColour.textAlt]"
       >
-        <a
+        <NuxtLink
           class="text-2xl font-bold no-underline my-3
          mobile:w-full mobile:text-left"
-          href="/about-us"
+          to="/about-us"
         >
           About Us
-        </a>
+        </NuxtLink>
         <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
@@ -138,13 +138,13 @@ const secondaryColour = computed(() => {
         class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
         :class="[navColour.textAlt]"
       >
-        <a
+        <NuxtLink
           class="text-2xl font-bold no-underline my-3
          mobile:w-full mobile:text-left"
-          href="/shop"
+          to="/shop"
         >
           Shop
-        </a>
+        </NuxtLink>
         <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
@@ -156,13 +156,13 @@ const secondaryColour = computed(() => {
         class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
         :class="[navColour.textAlt]"
       >
-        <a
+        <NuxtLink
           class="text-2xl font-bold no-underline my-3
          mobile:w-full mobile:text-left"
-          href="/contact-us"
+          to="/contact-us"
         >
           Contact Us
-        </a>
+        </NuxtLink>
         <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
@@ -174,13 +174,13 @@ const secondaryColour = computed(() => {
         class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
         :class="[navColour.textAlt]"
       >
-        <a
+        <NuxtLink
           class="text-2xl font-bold no-underline my-3
          mobile:w-full mobile:text-left"
-          href="/donate"
+          to="/donate"
         >
           Donate
-        </a>
+        </NuxtLink>
         <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5
@@ -192,13 +192,13 @@ const secondaryColour = computed(() => {
         class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
         :class="[navColour.textAlt]"
       >
-        <a
+        <NuxtLink
           class="text-2xl font-bold no-underline my-3
          mobile:w-full mobile:text-left"
-          href="/templates"
+          to="/templates"
         >
           Templates
-        </a>
+        </NuxtLink>
         <AppIcon
           :icon="['fas', 'chevron-right']"
           class="right hidden invisible h-5

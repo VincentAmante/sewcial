@@ -306,7 +306,7 @@ function setPaymentOption (option: string) {
               <div class="conditions-container">
                 <label for="conditions-acceptance">
                   <input id="" type="checkbox" name="conditions-acceptance">
-                  I accept the <a href="">Terms of Service</a>, <a href="">Community Guidelines</a>, and Privacy Policy
+                  I accept the <NuxtLink to="">Terms of Service</NuxtLink>, <NuxtLink to="">Community Guidelines</NuxtLink>, and Privacy Policy
                 </label>
               </div>
             </section>

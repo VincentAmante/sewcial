@@ -76,9 +76,9 @@ watchEffect(() => {
         class="inline-block mr-2"
         :class="(isFirstPage) ? ['opacity-50' , 'pointer-events-none'] : ['']"
       >
-        <a class="chevron" href="#" @click="() => prev()">
+        <div class="chevron" href="#" @click="() => prev()">
           <IconChevronLeft />
-        </a>
+        </div>
       </li>
       <li
         v-for="pageNum in pageCount"
@@ -86,17 +86,19 @@ watchEffect(() => {
         class="inline-block mr-2"
         :class="(currentPage !== pageNum) ? ['hover:opacity-75'] : ['cursor-default']"
       >
-        <a
+        <div
           class="page-link p-2 px-4 rounded-full"
           href="#"
           :class="(currentPage === pageNum) ? ['bg-accent-1', 'text-primary', 'cursor-default', 'pointer-events-none'] : ['']"
           @click="currentPage = pageNum"
-        >{{ pageNum }}</a>
+        >
+          {{ pageNum }}
+        </div>
       </li>
       <li class="inline-block mr-2" :class="(isLastPage) ? ['opacity-50' , 'pointer-events-none'] : ['']">
-        <a class="chevron" href="#" @click="() => next()">
+        <div class="chevron" href="#" @click="() => next()">
           <IconChevronRight />
-        </a>
+        </div>
       </li>
     </ul>
   </div>

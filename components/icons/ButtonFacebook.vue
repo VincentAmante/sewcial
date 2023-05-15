@@ -1,7 +1,7 @@
 <template>
-  <a target="_blank" href="https://www.facebook.com/sewcialspace">
+  <Nuxtlink target="_blank" to="https://www.facebook.com/sewcialspace">
     <AppIcon :icon="['fa-brands', 'fa-facebook']" />
-  </a>
+  </Nuxtlink>
 </template>
 
 <style scoped lang="scss">

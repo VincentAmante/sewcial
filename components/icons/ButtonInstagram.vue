@@ -1,7 +1,7 @@
 <template>
-  <a target="_blank" href="https://www.instagram.com/sewcialspace/">
+  <NuxtLink target="_blank" to="https://www.instagram.com/sewcialspace/">
     <AppIcon :icon="['fa-brands', 'fa-instagram']" />
-  </a>
+  </NuxtLink>
 </template>
 
 <style scoped lang="scss">
