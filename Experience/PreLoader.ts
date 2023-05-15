@@ -17,8 +17,6 @@ export default class Preloader extends EventEmitter {
 
     this.resources.on('item-loaded', async () => {
       this.progressRatio = ((this.resources.loaded + 1) / this.resources.queue) * 100
-
-      console.log(this.progressRatio)
       const progressBar = document.querySelector('#loading-bar')
       if (progressBar) { progressBar.innerHTML = `${Math.round(this.progressRatio)}%` }
 
