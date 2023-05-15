@@ -76,7 +76,7 @@ watchEffect(() => {
         class="inline-block mr-2"
         :class="(isFirstPage) ? ['opacity-50' , 'pointer-events-none'] : ['']"
       >
-        <div class="chevron" href="#" @click="() => prev()">
+        <div class="chevron" @click="() => prev()">
           <IconChevronLeft />
         </div>
       </li>
@@ -88,7 +88,6 @@ watchEffect(() => {
       >
         <div
           class="page-link p-2 px-4 rounded-full"
-          href="#"
           :class="(currentPage === pageNum) ? ['bg-accent-1', 'text-primary', 'cursor-default', 'pointer-events-none'] : ['']"
           @click="currentPage = pageNum"
         >
@@ -96,7 +95,7 @@ watchEffect(() => {
         </div>
       </li>
       <li class="inline-block mr-2" :class="(isLastPage) ? ['opacity-50' , 'pointer-events-none'] : ['']">
-        <div class="chevron" href="#" @click="() => next()">
+        <div class="chevron" @click="() => next()">
           <IconChevronRight />
         </div>
       </li>
