@@ -1,5 +1,5 @@
 <template>
-  <a href="https://www.instagram.com/sewcialspace/">
+  <a target="_blank" href="https://www.instagram.com/sewcialspace/">
     <AppIcon :icon="['fa-brands', 'fa-instagram']" />
   </a>
 </template>

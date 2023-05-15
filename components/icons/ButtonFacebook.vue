@@ -1,5 +1,5 @@
 <template>
-  <a href="https://www.facebook.com/sewcialspace">
+  <a target="_blank" href="https://www.facebook.com/sewcialspace">
     <AppIcon :icon="['fa-brands', 'fa-facebook']" />
   </a>
 </template>
