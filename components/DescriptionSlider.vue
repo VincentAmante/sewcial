@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import ButtonClose from './icons/ButtonClose.vue'
+import HeaderLogo from './TheHeader/HeaderLogo.vue'
 
 const isOpen = ref(false)
 const props = defineProps({
@@ -65,27 +66,30 @@ const toggledStyle = computed(() => {
   >
     <div
       :class="toggledStyle.slider"
-      class="relative pointer-events-auto -translate-x-full bg-primary max-w-full h-full transition-all ease-out duration-150 overflow-y-scroll no-scrollbar
-      desktop:flex-row desktop:w-1/2 desktop:gap-8"
+      class="relative pointer-events-auto -translate-x-full bg-primary max-w-3xl h-full transition-all ease-out duration-150 overflow-y-scroll no-scrollbar
+      desktop:flex-row desktop:gap-8"
     >
-      <div class="absolute right-0 pt-mobile-h pr-mobile-w">
-        <!-- DEV: ButtonClose has a function for when the 'close-btn-clicked' emit is triggered -->
-        <ButtonClose @close-btn-clicked="close" />
+      <div class="absolute top-0 w-full pt-mobile-h px-mobile-w flex justify-between">
+        <HeaderLogo colour="secondary" />
+        <div class="text-secondary text-4xl cursor-pointer">
+          <!-- DEV: ButtonClose has a function for when the 'close-btn-clicked' emit is triggered -->
+          <ButtonClose @close-btn-clicked="close" />
+        </div>
       </div>
       <div
-        class="flex flex-col h-full justify-center px-mobile-w pt-4
-        desktop:flex-row desktop:items-center desktop:justify-start"
+        class="flex flex-col h-full justify-center px-mobile-w pt-4 gap-8
+        desktop:flex-row desktop:items-center desktop:justify-start desktop:gap-0"
       >
         <img
           :src="imgSrc"
           alt=""
-          class="w-full object-contain max-h-80"
+          class="w-full max-w-sm object-contain max-h-80 self-center"
         >
-        <div class="content text-secondary px-8">
+        <div class="text-secondary px-8">
           <h1>
             <slot name="title" />
           </h1>
-          <div class="description text-justify relative">
+          <div class="text-justify relative">
             <slot />
           </div>
         </div>
