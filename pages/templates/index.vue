@@ -13,7 +13,7 @@ type WithMaterial<T> = T & {
 }
 type TemplateWithMaterials = WithMaterial<Template>[]
 
-const templates: Ref<TemplateWithMaterials | null> = ref(null)
+const templates: Ref<TemplateWithMaterials> = ref([])
 const filteredTemplates: Ref<TemplateWithMaterials | null> = ref(null)
 const templatePage: Ref<Template[]> = ref([])
 
@@ -112,12 +112,12 @@ function onShowFilter () {
 
     <!-- Browse section -->
     <section class="bg-secondary p-8 outline-4 outline-dashed outline-secondary desktop:p-20">
-      <h2 class="text-secondary">
+      <h2 class="text-primary">
         Browse
       </h2>
       <div class="filter flex justify-between items-center mt-4">
-        <p class="text-secondary">
-          400 ITEMS
+        <p class="text-primary">
+          {{ templates.length }} ITEMS
         </p>
         <div class="group relative flex flex-col">
           <div class="filter-options flex items-center gap-2 cursor-pointer uppercase bg-primary bg-opacity-20 rounded-lg px-4">
