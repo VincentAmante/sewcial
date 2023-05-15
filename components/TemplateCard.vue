@@ -31,7 +31,7 @@ const props = defineProps({
         <h3 class="my-2 capitalize">
           <slot name="owner" />
         </h3>
-        <p class=" text-justify grow">
+        <p class=" text-justify grow line-clamp-3">
           <slot name="description" />
         </p>
         <div class="flex justify-center">
