@@ -23,7 +23,7 @@ const toggle = useToggle(checked)
   >
     <div
       :class="(checked) ? 'bg-secondary' : ''"
-      class="p-2 min-w-[1.15rem] min-h-[1.15rem] border-solid border-secondary border-[2px] rounded-md"
+      class="p-2 min-w-[1.25rem] min-h-[1.25rem] aspect-square border-solid border-secondary border-[2px] rounded-md"
     >
       <input
         class="hidden pointer-events-none"
@@ -31,7 +31,7 @@ const toggle = useToggle(checked)
         @click="() => toggle()"
       >
     </div>
-    <div class="text-dark">
+    <div class="text-dark text-base">
       {{ label }}
     </div>
   </label>

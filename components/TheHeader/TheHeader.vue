@@ -83,7 +83,7 @@ const emit = defineEmits(['clickedLikedBtn'])
     />
     <div class="flex items-center gap-2 z-[150] fixed">
       <ButtonLikedPage
-        class="btn-liked-page h-6 tablet:h-[30px]"
+        class="btn-liked-page h-6 tablet:h-[30px] cursor-pointer"
         :class="(format === 'shop') ? 'block' : 'hidden'"
         @click="$emit('clickedLikedBtn')"
       />
@@ -102,13 +102,13 @@ const emit = defineEmits(['clickedLikedBtn'])
   />
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 
 header {
-    padding-inline: clamp($margin-width-mobile, 5vw, 50px);
+    padding-inline: clamp(30px, 5vw, 50px);
     height: clamp(70px, 15vw, 90px);
     }
 .logo {
-    padding-inline: clamp($margin-width-mobile, 5vw, 50px);
+    padding-inline: clamp(30px, 5vw, 50px);
 }
 </style>

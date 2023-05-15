@@ -7,8 +7,8 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="postcss">
   body {
-    @include flex-col;
+    @apply flex flex-col bg-primary transition-all ease-out;
   }
 </style>
