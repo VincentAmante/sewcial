@@ -143,7 +143,7 @@ const secondaryColour = computed(() => {
          mobile:w-full mobile:text-left"
           href="/shop"
         >
-          Discover
+          Shop
         </a>
         <AppIcon
           :icon="['fas', 'chevron-right']"
