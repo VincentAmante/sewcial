@@ -2,13 +2,10 @@
 import type { Workshop, Event } from '@prisma/client'
 // import { DatePicker } from 'v-calendar'
 import { v4 as uuidv4 } from 'uuid'
-import { DateRange } from 'v-calendar/dist/types/src/utils/date/range'
-import TiltedBubble from '@/components/TiltedBubble.vue'
 import TiltedHeading from '@/components/TiltedHeading.vue'
 import EventsCard from '@/components/EventsCard.vue'
-import StartTimePicker from '@/components/FormFields/StartTimePicker.vue'
-import EndTimePicker from '@/components/FormFields/EndTimePicker.vue'
-import BookingPeopleCount from '@/components/FormFields/BookingPeopleCount.vue'
+import IconChevronLeft from '@/components/icons/IconChevronLeft.vue'
+import IconChevronRight from '@/components/icons/IconChevronRight.vue'
 
 const bookingDate = ref(new Date())
 const startTime = ref(new Date())
@@ -18,6 +15,7 @@ const peopleCount = ref(0)
 
 const anchorDate = ref(new Date())
 const chosenDate = ref(anchorDate.value.getTime())
+const { width: windowWidth } = useWindowSize()
 const weekSelection = computed(() => {
   const week = []
   const firstDay = anchorDate.value.getDate() - anchorDate.value.getDay() + 1
@@ -28,7 +26,9 @@ const weekSelection = computed(() => {
     week.push({
       value: next.getTime(),
       date: next.getDate(),
-      day: next.toLocaleDateString('en-US', { weekday: 'short' }),
+      day: (windowWidth.value > 640)
+        ? next.toLocaleDateString('en-US', { weekday: 'short' })
+        : (next.toLocaleDateString('en-US', { weekday: 'short' }).at(0)),
       month: next.toLocaleDateString('en-US', { month: 'long' })
     })
   }
@@ -153,65 +153,6 @@ function validateBooking () {
 
 <template>
   <main>
-    <section
-      class="events-splash flex flex-col items-center justify-center my-12 relative
-    tablet:flex-row tablet:gap-20"
-    >
-      <!-- Left Sticker -->
-      <img
-        class="splash-sticker-l hidden tablet:block absolute top-0 left-0 transform translate-x-[-30%]"
-        src="@/assets/images/Events_Stickers_L.png"
-        width="190"
-        height="250"
-        alt=""
-      >
-
-      <div class="splash-heading flex flex-col text-secondary mb-12">
-        <p class="text-h-giant relative">
-          Sew...
-        </p>
-        <TiltedBubble>
-          booking
-        </TiltedBubble>
-        <p class="text-h-giant relative">
-          a session?
-        </p>
-      </div>
-
-      <!-- Right Sticker -->
-      <div class="splash-sticker-container hidden">
-        <img
-          class="splash-sticker-r"
-          src="@/assets/images/Events_Stickers_R.png"
-          width="150"
-          height="175"
-          alt=""
-        >
-      </div>
-
-      <div class="flex flex-col items-center justify-center bg-secondary p-6 rounded-lg w-full max-w-sm">
-        <VDatePicker v-model="bookingDate" class="date-picker w-full" />
-        <div class="booking-input my-4 w-full">
-          <div class="time-picker flex gap-4 w-full">
-            <StartTimePicker v-model="startTime" :date="bookingDate" />
-            <EndTimePicker v-model="endTime" :is-disabled="false" :start-time="startTime" />
-          </div>
-          <BookingPeopleCount v-model="peopleCount" />
-        </div>
-        <div class="book-now rounded-t-[1px] border-dashed border-primary w-full">
-          <p class="text-sm font-bold text-primary mb-0">
-            Total Amount (VAT inclusive): 25 AED
-          </p>
-          <button
-            class=" border-none rounded-lg bg-accent-1 text-primary w-full mb-2 p-2"
-            @click="() => validateBooking()"
-          >
-            <h1>BOOK NOW!</h1>
-          </button>
-        </div>
-      </div>
-    </section>
-
     <section class="upcoming-events bg-accent-1 py-4 desktop:p-16">
       <!-- Page Heading -->
       <div class="flex align-center justify-center py-4">
@@ -257,7 +198,7 @@ function validateBooking () {
       </div>
     </section>
 
-    <section class="workshops flex flex-col items-center justify-center relative overflow-x-hidden py-2 pb-20 overflow-y-hidden">
+    <section class="workshops flex flex-col items-center justify-center relative overflow-x-hidden py-2 pb-20 overflow-y-hidden min-h-[40rem]">
       <div class="absolute hidden top-0 w-full desktop:block">
         <img class="none desktop:flex absolute left-0 top-0 w-fit transform translate-x-[-50%] max-w-xs" src="@/assets/images/Sticker_5.png">
         <img class="none desktop:flex absolute right-0 w-fit transform translate-x-[50%] translate-y-[90%] max-w-xs" src="@/assets/images/Sticker_6.png">
@@ -285,7 +226,7 @@ function validateBooking () {
               hover:transform hover:scale-110"
             @click="() => changeWeek(-1)"
           >
-            &lt;
+            <IconChevronLeft />
           </div>
           <div class="flex w-full justify-around">
             <div
@@ -295,7 +236,7 @@ function validateBooking () {
               hover:transform hover:scale-110"
               @click="() => chooseDate(day.value)"
             >
-              <h3 class="m-0 font-bold uppercase">
+              <h3 class="m-0 font-bold uppercase text-lg mobile:text-base">
                 {{ day.day }}
               </h3>
               <p
@@ -311,7 +252,7 @@ function validateBooking () {
               hover:transform hover:scale-110"
             @click="() => changeWeek(1)"
           >
-            &gt;
+            <IconChevronRight />
           </div>
         </div>
         <!-- List of workshops -->
