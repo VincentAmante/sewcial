@@ -12,7 +12,8 @@ export default defineEventHandler(async (event) => {
           name: true,
           imageSrc: true,
           authorFirstName: true,
-          authorLastName: true
+          authorLastName: true,
+          priceAED: true
         }
       }
     }
