@@ -292,7 +292,7 @@ function validateBooking () {
                 <button class="bg-accent-1 text-primary rounded-md p-2 w-full px-4">
                   <h1
                     class="m-0"
-                    @click="() => bookWorkshop()"
+                    @click="() => bookWorkshop(workshop.id)"
                   >
                     BOOK NOW
                   </h1>
