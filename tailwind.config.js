@@ -47,7 +47,11 @@ module.exports = {
         'desktop-h': '3.125rem',
         'default-w': 'clamp(1.875rem, 10vw, 16rem)',
         'default-h': 'clamp(1.6rem, 10vh, 3.125rem)'
-      }
+      },
+      plugins: [
+        // ...
+        require('@tailwindcss/line-clamp'),
+      ]
     }
   }
 }
