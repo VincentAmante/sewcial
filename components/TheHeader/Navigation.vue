@@ -3,11 +3,10 @@ import { computed } from 'vue'
 
 // imports other vue components
 import AppButton from '../AppButton.vue'
-import ButtonTwitter from '../icons/ButtonTwitter.vue'
+import ButtonSpotify from '../icons/ButtonSpotify.vue'
 import ButtonFacebook from '../icons/ButtonFacebook.vue'
 import ButtonInstagram from '../icons/ButtonInstagram.vue'
 import HeaderLogo from './HeaderLogo.vue'
-import DevSelect from './DevSelect.vue'
 
 // Defines props in TypeScript
 /**
@@ -83,11 +82,13 @@ const navColour = computed(() => {
 const secondaryColour = computed(() => {
   return (props.colour === 'primary') ? 'secondary' : 'primary'
 })
+
+const { signOut, status } = useAuth()
 </script>
 
 <template>
   <nav
-    class="flex flex-col justify-around pb-10 fixed gap-1 top-0 right-0 w-screen h-full transition-all transform translate-x-full z-[105] max-w-lg"
+    class="flex flex-col justify-around pb-10 fixed top-0 right-0 w-screen h-full transition-all transform translate-x-full z-[105] max-w-lg"
     :class="[navStyle, colour, navColour.bg]"
   >
     <div
@@ -96,14 +97,14 @@ const secondaryColour = computed(() => {
     >
       <HeaderLogo class="logo" :colour="secondaryColour" />
     </div>
-    <ul class="flex flex-col uppercase px-12 mt-20">
+    <ul class="flex flex-col uppercase px-12 mt-24 gap-4">
       <li
         id="nav-home"
         class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
         :class="[navColour.textAlt]"
       >
         <NuxtLink
-          class="text-2xl font-bold no-underline my-4
+          class="text-2xl font-bold no-underline
          mobile:w-full mobile:text-left"
           to="/"
         >
@@ -121,7 +122,7 @@ const secondaryColour = computed(() => {
         :class="[navColour.textAlt]"
       >
         <NuxtLink
-          class="text-2xl font-bold no-underline my-3
+          class="text-2xl font-bold no-underline
          mobile:w-full mobile:text-left"
           to="/about-us"
         >
@@ -139,11 +140,47 @@ const secondaryColour = computed(() => {
         :class="[navColour.textAlt]"
       >
         <NuxtLink
-          class="text-2xl font-bold no-underline my-3
+          class="text-2xl font-bold no-underline
          mobile:w-full mobile:text-left"
           to="/shop"
         >
           Catalogue
+        </NuxtLink>
+        <AppIcon
+          :icon="['fas', 'chevron-right']"
+          class="right hidden invisible h-5
+        mobile:visible mobile:block mobile:absolute mobile:right-0"
+        />
+      </li>
+      <li
+        id="nav-templates"
+        class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
+        :class="[navColour.textAlt]"
+      >
+        <NuxtLink
+          class="text-2xl font-bold no-underline
+         mobile:w-full mobile:text-left"
+          to="/templates"
+        >
+          Templates
+        </NuxtLink>
+        <AppIcon
+          :icon="['fas', 'chevron-right']"
+          class="right hidden invisible h-5
+        mobile:visible mobile:block mobile:absolute mobile:right-0"
+        />
+      </li>
+      <li
+        id="nav-templates"
+        class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
+        :class="[navColour.textAlt]"
+      >
+        <NuxtLink
+          class="text-2xl font-bold no-underline
+         mobile:w-full mobile:text-left"
+          to="/events"
+        >
+          Events
         </NuxtLink>
         <AppIcon
           :icon="['fas', 'chevron-right']"
@@ -157,7 +194,7 @@ const secondaryColour = computed(() => {
         :class="[navColour.textAlt]"
       >
         <NuxtLink
-          class="text-2xl font-bold no-underline my-3
+          class="text-2xl font-bold no-underline
          mobile:w-full mobile:text-left"
           to="/contact-us"
         >
@@ -175,7 +212,7 @@ const secondaryColour = computed(() => {
         :class="[navColour.textAlt]"
       >
         <NuxtLink
-          class="text-2xl font-bold no-underline my-3
+          class="text-2xl font-bold no-underline
          mobile:w-full mobile:text-left"
           to="/donate"
         >
@@ -187,27 +224,9 @@ const secondaryColour = computed(() => {
         mobile:visible mobile:block mobile:absolute mobile:right-0"
         />
       </li>
-      <li
-        id="nav-templates"
-        class="flex items-center justify-center relative opacity-50 hover:opacity-90 transition-all"
-        :class="[navColour.textAlt]"
-      >
-        <NuxtLink
-          class="text-2xl font-bold no-underline my-3
-         mobile:w-full mobile:text-left"
-          to="/templates"
-        >
-          Templates
-        </NuxtLink>
-        <AppIcon
-          :icon="['fas', 'chevron-right']"
-          class="right hidden invisible h-5
-        mobile:visible mobile:block mobile:absolute mobile:right-0"
-        />
-      </li>
     </ul>
 
-    <div class="other flex flex-col items-center px-mobile-w justify-center gap-2">
+    <div class="other flex flex-col items-center px-12 justify-center gap-6 relative">
       <!-- <DevSelect class="dev-select bg-white" /> -->
       <AppButton
         class="w-full"
@@ -219,9 +238,20 @@ const secondaryColour = computed(() => {
         Book
       </AppButton>
       <div class="social-media-btns text-accent-1 flex justify-between w-full mobile:justify-around">
-        <ButtonTwitter />
+        <ButtonSpotify />
         <ButtonFacebook />
         <ButtonInstagram />
+      </div>
+      <div
+        v-if="status === 'authenticated'"
+        class="flex w-full justify-center gap-2 cursor-pointer opacity-50 hover:opacity-90 transition-all transform hover:scale-110"
+        :class="[navColour.textAlt]"
+        @click="() => signOut()"
+      >
+        <AppIcon :icon="['fas', 'right-from-bracket']" />
+        <h3 class="uppercase">
+          Sign Out
+        </h3>
       </div>
     </div>
   </nav>

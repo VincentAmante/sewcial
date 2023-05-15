@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CatalogueItem, Material } from '@prisma/client'
-import SpeechBubble from '@/components/SpeechBubble.vue'
+import SpeechBubbleRaw from '@/components/SpeechBubble.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
 import Pagination from '@/components/Pagination.vue'
@@ -69,15 +69,22 @@ const filterToggleStyling = computed(() => {
   <main class="flex flex-col">
     <div class="flex flex-col border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row  min-h-[30rem]">
       <img
-        class="w-full h-auto mobile:w-1/2"
-        src="https://via.placeholder.com/600x500"
+        class="w-full h-auto mobile:w-1/2 max-w-lg"
+        src="@/assets/images/collection.png"
       >
-      <div class="flex flex-col justify-center mx-auto mb-8 min-h-[30vh]">
-        <h1>NEW COLLECTION</h1>
-        <h1>Lorem ipsum sit aset dolor</h1>
-        <p>I got a condo in Manhattan, baby girl what’s happenin’?</p>
-        <SpeechBubble class="speech">
-          <p class="button">
+      <div class="flex flex-col items-center justify-center w-full h-full mb-8 min-h-[30vh] text-secondary tablet:items-start p-4 tablet:px-20">
+        <div class="text-left p-2 max-w-md">
+          <h1>NEW COLLECTION</h1>
+          <h2>Renewed Blooms</h2>
+          <p>
+            Celebrate the season with our unique and eco-friendly upcycled clothing pieces, featuring vibrant floral patterns and sustainable materials.
+          </p>
+        </div>
+        <SpeechBubble
+          alignment="start"
+          class="speech mx-auto tablet:mx-8"
+        >
+          <p class="button p-2 px-4">
             VIEW LIMITED EDITION
           </p>
         </SpeechBubble>
