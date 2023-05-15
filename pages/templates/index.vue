@@ -57,7 +57,7 @@ function onShowFilter () {
     <!--Stickers-->
     <div class="sticker-container absolute w-full">
       <img class="hidden absolute -z-[5] left-0 top-0 transform translate-x-[-30%] translate-y-[20%] w-48 desktop:block" src="@/assets/images/Sticker_1.png" alt="">
-      <img class="hidden absolute -z-[5] right-0 top-0 transform translate-x-[50%] translate-y-[10%] w-48 desktop:block" src="@/assets/images/Sticker_2.png" alt="">
+      <img class="hidden absolute -z-[5] right-0 top-0 transform translate-x-[41%] translate-y-[10%] w-48 desktop:block" src="@/assets/images/Sticker_2.png" alt="">
     </div>
     <!-- Page Heading -->
     <div
@@ -79,7 +79,7 @@ function onShowFilter () {
     </div>
 
     <!-- Featured section -->
-    <section class="bg-accent-1 p-4 pr-0 desktop:p-20 no-scrollbar  desktop:pr-0">
+    <section class="bg-accent-1 p-4 pr-0 desktop:p-20 no-scrollbar desktop:pr-0">
       <h2 class="text-primary">
         Featured
       </h2>
