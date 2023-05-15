@@ -160,7 +160,7 @@ function setPaymentOption (option: string) {
     <section>
       <div class="booking-header">
         <div @click="decrementPage()">
-          <font-awesome-icon :icon="['fas', 'chevron-left']" class="chevron-left" />
+          <AppIcon :icon="['fas', 'chevron-left']" class="chevron-left" />
         </div>
         <div>
           <PageCounter :page-count="page" :total-pages="maxPages" />
