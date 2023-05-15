@@ -3,10 +3,10 @@ import { useUserStore } from '~/stores/useUserStore'
 
 const { isUserSet, initialise } = useUserStore()
 
-onMounted(async () => {
+onMounted(() => {
   if (!isUserSet && useAuth().status.value === 'authenticated') {
     const email = useAuth().data.value?.user?.email
-    const { refresh } = await useFetch(`/api/User/${email}`, {
+    const { refresh } = useFetch(`/api/User/${email}`, {
       onResponse ({ response }) {
         const data = response._data
         initialise('name', data.email, data.id)
