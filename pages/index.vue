@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
       :class="loadingScreenStyle.background"
     >
       <div
-        class="m-4 mx-8 bg-accent-1 rounded-3xl bg-opacity-60 transition-all duration-1000 max-w-md w-full py-4"
+        class="m-4 mx-8 bg-accent-1 rounded-3xl transition-all duration-1000 max-w-md w-full py-4"
         :class="loadingScreenStyle.screen"
       >
         <h1 class="text-h-big-boy text-primary text-center">
