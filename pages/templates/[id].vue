@@ -50,7 +50,10 @@ refresh()
         <img class="sticker sticker-1" src="@/assets/images/Sticker_4.png" alt="">
       </div>
       <div class="breadcrumbs">
-        <p>TEMPLATES</p>
+        <NuxtLink to="/templates">
+          TEMPLATES
+        </NuxtLink>
+        <p>></p>
         <p> {{ template.name }}</p>
       </div>
       <div class="template-selected">
