@@ -146,58 +146,95 @@
         </div>
       </section>
 
-      <section class=" p-4">
-        <div class="grid grid-cols-1 tablet:grid-cols-2 ">
-          <div class="grid grid-cols-2">
-            <div class="aspect-square">
+      <section class="p-8 desktop:p-20">
+        <div class="grid grid-cols-1 gap-1">
+          <div class="grid grid-cols-3 gap-1">
+            <NuxtLink to="https://www.instagram.com/p/CsObqGCg0Z1/" class="aspect-square">
               <img
                 class="w-full"
-                src="../assets/images/about-1.png"
+                src="../assets/images/may-14.png"
               >
-            </div>
+            </NuxtLink>
 
-            <div class="aspect-square flex flex-col items-center justify-center text-secondary border-[1px] border-solid border-secondary">
-              <h1 class="lowercase text-3xl">
-                "mother"
-              </h1>
-            </div>
-            <div class="aspect-square flex flex-col items-center justify-start text-primary text-center bg-accent-2 border-[2px] border-solid border-secondary p-2">
-              <h1 class="lowercase text-3xl text-left">
-                "fav hangout spots 4evs"
-              </h1>
-            </div>
-
-            <div class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CsN9V4fSxmD/" class="aspect-square">
               <img
                 class="w-full"
-                src="../assets/images/about-2.png"
+                src="../assets/images/may-13.png"
               >
-            </div>
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CsL8YxgAqn1/" class="aspect-square">
+              <img
+                class="w-full"
+                src="../assets/images/may-12.png"
+              >
+            </NuxtLink>
           </div>
-          <div class="grid grid-cols-2">
-            <div class="aspect-square">
+          <div class="grid grid-cols-3 gap-1">
+            <NuxtLink to="https://www.instagram.com/p/CsJXpqvya7W/" class="aspect-square">
               <img
                 class="w-full"
-                src="../assets/images/about-3.png"
+                src="../assets/images/may-11.png"
               >
-            </div>
-            <div class="aspect-square flex flex-col items-center justify-center text-primary bg-accent-2 p-1">
-              <h1 class="lowercase text-3xl">
-                "grape"
-              </h1>
-            </div>
+            </NuxtLink>
 
-            <div class="aspect-square flex flex-col items-center justify-center text-secondary border-[1px] border-solid border-secondary p-1">
-              <h1 class="lowercase text-3xl">
-                "so slay pussy queen"
-              </h1>
-            </div>
-            <div class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CsGuojXM7PR/" class="aspect-square">
               <img
                 class="w-full"
-                src="../assets/images/about-4.png"
+                src="../assets/images/may-10.png"
               >
-            </div>
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CsBgZQVvLMr/" class="aspect-square">
+              <img
+                class="w-full"
+                src="../assets/images/may-09.png"
+              >
+            </NuxtLink>
+          </div>
+          <div class="grid grid-cols-3 gap-1">
+            <NuxtLink to="https://www.instagram.com/p/Cr8XLjjvnO7/" class="aspect-square">
+              <img
+                class="w-full"
+                src="../assets/images/may-07.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/Cr3XXHLPIdx/" class="aspect-square">
+              <img
+                class="w-full"
+                src="../assets/images/may-05.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CryIRACP4XI/" class="aspect-square">
+              <img
+                class="w-full"
+                src="../assets/images/may-03.png"
+              >
+            </NuxtLink>
+          </div>
+          <div class="grid grid-cols-3 gap-1">
+            <NuxtLink to="https://www.instagram.com/p/Crs9UhhvjKs/" class="aspect-square">
+              <img
+                class="w-full"
+                src="../assets/images/may-01.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/Crn7xkWhHhU/" class="aspect-square">
+              <img
+                class="w-full"
+                src="../assets/images/april-29.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CrimAKwBlYH/" class="aspect-square">
+              <img
+                class="w-full"
+                src="../assets/images/april-27.png"
+              >
+            </NuxtLink>
           </div>
         </div>
       </section>
