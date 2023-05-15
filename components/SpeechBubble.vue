@@ -74,12 +74,18 @@ const alignmentStyle = computed(() => {
     wrapper: ['self-end', bubbleColour.value.wrapper],
     arrow: ['border-r-[50px]', 'border-r-transparent', 'transform-y-2', 'translate-x-[2.5em]', 'rotate-[15deg]', 'right-0', bubbleColour.value.arrow]
   }
+  const centerStyling = {
+    wrapper: ['self-center', bubbleColour.value.wrapper],
+    arrow: ['border-l-[50px]', 'border-l-transparent', '-transform-y-2', 'translate-x-[-2.5em]', 'rotate-[-15deg]', 'left-0', bubbleColour.value.arrow]
+  }
 
   switch (props.alignment) {
     case 'right':
       return rightStyling
     case 'left':
       return leftStyling
+    case 'center':
+      return centerStyling
     default:
       return leftStyling
   }
