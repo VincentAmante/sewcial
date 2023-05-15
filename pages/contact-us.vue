@@ -66,7 +66,10 @@ async function submitContactForm () {
               Location
             </h1>
             <h2 class="my-0 font-normal">
-              Dubai Marina, Dubai, UAE
+              RAKEZ Academic Zone - Block D
+            </h2>
+            <h2 class="my-0 font-normal">
+              Al Dhait South - Ras Al Khaimah, U.A.E
             </h2>
           </div>
           <div>
@@ -82,7 +85,7 @@ async function submitContactForm () {
               Email
             </h1>
             <h2 class="my-0 font-normal">
-              sewcial@gmail.com
+              socials@sewcial.space
             </h2>
           </div>
         </SpeechBubble>
@@ -114,17 +117,3 @@ async function submitContactForm () {
     </section>
   </main>
 </template>
-
-<!-- <style scoped lang="scss">
-    main {
-        padding: $margin-width;
-
-        h1, h2 {
-          margin-block: 0;
-        }
-        h2 {
-          font-weight: 400;
-          text-transform: none;
-        }
-    }
-</style> -->

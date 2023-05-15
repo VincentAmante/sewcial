@@ -33,12 +33,12 @@
         desktop:flex-row desktop:items-center"
       >
         <img
-          class="p-8 pt-0 desktop:px-0 desktop:py-20 desktop:w-1/2 relative transform translate-x-[-20%]"
+          class="p-8 pt-0 desktop:px-0 desktop:py-20 desktop:w-1/2 relative transform desktop:translate-x-[-20%]"
           src="../assets/images/third-place.png"
           alt="about us"
         >
         <div class="about-wrapper p-8 pb-0 desktop:p-20 desktop:pl-0 py-16">
-          <div class="heading flex flex-col">
+          <div class="heading flex flex-col my-8">
             <div class="flex">
               <h1 class="text-h-big-boy p-0  my-0">
                 <span class="text-accent-1">A</span> <span class="text-primary lowercase">third place</span>
@@ -62,15 +62,20 @@
 
           <div class="para text-primary leading-5">
             <p>
-              Lorem ipsum dolor sit amet consectetur. At purus maecenas nunc egestas sed. Tempor adipiscing venenatis praesent nisi tincidunt.
-              Orci enim tristique aenean eu ac. Vel vestibulum imperdiet scelerisque dignissim in sagittis non dolor senectus.
-              Sapien sodales tortor elementum suspendisse non mauris scelerisque. <br><br>
-              Aliquam at pulvinar ipsum fringilla fermentum. Pulvinar enim scelerisque cras semper ac tortor. Scelerisque elit id risus mattis nibh lectus.
-              Arcu turpis viverra cras fusce sit commodo porttitor. <br><br>
-              Mattis pellentesque sed nunc dictum arcu mauris at. Nunc tortor mi non facilisis. Blandit risus mi sed tincidunt. Egestas nec est nisl laoreet
-              lobortis arcu quis purus egestas. Dictum amet facilisis sed neque tortor.<br>
-              Vestibulum tempor faucibus laoreet massa neque enim velit maecenas. Lorem vulputate enim neque in ac volutpat pharetra. Nulla consequat varius et leo sit. <br><br>
-              Augue ut et faucibus donec. Sed hac elementum nunc hendrerit egestas tellus et rhoncus luctus. Lorem vitae diam purus quis in est pharetra enim.
+              Welcome to Sewcial, your place to sew, share, and connect!
+              We host a collection of spaces that provide a unique environment for youth to pursue their passions in sustainable fashion,
+              earn from learning new skills, and build a community. Eat and study at the Sewcial Cafe;
+              meet new people and participate in events at the Sewcial Lounge;
+              learn how to sew, craft, and upcycle at the Sewcial Studio.
+            </p>
+            <p>
+              We aim to be one of very few third places catered to young people in Dubai
+              -
+              somewhere outside home or school that one spends time in to interact with others.
+              We do this by intentionally curating these spaces to serve them and their needs for community, creativity, and belonging.
+            </p>
+            <p>
+              We hope to see you soon at Sewcial, where creativity provides community.
             </p>
           </div>
         </div>
@@ -149,89 +154,89 @@
       <section class="p-8 desktop:p-20">
         <div class="grid grid-cols-1 gap-1">
           <div class="grid grid-cols-3 gap-1">
-            <NuxtLink to="https://www.instagram.com/p/CsObqGCg0Z1/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CsObqGCg0Z1/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-14.png"
               >
             </NuxtLink>
 
-            <NuxtLink to="https://www.instagram.com/p/CsN9V4fSxmD/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CsN9V4fSxmD/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-13.png"
               >
             </NuxtLink>
 
-            <NuxtLink to="https://www.instagram.com/p/CsL8YxgAqn1/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CsL8YxgAqn1/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-12.png"
               >
             </NuxtLink>
           </div>
           <div class="grid grid-cols-3 gap-1">
-            <NuxtLink to="https://www.instagram.com/p/CsJXpqvya7W/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CsJXpqvya7W/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-11.png"
               >
             </NuxtLink>
 
-            <NuxtLink to="https://www.instagram.com/p/CsGuojXM7PR/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CsGuojXM7PR/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-10.png"
               >
             </NuxtLink>
 
-            <NuxtLink to="https://www.instagram.com/p/CsBgZQVvLMr/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CsBgZQVvLMr/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-09.png"
               >
             </NuxtLink>
           </div>
           <div class="grid grid-cols-3 gap-1">
-            <NuxtLink to="https://www.instagram.com/p/Cr8XLjjvnO7/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/Cr8XLjjvnO7/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-07.png"
               >
             </NuxtLink>
 
-            <NuxtLink to="https://www.instagram.com/p/Cr3XXHLPIdx/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/Cr3XXHLPIdx/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-05.png"
               >
             </NuxtLink>
 
-            <NuxtLink to="https://www.instagram.com/p/CryIRACP4XI/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CryIRACP4XI/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-03.png"
               >
             </NuxtLink>
           </div>
           <div class="grid grid-cols-3 gap-1">
-            <NuxtLink to="https://www.instagram.com/p/Crs9UhhvjKs/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/Crs9UhhvjKs/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-01.png"
               >
             </NuxtLink>
 
-            <NuxtLink to="https://www.instagram.com/p/Crn7xkWhHhU/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/Crn7xkWhHhU/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/april-29.png"
               >
             </NuxtLink>
 
-            <NuxtLink to="https://www.instagram.com/p/CrimAKwBlYH/" class="aspect-square">
+            <NuxtLink to="https://www.instagram.com/p/CrimAKwBlYH/" class="aspect-square overflow-hidden">
               <img
-                class="w-full"
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/april-27.png"
               >
             </NuxtLink>
