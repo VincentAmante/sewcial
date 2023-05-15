@@ -17,6 +17,11 @@ const props = defineProps({
 })
 
 const liked = ref(props.isLiked)
+
+watchEffect(() => {
+  liked.value = props.isLiked
+})
+
 function toggleLike () {
   liked.value = !liked.value
 }
