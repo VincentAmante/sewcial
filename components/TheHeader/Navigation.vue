@@ -143,7 +143,7 @@ const secondaryColour = computed(() => {
          mobile:w-full mobile:text-left"
           to="/shop"
         >
-          Shop
+          Catalogue
         </NuxtLink>
         <AppIcon
           :icon="['fas', 'chevron-right']"
