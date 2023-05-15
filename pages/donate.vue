@@ -8,7 +8,7 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
   <main>
     <!-- Just test divs, don't mind -->
     <section class="flex flex-col items-center text-center text-secondary my-default-h gap-[4vw]">
-      <div class="text-6xl flex flex-col items-center justify-center text-secondary font-bold pt-5 gap-0 tablet:flex-row tablet:gap-4">
+      <div class="text-7xl flex flex-col items-center justify-center text-secondary font-bold pt-5 gap-0 tablet:flex-row tablet:gap-4">
         <span>Support</span>
         <TiltedHeading class="bg-accent-1">
           THE
@@ -40,7 +40,7 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
         <div class="flex flex-col items-center text-center">
           <img src="@/assets/icons/star.png" alt="">
           <h2 class="m-0">
-            Lorem Ipsum
+            Make Anew
           </h2>
           <p class="m-0 max-w-[12rem] text-black">
             Up-cycle unique pieces from unused clothing
