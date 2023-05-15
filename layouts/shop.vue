@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/useUserStore'
 
-const { user, isUserSet, initialise } = useUserStore()
+const { isUserSet, initialise } = useUserStore()
 
 onMounted(async () => {
-  console.log((!isUserSet && useAuth().status.value === 'authenticated'))
   if (!isUserSet && useAuth().status.value === 'authenticated') {
     const email = useAuth().data.value?.user?.email
-    console.log(email)
-    const { data, pending, error, refresh } = await useFetch(`/api/User/${email}`, {
+    const { refresh } = await useFetch(`/api/User/${email}`, {
       onResponse ({ response }) {
         const data = response._data
         initialise('name', data.email, data.id)
