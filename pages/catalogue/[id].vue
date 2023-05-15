@@ -83,7 +83,7 @@ function onLike () {
     <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-12">
       <div class="uppercase self-start desktop:hidden">
         <p class="caption">
-          <NuxtLink to="/shop">
+          <NuxtLink to="/catalogue">
             Catalogue
           </NuxtLink>
           <IconChevronRight>
@@ -98,7 +98,7 @@ function onLike () {
       <div class="w-full desktop:self-start flex flex-col">
         <div class="breadcrumb uppercase self-start hidden desktop:block">
           <p class="caption">
-            <NuxtLink to="/shop">
+            <NuxtLink to="/catalogue">
               Catalogue
               <span>&gt;</span>
               {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}

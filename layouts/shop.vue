@@ -17,7 +17,7 @@ function attemptLogIn () {
   if (!isUserSet && !(useAuth().status.value === 'authenticated')) {
     signInToggled.value = true
   } else {
-    useRouter().push('/shop/liked')
+    useRouter().push('/catalogue/liked')
   }
 }
 
@@ -32,7 +32,7 @@ const signInToggled = ref(false)
     >
       <SignInForm
         class="max-w-lg w-full"
-        redirect-to="/shop/liked"
+        redirect-to="/catalogue/liked"
         @close="signInToggled = false"
       />
     </div>

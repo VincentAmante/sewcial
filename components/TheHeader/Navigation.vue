@@ -142,7 +142,7 @@ const { signOut, status } = useAuth()
         <NuxtLink
           class="text-2xl font-bold no-underline
          mobile:w-full mobile:text-left"
-          to="/shop"
+          to="/catalogue"
         >
           Catalogue
         </NuxtLink>

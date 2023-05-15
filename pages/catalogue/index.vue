@@ -41,7 +41,7 @@ const { data, pending, error, refresh } = await useFetch('/api/CatalogueItems/',
 refresh()
 
 function toItem (itemUrl: string) {
-  useRouter().push(`/shop/${itemUrl}`)
+  useRouter().push(`/catalogue/${itemUrl}`)
 }
 
 function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
