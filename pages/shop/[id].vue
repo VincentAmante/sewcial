@@ -46,23 +46,20 @@ const { data, pending, error, refresh } = useFetch(`/api/CatalogueItems/${route.
 })
 refresh()
 
-onMounted(async () => {
-  const { user, isUserSet } = useUserStore()
-  console.log(user, isUserSet)
-  if (isUserSet) {
-    const { refresh: refreshIsLiked } = await useFetch('/api/CatalogueItems/isLiked', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: user.id,
-        catalogueItemId: route.params.id
-      }),
-      onResponse ({ response }) {
-        itemIsLiked.value = response._data
-      }
-    })
-    refreshIsLiked()
-  }
-})
+const { user, isUserSet } = useUserStore()
+if (isUserSet) {
+  const { refresh: refreshIsLiked } = await useFetch('/api/CatalogueItems/isLiked', {
+    method: 'POST',
+    body: JSON.stringify({
+      userId: user.id,
+      catalogueItemId: route.params.id
+    }),
+    onResponse ({ response }) {
+      itemIsLiked.value = response._data
+    }
+  })
+  refreshIsLiked()
+}
 
 function onLike () {
   itemIsLiked.value = !itemIsLiked.value
@@ -85,7 +82,11 @@ function onLike () {
     <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-12">
       <div class="uppercase self-start desktop:hidden">
         <p class="caption">
-          <a href="/shop/catalogue">Catalogue</a> <span>&gt;</span> {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
+          <NuxtLink to="/shop/catalogue">
+            Catalogue
+          </NuxtLink>
+          <span>&gt;</span>
+          {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
         </p>
       </div>
       <ItemImage
@@ -95,7 +96,11 @@ function onLike () {
       <div class="w-full desktop:self-start flex flex-col">
         <div class="breadcrumb uppercase self-start hidden desktop:block">
           <p class="caption">
-            <a href="/shop/catalogue">Catalogue</a> <span>&gt;</span> {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
+            <NuxtLink to="/shop/catalogue">
+              Catalogue
+              <span>&gt;</span>
+              {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
+            </NuxtLink>
           </p>
         </div>
         <ItemDescription :sizes="catalogueItem.sizingsData">

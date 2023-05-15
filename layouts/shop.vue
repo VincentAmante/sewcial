@@ -2,19 +2,16 @@
 import { useUserStore } from '~/stores/useUserStore'
 
 const { isUserSet, initialise } = useUserStore()
-
-onMounted(() => {
-  if (!isUserSet && useAuth().status.value === 'authenticated') {
-    const email = useAuth().data.value?.user?.email
-    const { refresh } = useFetch(`/api/User/${email}`, {
-      onResponse ({ response }) {
-        const data = response._data
-        initialise('name', data.email, data.id)
-      }
-    })
-    refresh()
-  }
-})
+if (!isUserSet && useAuth().status.value === 'authenticated') {
+  const email = useAuth().data.value?.user?.email
+  const { refresh } = useFetch(`/api/User/${email}`, {
+    onResponse ({ response }) {
+      const data = response._data
+      initialise('name', data.email, data.id)
+    }
+  })
+  refresh()
+}
 
 function attemptLogIn () {
   if (!isUserSet && !(useAuth().status.value === 'authenticated')) {
