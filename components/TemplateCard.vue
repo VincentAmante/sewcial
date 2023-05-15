@@ -14,9 +14,9 @@ const props = defineProps({
 <!-- Card -->
 <template>
   <div
-    class="cards m-2 cursor-pointer group min-w-[20rem] select-none"
+    class="cards m-2 cursor-pointer group select-none"
   >
-    <div class="card flex flex-col bg-primary rounded-2xl w-full h-full">
+    <div class="card flex flex-col bg-primary rounded-2xl w-full h-full max-w-xs">
       <div class="aspect-[1.1/1] overflow-hidden h-80">
         <div
           class="card-image bg-cover bg-center bg-no-repeat rounded-t-2xl align-middle brightness-100 h-full
@@ -31,11 +31,13 @@ const props = defineProps({
         <h3 class="my-2 capitalize">
           <slot name="owner" />
         </h3>
-        <p class=" text-justify grow line-clamp-3">
+        <p class=" text-justify line-clamp-3">
           <slot name="description" />
         </p>
-        <div class="flex justify-center">
-          <DownloadButton />
+        <div class="flex justify-center items-end grow">
+          <div>
+            <DownloadButton />
+          </div>
         </div>
       </div>
     </div>

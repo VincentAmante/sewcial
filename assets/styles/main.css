@@ -60,4 +60,26 @@
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
     }
+
+    .scrollbar-blue::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+      margin: 2rem;
+    }
+
+    .scrollbar-blue::-webkit-scrollbar-track {
+      border-radius: 100vh;
+      background-color: #FFFAE0;
+      margin-right: .5rem;
+    }
+
+    .scrollbar-blue::-webkit-scrollbar-thumb {
+      background: #607BDA;
+      border-radius: 100vh;
+      margin: 1rem;
+    }
+
+    .scrollbar-blue::-webkit-scrollbar-thumb:hover {
+      background: #c0a0b9;
+    }
   }

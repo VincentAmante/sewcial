@@ -85,7 +85,7 @@ function onShowFilter () {
       </h2>
       <div
         v-if="!pending && !error"
-        class="flex overflow-x-scroll no-scrollbar"
+        class="flex overflow-x-scroll scrollbar-blue pb-2"
       >
         <template
           v-for="template in templates"

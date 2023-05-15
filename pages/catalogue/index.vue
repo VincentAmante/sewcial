@@ -122,7 +122,7 @@ const filterToggleStyling = computed(() => {
       <div class="flex flex-col w-full desktop:pt-8 desktop:border-l-4 desktop:border-dashed desktop:border-secondary h-full">
         <div
           v-if="!pending && !error"
-          class="grid grid-cols-2 self-center justify-center desktop:grid-cols-3 gap-4 tablet:gap-8 px-4"
+          class="grid grid-cols-2 w-full self-center justify-center desktop:grid-cols-3 gap-4 tablet:gap-8 px-4"
         >
           <CatalogueCard
             v-for="item in cataloguePage"
