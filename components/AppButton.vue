@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   bgColour: {
     type: String,
     default: 'secondary'

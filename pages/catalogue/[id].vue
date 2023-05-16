@@ -39,7 +39,7 @@ const itemPlaceholder: CatalogueItemWithMaterials = {
 const catalogueItem: Ref<CatalogueItem> = ref(itemPlaceholder)
 
 const itemIsLiked = ref(false)
-const { data, pending, error, refresh } = useFetch(`/api/CatalogueItems/${route.params.id}`, {
+const { refresh } = useFetch(`/api/CatalogueItems/${route.params.id}`, {
   onResponse ({ response }) {
     const data = response._data as CatalogueItem
     catalogueItem.value = data
@@ -105,7 +105,9 @@ function onLike () {
             </NuxtLink>
           </p>
         </div>
-        <ItemDescription :sizes="catalogueItem.sizingsData">
+        <ItemDescription
+          :sizes="catalogueItem.sizingsData"
+        >
           <template #item-name>
             {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
           </template>

@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { UseImage } from '@vueuse/components'
 import ButtonDownload from '@/components/icons/ButtonDownload.vue'
+
 // Variables passed to this component are props
-const props = defineProps({
+defineProps({
   image: {
     type: String,
     required: true
@@ -11,26 +13,38 @@ const props = defineProps({
 
 <!-- Browse Image Card Templates -->
 <template>
-  <div class="card info-Slide-up">
+  <div class="info-Slide-up relative w-full text-primary overflow-hidden rounded-lg cursor-pointer group">
     <!-- Image -->
-    <img :src="image">
+    <UseImage
+      class="w-full h-full group-hover:brightness-75"
+      :src="image"
+    >
+      <template #loading>
+        <div class="text-secondary bg-primary flex flex-col items-center justify-center w-full h-full text-lg">
+          Loading..
+          <AppIcon class="animate-spin" :icon="['fas', 'spinner']" />
+        </div>
+      </template>
+    </UseImage>
     <!-- Info -->
-    <div class="info-container">
-      <div class="info-wrapper">
-        <div class="card-text">
+    <div class="info-container bg-primary absolute top-auto bottom-0 left-0 w-full py-4 transform desktop:translate-y-full backface-hidden transition-all group-hover:transform-none">
+      <div class="info-wrapper flex justify-between items-center px-4">
+        <div class="card-text text-dark">
           <h1><slot name="item-name" /></h1>
           <h3 class="capitalize">
             <slot name="owner-name" />
           </h3>
         </div>
-        <ButtonDownload class="btn-download" />
+        <ButtonDownload
+          class="btn-download "
+        />
       </div>
     </div>
   </div>
 </template>
 
 <!-- Scoped Styling -->
-<style scoped lang="scss">
+<!-- <style scoped>
     .card {
     position: relative;
     width: 100%;
@@ -41,9 +55,6 @@ const props = defineProps({
     img{
         width: 100%;
         height: 100%;
-    }
-    .card-text{
-        color: $clr-text;
     }
     .info-wrapper{
     display: flex;
@@ -56,7 +67,6 @@ const props = defineProps({
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: $clr-primary;
     padding: 0 15px 0 15px;
     transform: translateY(100%);
     backface-visibility: hidden;
@@ -67,12 +77,12 @@ const props = defineProps({
     }
 
     .info-Slide-up:hover{
-    cursor: pointer;
-        img{
+      cursor: pointer;
+    }
+    .info-Slide-up:hover img {
         box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
         filter: brightness(80%);
         }
-    }
     .info-Slide-up:hover .info-container {
     transform: translateY(0px);
     transition: opacity 0.1s, -webkit-transform 0.4s;
@@ -89,4 +99,4 @@ const props = defineProps({
             height: 50px;
         }
     }
-</style>
+</style> -->

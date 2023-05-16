@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const emits = defineEmits(['applyFilter', 'hideFilter'])
+defineEmits(['applyFilter', 'hideFilter'])
 </script>
 
 <template>

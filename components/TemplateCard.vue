@@ -1,9 +1,10 @@
 <script setup lang="ts">
 // Import download button
+import { UseImage } from '@vueuse/components'
 import DownloadButton from '@/components/DownloadButton.vue'
 
 // Variables passed to this component are props
-const props = defineProps({
+defineProps({
   image: {
     type: String,
     required: true
@@ -18,11 +19,18 @@ const props = defineProps({
   >
     <div class="card flex flex-col bg-primary rounded-2xl w-full h-full max-w-xs">
       <div class="aspect-[1.1/1] overflow-hidden h-80">
-        <div
-          class="card-image bg-cover bg-center bg-no-repeat rounded-t-2xl align-middle brightness-100 h-full
+        <UseImage
+          class="card-image object-cover object-center rounded-t-2xl align-middle brightness-100 w-full h-full
        transition-all group-hover:scale-105 group-hover:brightness-[80%]"
-          :style="{ backgroundImage: `url(${image})` }"
-        />
+          :src="image"
+        >
+          <template #loading>
+            <div class="text-primary bg-secondary flex flex-col items-center justify-center w-full h-full text-lg">
+              Loading..
+              <AppIcon class="animate-spin" :icon="['fas', 'spinner']" />
+            </div>
+          </template>
+        </UseImage>
       </div>
       <div class="card-info flex flex-col p-4 justify-start grow items">
         <h1 class="my-2">

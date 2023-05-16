@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ButtonClose from '@/components/icons/ButtonClose.vue'
-
-const props = defineProps({
+defineProps({
   redirectTo: {
     type: String,
     default: '/'

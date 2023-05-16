@@ -50,6 +50,14 @@
   }
 
   @layer utilities {
+
+    .backface-visible {
+      backface-visibility: 'visible',
+    }
+    .backface-hidden {
+      backface-visibility: 'hidden',
+    }
+
     /* Hide scrollbar for Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
       display: none;

@@ -28,7 +28,7 @@ const filteredCatalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
 const cataloguePage: Ref<CatalogueItem[]> = ref([])
 
 const { user } = useUserStore()
-const { data, pending, error, refresh } = await useFetch('/api/CatalogueItems/getLiked', {
+const { pending, error, refresh } = await useFetch('/api/CatalogueItems/getLiked', {
   method: 'POST',
   body: JSON.stringify({
     userId: user.id

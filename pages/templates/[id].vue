@@ -30,7 +30,7 @@ const templatePlaceholder: Template = {
 }
 const template: Ref<Template> = ref(templatePlaceholder)
 
-const { data, pending, error, refresh } = useFetch(`/api/Templates/${route.params.id}`, {
+const { refresh } = useFetch(`/api/Templates/${route.params.id}`, {
   onResponse ({ response }) {
     const data = response._data as Template
     template.value = data

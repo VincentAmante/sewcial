@@ -18,6 +18,7 @@ const clrOverride = ref(props.colourOverride.toLowerCase())
 watchEffect(() => {
   clrOverride.value = props.colourOverride.toLowerCase()
 })
+
 // Normally the alignment of a bubble has specific colouring
 // but in cases where the colouring needs to be overriden, this computed property exists
 const bubbleColour = computed(() => {

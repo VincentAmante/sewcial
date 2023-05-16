@@ -1,6 +1,7 @@
 <!-- TODO: Apply advanced behaviour -->
 <script setup lang="ts">
 
+defineEmits(['close-btn-clicked'])
 </script>
 
 <!--

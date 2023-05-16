@@ -1,9 +1,6 @@
 <script setup lang="ts">
-// Import heart
-import IconHeart from '@/components/icons/IconHeart.vue'
-
 // Variables passed to this component are props
-const props = defineProps({
+defineProps({
   alignment: {
     type: String,
     required: true,

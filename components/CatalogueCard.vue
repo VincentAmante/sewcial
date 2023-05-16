@@ -2,7 +2,7 @@
 import { UseImage } from '@vueuse/components'
 
 // Variables passed to this component are props
-const props = defineProps({
+defineProps({
   image: {
     type: String,
     required: true
@@ -32,7 +32,7 @@ const props = defineProps({
           <template #loading>
             <div class="text-secondary flex flex-col items-center justify-center w-full h-full">
               Loading..
-              <AppIcon :icon="['fas', 'faSpinner']" />
+              <AppIcon class="animate-spin" :icon="['fas', 'spinner']" />
             </div>
           </template>
         </UseImage>

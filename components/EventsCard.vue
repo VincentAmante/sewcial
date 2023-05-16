@@ -3,7 +3,7 @@
 import RSVPButton from '@/components/RSVPButton.vue'
 
 // Variables passed to this component are props
-const props = defineProps({
+defineProps({
   image: {
     type: String,
     required: true
