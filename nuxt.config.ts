@@ -5,7 +5,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/devtools',
     '@vueuse/nuxt',
-    '@huntersofbook/naive-ui-nuxt',
     '@pinia/nuxt'
   ],
   build: {
@@ -36,5 +35,10 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' }
+  },
+  nitro: {
+    prerender: {
+      routes: ['/about-us', '/contact-us', '/donate']
+    }
   }
 })
