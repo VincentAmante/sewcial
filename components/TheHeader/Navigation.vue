@@ -233,7 +233,7 @@ const { signOut, status } = useAuth()
         :class="[navColour.text]"
         :bg-colour="navColour.alt"
         :text-colour="colour"
-        @click="() => useRouter().push('/events')"
+        @click="() => useRouter().push('/booking')"
       >
         Book
       </AppButton>
