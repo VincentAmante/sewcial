@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
       :class="loadingScreenStyle.background"
     >
       <div
-        class="bg-accent-1 rounded-3xl transition-all duration-1000 max-w-md w-full py-4 px-8 "
+        class="bg-accent-1 rounded-3xl transition-all duration-1000 max-w-md w-full py-4 px-8 m-2"
         :class="loadingScreenStyle.screen"
       >
         <!-- <AppIcon class="animate-spin text-center text-4xl w-full text-primary" :icon="['fas', 'spinner']" /> -->
