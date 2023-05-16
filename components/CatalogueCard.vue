@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UseImage } from '@vueuse/components'
+
 // Variables passed to this component are props
 const props = defineProps({
   image: {
@@ -23,10 +25,17 @@ const props = defineProps({
       <div
         class="card-image aspect-[3/4] relative overflow-hidden bg-cover bg-center bg-no-repeat rounded-lg w-full align-middle transition-all"
       >
-        <img
-          class="w-full h-full absolute bg-secondary object-cover object-center aspect-[3/4]"
+        <UseImage
+          class="w-full h-full absolute bg-secondary object-cover object-center aspect-[3/4] flex flex-col"
           :src="image"
         >
+          <template #loading>
+            <div class="text-secondary flex flex-col items-center justify-center w-full h-full">
+              Loading..
+              <AppIcon :icon="['fas', 'faSpinner']" />
+            </div>
+          </template>
+        </UseImage>
         <div
           v-if="!available"
           class="sold-text absolute w-full h-full bg-accent-2 bg-opacity-50 flex flex-col items-center justify-center"

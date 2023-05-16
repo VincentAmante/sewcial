@@ -19,6 +19,7 @@ defineProps({
   <div class="text-center m-2 transition-all hover:transform hover:scale-110 cursor-pointer">
     <div>
       <img
+        loading="lazy"
         class="w-full"
         :src="imgSrc"
       >
