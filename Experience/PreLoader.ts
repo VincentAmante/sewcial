@@ -27,11 +27,11 @@ export default class Preloader extends EventEmitter {
     })
 
     this.resources.on('assets-ready', () => {
-      this.sleep(200).then(() => {
+      this.sleep(1).then(() => {
         const loadingType = document.querySelector('#loading-type')
         if (loadingType) { loadingType.innerHTML = 'Loading World' }
 
-        this.sleep(1200).then(() => {
+        this.sleep(10).then(() => {
           window.dispatchEvent(new Event('done-loading'))
         })
       })

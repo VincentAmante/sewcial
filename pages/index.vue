@@ -123,19 +123,20 @@ onBeforeUnmount(() => {
       :class="loadingScreenStyle.background"
     >
       <div
-        class="m-4 mx-8 bg-accent-1 rounded-3xl transition-all duration-1000 max-w-md w-full py-4"
+        class="bg-accent-1 rounded-3xl transition-all duration-1000 max-w-md w-full py-4 px-8 "
         :class="loadingScreenStyle.screen"
       >
-        <h1 class="text-h-big-boy text-primary text-center">
+        <!-- <AppIcon class="animate-spin text-center text-4xl w-full text-primary" :icon="['fas', 'spinner']" /> -->
+        <h1 class="text-h-big-boy text-primary text-center my-0">
           Loading..
         </h1>
-        <h2
+        <p
           id="loading-type"
-          class="w-full font-light text-primary text-center"
+          class="w-full font-light text-primary text-center mt-0"
         >
-          Downloading Assets -
-          <span id="loading-bar">0</span>
-        </h2>
+          Downloading Assets
+          <span id="loading-bar" class="hidden">0</span>
+        </p>
       </div>
     </div>
     <div class="canvas-wrapper w-[100vw] h-[100vh] pointer-events-none overflow-hidden absolute z-[-100]">
