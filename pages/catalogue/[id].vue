@@ -72,17 +72,19 @@ function onLike () {
       body: JSON.stringify({
         userId: user.id,
         catalogueItemId: catalogueItem.value.id
-      })
-    })
-    const { refresh: refreshLiked } = useFetch('/api/CatalogueItems/getLikedIds', {
-      body: {
-        userId: user.id
-      },
-      onResponse ({ response }) {
-        updateLikedItems(response._data.length)
+      }),
+      onResponse () {
+        const { refresh: refreshLiked } = useFetch('/api/CatalogueItems/getLikedIds', {
+          body: {
+            userId: user.id
+          },
+          onResponse ({ response }) {
+            updateLikedItems(response._data.length)
+          }
+        })
+        refreshLiked()
       }
     })
-    refreshLiked()
   }
 }
 </script>
