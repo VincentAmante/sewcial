@@ -155,7 +155,7 @@ function validateBooking () {
   <main>
     <section class="upcoming-events bg-accent-1 py-4 desktop:p-16">
       <!-- Page Heading -->
-      <div class="flex align-center justify-center py-4">
+      <div class="flex align-center justify-center py-4 pb-16">
         <div class="page-heading">
           <TiltedHeading
             big

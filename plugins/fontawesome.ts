@@ -5,7 +5,8 @@ import { library, config } from '@fortawesome/fontawesome-svg-core'
 import {
   faInstagram,
   faSpotify,
-  faFacebook
+  faFacebook,
+  faGithub
 } from '@fortawesome/free-brands-svg-icons'
 
 import {
@@ -14,12 +15,17 @@ import {
   faChevronLeft,
   faCircle as fasCircle,
   faSpinner,
-  faRightFromBracket
+  faRightFromBracket,
+  faChevronDown,
+  faPlus,
+  faMinus,
+  faHeart
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
   faCircle as farCircle,
-  faCircleDot
+  faCircleDot,
+  faHeart as farHeart
 } from '@fortawesome/free-regular-svg-icons'
 
 const icons = [
@@ -33,7 +39,13 @@ const icons = [
   farCircle,
   faCircleDot,
   faSpinner,
-  faRightFromBracket
+  faRightFromBracket,
+  faChevronDown,
+  faPlus,
+  faMinus,
+  faGithub,
+  faHeart,
+  farHeart
 ]
 library.add(...icons)
 

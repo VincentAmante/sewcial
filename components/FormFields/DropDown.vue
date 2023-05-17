@@ -44,7 +44,9 @@ onMounted(() => {
       @click="() => toggleVisibility()"
     >
       <span>{{ selectedLabel }}</span>
-      <span :class="(visible) ? ['text-accent-1']: ''">V</span>
+      <span :class="(visible) ? ['text-accent-1']: ''">
+        <AppIcon :icon="['fas', 'chevron-down']" />
+      </span>
     </div>
     <ul
       class="flex flex-col absolute bg-secondary w-full rounded-b-lg z-50"

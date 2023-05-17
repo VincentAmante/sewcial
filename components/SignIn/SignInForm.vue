@@ -30,7 +30,9 @@ defineEmits(['close'])
       class="flex justify-center bg-accent-1 gap-4 py-4 px-2 rounded-md text-primary hover:bg-dark hover:text-accent-1 w-full max-w-xs"
       @click="signIn('github')"
     >
-      <div>G</div>
+      <div>
+        <AppIcon :icon="['fab', 'github']" />
+      </div>
       <div>Github</div>
     </button>
   </div>
