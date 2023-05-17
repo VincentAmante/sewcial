@@ -15,6 +15,7 @@ if (!isUserSet && useAuth().status.value === 'authenticated') {
           userId: data.id
         }),
         onResponse ({ response }) {
+          console.log(response._data)
           updateLikedItems(response._data.length)
         }
       })
