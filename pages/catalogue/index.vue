@@ -36,7 +36,7 @@ definePageMeta({
       <Suspense>
         <AppCatalogue />
         <template #fallback>
-          <div class="h-full text-secondary text-h2 flex flex-col items-center">
+          <div class="h-full text-secondary text-h2 flex flex-col items-center py-6">
             Loading..
             <AppIcon :icon="['fas', 'spinner']" class="animate-spin" />
           </div>
