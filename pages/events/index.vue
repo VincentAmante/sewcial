@@ -159,7 +159,7 @@ function validateBooking () {
         <div class="page-heading">
           <TiltedHeading
             big
-            text-color="accent-1"
+            text-color="primary"
             class="tilted-heading bg-secondary desktop:bg-accent-2 text-accent-1 transform translate-y-6"
           >
             upcoming
