@@ -9,7 +9,7 @@ if (!isUserSet && useAuth().status.value === 'authenticated') {
       const data = response._data
       initialise('name', data.email, data.id)
 
-      useFetch('/api/User/getLikedIds', {
+      const { refresh: refreshLikedCount } = useFetch('/api/User/getLikedIds', {
         method: 'POST',
         body: JSON.stringify({
           userId: data.id
@@ -18,6 +18,7 @@ if (!isUserSet && useAuth().status.value === 'authenticated') {
           updateLikedItems(response._data.length)
         }
       })
+      refreshLikedCount()
     }
   })
   refresh()
