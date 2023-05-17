@@ -18,7 +18,8 @@ type Material = {
 type ItemWithMaterial = CatalogueItem & Material
 
 const props = defineProps<{
-  catalogue: ItemWithMaterial[]
+  catalogue: ItemWithMaterial[],
+  isLiked?: boolean
 }>()
 const emit = defineEmits<{(
   e: 'apply-filter', value: ItemWithMaterial[]): void,
@@ -249,12 +250,23 @@ function applyFilters () {
 function hideFilter () {
   emit('hide-filter')
 }
+
+const filterStyling = computed(() => {
+  return (props.isLiked) ? 'primary' : 'secondary'
+})
 </script>
 
 <template>
-  <BaseFilter @apply-filter="() => applyFilters()" @hide-filter="() => hideFilter()">
+  <BaseFilter
+    :is-liked-page="isLiked"
+    @apply-filter="() => applyFilters()"
+    @hide-filter="() => hideFilter()"
+  >
     <div class="flex flex-col gap-2 gap-y-4">
-      <h1 class="text-secondary my-1">
+      <h1
+        class="my-1"
+        :class="`text-${filterStyling}`"
+      >
         Search
       </h1>
       <div class="flex justify-between items-center gap-2">

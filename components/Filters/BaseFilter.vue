@@ -1,11 +1,39 @@
 <script setup lang="ts">
+const props = defineProps({
+  isLikedPage: {
+    type: Boolean,
+    default: false
+  }
+})
+
 defineEmits(['applyFilter', 'hideFilter'])
+
+const filterStyling = computed(() => {
+  switch (props.isLikedPage) {
+    case true:
+      return {
+        bg: 'accent-1',
+        bgAlt: 'primary',
+        text: 'primary'
+      }
+    case false:
+      return {
+        bg: 'primary',
+        bgAlt: 'accent-1',
+        text: 'accent-1'
+      }
+  }
+})
 </script>
 
 <template>
-  <div class="bg-primary flex flex-col p-9">
+  <div
+    class="bg-primary flex flex-col p-9"
+    :class="`bg-${filterStyling.bg}`"
+  >
     <div
-      class="uppercase text-base text-accent-1"
+      class="uppercase text-base"
+      :class="`text-${filterStyling.text}`"
       @click="$emit('hideFilter')"
     >
       Hide Filter
@@ -14,7 +42,7 @@ defineEmits(['applyFilter', 'hideFilter'])
       <slot />
     </div>
     <AppButton
-      bg-colour="accent-1"
+      :bg-colour="filterStyling.bgAlt"
       @click="$emit('applyFilter')"
     >
       Apply Filters

@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/useUserStore'
 
-const { isUserSet, initialise } = useUserStore()
+const { isUserSet, initialise, updateLikedItems } = useUserStore()
 if (!isUserSet && useAuth().status.value === 'authenticated') {
   const email = useAuth().data.value?.user?.email
   const { refresh } = useFetch(`/api/User/${email}`, {
     onResponse ({ response }) {
       const data = response._data
       initialise('name', data.email, data.id)
+
+      useFetch('/api/User/getLikedIds', {
+        method: 'POST',
+        body: {
+          userId: data.id
+        },
+        onResponse ({ response }) {
+          updateLikedItems(response._data.length)
+        }
+      })
     }
   })
   refresh()

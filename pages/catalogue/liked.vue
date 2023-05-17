@@ -121,6 +121,7 @@ const filterToggleStyling = computed(() => {
         >
           <CatalogueFilter
             v-if="!pending && !error && catalogue !== null"
+            is-liked="true"
             :catalogue="catalogue"
             class="w-full z-[100] max-w-lg transition-all duration-500 ease-in-out pt-0"
             :class="filterToggleStyling"
