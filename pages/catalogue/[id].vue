@@ -74,7 +74,7 @@ function onLike () {
         catalogueItemId: catalogueItem.value.id
       })
     })
-    const { refresh: refreshLiked } = useFetch('/api/User/getLikedIds', {
+    const { refresh: refreshLiked } = useFetch('/api/CatalogueItems/getLikedIds', {
       body: {
         userId: user.id
       },
