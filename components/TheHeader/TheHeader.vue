@@ -89,12 +89,6 @@ const emit = defineEmits(['clickedLikedBtn'])
         class="relative"
         :class="(format === 'shop') ? 'block' : 'hidden'"
       >
-        <div
-          v-if="userLikedItems > 0"
-          class="flex flex-col items-center justify-center absolute right-0 top-0 transform -translate-y-2 translate-x-2 bg-accent-2 text-primary aspect-square rounded-full w-5 h-5 text-center align-middle m-0 select-none"
-        >
-          {{ userLikedItems }}
-        </div>
         <ButtonLikedPage
           class="btn-liked-page h-6 tablet:h-[30px] cursor-pointer"
           @click="$emit('clickedLikedBtn')"
