@@ -12,15 +12,16 @@ const filterStyling = computed(() => {
   switch (props.isLikedPage) {
     case true:
       return {
-        bg: 'accent-1',
+        bg: 'bg-accent-1',
         bgAlt: 'primary',
-        text: 'primary'
+        text: 'text-primary'
       }
     case false:
+    default:
       return {
-        bg: 'primary',
+        bg: 'bg-primary',
         bgAlt: 'accent-1',
-        text: 'accent-1'
+        text: 'text-accent-1'
       }
   }
 })
@@ -29,11 +30,11 @@ const filterStyling = computed(() => {
 <template>
   <div
     class="bg-primary flex flex-col p-9"
-    :class="`bg-${filterStyling.bg}`"
+    :class="filterStyling.bg"
   >
     <div
       class="uppercase text-base"
-      :class="`text-${filterStyling.text}`"
+      :class="filterStyling.text"
       @click="$emit('hideFilter')"
     >
       Hide Filter
