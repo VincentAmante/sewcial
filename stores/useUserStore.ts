@@ -44,6 +44,7 @@ export const useUserStore = defineStore('user', () => {
 
   function updateLikedItems (newLikedItems: number) {
     likedItems.value = newLikedItems
+    console.log('likedItems.value', likedItems.value)
   }
 
   return { user, $reset, initialise, isUserSet, userLikedItems, updateLikedItems }
