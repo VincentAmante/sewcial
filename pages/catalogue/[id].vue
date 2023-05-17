@@ -47,7 +47,7 @@ const { refresh } = useFetch(`/api/CatalogueItems/${route.params.id}`, {
 })
 refresh()
 
-const { user, isUserSet } = useUserStore()
+const { user, isUserSet, updateLikedItems } = useUserStore()
 if (isUserSet) {
   const { refresh: refreshIsLiked } = await useFetch('/api/CatalogueItems/isLiked', {
     method: 'POST',
@@ -74,6 +74,15 @@ function onLike () {
         catalogueItemId: catalogueItem.value.id
       })
     })
+    const { refresh: refreshLiked } = useFetch('/api/User/getLikedIds', {
+      body: {
+        userId: user.id
+      },
+      onResponse ({ response }) {
+        updateLikedItems(response._data.length)
+      }
+    })
+    refreshLiked()
   }
 }
 </script>

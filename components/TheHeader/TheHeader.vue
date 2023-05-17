@@ -4,7 +4,11 @@ import { useRoute } from 'vue-router'
 import ButtonLikedPage from '../icons/ButtonLikedPage.vue'
 
 import BurgerButton from './BurgerButton.vue'
-import Navigation from './Navigation.vue'
+import LazyNavigation from './Navigation.vue'
+import { useUserStore } from '~/stores/useUserStore'
+
+const { likedItems: userLikedItems } = useUserStore()
+const likedItems = computed(() => userLikedItems)
 
 const props = defineProps({
   format: {
@@ -81,12 +85,20 @@ const emit = defineEmits(['clickedLikedBtn'])
       :header-toggled="headerToggled"
       class="logo w-full left-0 right-0 flex justify-start absolute"
     />
-    <div class="flex items-center gap-2 z-[150] fixed">
-      <ButtonLikedPage
-        class="btn-liked-page h-6 tablet:h-[30px] cursor-pointer"
-        :class="(format === 'shop') ? 'block' : 'hidden'"
-        @click="$emit('clickedLikedBtn')"
-      />
+    <div class="flex items-center gap-4 z-[150] fixed">
+      <div class="relative">
+        <div
+          v-if="likedItems > 0"
+          class="flex flex-col items-center justify-center absolute right-0 top-0 transform -translate-y-2 translate-x-2 bg-accent-2 text-primary aspect-square rounded-full w-5 h-5 text-center align-middle m-0 select-none"
+        >
+          {{ likedItems }}
+        </div>
+        <ButtonLikedPage
+          class="btn-liked-page h-6 tablet:h-[30px] cursor-pointer"
+          :class="(format === 'shop') ? 'block' : 'hidden'"
+          @click="$emit('clickedLikedBtn')"
+        />
+      </div>
       <BurgerButton
         v-model="headerToggled"
         class="burger-btn z-[150]"
@@ -95,7 +107,7 @@ const emit = defineEmits(['clickedLikedBtn'])
     </div>
   </header>
 
-  <Navigation
+  <LazyNavigation
     :is-toggled="headerToggled"
     :colour="navColour"
     :page="page"

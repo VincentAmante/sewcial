@@ -11,6 +11,7 @@ export const useUserStore = defineStore('user', () => {
   const email = ref('')
   const id = ref('')
   const isSet = ref(false)
+  const likedItems = ref(0)
 
   const isUserSet = computed(() => {
     return isSet.value
@@ -39,5 +40,9 @@ export const useUserStore = defineStore('user', () => {
     isSet.value = true
   }
 
-  return { user, $reset, initialise, isUserSet }
+  function updateLikedItems (newLikedItems: number) {
+    likedItems.value = newLikedItems
+  }
+
+  return { user, $reset, initialise, isUserSet, likedItems, updateLikedItems }
 })
