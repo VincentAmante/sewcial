@@ -25,6 +25,8 @@ export const useUserStore = defineStore('user', () => {
     } as User
   })
 
+  const userLikedItems = computed(() => { return likedItems.value })
+
   function $reset () {
     name.value = ''
     email.value = ''
@@ -44,5 +46,5 @@ export const useUserStore = defineStore('user', () => {
     likedItems.value = newLikedItems
   }
 
-  return { user, $reset, initialise, isUserSet, likedItems, updateLikedItems }
+  return { user, $reset, initialise, isUserSet, userLikedItems, updateLikedItems }
 })
