@@ -46,7 +46,7 @@ defineProps({
         </div>
       </div>
       <div class="card-heading flex flex-wrap justify-between items-baseline text-left gap-x-2 pt-2 text-secondary">
-        <h1 class="item-name my-0 max-w-[10ch] text-ellipsis overflow-hidden">
+        <h1 class="item-name my-0 max-w-[14ch] text-ellipsis overflow-hidden">
           <slot name="item-name" />
         </h1>
         <h1 class="price my-0 text-accent-1">

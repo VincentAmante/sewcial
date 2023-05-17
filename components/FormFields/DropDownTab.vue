@@ -7,7 +7,6 @@ import IconPlus from '@/components/icons/IconPlus.vue'
 const props = defineProps({
   alignment: {
     type: String,
-    required: true,
     default: 'left'
   },
   modelValue: {

@@ -71,10 +71,10 @@ watchEffect(() => {
 
 <template>
   <div>
-    <ul class="flex justify-center content-center mt-3 list-none">
+    <ul class="flex justify-center content-center mt-3 list-none items-center">
       <li
         class="inline-block mr-2"
-        :class="(isFirstPage) ? ['opacity-50' , 'pointer-events-none'] : ['']"
+        :class="(isFirstPage) ? ['opacity-50' , 'pointer-events-none'] : ['cursor-pointer']"
       >
         <div class="chevron" @click="() => prev()">
           <IconChevronLeft />
@@ -88,13 +88,13 @@ watchEffect(() => {
       >
         <div
           class="page-link p-2 px-4 rounded-full"
-          :class="(currentPage === pageNum) ? ['bg-accent-1', 'text-primary', 'cursor-default', 'pointer-events-none'] : ['']"
+          :class="(currentPage === pageNum) ? ['bg-accent-1', 'text-primary', 'cursor-default', 'pointer-events-none'] : ['cursor-pointer']"
           @click="currentPage = pageNum"
         >
           {{ pageNum }}
         </div>
       </li>
-      <li class="inline-block mr-2" :class="(isLastPage) ? ['opacity-50' , 'pointer-events-none'] : ['']">
+      <li class="inline-block mr-2" :class="(isLastPage) ? ['opacity-50' , 'pointer-events-none'] : ['cursor-pointer']">
         <div class="chevron" @click="() => next()">
           <IconChevronRight />
         </div>
