@@ -14,9 +14,9 @@ if (!isUserSet && useAuth().status.value === 'authenticated') {
         body: JSON.stringify({
           userId: data.id
         }),
-        onResponse ({ response }) {
-          console.log(response._data)
-          updateLikedItems(response._data.length)
+        onResponse ({ response: likedItems }) {
+          console.log(likedItems._data)
+          updateLikedItems(likedItems._data.length)
         }
       })
       refreshLikedCount()
