@@ -11,9 +11,9 @@ if (!isUserSet && useAuth().status.value === 'authenticated') {
 
       useFetch('/api/User/getLikedIds', {
         method: 'POST',
-        body: {
+        body: JSON.stringify({
           userId: data.id
-        },
+        }),
         onResponse ({ response }) {
           updateLikedItems(response._data.length)
         }
