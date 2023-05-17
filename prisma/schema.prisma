@@ -65,6 +65,7 @@ model CatalogueItem {
   createdAt          DateTime                   @default(now())
   authorFirstName    String?                    @default("first name missing")
   authorLastName     String?                    @default("last name missing")
+  sizing             String                     @default("M")
   CategoryTag        CatalogueCategoryTag?      @relation(fields: [categoryTagName], references: [name])
   materials          MaterialOnCatalogueItems[]
   LikedCatalogueItem LikedCatalogueItem[]
@@ -126,7 +127,7 @@ model Workshop {
   priceAED    Float
   details     Json?
   totalSlots  Int
-  bookedSlots Int       @default(0)
+  bookedSlots Int        @default(0)
   skill       Skill
   thumbnail   String     @default("")
   Bookings    Bookings[]

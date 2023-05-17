@@ -18,6 +18,7 @@ export default defineEventHandler(async (event) => {
       priceAED: body.priceAED,
       isFeatured: body.isFeatured,
       categoryTagName: body.categoryTagName,
+      sizing: body.sizing,
       sizingsData
     }
   })
