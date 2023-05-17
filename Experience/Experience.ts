@@ -34,6 +34,7 @@ export default class Experience {
   constructor (canvas: HTMLCanvasElement | null = document.querySelector('#canvas')) {
     // Singleton Set-up
     if (instance) {
+      this.isActive = true
       return instance
     }
     instance = this
@@ -65,14 +66,18 @@ export default class Experience {
     this.sizes.on('resize', () => {
       this.resize()
     })
+
+    this.isActive = true
   }
 
   resize () {
+    if (!this.isActive) { return }
     this.camera.resize()
     this.renderer.resize()
   }
 
   update () {
+    if (!this.isActive) { return }
     this.world.update()
     this.camera.update()
     this.renderer.update()
@@ -80,10 +85,15 @@ export default class Experience {
   }
 
   unmount () {
-    // this.renderer.instance.dispose()
+    if (!this.isActive) { return }
+    this.isActive = false
+    this.sizes.unmount()
+    this.renderer.instance.dispose()
+    this.raycaster.unmount()
     if (instance != null) {
       instance = null
     }
+
     (window as any).experience = null
   }
 }

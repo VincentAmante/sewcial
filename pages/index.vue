@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import { onMounted, ref, onBeforeUnmount } from 'vue'
+import LazyAppCanvas from '@/components/Subpages/AppCanvas.vue'
 import Experience from '@/Experience/Experience'
 // import router from '@/router'
 
@@ -78,12 +79,22 @@ useHead({
   ]
 })
 
-const experience = ref<Experience>()
-
 const loadingScreenStyle = ref({
   background: [''],
   screen: ['']
 })
+
+function doneLoading () {
+  const loadingScreen = document.querySelector('#loading-screen')
+  if (loadingScreen != null) {
+    loadingScreenStyle.value = {
+      background: ['bg-secondary', 'bg-opacity-0', 'pointer-events-none'],
+      screen: ['transform', 'translate-y-[-100%]', 'opacity-0']
+    }
+  }
+
+  window.removeEventListener('done-loading', doneLoading)
+}
 onMounted(() => {
   window.addEventListener(
     'triggerMessage',
@@ -91,27 +102,14 @@ onMounted(() => {
       router.push({ name: 'about-us' })
     }
   )
-  const appElem: HTMLCanvasElement | null = document.querySelector('#canvas')
-  if (appElem != null) {
-    experience.value = new Experience(appElem)
-  }
-
-  window.addEventListener('done-loading', () => {
-    const loadingScreen = document.querySelector('#loading-screen')
-    if (loadingScreen != null) {
-      loadingScreenStyle.value = {
-        background: ['bg-secondary', 'bg-opacity-0', 'pointer-events-none'],
-        screen: ['transform', 'translate-y-[-100%]', 'opacity-0']
-      }
-    }
-  })
+  window.addEventListener('done-loading', doneLoading)
 })
 
 // FIXME: Improve canvas unmount handling
 /** Currently, this code is done because when you switch pages and then go back to home, the canvas is lost
  *  ideally, we don't want the Experience to load a long time, so if canvas-loading is getting too long, then consider alternatives */
 onBeforeUnmount(() => {
-  if (experience.value != null) { experience.value.unmount() }
+  window.removeEventListener('doneLoading', doneLoading)
 })
 </script>
 
@@ -140,10 +138,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <div class="canvas-wrapper w-[100vw] h-[100vh] pointer-events-none overflow-hidden absolute z-[-100]">
-      <canvas
-        id="canvas"
-        class="w-full h-full bg-secondary pointer-events-auto"
-      />
+      <LazyAppCanvas />
     </div>
   </main>
 </template>

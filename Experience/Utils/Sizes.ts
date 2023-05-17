@@ -18,18 +18,25 @@ export default class Sizes extends EventEmitter {
     this.pixelRatio = Math.min(window.devicePixelRatio, 2)
     this.frustrum = 5
 
-    window.addEventListener('resize', () => {
-      // Guard Clause
-      if (canvasElem === null) { return }
+    window.addEventListener('resize', this.onResize.bind(this, canvasElem))
+  }
 
-      canvasElem.width = window.innerWidth
-      canvasElem.height = window.innerHeight
-      this.width = canvasElem.width
-      this.height = canvasElem.height
-      this.aspect = canvasElem.width / canvasElem.height
-      this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+  onResize (canvasElem: HTMLCanvasElement | null) {
+    if (canvasElem === null) { return }
 
-      this.emit('resize')
-    })
+    canvasElem.width = window.innerWidth
+    canvasElem.height = window.innerHeight
+    this.width = canvasElem.width
+    this.height = canvasElem.height
+    this.aspect = canvasElem.width / canvasElem.height
+    this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+
+    this.emit('resize')
+  }
+
+  unmount () {
+    window.removeEventListener('resize',
+      this.onResize
+        .bind(this, document.querySelector('canvas#canvas')))
   }
 }

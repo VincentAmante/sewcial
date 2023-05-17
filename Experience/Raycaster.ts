@@ -27,7 +27,6 @@ export default class Raycaster {
   selectedModel: any
   rawIntersects: any
   pointer: THREE.Vector2
-
   constructor () {
     this.experience = new Experience()
     this.scene = this.experience.scene
@@ -87,37 +86,38 @@ export default class Raycaster {
 
       /// These eventListeners came from jZhou's code, don't know what it does yet though
       this.touchedPoints = []
-      window.addEventListener('pointerdown', (event) => {
-        this.touchedPoints.push(event.pointerId)
-
-        this.cursorXMin = Math.abs((event.clientX / this.sizes.width * 2 - 1) * 0.9)
-        this.cursorXMax = Math.abs((event.clientX / this.sizes.width * 2 - 1) * 1.1)
-
-        this.cursorYMin = Math.abs((event.clientY / this.sizes.height * 2 - 1) * 0.9)
-        this.cursorYMax = Math.abs((event.clientY / this.sizes.height * 2 - 1) * 1.1)
-      })
-
-      window.addEventListener('pointermove', (event) => {
-        this.onPointerMove(event)
-      })
+      window.addEventListener('pointerdown', this.onPointerDown.bind(this))
+      window.addEventListener('pointermove', this.onPointerMove.bind(this))
       // Click listener
-      window.addEventListener('pointerup', (event) => {
-        this.cursor.x = event.clientX / this.sizes.width * 2 - 1
-        this.cursor.y = -(event.clientY / this.sizes.height) * 2 + 1
-
-        this.absX = Math.abs(this.cursor.x)
-        this.absY = Math.abs(this.cursor.y)
-
-        if (this.touchedPoints.length === 1 &&
-                this.absX > this.cursorXMin && this.absX < this.cursorXMax &&
-                this.absY > this.cursorYMin && this.absY < this.cursorYMax) {
-          this.click(this.cursor)
-          this.touchedPoints = []
-        } else {
-          this.touchedPoints = []
-        }
-      })
+      window.addEventListener('pointerup', this.onPointerUp.bind(this))
     })
+  }
+
+  onPointerUp (event) {
+    this.cursor.x = event.clientX / this.sizes.width * 2 - 1
+    this.cursor.y = -(event.clientY / this.sizes.height) * 2 + 1
+
+    this.absX = Math.abs(this.cursor.x)
+    this.absY = Math.abs(this.cursor.y)
+
+    if (this.touchedPoints.length === 1 &&
+            this.absX > this.cursorXMin && this.absX < this.cursorXMax &&
+            this.absY > this.cursorYMin && this.absY < this.cursorYMax) {
+      this.click(this.cursor)
+      this.touchedPoints = []
+    } else {
+      this.touchedPoints = []
+    }
+  }
+
+  onPointerDown (event) {
+    this.touchedPoints.push(event.pointerId)
+
+    this.cursorXMin = Math.abs((event.clientX / this.sizes.width * 2 - 1) * 0.9)
+    this.cursorXMax = Math.abs((event.clientX / this.sizes.width * 2 - 1) * 1.1)
+
+    this.cursorYMin = Math.abs((event.clientY / this.sizes.height * 2 - 1) * 0.9)
+    this.cursorYMax = Math.abs((event.clientY / this.sizes.height * 2 - 1) * 1.1)
   }
 
   onPointerMove (event) {
@@ -168,6 +168,12 @@ export default class Raycaster {
           break
       }
     }
+  }
+
+  unmount () {
+    window.removeEventListener('pointerdown', this.onPointerDown)
+    window.removeEventListener('pointermove', this.onPointerMove)
+    window.removeEventListener('pointerup', this.onPointerUp)
   }
 
   click (cursor: THREE.Vector2) {

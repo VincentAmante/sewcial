@@ -19,23 +19,27 @@ const props = defineProps({
 })
 const noSliderOpen = ref(true)
 
+function onToggle () {
+  if (noSliderOpen.value) {
+    isOpen.value = true
+    window.dispatchEvent(new Event('slider-opened'))
+  }
+}
+
+function onSliderOpen () {
+  isOpen.value = true
+}
+function onSliderClose () {
+  isOpen.value = false
+}
+
 onMounted(() => {
   // Listens for an event based on the prop<name> to open
   // See TestViewIcen to see how that operates
 
-  window.addEventListener('slider-opened', () => {
-    noSliderOpen.value = false
-  })
-  window.addEventListener('slider-closed', () => {
-    noSliderOpen.value = true
-  })
-
-  window.addEventListener(`toggle-${props.name}`, () => {
-    if (noSliderOpen.value) {
-      isOpen.value = true
-      window.dispatchEvent(new Event('slider-opened'))
-    }
-  })
+  window.addEventListener('slider-opened', onSliderOpen)
+  window.addEventListener('slider-closed', onSliderClose)
+  window.addEventListener(`toggle-${props.name}`, onToggle)
 })
 
 function close () {
@@ -52,10 +56,19 @@ const toggledStyle = computed(() => {
     }
   } else {
     return {
-      wrapper: [''],
-      slider: ['']
+      wrapper: [],
+      slider: []
     }
   }
+})
+
+onUnmounted(() => {
+  noSliderOpen.value = true
+  window.dispatchEvent(new Event('slider-closed'))
+
+  window.removeEventListener('slider-opened', onSliderOpen)
+  window.removeEventListener('slider-closed', onSliderClose)
+  window.removeEventListener(`toggle-${props.name}`, onToggle)
 })
 </script>
 
