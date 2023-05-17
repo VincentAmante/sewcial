@@ -3,7 +3,8 @@ export const Category = {
   dresses: 'dresses',
   misc: 'misc',
   pants: 'pants',
-  shirts: 'shirts'
+  shirts: 'shirts',
+  skirts: 'skirts'
 }
 
 export type Category = typeof Category[keyof typeof Category]

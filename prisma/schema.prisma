@@ -191,6 +191,8 @@ enum EnumMaterial {
   synthetic
   velvet
   wool
+  polyester
+  curduroy
 }
 
 enum Skill {

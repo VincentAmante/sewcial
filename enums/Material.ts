@@ -13,7 +13,9 @@ export const EnumMaterial: {[key in EnumMaterialOrigin]: key} = {
   silk: 'silk',
   synthetic: 'synthetic',
   velvet: 'velvet',
-  wool: 'wool'
+  wool: 'wool',
+  curduroy: 'curduroy',
+  polyester: 'polyester'
 } as const
 
 export type EnumMaterial = EnumMaterialOrigin
