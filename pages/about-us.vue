@@ -7,23 +7,23 @@
     <!-- Stickers -->
     <div class="sticker-container absolute w-full ">
       <img
-        class="sticker sticker-1 hidden desktop:block absolute -z-10 right-0 top-0 transform translate-x-[20%] translate-y-[-3%] w-[32rem]"
+        class="sticker sticker-1 hidden desktop:block absolute -z-10 right-0 top-2 transform translate-x-[20%] translate-y-[-3%] w-[40rem]"
         src="@/assets/images/Sticker_7.png"
         alt=""
       >
     </div>
 
     <div class="about-container">
-      <div class="splash-greeting flex text-center flex-col gap-2 p-4 py-16 desktop:p-20 desktop:text-left desktop:translate-x-[5%] desktop:text">
-        <h1 class="text-h-giant m-0 text-secondary lowercase">
+      <div class="splash-greeting flex text-center flex-col gap-0 p-4 py-16 desktop:p-20 desktop:text-left desktop:translate-x-[8%] desktop:text">
+        <h1 class="text-[100px] m-0 -mb-5 text-secondary lowercase">
           sew.
         </h1>
-        <SpeechBubbleRaw alignment="left" colour-override="accent-1" class="transform -rotate-6 -translate-x-0 -translate-y-0 flex flex-col gap-2 py-0 my-0 scale-90 self-center mobile:px-8 desktop:self-start">
-          <h1 class="text-h-giant w-full lowercase text-center transform my-0 py-2 px-2">
+        <SpeechBubbleRaw alignment="left" colour-override="accent-1" class="transform -rotate-6 -translate-x-0 -translate-y-0 flex flex-col gap-2 py-0 -ml-2 my-0 scale-90 self-center mobile:px-8 desktop:self-start">
+          <h1 class="text-[100px] w-full lowercase text-center transform my-0 py-0.05 px-2">
             share.
           </h1>
         </SpeechBubbleRaw>
-        <h1 class="text-h-giant text-secondary lowercase mt-0 -translate-y-4">
+        <h1 class="text-[100px] text-secondary lowercase -mt-2 -translate-y-4">
           connect.
         </h1>
       </div>
