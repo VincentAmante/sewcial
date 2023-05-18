@@ -15,7 +15,7 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
         </TiltedHeading>
         <span>community</span>
       </div>
-      <div class="flex flex-col tablet:flex-row gap-[6vw]">
+      <div class="flex flex-col tablet:flex-row gap-[6vw] mb-16">
         <div class="info-card flex flex-col items-center text-center">
           <img
             src="@/assets/icons/sharelove.png"
@@ -98,6 +98,15 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
             </li>
           </ol>
         </div>
+
+        <img
+          class="hidden absolute left-0 w-[8%] desktop:block lgScreen:w-[5%] xlScreen:[2%]"
+          src="@/assets/images/donatesticker1.png"
+        >
+        <img
+          class="hidden absolute right-0 w-[10%] desktop:block lgScreen:w-[7%] xlScreen:[4%]"
+          src="@/assets/images/donatesticker2.png"
+        >
       </div>
     </section>
     <section>
