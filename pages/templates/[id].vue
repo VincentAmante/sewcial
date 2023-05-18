@@ -79,7 +79,9 @@ function downloadImage () {
             <a @click="() => downloadImage()">DOWNLOAD AS PDF</a>
           </SpeechBubble>
           <SpeechBubble alignment="right" class="speech-bubble">
-            <a>VIEW TEMPLATE ONLINE</a>
+            <NuxtLink :to="template.templateImage">
+              VIEW TEMPLATE ONLINE
+            </NuxtLink>
           </SpeechBubble>
         </div>
       </div>
@@ -94,7 +96,9 @@ function downloadImage () {
           :url="template.templateImage"
           class="btn"
         />
-        <ButtonFullscreen class="btn" />
+        <a :href="template.templateImage" class="btn">
+          <ButtonFullscreen />
+        </a>
       </div>
     </section>
 
