@@ -77,7 +77,7 @@ async function submitContactForm () {
               Phone Number
             </h1>
             <h2 class="my-0 font-normal">
-              +971 00 000 000
+              +971 00 000 000 / +971 23 456 7890
             </h2>
           </div>
           <div>
