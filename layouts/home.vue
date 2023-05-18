@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary">
+  <div class="bg-secondary">
     <div>
       <DescriptionSlider
         class="z-[150]"

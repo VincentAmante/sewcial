@@ -97,7 +97,7 @@ const router = useRouter()
 
 function bookEvent (id: string) {
   router.push({
-    name: 'events-booking-type-id-date',
+    name: 'events-booking_type_id_date',
     params: {
       type: 'event',
       id,
@@ -108,9 +108,9 @@ function bookEvent (id: string) {
 
 function bookWorkshop (id: string) {
   router.push({
-    name: 'events-booking-type-id-date',
+    name: 'events-booking_type_id_date',
     params: {
-      type: 'event',
+      type: 'workshop',
       id,
       date: chosenDate.value
     }
@@ -118,7 +118,7 @@ function bookWorkshop (id: string) {
 }
 function bookSession () {
   router.push({
-    name: 'events-booking-type-id-date',
+    name: 'events-booking_type_id_date',
     params: {
       type: 'session',
       id: uuidv4(),
@@ -182,7 +182,7 @@ function validateBooking () {
           <EventsCard
             v-if="event.startTime > new Date()"
             :image="event.thumbnail"
-            @click="() => router.push(`/events/event-${event.id}`)"
+            @click="() => router.push(`/events-workshops/event-${event.id}`)"
             @clicked-rsvp="() => bookEvent(event.id)"
           >
             <template #event-name>
