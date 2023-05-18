@@ -27,10 +27,10 @@ function onToggle () {
 }
 
 function onSliderOpen () {
-  isOpen.value = true
+  noSliderOpen.value = false
 }
 function onSliderClose () {
-  isOpen.value = false
+  noSliderOpen.value = true
 }
 
 onMounted(() => {
