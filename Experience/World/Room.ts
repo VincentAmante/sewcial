@@ -1,10 +1,11 @@
 import * as THREE from 'three'
 import Experience from '../Experience'
+import Resources from '../Utils/Resources'
 
 export default class Room {
   experience: Experience
   scene: any
-  resources: any
+  resources: Resources
   room: any
   actualRoom: any
 
