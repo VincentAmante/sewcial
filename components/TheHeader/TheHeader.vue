@@ -30,11 +30,7 @@ const setColour = (page: String) => {
     case 'home':
     case '':
       return 'primary'
-    case 'test':
     case 'about':
-    case 'test-icen':
-    case 'test-kie':
-    case 'test-nehan':
     case 'templates':
       return 'secondary'
     default:

@@ -93,63 +93,57 @@
             Team!
           </h1>
         </div>
-        <div class="team-members flex flex-col items-center desktop:flex-row desktop:justify-evenly desktop:px-12">
-          <div class="one flex flex-row gap-5 desktop:gap-0">
-            <TeamPictures img-src="/images/team-icons/nehan.png">
-              <template #name>
-                Nehan Tariq
-              </template>
-              <template #role>
-                Role
-              </template>
-            </TeamPictures>
-            <TeamPictures img-src="/images/team-icons/frnk.png">
-              <template #name>
-                Franchesca Raymundo
-              </template>
-              <template #role>
-                Role
-              </template>
-            </TeamPictures>
-          </div>
-          <div class="two flex flex-row gap-5 desktop:gap-0">
-            <TeamPictures img-src="/images/team-icons/louis.png">
-              <template #name>
-                Anthony Cubillas
-              </template>
-              <template #role>
-                Role
-              </template>
-            </TeamPictures>
-            <TeamPictures img-src="/images/team-icons/icen.png">
-              <template #name>
-                Vincent Amante
-              </template>
-              <template #role>
-                Role
-              </template>
-            </TeamPictures>
-          </div>
-          <div class="three flex flex-row gap-5 desktop:gap-0">
-            <TeamPictures img-src="/images/team-icons/nella.png">
-              <template #name>
-                Nella Bermudo
-              </template>
-              <template #role>
-                Role
-              </template>
-            </TeamPictures>
-            <TeamPictures
-              img-src="/images/team-icons/bie.png"
-            >
-              <template #name>
-                Princelle Abbie
-              </template>
-              <template #role>
-                Role
-              </template>
-            </TeamPictures>
-          </div>
+        <div class="team-members flex flex-col items-center desktop:flex-row desktop:justify-evenly desktop:px-12 py-8">
+          <TeamPictures img-src="/images/team-icons/nehan.png">
+            <template #name>
+              Nehan Tariq
+            </template>
+            <template #role>
+              Role
+            </template>
+          </TeamPictures>
+          <TeamPictures img-src="/images/team-icons/frnk.png">
+            <template #name>
+              Franchesca Raymundo
+            </template>
+            <template #role>
+              Role
+            </template>
+          </TeamPictures>
+          <TeamPictures img-src="/images/team-icons/louis.png">
+            <template #name>
+              Anthony Cubillas
+            </template>
+            <template #role>
+              Role
+            </template>
+          </TeamPictures>
+          <TeamPictures img-src="/images/team-icons/icen.png">
+            <template #name>
+              Vincent Amante
+            </template>
+            <template #role>
+              Role
+            </template>
+          </TeamPictures>
+          <TeamPictures img-src="/images/team-icons/nella.png">
+            <template #name>
+              Nella Bermudo
+            </template>
+            <template #role>
+              Role
+            </template>
+          </TeamPictures>
+          <TeamPictures
+            img-src="/images/team-icons/bie.png"
+          >
+            <template #name>
+              Princelle Abbie
+            </template>
+            <template #role>
+              Role
+            </template>
+          </TeamPictures>
         </div>
       </section>
 

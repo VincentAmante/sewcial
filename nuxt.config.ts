@@ -33,7 +33,6 @@ export default defineNuxtConfig({
     '@/assets/styles/main.css'
   ],
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' }
   },
   nitro: {

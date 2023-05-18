@@ -2,7 +2,6 @@
 
 import { onMounted, ref, onBeforeUnmount } from 'vue'
 import LazyAppCanvas from '@/components/Subpages/AppCanvas.vue'
-import Experience from '@/Experience/Experience'
 // import router from '@/router'
 
 const router = useRouter()
@@ -105,9 +104,6 @@ onMounted(() => {
   window.addEventListener('done-loading', doneLoading)
 })
 
-// FIXME: Improve canvas unmount handling
-/** Currently, this code is done because when you switch pages and then go back to home, the canvas is lost
- *  ideally, we don't want the Experience to load a long time, so if canvas-loading is getting too long, then consider alternatives */
 onBeforeUnmount(() => {
   window.removeEventListener('doneLoading', doneLoading)
 })

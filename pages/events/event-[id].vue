@@ -60,7 +60,7 @@ function bookEvent (id: string) {
       <div class="text-primary text-base">
         <span @click="() => router.push('/events')">Events</span>
         &gt;
-        <span>Luggate Tag</span>
+        <span>{{ event?.title }}</span>
       </div>
       <div>
         <div class="flex flex-col tablet:flex-col-reverse gap-4">
