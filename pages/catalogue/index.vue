@@ -16,17 +16,23 @@ definePageMeta({
       >
       <div class="flex flex-col items-center justify-center w-full h-full mb-8 min-h-[30vh] text-secondary tablet:items-start p-4 tablet:px-20 desktop:w-1/2">
         <div class="text-left p-2 max-w-md">
-          <h1>NEW COLLECTION</h1>
-          <h2>Renewed Blooms</h2>
+          <TiltedHeading class="bg-accent-1 translate-y-10 -z-10">
+            NEW
+          </TiltedHeading>
+          <h1 class="text-h-giant">
+            COLLECTION
+          </h1>
+          <h2>Nike Blooms</h2>
           <p>
             Celebrate the season with our unique and eco-friendly upcycled clothing pieces, featuring vibrant floral patterns and sustainable materials.
           </p>
         </div>
         <SpeechBubble
           alignment="start"
-          class="speech mx-auto tablet:mx-2"
+          class="speech mx-auto tablet:mx-2 cursor-pointer"
+          @click="() => useRouter().push('/catalogue/4735d118-a819-4a7d-ab82-919f5bf0ddba')"
         >
-          <p class="button p-2 px-4">
+          <p class="button p-2 px-4 ">
             VIEW LIMITED EDITION
           </p>
         </SpeechBubble>
