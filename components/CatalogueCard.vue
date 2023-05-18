@@ -26,6 +26,7 @@ defineProps({
         class="card-image aspect-[3/4] relative overflow-hidden bg-cover bg-center bg-no-repeat rounded-lg w-full align-middle transition-all"
       >
         <UseImage
+          loading="lazy"
           class="w-full h-full absolute bg-secondary object-cover object-center aspect-[3/4] flex flex-col"
           :src="image"
         >
