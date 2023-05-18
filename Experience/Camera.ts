@@ -32,11 +32,19 @@ export default class Camera {
     // Switch between either perspective or ortho
     this.instance = this.createOrthographicCamera()
 
-    this.instance.position.x = 19
+    this.instance.position.x = 18.6
     this.instance.position.y = 10
     this.instance.position.z = 20
 
     this.scene.add(this.instance)
+
+    // window.addEventListener('keydown', (event) => {
+    //   if (event.keyCode === 37) {
+    //     this.instance.position.x -= 0.1
+    //   } else if (event.keyCode === 39) {
+    //     this.instance.position.x += 0.1
+    //   }
+    // })
   }
 
   createPerspectiveCamera () {
@@ -110,7 +118,7 @@ export default class Camera {
     // Set Limitations
     this.controls.minDistance = 7
     this.controls.maxDistance = 50
-    this.controls.minAzimuthAngle = Math.PI * 0.05
+    this.controls.minAzimuthAngle = Math.PI * 0.04
     this.controls.maxAzimuthAngle = Math.PI * 0.4
     this.controls.minPolarAngle = Math.PI * 0.25
     this.controls.maxPolarAngle = Math.PI * 0.4
