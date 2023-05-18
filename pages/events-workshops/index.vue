@@ -4,8 +4,6 @@ import type { Workshop, Event } from '@prisma/client'
 import { v4 as uuidv4 } from 'uuid'
 import TiltedHeading from '@/components/TiltedHeading.vue'
 import EventsCard from '@/components/EventsCard.vue'
-import IconChevronLeft from '@/components/icons/IconChevronLeft.vue'
-import IconChevronRight from '@/components/icons/IconChevronRight.vue'
 
 useHead({
   title: 'Sewcial | Events & Workshops'
@@ -230,7 +228,7 @@ function validateBooking () {
               hover:transform hover:scale-110"
             @click="() => changeWeek(-1)"
           >
-            <IconChevronLeft />
+            <AppIcon :icon="['fas', 'chevron-left']" />
           </div>
           <div class="flex w-full justify-around">
             <div
@@ -256,7 +254,7 @@ function validateBooking () {
               hover:transform hover:scale-110"
             @click="() => changeWeek(1)"
           >
-            <IconChevronRight />
+            <AppIcon :icon="['fas', 'chevron-right']" />
           </div>
         </div>
         <!-- List of workshops -->

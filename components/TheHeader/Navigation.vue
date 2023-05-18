@@ -180,7 +180,7 @@ const { signOut, status } = useAuth()
          mobile:w-full mobile:text-left"
           to="/events-workshops"
         >
-          Events
+          Events & Workshops
         </NuxtLink>
         <AppIcon
           :icon="['fas', 'chevron-right']"

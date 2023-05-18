@@ -4,7 +4,6 @@ import { EnumMaterial } from '~/enums/Material'
 import ItemDescription from '@/components/ItemDescription.vue'
 import ItemImage from '@/components/ItemImage.vue'
 import { useUserStore } from '~/stores/useUserStore'
-import IconChevronRight from '@/components/icons/IconChevronRight.vue'
 
 const title = ref('Sewcial |')
 useHead({
@@ -99,14 +98,15 @@ function onLike () {
   <main class="flex flex-col w-full text-secondary relative items-center my-desktop-h">
     <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-20">
       <div class="uppercase self-start desktop:hidden">
-        <p class="caption">
+        <div class="caption flex gap-2 text-base items-center">
           <NuxtLink to="/catalogue">
             Catalogue
           </NuxtLink>
-          <IconChevronRight>
+          <AppIcon :icon="['fas', 'chevron-right']" />
+          <p>
             {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
-          </iconchevronright>
-        </p>
+          </p>
+        </div>
       </div>
       <ItemImage
         :image="catalogueItem.imageSrc"
@@ -114,13 +114,15 @@ function onLike () {
       />
       <div class="w-full desktop:self-start flex flex-col">
         <div class="breadcrumb uppercase self-start hidden desktop:block">
-          <p class="caption">
+          <div class="caption flex gap-2 text-base items-center">
             <NuxtLink to="/catalogue">
               Catalogue
-              <span>&gt;</span>
-              {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
             </NuxtLink>
-          </p>
+            <AppIcon :icon="['fas', 'chevron-right']" />
+            <p>
+              {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
+            </p>
+          </div>
         </div>
         <ItemDescription
           :sizes="catalogueItem.sizingsData"
