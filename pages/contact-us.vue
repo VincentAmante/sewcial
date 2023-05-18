@@ -49,7 +49,7 @@ async function submitContactForm () {
 </script>
 
 <template>
-  <main class="flex flex-col py-default-h gap-[5vmax] mx-default-w tablet:flex-row tablet:justify-between">
+  <main class="flex flex-col py-default-h gap-[5vmax] mx-default-w tablet:flex-row tablet:justify-between my-desktop-h">
     <section class="w-full flex flex-col px-[3vw]">
       <div class="flex flex-col w-full px-0">
         <SpeechBubble class="flex flex-col py-4">
