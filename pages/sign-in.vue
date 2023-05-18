@@ -6,6 +6,10 @@ definePageMeta({
 })
 const { signIn } = useAuth()
 
+useHead({
+  title: 'Sewcial | Sign in'
+})
+
 </script>
 
 <template>

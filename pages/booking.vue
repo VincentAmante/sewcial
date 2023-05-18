@@ -5,6 +5,10 @@ import StartTimePicker from '@/components/FormFields/StartTimePicker.vue'
 import EndTimePicker from '@/components/FormFields/EndTimePicker.vue'
 import BookingPeopleCount from '@/components/FormFields/BookingPeopleCount.vue'
 
+useHead({
+  title: 'Sewcial | Booking'
+})
+
 const bookingDate = ref(new Date())
 const startTime = ref(new Date())
 const endTime = ref(new Date())
@@ -17,7 +21,7 @@ const router = useRouter()
 
 function bookSession () {
   router.push({
-    name: 'events-booking-type-id-date',
+    name: 'events-booking_type_id_date',
     params: {
       type: 'session',
       id: uuidv4(),

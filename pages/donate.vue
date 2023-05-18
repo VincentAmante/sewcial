@@ -3,6 +3,10 @@
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import TiltedHeading from '@/components/TiltedHeading.vue'
 
+useHead({
+  title: 'Sewcial | Donate'
+})
+
 </script>
 <template>
   <main>

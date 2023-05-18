@@ -3,6 +3,10 @@ import { z } from 'zod'
 import ContactField from '@/components/FormFields/ContactField.vue'
 import ContactTextArea from '@/components/FormFields/ContactTextArea.vue'
 
+useHead({
+  title: 'Sewcial | Contact Us'
+})
+
 const name = ref('')
 const email = ref('')
 const mobileNumber = ref('')

@@ -7,6 +7,10 @@ import Pagination from '@/components/Pagination.vue'
 import { useUserStore } from '~/stores/useUserStore'
 import CatalogueFilter from '~/components/Filters/CatalogueFilter.vue'
 
+useHead({
+  title: 'Sewcial | Liked Items'
+})
+
 definePageMeta({
   layout: 'shop',
   middleware: 'auth'

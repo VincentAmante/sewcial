@@ -7,6 +7,10 @@ import EventsCard from '@/components/EventsCard.vue'
 import IconChevronLeft from '@/components/icons/IconChevronLeft.vue'
 import IconChevronRight from '@/components/icons/IconChevronRight.vue'
 
+useHead({
+  title: 'Sewcial | Events & Workshops'
+})
+
 const bookingDate = ref(new Date())
 const startTime = ref(new Date())
 const endTime = ref(new Date())

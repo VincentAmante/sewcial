@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import AppCatalogue from '~/components/Subpages/AppCatalogue.vue'
 
+useHead({
+  title: 'Sewcial | Catalogue'
+})
+
 definePageMeta({
   layout: 'shop'
 })
-
 </script>
 
 <template>

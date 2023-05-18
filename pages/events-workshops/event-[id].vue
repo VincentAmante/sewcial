@@ -3,6 +3,11 @@ import type { Event } from '@prisma/client'
 import { generateHTML, JSONContent } from '@tiptap/vue-3'
 import { StarterKit } from '@tiptap/starter-kit'
 
+const title = ref('Sewcial |')
+useHead({
+  title
+})
+
 // Route Params
 const route = useRoute()
 const id = ref(route.params.id)
@@ -20,6 +25,7 @@ const { data, pending, error, refresh } = useFetch(`/api/Events/${id.value}`, {
   onResponse ({ response }) {
     const data = response._data as Event
     event.value = data
+    title.value = `Sewcial | ${data.title}`
     if (data.details !== null) {
       content.value = generateHTML(data.details as JSONContent, [StarterKit])
     }
@@ -58,7 +64,7 @@ function bookEvent (id: string) {
   >
     <div class="flex flex-col gap-8 uppercase text-primary w-full">
       <div class="text-primary text-base">
-        <span @click="() => router.push('/events')">Events</span>
+        <span @click="() => router.push('/events-workshops')">Events</span>
         &gt;
         <span>{{ event?.title }}</span>
       </div>

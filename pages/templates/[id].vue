@@ -5,6 +5,11 @@ import ButtonDownload from '@/components/icons/ButtonDownload.vue'
 import ButtonFullscreen from '@/components/icons/ButtonFullscreen.vue'
 import { Skill } from '~/enums/Skill'
 
+const title = ref('Sewcial |')
+useHead({
+  title
+})
+
 const route = useRoute()
 if (route.params.id === undefined) {
   showError('No ID provided')
@@ -33,6 +38,7 @@ const template: Ref<Template> = ref(templatePlaceholder)
 const { refresh } = useFetch(`/api/Templates/${route.params.id}`, {
   onResponse ({ response }) {
     const data = response._data as Template
+    title.value = `Sewcial | ${data.name}`
     template.value = data
   }
 })

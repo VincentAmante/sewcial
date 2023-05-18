@@ -6,6 +6,11 @@ import ItemImage from '@/components/ItemImage.vue'
 import { useUserStore } from '~/stores/useUserStore'
 import IconChevronRight from '@/components/icons/IconChevronRight.vue'
 
+const title = ref('Sewcial |')
+useHead({
+  title
+})
+
 definePageMeta({
   layout: 'shop'
 })
@@ -43,6 +48,7 @@ const { refresh } = useFetch(`/api/CatalogueItems/${route.params.id}`, {
   onResponse ({ response }) {
     const data = response._data as CatalogueItem
     catalogueItem.value = data
+    title.value = `Sewcial | ${data.name}`
   }
 })
 refresh()

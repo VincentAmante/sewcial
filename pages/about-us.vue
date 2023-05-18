@@ -1,5 +1,9 @@
 <script setup lang="ts">
 
+useHead({
+  title: 'Sewcial | About Us'
+})
+
 </script>
 
 <template>
