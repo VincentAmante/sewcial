@@ -110,7 +110,7 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
       </div>
     </section>
     <section>
-      <div class="flex flex-col items-center justify-center px-default-w pb-20 gap-8 tablet:flex-row ">
+      <div class="flex flex-col items-center justify-center px-default-w pb-20 gap-8 tablet:flex-row mt-16">
         <div class="max-w-lg my-8">
           <img src="@/assets/images/donatemap.png" alt="">
         </div>
