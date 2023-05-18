@@ -16,8 +16,29 @@ id.value === undefined) {
   showError('Invalid params')
 }
 
+const maxPages = ref(5)
+const page = ref(1)
+let pages = ['workshops', 'extra-info', 'personal-details', 'payment-info', 'booking-confirmed']
+switch (type.value) {
+  case 'workshop':
+    pages = ['workshops', 'extra-info', 'personal-details', 'payment-info', 'booking-confirmed']
+    maxPages.value = 5
+    break
+  case 'session':
+    pages = ['personal-details', 'payment-info', 'booking-confirmed']
+    maxPages.value = 3
+    break
+  case 'event':
+    pages = ['personal-details', 'extra-info', 'booking-confirmed']
+    maxPages.value = 3
+    break
+  default:
+    break
+}
+
 const date = ref(new Date())
 if (route.params.id !== undefined) {
+  console.log(route.params.date)
   if (Array.isArray(route.params.date)) {
     date.value = new Date(parseInt(route.params.date[0]))
   } else {
@@ -25,35 +46,23 @@ if (route.params.id !== undefined) {
   }
 }
 
-const maxPages = 5
-const page = ref(1)
-
-if (type.value === 'session') {
-  page.value = 3
-}
-if (type.value === 'event') {
-  page.value = 2
+function compareDate (date1: Date, date2: Date) {
+  console.log(date1, date2)
+  return date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
 }
 
 const incrementPage = () => {
-  if (page.value === maxPages) { return }
-  (type.value === 'event' && page.value === 2) ? page.value = 5 : page.value++
+  if (page.value >= maxPages.value) {
+    return
+  }
+  page.value++
 }
 const decrementPage = () => {
   if (page.value <= 1) {
     return
   }
-  if (type.value === 'event' && page.value === 5) {
-    page.value = 2
-    return
-  }
-  if (type.value === 'event' && page.value === 2) {
-    return
-  }
-  if (type.value === 'session' && page.value === 3) {
-    return
-  }
-
   page.value--
 }
 
@@ -158,34 +167,43 @@ function setPaymentOption (option: string) {
 <template>
   <main>
     <section>
-      <div class="booking-header">
+      <div class="booking-header flex items-center gap-2">
         <div @click="decrementPage()">
           <AppIcon :icon="['fas', 'chevron-left']" class="chevron-left" />
         </div>
         <div>
-          <PageCounter :page-count="page" :total-pages="maxPages" />
+          <PageCounter
+            :page-count="page"
+            :total-pages="maxPages"
+          />
         </div>
       </div>
       <div class="content-container">
         <div class="content">
-          <!-- TODO: Refactor how pages are decided so transition is smoother -->
           <Transition mode="out-in">
-            <section v-if="page === 1" id="workshops">
+            <section
+              v-if="pages[page - 1] === 'workshops'"
+              id="workshops"
+            >
               <ul>
-                <li
+                <template
                   v-for="workshop in workshops"
                   :key="workshop.id"
                 >
-                  <div>
-                    <h3>{{ workshop.title }}</h3>
-                    <p>AED {{ workshop.priceAED }}</p>
-                  </div>
-                  <Incrementor
-                    v-if="workshops.length > 0"
-                    v-model="workshop.bookedSlots"
-                    :text="workshop.title"
-                  />
-                </li>
+                  <li
+                    v-if="compareDate(workshop.startTime, date)"
+                  >
+                    <div>
+                      <h3>{{ workshop.title }}</h3>
+                      <p>AED {{ workshop.priceAED }}</p>
+                    </div>
+                    <Incrementor
+                      v-if="workshops.length > 0"
+                      v-model="workshop.bookedSlots"
+                      :text="workshop.title"
+                    />
+                  </li>
+                </template>
               </ul>
               <div class="totals">
                 <div class="text-h3">
@@ -197,13 +215,13 @@ function setPaymentOption (option: string) {
               </div>
             </section>
 
-            <section v-else-if="page === 2" id="extra-info">
+            <section v-else-if="pages[page - 1] === 'extra-info'" id="extra-info">
               <h3>If there is any extra information, please note it here</h3>
               <p>Eg: Accessibility (we have a rooftop that hosts the events)</p>
               <textarea id="" v-model="extraInfo" name="extra-info" cols="30" rows="10" />
             </section>
 
-            <section v-else-if="page === 3" id="personal-details">
+            <section v-else-if="pages[page - 1] === 'personal-details'" id="personal-details">
               <h3>Add personal details</h3>
               <div class="personal-details-form">
                 <EventField v-model="personalDetails.firstName.value" class="event-field" name="firstName">
@@ -219,7 +237,10 @@ function setPaymentOption (option: string) {
                   Mobile Number
                 </EventField>
               </div>
-              <div class="booking-summary-container">
+              <div
+                v-if="type === 'workshop'"
+                class="booking-summary-container"
+              >
                 <div>
                   <h3>Booking Summary</h3>
                 </div>
@@ -253,7 +274,7 @@ function setPaymentOption (option: string) {
               </div>
             </section>
 
-            <section v-else-if="page === 4" id="payment-info">
+            <section v-else-if="pages[page - 1] === 'payment-info'" id="payment-info">
               <h3>Pay with</h3>
               <div class="payment-options">
                 <div>
@@ -311,7 +332,7 @@ function setPaymentOption (option: string) {
               </div>
             </section>
 
-            <section v-else-if="page === 5" id="booking-confirmed">
+            <section v-else-if="pages[page - 1] === 'booking-confirmed'" id="booking-confirmed">
               <img src="/images/message-tick.svg" alt="">
               <div class="text-h1">
                 Booking Confirmed

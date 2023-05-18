@@ -43,7 +43,7 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
             Make Anew
           </h2>
           <p class="m-0 max-w-[12rem] text-black">
-            Up-cycle unique pieces from unused clothing
+            Up-cycle unique pieces from used clothing
           </p>
         </div>
       </div>
@@ -89,7 +89,10 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
             </li>
             <li>
               Condition is unusable - Our partner, Kiswa, kindly buy these from us
-              at AED2/kg and recycles them into furniture in Turkey. Luxury -
+              at AED2/kg and recycles them into furniture in Turkey.
+            </li>
+            <li>
+              Luxury -
               regardless of the condition, we do our best to authenticate internally
               and repair.
             </li>

@@ -16,11 +16,11 @@ definePageMeta({
       >
       <div class="flex flex-col items-center justify-center w-full h-full mb-8 min-h-[30vh] text-secondary tablet:items-start p-4 tablet:px-20 desktop:w-1/2">
         <div class="text-left p-2 max-w-md">
-          <TiltedHeading class="bg-accent-1 translate-y-10 -z-10">
+          <TiltedHeading class="bg-accent-1 translate-y-[60%] -z-10">
             NEW
           </TiltedHeading>
-          <h1 class="text-h-giant">
-            COLLECTION
+          <h1 class="text-h-giant capitalize">
+            Collection
           </h1>
           <h2>Nike Blooms</h2>
           <p>

@@ -74,8 +74,7 @@ function onShowFilter () {
         </h1>
       </div>
       <p class="leading-6 text-dark mt-0">
-        Lorem ipsum dolor sit amet consectetur. At purus maecenas nunc egestas sed. Tempor adipiscing venenatis praesent nisi tincidunt. Orci enim tristique aenean eu ac. Vel vestibulum imperdiet scelerisque dignissim in sagittis non dolor senectus. Sapien sodales tortor elementum suspendisse non mauris scelerisque.
-      </p>
+        Here you'll find a treasure trove of free sewing templates for a variety of projects that can be sorted with our easy-to-use filter system. Click on a project to learn more and access a tutorial and download link for the sewing template. These templates are perfect for both beginners and experienced sewists alike, so dive in and start crafting!</p>
     </div>
 
     <!-- Featured section -->

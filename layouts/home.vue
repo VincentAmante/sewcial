@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary">
+  <div class="bg-secondary">
     <div>
       <DescriptionSlider
         class="z-[150]"
@@ -10,8 +10,7 @@
           Sewcial Lounge
         </template>
         <template #default>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
+          <p>Our lounge areas outside for people to socialise in. On the rooftop, there is an extension of the café, lounge seating, and a small stage equipped for an open mic and other community events.</p>
         </template>
       </DescriptionSlider>
 
@@ -24,8 +23,7 @@
           Sewcial Cafe
         </template>
         <template #default>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
+          <p>The café areas inside and outside the building for people to enjoy hot drinks and food. We also give small part-time employment opportunities for youth to help with the café.</p>
         </template>
       </DescriptionSlider>
 
@@ -38,8 +36,7 @@
           Sewcial Studio
         </template>
         <template #default>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
+          <p>This workshop space provides clothes, fabric, and tools to create upcycled pieces. We also host regular interactive sessions for beginners, as well as weekly donation drives for people to donate used clothing (to be used for workshop sessions).</p>
           <div class="flex flex-col">
             <SpeechBubble
               class="flex justify-between items-center cursor-pointer"
@@ -73,8 +70,7 @@
           Sewcial Showcase
         </template>
         <template #default>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, totam officia. Repellendus consectetur pariatur ex repudiandae dignissimos ducimus, consequuntur laboriosam! Corporis porro sunt ipsa harum nulla quod rerum voluptatum sint.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod et ad illum, vero debitis dignissimos totam minima eligendi eveniet quisquam?</p>
+          <p>A small shop where customers can showcase, buy, and even sell their own pieces they’ve created in the Sewcial Studio. We also sell our own merchandise, called the Sewcial Club. Stop by every once in a while to check for new unique pieces!</p>
           <div class="flex flex-col">
             <SpeechBubble
               class="flex justify-between items-center cursor-pointer text-center"

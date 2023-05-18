@@ -36,7 +36,7 @@ const signInToggled = ref(false)
 </script>
 
 <template>
-  <div>
+  <div class="max-w-[1920px] mx-auto relative">
     <div
       v-if="(!isUserSet && !(useAuth().status.value === 'authenticated')) && signInToggled"
       class="fixed p-20 flex flex-col items-center justify-center z-[200] h-full w-full bg-dark bg-opacity-50"
