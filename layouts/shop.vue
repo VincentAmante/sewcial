@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/useUserStore'
 
+useServerSeoMeta({
+  title: 'Sewcial | Catalogue',
+  referrer: 'no-referrer',
+  ogUrl: 'https://sewcial.space',
+  ogTitle: 'Sewcial',
+  description: 'Your new third place for creativity, sustainability, and community. Upcycle clothes, make friends and build a better future! 🌍🧵🪡',
+  ogDescription: 'Your new third place for creativity, sustainability, and community. Upcycle clothes, make friends and build a better future! 🌍🧵🪡',
+  ogImage: 'https://sewcial.space/images/thumbnail.png',
+  ogImageAlt: 'A picture of the Sewcial store',
+  twitterImage: 'https://sewcial.space/images/thumbnail.png',
+  themeColor: '#FF96C3'
+})
+
 const { isUserSet, initialise, updateLikedItems, user } = useUserStore()
 if (!isUserSet && useAuth().status.value === 'authenticated') {
   const email = useAuth().data.value?.user?.email
