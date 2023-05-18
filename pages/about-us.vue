@@ -170,7 +170,7 @@
               <img
                 loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
-                src="../assets/images/may-12.png"
+                src="../assets/images/reel1.png"
               >
             </NuxtLink>
           </div>
@@ -179,7 +179,7 @@
               <img
                 loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
-                src="../assets/images/may-11.png"
+                src="../assets/images/may-09.png"
               >
             </NuxtLink>
 
@@ -195,7 +195,7 @@
               <img
                 loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
-                src="../assets/images/may-09.png"
+                src="../assets/images/may-11.png"
               >
             </NuxtLink>
           </div>
