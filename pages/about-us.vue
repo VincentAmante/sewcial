@@ -33,7 +33,7 @@
         desktop:flex-row desktop:items-center"
       >
         <img
-          class="p-8 pt-0 desktop:px-0 desktop:py-20 desktop:w-1/2 relative transform desktop:translate-x-[-20%]"
+          class="p-8 pt-0 desktop:px-0 desktop:py-20 desktop:w-1/2 relative transform desktop:translate-x-[-15%]"
           src="../assets/images/third-place.png"
           alt="about us"
         >
@@ -44,7 +44,7 @@
                 <span class="text-accent-1">A</span> <span class="text-primary lowercase">third place</span>
               </h1>
             </div>
-            <div class="flex gap-4 items-center">
+            <div class="flex gap-4 items-center -mt-6">
               <TiltedHeading
                 text-color="accent-1"
                 class="and bg-primary p-0 px-4 flex items-center transform translate-y-3"
