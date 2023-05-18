@@ -4,7 +4,7 @@ import { NuxtAuthHandler } from '#auth'
 export default NuxtAuthHandler({
   pages: {
     signIn: '/sign-in'
-  }
+  },
 
   secret: process.env.AUTH_SECRET,
   providers: [
