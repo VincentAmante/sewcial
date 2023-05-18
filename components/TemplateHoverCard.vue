@@ -36,6 +36,7 @@ defineProps({
           </h3>
         </div>
         <ButtonDownload
+          :url="image"
           class="btn-download "
         />
       </div>

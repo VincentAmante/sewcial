@@ -38,6 +38,19 @@ const { refresh } = useFetch(`/api/Templates/${route.params.id}`, {
 })
 refresh()
 
+function downloadImage () {
+  fetch(template.value.templateImage)
+    .then(response => response.blob())
+    .then((blob) => {
+      const blobUrl = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.download = template.value.templateImage.replace(/^.*[\\\/]/, '')
+      a.href = blobUrl
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+    })
+}
 </script>
 
 <template>
@@ -63,10 +76,12 @@ refresh()
           <p>{{ template.description }}</p>
 
           <SpeechBubble class="speech-bubble">
-            <a>DOWNLOAD AS PDF</a>
+            <a @click="() => downloadImage()">DOWNLOAD AS PDF</a>
           </SpeechBubble>
           <SpeechBubble alignment="right" class="speech-bubble">
-            <a>VIEW TEMPLATE ONLINE</a>
+            <NuxtLink :to="template.templateImage">
+              VIEW TEMPLATE ONLINE
+            </NuxtLink>
           </SpeechBubble>
         </div>
       </div>
@@ -77,8 +92,13 @@ refresh()
       <h1>{{ template.name }}</h1>
       <img :src="template.templateImage">
       <div class="buttons">
-        <ButtonDownload class="btn" />
-        <ButtonFullscreen class="btn" />
+        <ButtonDownload
+          :url="template.templateImage"
+          class="btn"
+        />
+        <a :href="template.templateImage" class="btn">
+          <ButtonFullscreen />
+        </a>
       </div>
     </section>
 
