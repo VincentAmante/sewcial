@@ -90,8 +90,8 @@ function onLike () {
 </script>
 
 <template>
-  <main class="flex flex-col w-full text-secondary relative items-center">
-    <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-12">
+  <main class="flex flex-col w-full text-secondary relative items-center my-desktop-h">
+    <div class="flex flex-col items-center justify-center px-4 my-desktop-h gap-4 max-w-4xl w-full desktop:flex-row desktop:gap-20">
       <div class="uppercase self-start desktop:hidden">
         <p class="caption">
           <NuxtLink to="/catalogue">
@@ -133,13 +133,22 @@ function onLike () {
           </template>
         </ItemDescription>
 
-        <div class="w-full flex items-center justify-center">
+        <div class="w-full flex items-center justify-center desktop:items-start desktop:justify-start desktop:mt-5 desktop:-ml-3">
           <LikeButton
             :is-liked="itemIsLiked"
             @click="() => onLike()"
           />
         </div>
       </div>
+
+      <img
+        class="hidden absolute left-0 w-[15%] desktop:block"
+        src="@/assets/images/idsticker1.png"
+      >
     </div>
   </main>
+  <img
+    class="hidden absolute right-0 bottom-0 w-[15%] desktop:block"
+    src="@/assets/images/idsticker2.png"
+  >
 </template>

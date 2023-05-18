@@ -14,17 +14,17 @@
     </div>
 
     <div class="about-container">
-      <div class="splash-greeting flex flex-col items-center gap-2 p-4 py-16 desktop:p-20">
+      <div class="splash-greeting flex text-center flex-col gap-2 p-4 py-16 desktop:p-20 desktop:text-left desktop:translate-x-[5%] desktop:text">
         <h1 class="text-h-giant m-0 text-secondary lowercase">
-          hello my
+          sew.
         </h1>
-        <SpeechBubbleRaw alignment="right" colour-override="accent-1" class="transform -rotate-6 -translate-x-3 -translate-y-0 self-center flex flex-col gap-2 py-0 my-0 scale-90 mobile:px-8">
-          <h1 class="text-[55px] w-full uppercase text-center transform my-0 py-2 px-2">
-            cute cute
+        <SpeechBubbleRaw alignment="left" colour-override="accent-1" class="transform -rotate-6 -translate-x-0 -translate-y-0 flex flex-col gap-2 py-0 my-0 scale-90 self-center mobile:px-8 desktop:self-start">
+          <h1 class="text-h-giant w-full lowercase text-center transform my-0 py-2 px-2">
+            share.
           </h1>
         </SpeechBubbleRaw>
         <h1 class="text-h-giant text-secondary lowercase mt-0 -translate-y-4">
-          sewdents
+          connect.
         </h1>
       </div>
 
@@ -170,7 +170,7 @@
               <img
                 loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
-                src="../assets/images/may-12.png"
+                src="../assets/images/reel1.png"
               >
             </NuxtLink>
           </div>
@@ -179,7 +179,7 @@
               <img
                 loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
-                src="../assets/images/may-11.png"
+                src="../assets/images/may-09.png"
               >
             </NuxtLink>
 
@@ -195,7 +195,7 @@
               <img
                 loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
-                src="../assets/images/may-09.png"
+                src="../assets/images/may-11.png"
               >
             </NuxtLink>
           </div>
