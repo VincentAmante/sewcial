@@ -97,7 +97,7 @@ const alignmentStyle = computed(() => {
 <!-- Slot 'Icon' has no implementation yet -->
 <template>
   <div
-    class="relative rounded-3xl text-primary m-2 mx-3 p-2 px-7 w-fit max-w-[55ch] break-words"
+    class="relative rounded-3xl text-primary m-2 mx-3 p-1/2 px-7 w-fit max-w-[55ch] break-words"
     :class="[alignment, alignmentStyle.wrapper]"
   >
     <slot name="icon" />
