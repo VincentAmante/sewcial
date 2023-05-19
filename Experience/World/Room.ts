@@ -11,8 +11,8 @@ export default class Room {
 
   constructor () {
     this.experience = new Experience()
-    this.scene = this.experience.scene
     this.resources = this.experience.resources
+    this.scene = this.experience.scene
     this.room = this.resources.items.room
     this.actualRoom = this.room.scene
 

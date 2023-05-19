@@ -55,26 +55,6 @@ refresh()
 function toItem (itemUrl: string) {
   useRouter().push(`/catalogue/${itemUrl}`)
 }
-
-function onApplyFilter (newFilteredCatalogue: CatalogueItemsWithMaterials) {
-  filteredCatalogue.value = newFilteredCatalogue
-}
-
-const filterToggled = ref(true)
-function onHideFilter () {
-  filterToggled.value = false
-}
-function onShowFilter () {
-  filterToggled.value = true
-}
-
-const filterToggleStyling = computed(() => {
-  if (filterToggled.value) {
-    return ['desktop:translate-x-[0%]', 'desktop:block']
-  } else {
-    return ['desktop:translate-x-[-100%]', 'hidden', 'desktop:block']
-  }
-})
 </script>
 
 <template>
@@ -109,34 +89,9 @@ const filterToggleStyling = computed(() => {
 
     <div class="catalogue-container flex flex-col desktop:flex-row">
       <!-- Filters -->
-      <div class="flex flex-col border-b-4 desktop:border-b-0 border-dashed border-secondary desktop:border-none w-full self-start desktop:max-w-md p-4 h-full">
-        <div
-          class="flex flex-row items-center justify-end desktop:justify-start w-full gap-2 px-8 pt-4"
-          @click="() => onShowFilter()"
-        >
-          <IconFilterBlue />
-          <p class="text-secondary">
-            Filter
-          </p>
-        </div>
-
-        <div
-          class="mt-5 flex flex-col items-center rounded-2xl desktop:items-start "
-        >
-          <CatalogueFilter
-            v-if="!pending && !error && catalogue !== null"
-            is-liked="true"
-            :catalogue="catalogue"
-            class="w-full z-[100] max-w-lg transition-all duration-500 ease-in-out pt-0"
-            :class="filterToggleStyling"
-            @apply-filter="(newFilteredCatalogue) => onApplyFilter(newFilteredCatalogue)"
-            @hide-filter="() => onHideFilter()"
-          />
-        </div>
-      </div>
 
       <!-- Catalogue Items -->
-      <div class="flex flex-col w-full desktop:pt-8 desktop:border-l-4 desktop:border-dashed desktop:border-secondary h-full">
+      <div class="flex flex-col w-full desktop:pt-8 px-default-w">
         <div
           v-if="!pending && !error"
           class="grid grid-cols-2 w-full self-center justify-center desktop:grid-cols-3 gap-4 tablet:gap-8 px-4"

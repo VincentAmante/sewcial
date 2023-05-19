@@ -96,6 +96,7 @@ onUnmounted(() => {
         <img
           :src="imgSrc"
           alt=""
+          width="1000"
           class="w-full max-w-sm object-contain max-h-80 self-center"
         >
         <div class="text-secondary px-8">

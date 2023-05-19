@@ -19,21 +19,30 @@ const catalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
 // This list tends to lose items due to filtering, so the filter reverts to ${catalogue} when no filters are applied
 const filteredCatalogue: Ref<CatalogueItemsWithMaterials | null> = ref(null)
 const cataloguePage: Ref<CatalogueItem[]> = ref([])
-const { pending, error, refresh } = await useFetch('/api/CatalogueItems/', {
-  onResponse ({ response }) {
-    // Needs to be converted to array
-    const responseData = { ...response._data }
-    const resList = []
-    for (const item in responseData) {
-      resList.push(responseData[item])
-    }
 
-    catalogue.value = resList
-    filteredCatalogue.value = resList
+onMounted(async () => {
+  if (sessionStorage.getItem('catalogue') !== null) {
+    catalogue.value = JSON.parse(sessionStorage.getItem('catalogue')!)
+    filteredCatalogue.value = JSON.parse(sessionStorage.getItem('catalogue')!)
+  } else {
+    const { pending, error, refresh } = await useFetch('/api/CatalogueItems/', {
+      onResponse ({ response }) {
+        // Needs to be converted to array
+        const responseData = { ...response._data }
+        const resList = []
+        for (const item in responseData) {
+          resList.push(responseData[item])
+        }
+
+        catalogue.value = resList
+        filteredCatalogue.value = resList
+        useSessionStorage('catalogue', JSON.stringify(resList))
+      }
+    })
+    // Ensures fetches are made on page load
+    refresh()
   }
 })
-// Ensures fetches are made on page load
-refresh()
 
 function toItem (itemUrl: string) {
   useRouter().push(`/catalogue/${itemUrl}`)

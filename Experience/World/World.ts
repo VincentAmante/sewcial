@@ -24,16 +24,16 @@ export default class World {
 
   constructor () {
     this.experience = new Experience()
+    this.resources = this.experience.resources
     this.canvas = this.experience.canvas
     this.sizes = this.experience.sizes
     this.scene = this.experience.scene
     this.camera = this.experience.camera
-    this.resources = this.experience.resources
 
     // Creates all models when assets are ready
     this.resources.on('assets-ready', () => {
-      this.room = new Room()
       this.environment = new Environment()
+      this.room = new Room()
       // this.floor = new Floor()
       this.markerLounge = new Marker('Lounge')
       this.markerLounge.setLocation(-0.75, 1.75, -1.15)
