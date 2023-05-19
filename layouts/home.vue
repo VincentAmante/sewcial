@@ -8,7 +8,9 @@ useServerSeoMeta({
   ogImage: 'https://sewcial.space/images/thumbnail.png',
   ogImageAlt: 'A picture of the Sewcial store',
   twitterImage: 'https://sewcial.space/images/thumbnail.png',
-  themeColor: '#FF96C3'
+  themeColor: '#FF96C3',
+  twitterTitle: 'Sewcial | Map',
+  twitterCard: 'summary_large_image'
 })
 </script>
 
@@ -78,7 +80,7 @@ useServerSeoMeta({
       <DescriptionSlider
         class="z-[150]"
         name="shop"
-        img-src="/images/scenes/shop.png"
+        img-src="/images/scenes/catalogue.png"
       >
         <template #title>
           Sewcial Showcase

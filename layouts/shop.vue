@@ -8,10 +8,13 @@ useServerSeoMeta({
   ogTitle: 'Sewcial',
   description: 'Your new third place for creativity, sustainability, and community. Upcycle clothes, make friends and build a better future! 🌍🧵🪡',
   ogDescription: 'Your new third place for creativity, sustainability, and community. Upcycle clothes, make friends and build a better future! 🌍🧵🪡',
+  ogType: 'website',
   ogImage: 'https://sewcial.space/images/thumbnail.png',
   ogImageAlt: 'A picture of the Sewcial store',
   twitterImage: 'https://sewcial.space/images/thumbnail.png',
-  themeColor: '#FF96C3'
+  themeColor: '#FF96C3',
+  twitterTitle: 'Sewcial | Catalogue',
+  twitterCard: 'summary_large_image'
 })
 
 const { isUserSet, initialise, updateLikedItems, user } = useUserStore()

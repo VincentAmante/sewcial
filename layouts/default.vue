@@ -9,7 +9,9 @@ useServerSeoMeta({
   ogImage: 'https://sewcial.space/images/thumbnail.png',
   ogImageAlt: 'A picture of the Sewcial store',
   twitterImage: 'https://sewcial.space/images/thumbnail.png',
-  themeColor: '#FF96C3'
+  themeColor: '#FF96C3',
+  twitterTitle: 'Sewcial',
+  twitterCard: 'summary_large_image'
 })
 </script>
 
