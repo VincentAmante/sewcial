@@ -108,7 +108,7 @@ useHead({
           src="@/assets/images/donatesticker1.png"
         >
         <img
-          class="hidden absolute right-0 w-[10%] desktop:block lgScreen:w-[7%] xlScreen:[4%]"
+          class="hidden absolute right-0 w-[10%] desktop:block lgScreen:w-[6.5%] xlScreen:[4%]"
           src="@/assets/images/donatesticker2.png"
         >
       </div>

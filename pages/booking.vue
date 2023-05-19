@@ -60,15 +60,14 @@ function validateBooking () {
       class="events-splash flex flex-col items-center justify-center my-12 relative
     tablet:flex-row tablet:gap-20"
     >
-      <!-- Left Sticker -->
-      <img
-        class="splash-sticker-l hidden tablet:block absolute top-0 left-0 transform translate-x-[-30%]"
-        src="@/assets/images/Events_Stickers_L.png"
-        width="190"
-        height="250"
-        alt=""
-      >
-
+    <img
+      class="hidden absolute left-0 top-0 desktop:block lgScreen:w-[8%] xlScreen:[3%]"
+      src="@/assets/images/bookingsticker1.png"
+    >
+    <img
+      class="hidden absolute right-0 top-0 desktop:block lgScreen:w-[7.5%] xlScreen:[3%]"
+      src="@/assets/images/bookingsticker2.png"
+    >
       <div class="splash-heading flex flex-col text-secondary mb-12">
         <p class="text-h-giant relative">
           Sew...
@@ -80,18 +79,6 @@ function validateBooking () {
           a session?
         </p>
       </div>
-
-      <!-- Right Sticker -->
-      <div class="splash-sticker-container hidden">
-        <img
-          class="splash-sticker-r"
-          src="@/assets/images/Events_Stickers_R.png"
-          width="150"
-          height="175"
-          alt=""
-        >
-      </div>
-
       <div class="flex flex-col items-center justify-center bg-secondary p-6 rounded-lg w-full max-w-sm">
         <VDatePicker v-model="bookingDate" class="date-picker w-full" />
         <div class="booking-input my-4 w-full">
