@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import ButtonSpotify from './icons/ButtonSpotify.vue'
-import ButtonFacebook from './icons/ButtonFacebook.vue'
-import ButtonInstagram from './icons/ButtonInstagram.vue'
+import ButtonSpotify from '../components/icons/ButtonSpotify.vue'
+import ButtonFacebook from '../components/icons/ButtonFacebook.vue'
+import ButtonInstagram from '../components/icons/ButtonInstagram.vue'
 </script>
 
 <template>
   <div class="footer-container bg-accent-1 p-4 mobile:px-20">
-    <ul class="flex items-center justify-center flex-col text-primary uppercase gap-2 py-14 mobile:flex-row mobile:justify-between">
+    <ul class="flex items-center justify-center flex-col text-primary uppercase gap-4 py-14 desktop:flex-row desktop:justify-between desktop:flex-wrap">
       <li
         id="nav-home"
         class="opacity-70 hover:opacity-100 transition-all"
