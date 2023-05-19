@@ -33,7 +33,7 @@ defineEmits(['clickedRsvp'])
         <h3 class="my-2">
           <slot name="date" />
         </h3>
-        <p>This is the event description.</p>
+        <slot><p>This is the event description.</p></slot>
         <h3 class="disclaimer pt-2 my-6 grow">
           FREE ENTRY!
         </h3>
