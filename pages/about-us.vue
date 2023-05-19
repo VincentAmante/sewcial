@@ -310,5 +310,6 @@ useHead({
         </div>
       </section> -->
     </div>
+    <Footer></Footer>
   </main>
 </template>
