@@ -12,12 +12,12 @@ definePageMeta({
 
 <template>
   <main class="flex flex-col">
-    <section class="flex flex-col border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row  min-h-[30rem]">
+    <section class="grid mobile:grid-cols-2 border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row  min-h-[30rem] h-full">
       <img
-        class="w-full h-full mobile:w-1/2 desktop:w-1/2"
+        class="w-full h-full object-cover object-center"
         src="@/assets/images/collection.png"
       >
-      <div class="flex flex-col items-center justify-center w-full h-full mb-8 min-h-[30vh] text-secondary tablet:items-start p-4 tablet:px-20 desktop:w-1/2">
+      <div class="flex flex-col items-center justify-center w-full h-full mb-8 min-h-[30vh] text-secondary tablet:items-start p-4 tablet:px-20">
         <div class="text-left p-2 max-w-md">
           <TiltedHeading class="bg-accent-1 translate-y-[60%] -z-10">
             NEW
@@ -32,7 +32,7 @@ definePageMeta({
         </div>
         <SpeechBubble
           alignment="start"
-          class="speech mx-auto tablet:mx-2 cursor-pointer"
+          class="speech mx-auto tablet:mx-2 cursor-pointer transform translate-x-2"
           @click="() => useRouter().push('/catalogue/4735d118-a819-4a7d-ab82-919f5bf0ddba')"
         >
           <p class="button p-2 px-4 ">
