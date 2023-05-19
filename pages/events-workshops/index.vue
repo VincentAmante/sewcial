@@ -195,6 +195,9 @@ function validateBooking () {
               {{ event.startTime.getDate() }}
               {{ event.startTime.toLocaleDateString(undefined, {month: 'long'}) }}
             </template>
+            <template #default>
+              {{ event.description }}
+            </template>
           </EventsCard>
         </template>
       </div>
@@ -306,5 +309,5 @@ function validateBooking () {
       </div>
     </section>
   </main>
-  <Footer></Footer>
+  <Footer />
 </template>
