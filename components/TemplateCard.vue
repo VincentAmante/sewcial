@@ -20,7 +20,6 @@ defineProps({
     <div class="card flex flex-col bg-primary rounded-2xl w-full h-full max-w-xs">
       <div class="aspect-[1.1/1] overflow-hidden h-80">
         <UseImage
-          loading="lazy"
           class="card-image object-cover object-center rounded-t-2xl align-middle brightness-100 w-full h-full
        transition-all group-hover:scale-105 group-hover:brightness-[80%]"
           :src="image"
