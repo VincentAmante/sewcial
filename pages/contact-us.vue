@@ -54,6 +54,14 @@ async function submitContactForm () {
 
 <template>
   <main class="flex flex-col py-default-h gap-[5vmax] mx-default-w tablet:flex-row tablet:justify-between my-desktop-h">
+    <img
+      class="hidden absolute left-0 top-25 w-[10%] desktop:block lgScreen:w-[7%] xlScreen:[3%]"
+      src="@/assets/images/contactsticker1.png"
+    >
+    <img
+      class="hidden absolute right-0 top-25 w-[10%] desktop:block lgScreen:w-[7%] xlScreen:[3%]"
+      src="@/assets/images/contactsticker2.png"
+    >
     <section class="w-full flex flex-col px-[3vw]">
       <div class="flex flex-col w-full px-0">
         <SpeechBubble class="flex flex-col py-4">
@@ -62,7 +70,7 @@ async function submitContactForm () {
           </h1>
         </SpeechBubble>
         <SpeechBubble
-          class="flex flex-col gap-4 py-8"
+          class="flex flex-col gap-10 py-8 mt-10"
           alignment="right"
         >
           <div>
@@ -96,6 +104,7 @@ async function submitContactForm () {
       </div>
     </section>
     <section class="w-full max-w-2xl">
+      
       <form
         class="flex flex-col gap-4 border-4 border-dashed border-secondary rounded-3xl p-12"
         @submit.prevent="() => submitContactForm()"
