@@ -37,9 +37,14 @@ useHead({
         desktop:flex-row desktop:items-center"
       >
         <img
-          class="p-8 pt-0 desktop:px-0 desktop:py-20 desktop:w-1/2 relative transform desktop:translate-x-[-15%]"
-          src="../assets/images/third-place.png"
+          class="p-8 pt-0 mt-10 translate-x-[3%] desktop:px-0 desktop:py-20 desktop:w-2/5 relative transform desktop:translate-x-[-15%]"
+          src="../assets/images/third-place2.png"
           alt="about us"
+        >
+
+        <img
+          class="hidden absolute right-0 top-100 w-[15%] desktop:block lgScreen:w-[10%] xlScreen:[5%]"
+          src="@/assets/images/aboutstickers.png"
         >
         <div class="about-wrapper p-8 pb-0 desktop:p-20 desktop:pl-0 py-16">
           <div class="heading flex flex-col my-8">
@@ -64,7 +69,7 @@ useHead({
             </div>
           </div>
 
-          <div class="para text-primary leading-5">
+          <div class="para text-primary leading-5 desktop:w-[70%] desktop:ml-20">
             <p>
               Welcome to Sewcial, your place to sew, share, and connect!
               We host a collection of spaces that provide a unique environment for youth to pursue their passions in sustainable fashion,

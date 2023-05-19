@@ -61,7 +61,7 @@ function bookEvent (id: string) {
   <main
     class="flex flex-col items-center py-8 bg-secondary w-full min-h-screen"
   >
-    <section class="flex flex-col items-center tablet:flex-row tablet:justify-between tablet:gap-x-16 tablet:items-stretch max-w-7xl px-default-w">
+    <section class="flex flex-col items-center tablet:flex-row tablet:justify-between tablet:gap-x-16 tablet:items-stretch max-w-[90%] px-default-w my-10">
       <div class="flex flex-col gap-4 uppercase text-primary w-full tablet:basis-1/3 tablet:gap-8">
         <div class="text-primary text-base">
           <span @click="() => router.push('/events-workshops')">Events</span>
@@ -100,7 +100,7 @@ function bookEvent (id: string) {
           </SpeechBubble>
         </div>
       </div>
-      <div class="flex flex-col text-primary w-full h-full tablet:basis-2/3">
+      <div class="flex flex-col text-primary w-full h-full tablet:basis-2/3 mt-12">
         <div
           v-if="!pending
             && !error
