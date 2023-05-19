@@ -97,57 +97,63 @@ useHead({
             Team!
           </h1>
         </div>
-        <div class="team-members flex flex-col items-center desktop:flex-row desktop:justify-evenly desktop:px-12 py-8">
-          <TeamPictures img-src="/images/team-icons/nehan.png">
-            <template #name>
-              Nehan Tariq
-            </template>
-            <template #role>
-              Role
-            </template>
-          </TeamPictures>
-          <TeamPictures img-src="/images/team-icons/frnk.png">
-            <template #name>
-              Franchesca Raymundo
-            </template>
-            <template #role>
-              Role
-            </template>
-          </TeamPictures>
-          <TeamPictures img-src="/images/team-icons/louis.png">
-            <template #name>
-              Anthony Cubillas
-            </template>
-            <template #role>
-              Role
-            </template>
-          </TeamPictures>
-          <TeamPictures img-src="/images/team-icons/icen.png">
-            <template #name>
-              Vincent Amante
-            </template>
-            <template #role>
-              Role
-            </template>
-          </TeamPictures>
-          <TeamPictures img-src="/images/team-icons/nella.png">
-            <template #name>
-              Nella Bermudo
-            </template>
-            <template #role>
-              Role
-            </template>
-          </TeamPictures>
-          <TeamPictures
-            img-src="/images/team-icons/bie.png"
-          >
-            <template #name>
-              Princelle Abbie
-            </template>
-            <template #role>
-              Role
-            </template>
-          </TeamPictures>
+        <div class="team-members flex flex-col items-center desktop:flex-row desktop:justify-evenly desktop:px-12">
+          <div class="one flex flex-row gap-5 desktop:gap-0">
+            <TeamPictures img-src="/images/team-icons/nehan.png">
+              <template #name>
+                Nehan Tariq
+              </template>
+              <template #role>
+                Role
+              </template>
+            </TeamPictures>
+            <TeamPictures img-src="/images/team-icons/frnk.png">
+              <template #name>
+                Franchesca Raymundo
+              </template>
+              <template #role>
+                Role
+              </template>
+            </TeamPictures>
+          </div>
+          <div class="two flex flex-row gap-5 desktop:gap-0">
+            <TeamPictures img-src="/images/team-icons/louis.png">
+              <template #name>
+                Anthony Cubillas
+              </template>
+              <template #role>
+                Role
+              </template>
+            </TeamPictures>
+            <TeamPictures img-src="/images/team-icons/icen.png">
+              <template #name>
+                Vincent Amante
+              </template>
+              <template #role>
+                Role
+              </template>
+            </TeamPictures>
+          </div>
+          <div class="three flex flex-row gap-5 desktop:gap-0">
+            <TeamPictures img-src="/images/team-icons/nella.png">
+              <template #name>
+                Nella Bermudo
+              </template>
+              <template #role>
+                Role
+              </template>
+            </TeamPictures>
+            <TeamPictures
+              img-src="/images/team-icons/bie.png"
+            >
+              <template #name>
+                Princelle Abbie
+              </template>
+              <template #role>
+                Role
+              </template>
+            </TeamPictures>
+          </div>
         </div>
       </section>
 
@@ -255,61 +261,7 @@ useHead({
           </div>
         </div>
       </section>
-      <!-- <section class="banner p-8 flex justify-center items-center tablet:p-20 tablet:flex-row tablet:items-stretch">
-        <div class="wrapper-1 tablet:w-1/2">
-          <div class="container flex items-stretch">
-            <img
-              class="w-1/2 h-auto"
-              src="../assets/images/about-1.png"
-              alt="about us"
-            >
-            <div class="card light w-1/2 flex items-center justify-center bg-primary outline-1 outline-secondary outline-solid">
-              <h1 class="text-h1 text-secondary lowercase text-center p-2 break-words">
-                “motherr”
-              </h1>
-            </div>
-          </div>
-          <div class="container flex items-stretch">
-            <div class="card dark">
-              <h1 class="text-h1">
-                “fav hangout spot 4evs”
-              </h1>
-            </div>
-            <img
-              class="w-1/2 h-auto"
-              src="../assets/images/about-3.png"
-              alt="about us"
-            >
-          </div>
-        </div>
-        <div class="wrapper-2 tablet:w-1/2">
-          <div class="container flex items-stretch">
-            <img
-              class="w-1/2 h-auto"
-              src="../assets/images/about-2.png"
-              alt="about us"
-            >
-            <div class="card dark">
-              <h1 class="text-h1">
-                “grape”
-              </h1>
-            </div>
-          </div>
-          <div class="container flex items-stretch">
-            <div class="card light w-1/2 flex items-center justify-center bg-primary outline-1 outline-secondary outline-solid">
-              <h1 class="text-h1">
-                “so slay halal queen”
-              </h1>
-            </div>
-            <img
-              class="w-1/2 h-auto"
-              src="../assets/images/about-4.png"
-              alt="about us"
-            >
-          </div>
-        </div>
-      </section> -->
     </div>
-    <Footer></Footer>
+    <LazyFooter />
   </main>
 </template>

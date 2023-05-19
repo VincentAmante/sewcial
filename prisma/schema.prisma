@@ -56,7 +56,7 @@ model TemplateCategoryTag {
 model CatalogueItem {
   id                 String                     @id @default(uuid())
   name               String
-  description        String
+  description        String                     @db.VarChar(250)
   imageSrc           String
   priceAED           Float
   isFeatured         Boolean                    @default(false)
@@ -114,6 +114,7 @@ model Event {
   startTime DateTime
   endTime   DateTime
   title     String
+  description String @default("") @db.VarChar(200)
   details   Json?
   thumbnail String     @default("")
   Bookings  Bookings[]
