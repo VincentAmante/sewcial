@@ -6,6 +6,10 @@ import IconFilterVue from '@/components/icons/IconFilter.vue'
 import TemplateHoverCard from '@/components/TemplateHoverCard.vue'
 import TemplatesFilter from '~/components/Filters/TemplatesFilter.vue'
 
+useHead({
+  title: 'Sewcial | Templates'
+})
+
 type WithMaterial<T> = T & {
   MaterialOnTemplate: {
     material: Material
