@@ -21,23 +21,32 @@ const templates: Ref<TemplateWithMaterials> = ref([])
 const filteredTemplates: Ref<TemplateWithMaterials | null> = ref(null)
 const templatePage: Ref<Template[]> = ref([])
 
-const { data, pending, error, refresh } = await useFetch('/api/Templates/', {
-  onResponse ({ response }) {
-    // Needs to be converted to array
-    const responseData = { ...response._data }
-    const resList = []
-    for (const item in responseData) {
-      resList.push(responseData[item])
-    }
-    templates.value = resList
+onMounted(async () => {
+  if (sessionStorage.getItem('templates') !== null) {
+    templates.value = JSON.parse(sessionStorage.getItem('templates')!)
+    filteredTemplates.value = JSON.parse(sessionStorage.getItem('templates')!).filter((template: TemplateWithMaterials) => !template.isFeatured)
+  } else {
+    const { data, pending, error, refresh } = await useFetch('/api/Templates/', {
+      onResponse ({ response }) {
+        // Needs to be converted to array
+        const responseData = { ...response._data }
+        const resList = []
+        for (const item in responseData) {
+          resList.push(responseData[item])
+        }
+        templates.value = resList
 
-    // Featured templates won't go through filters and sorting anyway
-    filteredTemplates.value = resList
-      .filter((template: TemplateWithMaterials) => !template.isFeatured)
+        // Featured templates won't go through filters and sorting anyway
+        filteredTemplates.value = resList
+          .filter((template: TemplateWithMaterials) => !template.isFeatured)
+
+        useSessionStorage('templates', JSON.stringify(resList))
+      }
+    })
+    // Ensures fetches are made on page load
+    refresh()
   }
 })
-// Ensures fetches are made on page load
-refresh()
 
 function toTemplate (templateUrl: string) {
   useRouter().push(`/templates/${templateUrl}`)
@@ -88,7 +97,7 @@ function onShowFilter () {
         Featured
       </h2>
       <div
-        v-if="!pending && !error"
+        v-if="templates.length > 0"
         class="flex overflow-x-scroll scrollbar-blue pb-2"
       >
         <template
@@ -136,7 +145,7 @@ function onShowFilter () {
             </div>
             <div class="desktop:relative mt-5">
               <TemplatesFilter
-                v-if="!pending && !error && templates && filterToggled"
+                v-if="templates.length > 0 && filterToggled"
                 :templates="templates"
                 class="absolute top-0 right-0 z-50 w-screen rounded-lg mt-5 max-w-md"
                 @apply-filter="(newFilteredTemplates) => onApplyFilter(newFilteredTemplates)"
@@ -168,7 +177,7 @@ function onShowFilter () {
       </div>
       <div class="paginate my-8">
         <Pagination
-          v-if="!pending && !error && filteredTemplates"
+          v-if="templates.length > 0 && filteredTemplates"
           v-model="templatePage"
           :items-per-page="9"
           :original-list="filteredTemplates"

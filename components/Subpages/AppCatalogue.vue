@@ -25,7 +25,7 @@ onMounted(async () => {
     catalogue.value = JSON.parse(sessionStorage.getItem('catalogue')!)
     filteredCatalogue.value = JSON.parse(sessionStorage.getItem('catalogue')!)
   } else {
-    const { pending, error, refresh } = await useFetch('/api/CatalogueItems/', {
+    const { refresh } = await useFetch('/api/CatalogueItems/', {
       onResponse ({ response }) {
         // Needs to be converted to array
         const responseData = { ...response._data }
@@ -88,7 +88,7 @@ const filterToggleStyling = computed(() => {
           class="mt-5 flex flex-col items-center rounded-2xl desktop:items-start "
         >
           <CatalogueFilter
-            v-if="!pending && !error && catalogue !== null"
+            v-if="catalogue !== null"
             :catalogue="catalogue"
             class="w-full z-[100] max-w-lg transition-all duration-500 ease-in-out pt-0"
             :class="filterToggleStyling"
@@ -101,7 +101,7 @@ const filterToggleStyling = computed(() => {
       <!-- Catalogue Items -->
       <div class="flex flex-col w-full desktop:pt-8 desktop:border-l-4 desktop:border-dashed desktop:border-secondary h-full">
         <div
-          v-if="!pending && !error"
+          v-if="catalogue && filteredCatalogue"
           class="grid grid-cols-2 w-full self-center justify-center desktop:grid-cols-3 gap-4 tablet:gap-8 px-4"
         >
           <CatalogueCard
@@ -126,7 +126,7 @@ const filterToggleStyling = computed(() => {
     <!-- Paginate -->
     <div class="paginate my-8">
       <Pagination
-        v-if="!pending && !error && filteredCatalogue"
+        v-if="filteredCatalogue"
         v-model="cataloguePage"
         :items-per-page="9"
         :original-list="filteredCatalogue"
