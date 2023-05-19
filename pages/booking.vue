@@ -115,4 +115,5 @@ function validateBooking () {
       </div>
     </section>
   </main>
+  <Footer></Footer>
 </template>

@@ -104,4 +104,5 @@ function bookEvent (id: string) {
       />
     </div>
   </main>
+  <Footer></Footer>
 </template>

@@ -383,6 +383,7 @@ function setPaymentOption (option: string) {
       </div>
     </section>
   </main>
+  <Footer></Footer>
 </template>
 
 <style scoped lang="scss">

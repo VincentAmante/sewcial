@@ -125,6 +125,7 @@ function toItem (itemUrl: string) {
       />
     </div>
   </main>
+  <Footer></Footer>
 </template>
 
 <!-- Styling -->
