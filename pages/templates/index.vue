@@ -186,4 +186,5 @@ function onShowFilter () {
       </div>
     </section>
   </main>
+  <Footer></Footer>
 </template>

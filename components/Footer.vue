@@ -5,6 +5,7 @@ import ButtonInstagram from '../components/icons/ButtonInstagram.vue'
 </script>
 
 <template>
+  <div class="border-t-4 border-secondary border-dashed mt-30"></div>
   <div class="footer-container bg-accent-1 p-4 mobile:px-20">
     <ul class="flex items-center justify-center flex-col text-primary uppercase gap-4 py-14 desktop:flex-row desktop:justify-between desktop:flex-wrap">
       <li
@@ -121,7 +122,7 @@ import ButtonInstagram from '../components/icons/ButtonInstagram.vue'
         <ButtonInstagram />
       </div>
     </div>
-    <div class="text-primary flex flex-col items-center py-5">
+    <div class="text-primary flex flex-col items-center py-5 desktop:justify-between desktop:flex-row desktop:pt-5">
       <p class="my-0">Dubai Marina, Dubai, UAE</p>
       <p class="my-0">© 2023 Sewcial Inc. All rights reserved</p>
     </div>

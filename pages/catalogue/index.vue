@@ -57,4 +57,5 @@ definePageMeta({
       </Suspense>
     </div>
   </main>
+  <Footer></Footer>
 </template>

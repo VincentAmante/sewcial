@@ -120,4 +120,5 @@ async function submitContactForm () {
       </form>
     </section>
   </main>
+  <Footer></Footer>
 </template>
