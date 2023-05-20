@@ -15,7 +15,7 @@ definePageMeta({
     <section class="grid mobile:grid-cols-2 border-b-secondary items-center justify-center border-dashed border-b-[4px] mobile:flex-row  min-h-[30rem] h-full">
       <img
         class="w-full h-full object-cover object-center"
-        src="@/assets/images/collection.png"
+        src="@/assets/images/collection.jpg"
       >
       <div class="flex flex-col items-center justify-center w-full h-full mb-8 min-h-[30vh] text-secondary tablet:items-start p-4 tablet:px-20">
         <div class="text-left p-2 max-w-md">
@@ -57,5 +57,5 @@ definePageMeta({
       </Suspense>
     </div>
   </main>
-  <Footer></Footer>
+  <Footer />
 </template>
