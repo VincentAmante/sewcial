@@ -38,7 +38,7 @@ const weekSelection = computed(() => {
 })
 
 const workshops = ref<Workshop[]>([])
-const { data: workshopData, pending: workshopPending, error: workshopError, refresh: refreshWorkshops } = useFetch('/api/Workshops', {
+const { refresh: refreshWorkshops } = useFetch('/api/Workshops', {
   onResponse ({ response }) {
     const data = response._data as Workshop[]
     workshops.value = data.map((workshop) => {

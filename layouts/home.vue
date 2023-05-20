@@ -77,31 +77,33 @@ useServerSeoMeta({
         </template>
       </DescriptionSlider>
 
-      <DescriptionSlider
-        class="z-[150]"
-        name="shop"
-        img-src="/images/scenes/catalogue.png"
-      >
-        <template #title>
-          Sewcial Showcase
-        </template>
-        <template #default>
-          <p>A small shop where customers can showcase, buy, and even sell their own pieces they’ve created in the Sewcial Studio. We also sell our own merchandise, called the Sewcial Club. Stop by every once in a while to check for new unique pieces!</p>
-          <div class="flex flex-col">
-            <SpeechBubble
-              class="flex justify-between items-center cursor-pointer text-center"
-              @click="() => useRouter().push('/shop')"
-            >
-              <p class="text-alt uppercase">
-                See our Catalogue
-              </p>
-              <img src="/images/door.png" alt="">
-            </SpeechBubble>
-          </div>
-        </template>
-      </DescriptionSlider>
+      <div>
+        <DescriptionSlider
+          class="z-[150]"
+          name="shop"
+          img-src="/images/scenes/catalogue.png"
+        >
+          <template #title>
+            Sewcial Showcase
+          </template>
+          <template #default>
+            <p>A small shop where customers can showcase, buy, and even sell their own pieces they’ve created in the Sewcial Studio. We also sell our own merchandise, called the Sewcial Club. Stop by every once in a while to check for new unique pieces!</p>
+            <div class="flex flex-col">
+              <SpeechBubble
+                class="flex justify-between items-center cursor-pointer text-center"
+                @click="() => useRouter().push('/shop')"
+              >
+                <p class="text-alt uppercase">
+                  See our Catalogue
+                </p>
+                <img src="/images/door.png" alt="">
+              </SpeechBubble>
+            </div>
+          </template>
+        </DescriptionSlider>
+      </div>
+      <TheHeader format="home" />
+      <NuxtPage />
     </div>
-    <TheHeader format="home" />
-    <NuxtPage />
   </div>
 </template>
