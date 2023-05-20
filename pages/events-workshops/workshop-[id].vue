@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Event } from '@prisma/client'
+import type { Workshop } from '@prisma/client'
 import { generateHTML, JSONContent } from '@tiptap/vue-3'
 import { StarterKit } from '@tiptap/starter-kit'
 
@@ -15,11 +15,11 @@ const content: Ref<any> = ref({
   content: []
 })
 
-const event: Ref<Event | null> = ref(null)
-const { data, pending, error, refresh } = useFetch(`/api/Events/${id.value}`, {
+const workshop: Ref<Workshop | null> = ref(null)
+const { data, pending, error, refresh } = useFetch(`/api/Workshops/${id.value}`, {
   onResponse ({ response }) {
-    const data = response._data as Event
-    event.value = data
+    const data = response._data as Workshop
+    workshop.value = data
     if (data.details !== null) {
       content.value = generateHTML(data.details as JSONContent, [StarterKit])
     }
@@ -32,20 +32,20 @@ refresh()
 // })
 const router = useRouter()
 function bookEvent (id: string) {
-  if (event.value?.startTime === undefined) {
+  if (workshop.value?.startTime === undefined) {
     showError('Invalid event')
   }
-  if (event.value === null) {
+  if (workshop.value === null) {
     showError('Invalid event data')
     return
   }
 
   router.push({
-    name: 'events-booking_type_id_date',
+    name: 'events-workshops-booking_type_id_date',
     params: {
-      type: 'event',
+      type: 'workshop',
       id,
-      date: new Date(event.value.startTime).getTime()
+      date: new Date(workshop.value.startTime).getTime()
     }
   })
 }
@@ -65,14 +65,14 @@ function bookEvent (id: string) {
       <div>
         <div class="flex flex-col tablet:flex-col-reverse gap-4">
           <img
-            :src="event?.thumbnail"
+            :src="workshop?.thumbnail"
             alt="event image"
             class="rounded-2xl outline-primary outline-dashed outline-2 max-w-sm bg-contain"
           >
 
           <div class="flex flex-col gap-1">
             <h1 class="my-0">
-              {{ event?.title }}
+              {{ workshop?.title }}
             </h1>
             <h2 class="my-0">
               March 18 (Saturday)
@@ -86,8 +86,9 @@ function bookEvent (id: string) {
       <div class="flex w-full items-center justify-center tablet:items-start tablet:justify-start">
         <SpeechBubble>
           <p
+            v-if="workshop"
             class="text-alt uppercase my-4 mx-8 font-bold"
-            @click="() => bookEvent(event.id)"
+            @click="() => bookEvent(workshop.id)"
           >
             Book Now!
           </p>
@@ -96,13 +97,11 @@ function bookEvent (id: string) {
     </div>
     <div class="flex flex-col text-primary w-full h-full">
       <div
-        v-if="!pending
-          && !error
-          && event.details"
-        class=" break-words"
+        v-if="workshop"
+        class="break-words"
         v-html="content"
       />
     </div>
   </main>
-  <Footer></Footer>
+  <Footer />
 </template>

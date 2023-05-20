@@ -99,7 +99,7 @@ const router = useRouter()
 
 function bookEvent (id: string) {
   router.push({
-    name: 'events-booking_type_id_date',
+    name: 'events-workshops-booking_type_id_date',
     params: {
       type: 'event',
       id,
@@ -110,7 +110,7 @@ function bookEvent (id: string) {
 
 function bookWorkshop (id: string) {
   router.push({
-    name: 'events-booking_type_id_date',
+    name: 'events-workshops-booking_type_id_date',
     params: {
       type: 'workshop',
       id,
@@ -120,7 +120,7 @@ function bookWorkshop (id: string) {
 }
 function bookSession () {
   router.push({
-    name: 'events-booking_type_id_date',
+    name: 'events-workshops-booking_type_id_date',
     params: {
       type: 'session',
       id: uuidv4(),

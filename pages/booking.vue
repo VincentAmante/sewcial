@@ -21,7 +21,7 @@ const router = useRouter()
 
 function bookSession () {
   router.push({
-    name: 'events-booking_type_id_date',
+    name: 'events-workshops-booking_type_id_date',
     params: {
       type: 'session',
       id: uuidv4(),
@@ -60,14 +60,14 @@ function validateBooking () {
       class="events-splash flex flex-col items-center justify-center my-12 relative
     tablet:flex-row tablet:gap-20"
     >
-    <img
-      class="hidden absolute left-0 top-0 desktop:block lgScreen:w-[8%] xlScreen:[3%]"
-      src="@/assets/images/bookingsticker1.png"
-    >
-    <img
-      class="hidden absolute right-0 top-0 desktop:block lgScreen:w-[7.5%] xlScreen:[3%]"
-      src="@/assets/images/bookingsticker2.png"
-    >
+      <img
+        class="hidden absolute left-0 top-0 desktop:block lgScreen:w-[8%] xlScreen:[3%]"
+        src="@/assets/images/bookingsticker1.png"
+      >
+      <img
+        class="hidden absolute right-0 top-0 desktop:block lgScreen:w-[7.5%] xlScreen:[3%]"
+        src="@/assets/images/bookingsticker2.png"
+      >
       <div class="splash-heading flex flex-col text-secondary mb-12">
         <p class="text-h-giant relative">
           Sew...
@@ -102,5 +102,5 @@ function validateBooking () {
       </div>
     </section>
   </main>
-  <Footer></Footer>
+  <Footer />
 </template>
