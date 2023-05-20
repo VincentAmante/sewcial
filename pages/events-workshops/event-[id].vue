@@ -47,7 +47,7 @@ function bookEvent (id: string) {
   }
 
   router.push({
-    name: 'events-booking_type_id_date',
+    name: 'events-workshops-booking_type_id_date',
     params: {
       type: 'event',
       id,
@@ -111,5 +111,5 @@ function bookEvent (id: string) {
       </div>
     </section>
   </main>
-  <Footer></Footer>
+  <Footer />
 </template>
