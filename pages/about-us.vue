@@ -38,7 +38,7 @@ useHead({
       >
         <img
           class="p-8 pt-0 mt-10 translate-x-[3%] desktop:px-0 desktop:py-20 desktop:w-2/5 relative transform desktop:translate-x-[-15%]"
-          src="../assets/images/third-place2.png"
+          src="../assets/images/third-place2.jpg"
           alt="about us"
         >
 
@@ -182,7 +182,7 @@ useHead({
             <NuxtLink to="https://www.instagram.com/p/CsL8YxgAqn1/" class="aspect-square overflow-hidden">
               <img
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
-                src="../assets/images/reel1.png"
+                src="../assets/images/reel1.jpg"
               >
             </NuxtLink>
           </div>
@@ -197,7 +197,7 @@ useHead({
             <NuxtLink to="https://www.instagram.com/p/CsGuojXM7PR/" class="aspect-square overflow-hidden">
               <img
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
-                src="../assets/images/may-10.png"
+                src="../assets/images/may-10.jpg"
               >
             </NuxtLink>
 
@@ -219,7 +219,7 @@ useHead({
             <NuxtLink to="https://www.instagram.com/p/Cr3XXHLPIdx/" class="aspect-square overflow-hidden">
               <img
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
-                src="../assets/images/may-05.png"
+                src="../assets/images/may-05.jpg"
               >
             </NuxtLink>
 
