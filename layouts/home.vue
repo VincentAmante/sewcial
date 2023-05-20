@@ -5,9 +5,9 @@ useServerSeoMeta({
   ogTitle: 'Sewcial',
   description: 'Your new third place for creativity, sustainability, and community. Upcycle clothes, make friends and build a better future! 🌍🧵🪡',
   ogDescription: 'Your new third place for creativity, sustainability, and community. Upcycle clothes, make friends and build a better future! 🌍🧵🪡',
-  ogImage: 'https://sewcial.space/images/thumbnail.png',
+  ogImage: 'https://sewcial.space/images/thumbnail.jpg',
   ogImageAlt: 'A picture of the Sewcial store',
-  twitterImage: 'https://sewcial.space/images/thumbnail.png',
+  twitterImage: 'https://sewcial.space/images/thumbnail.jpg',
   themeColor: '#FF96C3',
   twitterTitle: 'Sewcial | Map',
   twitterCard: 'summary_large_image'
@@ -81,7 +81,7 @@ useServerSeoMeta({
         <DescriptionSlider
           class="z-[150]"
           name="shop"
-          img-src="/images/scenes/catalogue.png"
+          img-src="/images/scenes/shop.png"
         >
           <template #title>
             Sewcial Showcase
@@ -91,7 +91,7 @@ useServerSeoMeta({
             <div class="flex flex-col">
               <SpeechBubble
                 class="flex justify-between items-center cursor-pointer text-center"
-                @click="() => useRouter().push('/shop')"
+                @click="() => useRouter().push('/catalogue')"
               >
                 <p class="text-alt uppercase">
                   See our Catalogue
