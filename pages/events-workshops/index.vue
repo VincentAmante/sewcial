@@ -280,6 +280,7 @@ function validateBooking () {
               </div>
 
               <div
+                class="cursor-pointer"
                 @click="() => router.push(`/events-workshops/workshop-${workshop.id}`)"
               >
                 <h1 class="my-1">
