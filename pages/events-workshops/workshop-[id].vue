@@ -60,12 +60,12 @@ function bookEvent (id: string) {
       <div class="text-primary text-base">
         <span @click="() => router.push('/events-workshops')">Events</span>
         &gt;
-        <span>Luggate Tag</span>
+        <span>{{ workshop.title }}</span>
       </div>
       <div>
         <div class="flex flex-col tablet:flex-col-reverse gap-4">
           <img
-            :src="workshop?.thumbnail"
+            :src="workshop.thumbnail"
             alt="event image"
             class="rounded-2xl outline-primary outline-dashed outline-2 max-w-sm bg-contain"
           >
