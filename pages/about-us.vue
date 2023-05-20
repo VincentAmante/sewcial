@@ -167,7 +167,6 @@ useHead({
           <div class="grid grid-cols-3 gap-1">
             <NuxtLink to="https://www.instagram.com/p/CsObqGCg0Z1/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-14.png"
               >
@@ -175,7 +174,6 @@ useHead({
 
             <NuxtLink to="https://www.instagram.com/p/CsN9V4fSxmD/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-13.png"
               >
@@ -183,7 +181,6 @@ useHead({
 
             <NuxtLink to="https://www.instagram.com/p/CsL8YxgAqn1/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/reel1.png"
               >
@@ -192,7 +189,6 @@ useHead({
           <div class="grid grid-cols-3 gap-1">
             <NuxtLink to="https://www.instagram.com/p/CsJXpqvya7W/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-09.png"
               >
@@ -200,7 +196,6 @@ useHead({
 
             <NuxtLink to="https://www.instagram.com/p/CsGuojXM7PR/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-10.png"
               >
@@ -208,7 +203,6 @@ useHead({
 
             <NuxtLink to="https://www.instagram.com/p/CsBgZQVvLMr/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-11.png"
               >
@@ -217,7 +211,6 @@ useHead({
           <div class="grid grid-cols-3 gap-1">
             <NuxtLink to="https://www.instagram.com/p/Cr8XLjjvnO7/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-07.png"
               >
@@ -225,7 +218,6 @@ useHead({
 
             <NuxtLink to="https://www.instagram.com/p/Cr3XXHLPIdx/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-05.png"
               >
@@ -233,7 +225,6 @@ useHead({
 
             <NuxtLink to="https://www.instagram.com/p/CryIRACP4XI/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-03.png"
               >
@@ -242,7 +233,6 @@ useHead({
           <div class="grid grid-cols-3 gap-1">
             <NuxtLink to="https://www.instagram.com/p/Crs9UhhvjKs/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/may-01.png"
               >
@@ -250,7 +240,6 @@ useHead({
 
             <NuxtLink to="https://www.instagram.com/p/Crn7xkWhHhU/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/april-29.png"
               >
@@ -258,7 +247,6 @@ useHead({
 
             <NuxtLink to="https://www.instagram.com/p/CrimAKwBlYH/" class="aspect-square overflow-hidden">
               <img
-                loading="lazy"
                 class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
                 src="../assets/images/april-27.png"
               >
