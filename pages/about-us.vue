@@ -38,7 +38,7 @@ useHead({
       >
         <img
           class="p-8 pt-0 mt-10 translate-x-[3%] desktop:px-0 desktop:py-20 desktop:w-2/5 relative transform desktop:translate-x-[-15%]"
-          src="../assets/images/third-place2.jpg"
+          src="../assets/images/third-place2.png"
           alt="about us"
         >
 
