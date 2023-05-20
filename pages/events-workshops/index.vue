@@ -269,7 +269,6 @@ function validateBooking () {
               :key="workshop.id"
               class="flex flex-col justify-between gap-x-4 p-4 my-4 text-left text-dark border-b-accent-1 border-b-4 border-dashed
               desktop:flex-row desktop:items-center"
-              @click="() => router.push(`/events-workshops/workshop-${workshop.id}`)"
             >
               <div class="flex desktop:flex-col justify-between items-start desktop:justify-center">
                 <h1 class="font-bold my-1">
@@ -280,7 +279,9 @@ function validateBooking () {
                 </p>
               </div>
 
-              <div>
+              <div
+                @click="() => router.push(`/events-workshops/workshop-${workshop.id}`)"
+              >
                 <h1 class="my-1">
                   {{ workshop.title }}
                 </h1>
