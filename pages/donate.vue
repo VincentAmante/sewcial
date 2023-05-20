@@ -132,14 +132,14 @@ useHead({
           >
             <div class="text-alt font-medium">
               <span class="uppercase">Location</span> <br>
-              Office No. 3002, Al Manara Tower <br>
-              Dubai Marina <br>
-              Dubai, UAE
+              RAKEZ Academic Zone<br>
+              Block D - Al Dhait South<br>
+              Ras Al Khaimah, U.A.E
             </div>
           </SpeechBubble>
         </div>
       </div>
     </section>
   </main>
-  <Footer></Footer>
+  <Footer />
 </template>

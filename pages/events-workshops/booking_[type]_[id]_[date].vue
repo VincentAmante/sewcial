@@ -210,7 +210,7 @@ function setPaymentOption (option: string) {
                   SLOTS: {{ totalSlots }}
                 </div>
                 <div class="text-h3">
-                  TOTAL: {{ totalCost }}
+                  TOTAL: {{ totalCost }} AED
                 </div>
               </div>
             </section>
@@ -383,7 +383,7 @@ function setPaymentOption (option: string) {
       </div>
     </section>
   </main>
-  <Footer></Footer>
+  <Footer />
 </template>
 
 <style scoped lang="scss">

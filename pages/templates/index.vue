@@ -79,7 +79,7 @@ function onShowFilter () {
     desktop:gap-x-60"
     >
       <div class="pb-6 px-8">
-        <TiltedHeading class="transform translate-x-[-1em] translate-y-[.75em]">
+        <TiltedHeading class="bg-accent-1 transform translate-x-[-1em] translate-y-[.75em]">
           COMMUNITY
         </TiltedHeading>
         <h1 class="templates-heading capitalize text-secondary relative text-5xl">
