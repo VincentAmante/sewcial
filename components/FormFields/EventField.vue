@@ -11,6 +11,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
+    default: '',
     required: false
   },
   isRequired: {
@@ -24,6 +25,11 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  hasError: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -35,6 +41,20 @@ const textInput = computed({
   set (value) {
     emit('update:modelValue', value)
   }
+})
+
+const bookingPeople = computed({
+  get () {
+    return props.modelValue
+  },
+  set (value) {
+    emit('update:modelValue', value)
+  }
+})
+
+const { errorStyling, hasError } = useErrorStyling(props.hasError)
+watch(() => props.hasError, (newValue) => {
+  hasError.value = newValue
 })
 </script>
 
@@ -55,12 +75,13 @@ const textInput = computed({
     <input
       id=""
       v-model.lazy="textInput"
-      class=" rounded-md border-2 border-solid border-secondary bg-primary pb-2 px-1 focus:outline-none disabled:opacity-25"
+      class="rounded-md border-2 border-solid pb-2 px-1 focus:outline-none disabled:opacity-25"
       :type="type"
       :name="name"
       :placeholder="placeholder"
       :required="isRequired"
       :disabled="disabled"
+      :class="(hasError) ? errorStyling: ['border-secondary', 'bg-primary ']"
     >
   </label>
 </template>

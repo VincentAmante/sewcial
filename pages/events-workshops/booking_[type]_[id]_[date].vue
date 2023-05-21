@@ -54,7 +54,27 @@ function compareDate (date1: Date, date2: Date) {
 }
 
 const incrementPage = () => {
-  if (page.value >= maxPages.value) {
+  if (pages[page.value - 1] === 'personal-details') {
+    validatePersonalDetails()
+    if (formHasPersonalDetailsErrors.value) {
+      return
+    }
+  } else if (pages[page.value - 1] === 'workshops') {
+    if (totalSlots.value === 0) {
+      return
+    }
+  } else if (pages[page.value - 1] === 'payment-info') {
+    validateCardDetails()
+    if (paymentOption.value === '') {
+      return
+    }
+    if (formHasCardDetailsErrors.value) {
+      return
+    }
+    if (!conditionsAccepted.value) {
+      return
+    }
+  } else if (page.value >= maxPages.value) {
     return
   }
   page.value++
@@ -164,6 +184,7 @@ const cardDetails = ref({
     errorMessage: ''
   }
 })
+const conditionsAccepted = ref(false)
 const paymentOption = ref('')
 function setPaymentOption (option: string) {
   paymentOption.value = option
@@ -172,8 +193,6 @@ function setPaymentOption (option: string) {
 function getStringPortions (str: string, amount = 2) {
   const strings = []
   const stringSplit = str.split('-')
-  console.log(amount)
-  console.log(stringSplit)
   for (let i = 0; i < amount; i++) {
     if (stringSplit[i] === undefined) {
       break
@@ -183,6 +202,69 @@ function getStringPortions (str: string, amount = 2) {
 
   return strings.join('')
 }
+
+function validatePersonalDetails () {
+  personalDetails.value.firstName.error = false
+  personalDetails.value.lastName.error = false
+  personalDetails.value.email.error = false
+  personalDetails.value.mobileNumber.error = false
+
+  if (personalDetails.value.firstName.value === '') {
+    personalDetails.value.firstName.error = true
+  }
+  if (personalDetails.value.lastName.value === '') {
+    personalDetails.value.lastName.error = true
+  }
+  if (personalDetails.value.email.value === '') {
+    personalDetails.value.email.error = true
+  }
+  if (personalDetails.value.mobileNumber.value === '') {
+    personalDetails.value.mobileNumber.error = true
+  }
+}
+const formHasPersonalDetailsErrors = computed(() => {
+  let hasErrors = false
+  Object.values(personalDetails.value).forEach((detail) => {
+    if (detail.error) {
+      hasErrors = true
+    }
+  })
+
+  return hasErrors
+})
+
+function validateCardDetails () {
+  if (paymentOption.value === 'credit-debit') {
+    if (cardDetails.value.cardNumber.value === '') {
+      cardDetails.value.cardNumber.error = true
+    }
+
+    if (cardDetails.value.expiryDate.value === '') {
+      cardDetails.value.expiryDate.error = true
+    }
+
+    if (cardDetails.value.cvv.value === '') {
+      cardDetails.value.cvv.error = true
+    }
+
+    if (cardDetails.value.zipCode.value === '') {
+      cardDetails.value.zipCode.error = true
+    }
+  }
+}
+const formHasCardDetailsErrors = computed(() => {
+  let hasErrors = false
+
+  if (paymentOption.value === 'credit-debit') {
+    Object.values(cardDetails.value).forEach((detail) => {
+      if (detail.error) {
+        hasErrors = true
+      }
+    })
+  }
+
+  return hasErrors
+})
 </script>
 
 <template>
@@ -243,16 +325,38 @@ function getStringPortions (str: string, amount = 2) {
             <section v-else-if="pages[page - 1] === 'personal-details'" id="personal-details">
               <h3>Add personal details</h3>
               <div class="personal-details-form">
-                <EventField v-model="personalDetails.firstName.value" class="event-field" name="firstName">
+                <EventField
+                  v-model="personalDetails.firstName.value"
+                  class="event-field"
+                  name="firstName"
+                  :has-error="personalDetails.firstName.error"
+                >
                   First Name
                 </EventField>
-                <EventField v-model="personalDetails.lastName.value" class="event-field" name="lastName">
+                <EventField
+                  v-model="personalDetails.lastName.value"
+                  class="event-field"
+                  name="lastName"
+                  :has-error="personalDetails.lastName.error"
+                >
                   Last Name
                 </EventField>
-                <EventField v-model="personalDetails.email.value" class="event-field" name="email" type="email">
+                <EventField
+                  v-model="personalDetails.email.value"
+                  class="event-field"
+                  name="email"
+                  type="email"
+                  :has-error="personalDetails.email.error"
+                >
                   Email Address
                 </EventField>
-                <EventField v-model="personalDetails.firstName.value" class="event-field" name="number" type="tel">
+                <EventField
+                  v-model="personalDetails.mobileNumber.value"
+                  class="event-field"
+                  name="number"
+                  type="tel"
+                  :has-error="personalDetails.mobileNumber.error"
+                >
                   Mobile Number
                 </EventField>
               </div>
@@ -347,7 +451,12 @@ function getStringPortions (str: string, amount = 2) {
               </div>
               <div class="conditions-container">
                 <label for="conditions-acceptance">
-                  <input id="" type="checkbox" name="conditions-acceptance">
+                  <input
+                    id=""
+                    v-model="conditionsAccepted"
+                    type="checkbox"
+                    name="conditions-acceptance"
+                  >
                   I accept the <NuxtLink to="">Terms of Service</NuxtLink>, <NuxtLink to="">Community Guidelines</NuxtLink>, and Privacy Policy
                 </label>
               </div>
