@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { Workshop } from '@prisma/client'
+import { string } from 'zod'
 import AppButton from '@/components/AppButton.vue'
 import PageCounter from '@/components/PageCounter.vue'
 import Incrementor from '@/components/Incrementor.vue'
@@ -16,6 +17,7 @@ id.value === undefined) {
   showError('Invalid params')
 }
 
+// Page handler
 const maxPages = ref(5)
 const page = ref(1)
 let pages = ['workshops', 'extra-info', 'personal-details', 'payment-info', 'booking-confirmed']
@@ -38,7 +40,6 @@ switch (type.value) {
 
 const date = ref(new Date())
 if (route.params.id !== undefined) {
-  console.log(route.params.date)
   if (Array.isArray(route.params.date)) {
     date.value = new Date(parseInt(route.params.date[0]))
   } else {
@@ -47,7 +48,6 @@ if (route.params.id !== undefined) {
 }
 
 function compareDate (date1: Date, date2: Date) {
-  console.log(date1, date2)
   return date1.getFullYear() === date2.getFullYear() &&
     date1.getMonth() === date2.getMonth() &&
     date1.getDate() === date2.getDate()
@@ -59,6 +59,7 @@ const incrementPage = () => {
   }
   page.value++
 }
+
 const decrementPage = () => {
   if (page.value <= 1) {
     return
@@ -71,18 +72,22 @@ if (type.value === 'workshop') {
   const { refresh: refreshWorkshops } = useFetch('/api/Workshops', {
     onResponse ({ response }) {
       const data = response._data as Workshop[]
-      workshops.value = data.map((workshop) => {
-        workshop.startTime = new Date(workshop.startTime)
-        workshop.endTime = new Date(workshop.endTime)
+      workshops.value = data
+        .map((workshop) => {
+          workshop.startTime = new Date(workshop.startTime)
+          workshop.endTime = new Date(workshop.endTime)
 
-        if (workshop.bookedSlots === null) {
-          workshop.bookedSlots = 0
-        }
-        return {
-          ...workshop,
-          slots: 0
-        }
-      })
+          if (workshop.bookedSlots === null) {
+            workshop.bookedSlots = 0
+          }
+          return {
+            ...workshop,
+            slots: 0
+          }
+        })
+        .filter((workshop) => {
+          return compareDate(workshop.startTime, date.value)
+        })
     }
   })
   refreshWorkshops()
@@ -98,6 +103,7 @@ const totalSlots = computed(() => {
 
   return total
 })
+
 const totalCost = computed(() => {
   if (type.value !== 'workshop') { return }
   let total = 0
@@ -162,6 +168,21 @@ const paymentOption = ref('')
 function setPaymentOption (option: string) {
   paymentOption.value = option
 }
+
+function getStringPortions (str: string, amount = 2) {
+  const strings = []
+  const stringSplit = str.split('-')
+  console.log(amount)
+  console.log(stringSplit)
+  for (let i = 0; i < amount; i++) {
+    if (stringSplit[i] === undefined) {
+      break
+    }
+    strings.push(stringSplit[i])
+  }
+
+  return strings.join('')
+}
 </script>
 
 <template>
@@ -190,9 +211,7 @@ function setPaymentOption (option: string) {
                   v-for="workshop in workshops"
                   :key="workshop.id"
                 >
-                  <li
-                    v-if="compareDate(workshop.startTime, date)"
-                  >
+                  <li>
                     <div>
                       <h3>{{ workshop.title }}</h3>
                       <p>AED {{ workshop.priceAED }}</p>
@@ -249,24 +268,26 @@ function setPaymentOption (option: string) {
                     v-for="workshop in workshops"
                     :key="workshop.id"
                   >
-                    <BookingSummary v-if="workshop.slots > 0">
+                    <BookingSummary v-if="workshop.bookedSlots > 0">
                       <template #date>
-                        Saturday, 18 March 2023
+                        {{ workshop.startTime.toLocaleDateString('en-GB', {year: 'numeric', day: 'numeric', month: 'short', weekday: 'long'}) }}
                       </template>
                       <template #name>
                         {{ workshop.activity }}
                       </template>
                       <template #time>
-                        10:00am - 11:00am
+                        {{ workshop.startTime.toLocaleTimeString([], {hourCycle: 'h12',hour: '2-digit', minute: '2-digit'}) }}
+                        -
+                        {{ workshop.endTime.toLocaleTimeString([], {hourCycle: 'h12',hour: '2-digit', minute: '2-digit'}) }}
                       </template>
                       <template #code>
-                        SW898LVMB4
+                        {{ getStringPortions(workshop.id) }}
                       </template>
                       <template #price>
-                        {{ workshop.price * workshop.slots }}
+                        {{ workshop.priceAED * workshop.bookedSlots }}
                       </template>
                       <template #count>
-                        {{ workshop.slots }}
+                        {{ workshop.bookedSlots }}
                       </template>
                     </BookingSummary>
                   </li>
@@ -343,18 +364,22 @@ function setPaymentOption (option: string) {
                   v-for="workshop in workshops"
                   :key="workshop.id"
                 >
-                  <BookingSummary v-if="totalSlots > 0">
+                  <BookingSummary
+                    v-if="workshop.bookedSlots > 0"
+                  >
                     <template #date>
-                      Saturday, 18 March 2023
+                      {{ workshop.startTime.toLocaleDateString('en-GB', {year: 'numeric', day: 'numeric', month: 'short', weekday: 'long'}) }}
                     </template>
                     <template #name>
                       {{ workshop.title }}
                     </template>
                     <template #time>
-                      10:00am - 11:00am
+                      {{ workshop.startTime.toLocaleTimeString([], {hourCycle: 'h12',hour: '2-digit', minute: '2-digit'}) }}
+                      -
+                      {{ workshop.endTime.toLocaleTimeString([], {hourCycle: 'h12',hour: '2-digit', minute: '2-digit'}) }}
                     </template>
                     <template #code>
-                      SW898LVMB4
+                      {{ getStringPortions(workshop.id) }}
                     </template>
                     <template #price>
                       {{ workshop.priceAED * totalSlots }}
