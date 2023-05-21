@@ -24,6 +24,11 @@ const selectedLabel = ref(props.options.find(
 // for targetting the element to attach the click outside event to
 const target = ref<HTMLElement>()
 
+watch(() => props.modelValue, (newValue) => {
+  selected.value = newValue
+  selectedLabel.value = props.options.find(option => option.value === newValue)?.label ?? newValue
+})
+
 onMounted(() => {
   selected.value = props.options[0].value
 

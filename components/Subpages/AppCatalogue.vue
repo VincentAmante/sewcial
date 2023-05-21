@@ -56,8 +56,8 @@ const filterToggled = ref(true)
 function onHideFilter () {
   filterToggled.value = false
 }
-function onShowFilter () {
-  filterToggled.value = true
+function toggleFilter () {
+  filterToggled.value = !filterToggled.value
 }
 
 const filterToggleStyling = computed(() => {
@@ -75,13 +75,17 @@ const filterToggleStyling = computed(() => {
       <!-- Filters -->
       <div class="flex flex-col border-b-4 desktop:border-b-0 border-dashed border-secondary desktop:border-none w-full self-start desktop:max-w-md p-4 h-full">
         <div
-          class="flex flex-row items-center justify-end desktop:justify-start w-full gap-2 px-8 pt-4"
-          @click="() => onShowFilter()"
+          class="flex flex-row items-center justify-end desktop:justify-start w-full px-8 pt-4 "
         >
-          <IconFilterBlue />
-          <p class="text-secondary">
-            Filter
-          </p>
+          <div
+            class="flex items-center px-3 gap-2 cursor-pointer hover:bg-slate-200 hover:bg-opacity-50 rounded-lg"
+            @click="() => toggleFilter()"
+          >
+            <IconFilterBlue />
+            <p class="text-secondary">
+              Filter
+            </p>
+          </div>
         </div>
 
         <div

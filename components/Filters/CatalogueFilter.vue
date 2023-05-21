@@ -249,10 +249,28 @@ function applyFilters () {
 function hideFilter () {
   emit('hide-filter')
 }
+
+function clearFilter () {
+  sortOption.value = sortOptions[0].value
+  sortOrder.value = sortOrderOptions[0].value
+  priceFilterOption.value = priceFilterOptions[0].value
+
+  materialArr.forEach((material) => {
+    material.value.selected = false
+  })
+  categoryArr.forEach((category) => {
+    category.value.selected = false
+  })
+  // applyFilters()
+}
 </script>
 
 <template>
-  <BaseFilter @apply-filter="() => applyFilters()" @hide-filter="() => hideFilter()">
+  <BaseFilter
+    @apply-filter="() => applyFilters()"
+    @hide-filter="() => hideFilter()"
+    @clear-filter="() => clearFilter()"
+  >
     <div class="flex flex-col gap-2 gap-y-4">
       <h1 class="text-secondary my-1">
         Search
