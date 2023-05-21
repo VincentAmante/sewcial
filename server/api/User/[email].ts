@@ -9,6 +9,10 @@ export default defineEventHandler(async (event) => {
     where: {
       email
     },
+    select: {
+      id: true,
+      email: true
+    },
     update: {},
     create: {
       email
