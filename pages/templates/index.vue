@@ -26,7 +26,7 @@ onMounted(async () => {
     templates.value = JSON.parse(sessionStorage.getItem('templates')!)
     filteredTemplates.value = JSON.parse(sessionStorage.getItem('templates')!).filter((template: TemplateWithMaterials) => !template.isFeatured)
   } else {
-    const { data, pending, error, refresh } = await useFetch('/api/Templates/', {
+    const { refresh } = await useFetch('/api/Templates/', {
       onResponse ({ response }) {
         // Needs to be converted to array
         const responseData = { ...response._data }
@@ -60,8 +60,8 @@ const filterToggled = ref(false)
 function onHideFilter () {
   filterToggled.value = false
 }
-function onShowFilter () {
-  filterToggled.value = true
+function toggleFilter () {
+  filterToggled.value = !filterToggled.value
 }
 </script>
 
@@ -133,13 +133,14 @@ function onShowFilter () {
           {{ templates.length }} ITEMS
         </p>
         <div class="group relative flex flex-col">
-          <div class="filter-options flex items-center gap-2 cursor-pointer uppercase bg-primary bg-opacity-20 rounded-lg px-4">
+          <div class="filter-options flex items-center gap-2">
             <div
-              class="flex flex-row items-center justify-around gap-2"
-              @click="() => onShowFilter()"
+              class="bg-primary bg-opacity-20 px-4 rounded-lg uppercase flex flex-row items-center justify-around gap-2 cursor-pointer
+              hover:bg-opacity-40"
+              @click="() => toggleFilter()"
             >
               <IconFilterVue />
-              <p class="text-primary">
+              <p class="text-primary select-none">
                 Filter
               </p>
             </div>
@@ -186,5 +187,5 @@ function onShowFilter () {
       </div>
     </section>
   </main>
-  <Footer></Footer>
+  <Footer />
 </template>

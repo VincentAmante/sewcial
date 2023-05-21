@@ -255,6 +255,9 @@ function clearFilter () {
   sortOrder.value = sortOrderOptions[0].value
   priceFilterOption.value = priceFilterOptions[0].value
 
+  willFilterCategory.value = false
+  willFilterMaterial.value = false
+
   materialArr.forEach((material) => {
     material.value.selected = false
   })
