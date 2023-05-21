@@ -417,16 +417,37 @@ const formHasCardDetailsErrors = computed(() => {
                     </svg>
                   </label>
                   <div class="card-details">
-                    <EventField v-model="cardDetails.cardNumber.value" name="card-number" :disabled="!(paymentOption === 'credit-debit')">
+                    <EventField
+                      v-model="cardDetails.cardNumber.value"
+                      name="card-number"
+                      :disabled="!(paymentOption === 'credit-debit')"
+                      :has-error="cardDetails.cardNumber.error"
+                    >
                       Card Number
                     </EventField>
-                    <EventField v-model="cardDetails.expiryDate.value" name="card-expiry" type="month" :disabled="!(paymentOption === 'credit-debit')">
+                    <EventField
+                      v-model="cardDetails.expiryDate.value"
+                      name="card-expiry"
+                      type="month"
+                      :disabled="!(paymentOption === 'credit-debit')"
+                      :has-error="cardDetails.expiryDate.error"
+                    >
                       Expiry Date
                     </EventField>
-                    <EventField v-model="cardDetails.cvv.value" name="security-code" :disabled="!(paymentOption === 'credit-debit')">
+                    <EventField
+                      v-model="cardDetails.cvv.value"
+                      name="security-code"
+                      :disabled="!(paymentOption === 'credit-debit')"
+                      :has-error="cardDetails.cvv.error"
+                    >
                       Security Code
                     </EventField>
-                    <EventField v-model="cardDetails.zipCode.value" name="zip-code" :disabled="!(paymentOption === 'credit-debit')">
+                    <EventField
+                      v-model="cardDetails.zipCode.value"
+                      name="zip-code"
+                      :disabled="!(paymentOption === 'credit-debit')"
+                      :has-error="cardDetails.zipCode.error"
+                    >
                       Zip Code
                     </EventField>
                   </div>
