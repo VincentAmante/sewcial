@@ -382,7 +382,7 @@ function getStringPortions (str: string, amount = 2) {
                       {{ getStringPortions(workshop.id) }}
                     </template>
                     <template #price>
-                      {{ workshop.priceAED * totalSlots }}
+                      {{ workshop.priceAED * workshop.bookedSlots }}
                     </template>
                     <template #count>
                       {{ totalSlots }}
