@@ -128,29 +128,6 @@ function bookSession () {
     }
   })
 }
-
-function validateBooking () {
-  let error = false
-
-  if (bookingDate.value === undefined) {
-    error = true
-  }
-  if (startTime.value === undefined || startTime.value.getTime() === currentDefaultDate.value.getTime()) {
-    error = true
-  }
-  if (endTime.value === undefined || endTime.value.getTime() === currentDefaultDate.value.getTime()) {
-    error = true
-  }
-  if (peopleCount.value === undefined || peopleCount.value <= 0) {
-    error = true
-  }
-
-  if (!error) {
-    bookSession()
-  } else {
-    console.log('error')
-  }
-}
 </script>
 
 <template>

@@ -30,23 +30,41 @@ function bookSession () {
   })
 }
 
+const errors = ref({
+  bookingDate: false,
+  startTime: false,
+  endTime: false,
+  peopleCount: false
+})
+const formHasFalse = computed(() => {
+  return Object.values(errors.value).includes(true)
+})
+function resetFormValidation () {
+  errors.value = {
+    bookingDate: false,
+    startTime: false,
+    endTime: false,
+    peopleCount: false
+  }
+}
+
 function validateBooking () {
-  let error = false
+  resetFormValidation()
 
   if (bookingDate.value === undefined) {
-    error = true
+    errors.value.bookingDate = true
   }
   if (startTime.value === undefined || startTime.value.getTime() === currentDefaultDate.value.getTime()) {
-    error = true
+    errors.value.startTime = true
   }
   if (endTime.value === undefined || endTime.value.getTime() === currentDefaultDate.value.getTime()) {
-    error = true
+    errors.value.endTime = true
   }
   if (peopleCount.value === undefined || peopleCount.value <= 0) {
-    error = true
+    errors.value.peopleCount = true
   }
 
-  if (!error) {
+  if (!formHasFalse.value) {
     bookSession()
   } else {
     console.log('error')
@@ -80,13 +98,28 @@ function validateBooking () {
         </p>
       </div>
       <div class="flex flex-col items-center justify-center bg-secondary p-6 rounded-lg w-full max-w-sm">
-        <VDatePicker v-model="bookingDate" class="date-picker w-full" />
+        <VDatePicker
+          v-model="bookingDate"
+          class="date-picker w-full bg-red-200"
+        />
         <div class="booking-input my-4 w-full">
           <div class="time-picker flex gap-4 w-full">
-            <StartTimePicker v-model="startTime" :date="bookingDate" />
-            <EndTimePicker v-model="endTime" :is-disabled="false" :start-time="startTime" />
+            <StartTimePicker
+              v-model="startTime"
+              :date="bookingDate"
+              :has-error="errors.startTime"
+            />
+            <EndTimePicker
+              v-model="endTime"
+              :is-disabled="false"
+              :start-time="startTime"
+              :has-error="errors.endTime"
+            />
           </div>
-          <BookingPeopleCount v-model="peopleCount" />
+          <BookingPeopleCount
+            v-model="peopleCount"
+            :has-error="errors.peopleCount"
+          />
         </div>
         <div class="book-now rounded-t-[1px] border-dashed border-primary w-full">
           <p class="text-sm font-bold text-primary mb-0">
