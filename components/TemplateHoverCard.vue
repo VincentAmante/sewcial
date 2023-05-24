@@ -7,6 +7,10 @@ defineProps({
   image: {
     type: String,
     required: true
+  },
+  templateUrl: {
+    type: String,
+    required: true
   }
 })
 </script>
@@ -17,7 +21,7 @@ defineProps({
     <!-- Image -->
     <UseImage
       class="w-full h-full group-hover:brightness-75"
-      :src="image"
+      :src="templateUrl"
     >
       <template #loading>
         <div class="text-secondary bg-primary flex flex-col items-center justify-center w-full h-full text-lg">
