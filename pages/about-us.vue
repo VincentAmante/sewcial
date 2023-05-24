@@ -69,11 +69,14 @@ useHead({
             </div>
           </div>
 
-          <div class="para text-primary leading-5 desktop:w-[70%] desktop:ml-20">
+          <div class="para text-primary leading-6 desktop:w-[70%] desktop:ml-20">
             <p>
               Welcome to Sewcial, your place to sew, share, and connect!
               We host a collection of spaces that provide a unique environment for youth to pursue their passions in sustainable fashion,
-              earn from learning new skills, and build a community. Eat and study at the Sewcial Cafe;
+              earn from learning new skills, and build a community.
+            </p>
+            <p>
+              Eat and study at the Sewcial Cafe;
               meet new people and participate in events at the Sewcial Lounge;
               learn how to sew, craft, and upcycle at the Sewcial Studio.
             </p>
