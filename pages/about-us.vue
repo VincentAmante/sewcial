@@ -53,7 +53,7 @@ useHead({
                 <span class="text-accent-1">A</span> <span class="text-primary lowercase">third place</span>
               </h1>
             </div>
-            <div class="flex gap-4 items-center -mt-6">
+            <div class="flex gap-4 items-center desktop:-mt-6">
               <TiltedHeading
                 text-color="accent-1"
                 class="and bg-primary p-0 px-4 flex items-center transform translate-y-3"
@@ -69,7 +69,7 @@ useHead({
             </div>
           </div>
 
-          <div class="para text-primary leading-6 desktop:w-[70%] desktop:ml-20">
+          <div class="para text-primary leading-6 desktop:w-[70%] desktop:ml-20 max-w-[60ch]">
             <p>
               Welcome to Sewcial, your place to sew, share, and connect!
               We host a collection of spaces that provide a unique environment for youth to pursue their passions in sustainable fashion,
