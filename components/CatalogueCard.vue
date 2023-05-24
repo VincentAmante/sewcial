@@ -53,7 +53,7 @@ defineProps({
           <slot name="price" />
         </h1>
       </div>
-      <p class="description text-left mobile:text-center w-full text-secondary my-1">
+      <p class="description text-left w-full text-secondary my-1 line-clamp-4">
         <slot name="description" />
       </p>
     </div>
