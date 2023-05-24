@@ -31,9 +31,9 @@ module.exports = {
       },
       fontSize: {
         sm: '10px', // Caption
-        base: '16px', // Base / Body
+        base: 'clamp(14px, 1.4vw, 16px)', // Base / Body
         alt: 'clamp(14px, 2vw, 14.5px)', // Buttons / Bubbles
-        xl: 'clamp(11px, 1.95vw, 13px)', // h3
+        xl: 'clamp(13px, 1.3vw, 15px)', // h3
         navIcon: 'clamp(30px, 10vw, 50px)',
         '2xl': 'clamp(20px, 2.4vw, 16px)', // h2
         '3xl': 'clamp(16px, 2.5vmax, 20px)', // h1
