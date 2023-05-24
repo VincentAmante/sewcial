@@ -165,6 +165,7 @@ function toggleFilter () {
             :key="template.id"
             class="mb-6"
             :image="template.thumbnail"
+            :template-url="template.templateImage"
             @click="() => toTemplate(template.id)"
           >
             <template #item-name>
