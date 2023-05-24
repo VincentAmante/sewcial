@@ -41,7 +41,7 @@ definePageMeta({
         </SpeechBubble>
       </div>
       <img
-        class="hidden absolute right-0 w-[15%] desktop:block"
+        class="hidden absolute right-0 w-[15%] lgScreen:block"
         src="@/assets/images/cataloguestickers.png"
       >
     </section>
