@@ -131,7 +131,7 @@ function onLike () {
             {{ (catalogueItem.name) ? catalogueItem.name : 'Loading name..' }}
           </template>
           <template #owner-name>
-            <!-- {{  }} -->
+            {{ catalogueItem.authorFirstName }} {{ catalogueItem.authorLastName }}
           </template>
           <template #description>
             {{ catalogueItem.description || 'Loading description..' }}
@@ -141,7 +141,7 @@ function onLike () {
           </template>
         </ItemDescription>
 
-        <div class="w-full flex items-center justify-center desktop:items-start desktop:justify-start desktop:mt-5 desktop:-ml-3">
+        <div class="w-full flex items-center justify-center desktop:items-start desktop:justify-start desktop:mt-5 desktop:-ml-3 cursor-pointer">
           <LikeButton
             :is-liked="itemIsLiked"
             @click="() => onLike()"

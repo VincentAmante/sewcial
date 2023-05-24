@@ -20,8 +20,8 @@ defineProps({
   <div class="info-Slide-up relative w-full text-primary overflow-hidden rounded-lg cursor-pointer group">
     <!-- Image -->
     <UseImage
-      class="w-full h-full group-hover:brightness-75"
-      :src="templateUrl"
+      class="w-full h-full group-hover:brightness-75  min-h-[5rem] object-cover object-center"
+      :src="image"
     >
       <template #loading>
         <div class="text-secondary bg-primary flex flex-col items-center justify-center w-full h-full text-lg">
@@ -40,7 +40,7 @@ defineProps({
           </h3>
         </div>
         <ButtonDownload
-          :url="image"
+          :url="templateUrl"
           class="btn-download "
         />
       </div>

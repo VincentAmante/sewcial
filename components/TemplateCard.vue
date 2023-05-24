@@ -33,10 +33,10 @@ defineProps({
         </UseImage>
       </div>
       <div class="card-info flex flex-col p-4 justify-start grow items">
-        <h1 class="my-2">
+        <h1 class="my-2 mb-0">
           <slot name="item-name" />
         </h1>
-        <h3 class="my-2 capitalize">
+        <h3 class="my-2 capitalize mt-0">
           <slot name="owner" />
         </h3>
         <p class=" text-justify line-clamp-3">

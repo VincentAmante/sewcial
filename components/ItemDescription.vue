@@ -30,8 +30,8 @@ const sizesAdjusted = computed(() => {
       <slot name="item-name" />
     </h1>
 
-    <h3 class="mb-1">
-      <slot name="owner-name" />
+    <h3 class="mb-1 capitalize">
+      By <slot name="owner-name" />
     </h3>
 
     <p class="mb-1">
@@ -40,7 +40,8 @@ const sizesAdjusted = computed(() => {
 
     <h3 class="sizing flex mt-4 gap-2 text-xl">
       SIZING
-      <span><slot name="sizing">SIZING MISSING</slot>
+      <span>
+        <slot name="sizing">SIZING MISSING</slot>
       </span>
     </h3>
   </div>
