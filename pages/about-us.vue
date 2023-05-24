@@ -255,6 +255,5 @@ useHead({
         </div>
       </section>
     </div>
-    <LazyFooter />
   </main>
 </template>

@@ -538,7 +538,6 @@ const formHasCardDetailsErrors = computed(() => {
       </div>
     </section>
   </main>
-  <Footer />
 </template>
 
 <style scoped lang="scss">

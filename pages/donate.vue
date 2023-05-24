@@ -141,5 +141,4 @@ useHead({
       </div>
     </section>
   </main>
-  <Footer />
 </template>

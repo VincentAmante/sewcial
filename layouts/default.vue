@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 useServerSeoMeta({
   referrer: 'no-referrer',
   ogUrl: 'https://sewcial.space',
@@ -20,5 +19,6 @@ useServerSeoMeta({
     <!-- {{ data }} -->
     <TheHeader />
     <NuxtPage />
+    <Footer />
   </div>
 </template>

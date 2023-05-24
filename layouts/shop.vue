@@ -68,5 +68,6 @@ const signInToggled = ref(false)
       @clicked-liked-btn="attemptLogIn"
     />
     <NuxtPage />
+    <Footer />
   </div>
 </template>

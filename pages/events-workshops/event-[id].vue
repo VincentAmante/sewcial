@@ -111,5 +111,4 @@ function bookEvent (id: string) {
       </div>
     </section>
   </main>
-  <Footer />
 </template>

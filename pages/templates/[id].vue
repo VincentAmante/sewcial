@@ -144,7 +144,6 @@ function downloadImage () {
       </div>
     </section>
   </main>
-  <Footer></Footer>
 </template>
 
 <style scoped lang="scss">

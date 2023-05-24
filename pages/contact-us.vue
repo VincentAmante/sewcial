@@ -104,7 +104,6 @@ async function submitContactForm () {
       </div>
     </section>
     <section class="w-full max-w-2xl">
-      
       <form
         class="flex flex-col gap-4 border-4 border-dashed border-secondary rounded-3xl p-12"
         @submit.prevent="() => submitContactForm()"
@@ -129,5 +128,4 @@ async function submitContactForm () {
       </form>
     </section>
   </main>
-  <Footer></Footer>
 </template>

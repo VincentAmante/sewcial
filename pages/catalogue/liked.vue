@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import type { CatalogueItem, Material } from '@prisma/client'
 import TiltedHeading from '@/components/TiltedHeading.vue'
-import IconFilterBlue from '@/components/icons/IconFilterBlue.vue'
 import CatalogueCard from '@/components/CatalogueCard.vue'
 import Pagination from '@/components/Pagination.vue'
 import { useUserStore } from '~/stores/useUserStore'
-import CatalogueFilter from '~/components/Filters/CatalogueFilter.vue'
 
 useHead({
   title: 'Sewcial | Liked Items'
@@ -125,7 +123,6 @@ function toItem (itemUrl: string) {
       />
     </div>
   </main>
-  <Footer></Footer>
 </template>
 
 <!-- Styling -->

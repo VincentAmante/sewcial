@@ -187,5 +187,4 @@ function toggleFilter () {
       </div>
     </section>
   </main>
-  <Footer />
 </template>
