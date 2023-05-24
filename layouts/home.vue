@@ -52,17 +52,19 @@ useServerSeoMeta({
           Sewcial Studio
         </template>
         <template #default>
-          <p>This workshop space provides clothes, fabric, and tools to create upcycled pieces. We also host regular interactive sessions for beginners, as well as weekly donation drives for people to donate used clothing (to be used for workshop sessions).</p>
+          <p class="max-w-[64ch]">
+            This workshop space provides clothes, fabric, and tools to create upcycled pieces. We also host regular interactive sessions for beginners, as well as weekly donation drives for people to donate used clothing (to be used for workshop sessions).
+          </p>
           <div class="flex flex-col">
-            <SpeechBubble
-              class="flex justify-between items-center cursor-pointer"
+            <SpeechBubbleRaw
+              class="flex  items-center cursor-pointer py-1 px-4 pl-6"
               @click="() => useRouter().push('/templates')"
             >
-              <p class="text-alt uppercase">
+              <p class="text-alt uppercase text-left w-fit">
                 Try our templates
               </p>
               <img src="/images/door.png" alt="">
-            </SpeechBubble>
+            </SpeechBubbleRaw>
             <SpeechBubble
               alignment="right"
               class="flex flex-row-reverse justify-between items-center cursor-pointer"
@@ -84,10 +86,12 @@ useServerSeoMeta({
           img-src="/images/scenes/shop.png"
         >
           <template #title>
-            Sewcial Showcase
+            Sewcial Shop
           </template>
           <template #default>
-            <p>A small shop where customers can showcase, buy, and even sell their own pieces they’ve created in the Sewcial Studio. We also sell our own merchandise, called the Sewcial Club. Stop by every once in a while to check for new unique pieces!</p>
+            <p class="max-w-[64ch]">
+              A small shop where customers can showcase, buy, and even sell their own pieces they’ve created in the Sewcial Studio. We also sell our own merchandise, called the Sewcial Club. Stop by every once in a while to check for new unique pieces!
+            </p>
             <div class="flex flex-col">
               <SpeechBubble
                 class="flex justify-between items-center cursor-pointer text-center"

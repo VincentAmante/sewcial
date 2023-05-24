@@ -80,7 +80,7 @@ onUnmounted(() => {
     <div
       :class="toggledStyle.slider"
       class="relative pointer-events-auto -translate-x-full bg-primary max-w-3xl h-full transition-all ease-out duration-150 overflow-y-scroll no-scrollbar
-      desktop:flex-row desktop:gap-8"
+      desktop:flex-row desktop:gap-8 min-h-screen overflow-scroll pt-14"
     >
       <div class="absolute top-0 w-full pt-mobile-h px-mobile-w flex justify-between">
         <HeaderLogo colour="secondary" />
@@ -90,20 +90,20 @@ onUnmounted(() => {
         </div>
       </div>
       <div
-        class="flex flex-col h-full justify-center px-mobile-w pt-4 gap-8
+        class="flex flex-col h-full justify-center px-mobile-w pl-0 pt-4 gap-0
         desktop:flex-row desktop:items-center desktop:justify-start desktop:gap-0"
       >
         <img
           :src="imgSrc"
           alt=""
           width="1000"
-          class="w-full max-w-sm object-contain max-h-80 self-center"
+          class="w-full max-w-sm object-contain self-center desktop:-translate-x-16 desktop:scale-[1.35]"
         >
         <div class="text-secondary px-8">
           <h1>
             <slot name="title" />
           </h1>
-          <div class="text-justify relative">
+          <div class="relative">
             <slot />
           </div>
         </div>
