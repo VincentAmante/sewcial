@@ -98,7 +98,7 @@ useHead({
           <h1 class="text-h-big-boy text-primary capitalize">
             Meet
           </h1>
-          <TiltedHeading class="bg-primary text-secondary py-0 px-0 rounded-lg mx-2 uppercase">
+          <TiltedHeading class="bg-primary text-secondary text-center py-0 px-0 rounded-lg uppercase tablet:mx-2 tablet:ml-3">
             The
           </TiltedHeading>
           <h1 class="text-h-big-boy text-primary capitalize">
