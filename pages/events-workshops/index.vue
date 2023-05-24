@@ -208,7 +208,7 @@ function bookSession () {
               hover:transform hover:scale-110"
             @click="() => changeWeek(-1)"
           >
-            <AppIcon class="text-secondary" :icon="['fas', 'chevron-left']" />
+            <AppIcon class="text-secondary p-2" :icon="['fas', 'chevron-left']" />
           </div>
           <div class="flex w-full justify-around">
             <div
@@ -234,7 +234,7 @@ function bookSession () {
               hover:transform hover:scale-110"
             @click="() => changeWeek(1)"
           >
-            <AppIcon class="text-secondary" :icon="['fas', 'chevron-right']" />
+            <AppIcon class="text-secondary p-2" :icon="['fas', 'chevron-right']" />
           </div>
         </div>
         <!-- List of workshops -->
