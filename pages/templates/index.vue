@@ -92,7 +92,7 @@ function toggleFilter () {
     </div>
 
     <!-- Featured section -->
-    <section class="bg-accent-1 p-4 pr-0 desktop:p-20 no-scrollbar desktop:pr-0">
+    <section class="bg-accent-1 p-4 pr-0 desktop:p-20 no-scrollbar desktop:pr-0 min-h-[50rem]">
       <h2 class="text-primary">
         Featured
       </h2>
@@ -124,7 +124,7 @@ function toggleFilter () {
     </section>
 
     <!-- Browse section -->
-    <section class="bg-secondary p-8 outline-4 outline-dashed outline-secondary desktop:p-20">
+    <section class="bg-secondary p-8 outline-4 outline-dashed outline-secondary desktop:p-20 min-h-[50rem]">
       <h2 class="text-primary">
         Browse
       </h2>

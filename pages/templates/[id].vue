@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Template } from '@prisma/client'
+import { UseImage } from '@vueuse/components'
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import ButtonDownload from '@/components/icons/ButtonDownload.vue'
 import ButtonFullscreen from '@/components/icons/ButtonFullscreen.vue'
@@ -76,7 +77,18 @@ function downloadImage () {
         <p> {{ template.name }}</p>
       </div>
       <div class="template-selected">
-        <img :src="template.thumbnail" alt="template-1">
+        <UseImage
+          class="card-image object-cover object-center rounded-t-2xl align-middle brightness-100 w-full h-full
+       transition-all group-hover:scale-105 group-hover:brightness-[80%]"
+          :src="template.thumbnail"
+        >
+          <template #loading>
+            <div class="text-secondary flex flex-col items-center justify-center w-full h-full text-lg max-w-sm min-h-[20rem]">
+              Loading..
+              <AppIcon class="animate-spin" :icon="['fas', 'spinner']" />
+            </div>
+          </template>
+        </UseImage>
         <div class="template-info">
           <h1>{{ template.name }}</h1>
           <p>{{ template.description }}</p>
