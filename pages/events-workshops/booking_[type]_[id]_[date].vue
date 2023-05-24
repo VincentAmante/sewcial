@@ -454,6 +454,7 @@ const formHasCardDetailsErrors = computed(() => {
                 </div>
                 <div>
                   <label class="payment-option" for="paypal">
+
                     <div>
                       <div class="custom-radio" @click="setPaymentOption('paypal')">
                         <AppIcon v-if="paymentOption != 'paypal'" :icon="['far', 'circle']" />
@@ -468,6 +469,11 @@ const formHasCardDetailsErrors = computed(() => {
                       <path d="M24.8256 9.9082C24.1506 13.0165 22.0256 14.6582 18.6423 14.6582H17.4173L16.5589 20.0915C16.5256 20.3082 16.6923 20.4999 16.9089 20.4999H18.4923C18.7756 20.4999 19.0256 20.2915 19.0673 20.0082C19.1339 19.6749 19.5006 17.2415 19.5756 16.8249C19.6173 16.5415 19.8673 16.3332 20.1506 16.3332H20.5173C22.8673 16.3332 24.7089 15.3749 25.2506 12.6165C25.4673 11.4999 25.3506 10.5832 24.8256 9.9082Z" fill="#FFFAE0" />
                     </svg>
                   </label>
+                  <div v-if="paymentOption === 'paypal'">
+                    <div class="opacity-50 text-2xl">
+                      Paypal integration will be added soon..
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="conditions-container">
