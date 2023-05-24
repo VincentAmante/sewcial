@@ -23,14 +23,16 @@ defineProps({
         :src="imgSrc"
       >
     </div>
-    <div>
-      <div class="text-primary font-medium" :class="alignment">
-        <p><slot name="name" /></p>
+    <div class="my-4">
+      <div class="text-accent-2 font-bold" :class="alignment">
+        <p class="my-0">
+          <slot name="name" />
+        </p>
       </div>
 
-      <div class="text-accent-2">
-        <p><slot name="role" /></p>
-      </div>
+      <p class="text-primary flex flex-col my-0 leading-tight">
+        <slot name="role" />
+      </p>
     </div>
   </div>
 <!-- </div> -->

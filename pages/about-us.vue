@@ -98,21 +98,23 @@ useHead({
           <h1 class="text-h-big-boy text-primary capitalize">
             Meet
           </h1>
-          <TiltedHeading class="bg-secondary text-accent-1 py-0 px-4 rounded-lg uppercase">
+          <TiltedHeading class="bg-primary text-secondary py-0 px-0 rounded-lg mx-2 uppercase">
             The
           </TiltedHeading>
           <h1 class="text-h-big-boy text-primary capitalize">
             Team!
           </h1>
         </div>
-        <div class="team-members flex flex-col items-center desktop:flex-row desktop:justify-evenly desktop:px-12">
+        <div class="team-members flex flex-col items-center desktop:flex-row justify-center desktop:px-10">
           <div class="one flex flex-row gap-5 desktop:gap-0">
             <TeamPictures img-src="/images/team-icons/nehan.png">
               <template #name>
                 Nehan Tariq
               </template>
               <template #role>
-                Role
+                <span>Design</span>
+                <span>Front-end</span>
+                <span>Marketing</span>
               </template>
             </TeamPictures>
             <TeamPictures img-src="/images/team-icons/frnk.png">
@@ -120,7 +122,9 @@ useHead({
                 Franchesca Raymundo
               </template>
               <template #role>
-                Role
+                <span>Design</span>
+                <span>Front-end</span>
+                <span>Marketing</span>
               </template>
             </TeamPictures>
           </div>
@@ -130,7 +134,9 @@ useHead({
                 Anthony Cubillas
               </template>
               <template #role>
-                Role
+                <span>QA Testing</span>
+                <span>Marketing</span>
+                <span>Development</span>
               </template>
             </TeamPictures>
             <TeamPictures img-src="/images/team-icons/icen.png">
@@ -138,7 +144,9 @@ useHead({
                 Vincent Amante
               </template>
               <template #role>
-                Role
+                <span>Front-end</span>
+                <span>Back-end</span>
+                <span>3D Modelling</span>
               </template>
             </TeamPictures>
           </div>
@@ -148,7 +156,9 @@ useHead({
                 Nella Bermudo
               </template>
               <template #role>
-                Role
+                <span>Team Leader</span>
+                <span>3D Modelling</span>
+                <span>Content Writing</span>
               </template>
             </TeamPictures>
             <TeamPictures
@@ -158,7 +168,9 @@ useHead({
                 Princelle Abbie
               </template>
               <template #role>
-                Role
+                <span>Design</span>
+                <span>3D Modelling</span>
+                <span>Content Writing</span>
               </template>
             </TeamPictures>
           </div>
