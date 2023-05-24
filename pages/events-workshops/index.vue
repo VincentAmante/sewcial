@@ -208,7 +208,7 @@ function bookSession () {
               hover:transform hover:scale-110"
             @click="() => changeWeek(-1)"
           >
-            <AppIcon :icon="['fas', 'chevron-left']" />
+            <AppIcon class="text-secondary" :icon="['fas', 'chevron-left']" />
           </div>
           <div class="flex w-full justify-around">
             <div
@@ -234,7 +234,7 @@ function bookSession () {
               hover:transform hover:scale-110"
             @click="() => changeWeek(1)"
           >
-            <AppIcon :icon="['fas', 'chevron-right']" />
+            <AppIcon class="text-secondary" :icon="['fas', 'chevron-right']" />
           </div>
         </div>
         <!-- List of workshops -->
@@ -257,7 +257,7 @@ function bookSession () {
               </div>
 
               <div
-                class="cursor-pointer"
+                class="cursor-pointer overflow-hidden text-ellipsis max-w-[32ch] line-clamp-3"
                 @click="() => router.push(`/events-workshops/workshop-${workshop.id}`)"
               >
                 <h1 class="my-1">
@@ -289,5 +289,4 @@ function bookSession () {
       </div>
     </section>
   </main>
-  <Footer />
 </template>

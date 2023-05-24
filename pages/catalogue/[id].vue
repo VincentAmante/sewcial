@@ -159,5 +159,4 @@ function onLike () {
     class="hidden absolute right-0 bottom-0 w-[15%] desktop:block lgScreen:w-[10%] xlScreen:[5%]"
     src="@/assets/images/idsticker2.png"
   >
-  <Footer></Footer>
 </template>
