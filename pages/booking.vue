@@ -67,7 +67,7 @@ function validateBooking () {
   if (!formHasFalse.value) {
     bookSession()
   } else {
-    console.log('error')
+    console.error('Cannot continue, fields still missing')
   }
 }
 </script>
@@ -98,32 +98,17 @@ function validateBooking () {
         </p>
       </div>
       <div class="flex flex-col items-center justify-center bg-secondary p-6 rounded-lg w-full max-w-sm">
-        <VDatePicker
-          v-model="bookingDate"
-          class="date-picker w-full bg-red-200"
-        />
+        <VDatePicker v-model="bookingDate" class="date-picker w-full bg-red-200" />
         <div class="booking-input my-4 w-full">
           <div class="time-picker flex gap-4 w-full">
-            <StartTimePicker
-              v-model="startTime"
-              :date="bookingDate"
-              :has-error="errors.startTime"
-            />
-            <EndTimePicker
-              v-model="endTime"
-              :is-disabled="false"
-              :start-time="startTime"
-              :has-error="errors.endTime"
-            />
+            <StartTimePicker v-model="startTime" :date="bookingDate" :has-error="errors.startTime" />
+            <EndTimePicker v-model="endTime" :is-disabled="false" :start-time="startTime" :has-error="errors.endTime" />
           </div>
-          <BookingPeopleCount
-            v-model="peopleCount"
-            :has-error="errors.peopleCount"
-          />
+          <BookingPeopleCount v-model="peopleCount" :has-error="errors.peopleCount" />
         </div>
         <div class="book-now rounded-t-[1px] border-dashed border-primary w-full">
           <p class="text-sm font-bold text-primary mb-0">
-            Total Amount (VAT inclusive): 25 AED
+            Total Amount (VAT inclusive): {{ 25 * peopleCount }} AED
           </p>
           <button
             class=" border-none rounded-lg bg-accent-1 text-primary w-full mb-2 p-2"
@@ -135,5 +120,4 @@ function validateBooking () {
       </div>
     </section>
   </main>
-  <Footer />
 </template>
