@@ -156,7 +156,7 @@ function toggleFilter () {
           </div>
         </div>
       </div>
-      <div class="column-cards pt-4 gap-4 desktop:gap-8 columns-1 desktop:columns-3">
+      <div class="column-cards pt-4 gap-4 desktop:gap-8 columns-1 mobile:columns-3">
         <template
           v-for="template in templatePage"
         >
