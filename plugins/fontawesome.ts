@@ -19,7 +19,9 @@ import {
   faChevronDown,
   faPlus,
   faMinus,
-  faHeart
+  faHeart,
+  faAt,
+  faEnvelope
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -45,7 +47,9 @@ const icons = [
   faMinus,
   faGithub,
   faHeart,
-  farHeart
+  farHeart,
+  faAt,
+  faEnvelope
 ]
 library.add(...icons)
 

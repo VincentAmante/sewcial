@@ -40,8 +40,6 @@ const tilt = computed(() => {
 })
 </script>
 
-<!-- Template with defined slots -->
-<!-- Currently, content by default goes to the one without a name -->
 <template lang="">
   <p
     class="text-h-tilted rounded-md py-1 px-2 relative w-fit max-w-[50ch]"

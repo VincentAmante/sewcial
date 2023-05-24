@@ -3,6 +3,8 @@ import { z } from 'zod'
 import ContactField from '@/components/FormFields/ContactField.vue'
 import ContactTextArea from '@/components/FormFields/ContactTextArea.vue'
 
+const mail = useMail()
+
 useHead({
   title: 'Sewcial | Contact Us'
 })
@@ -39,14 +41,16 @@ async function submitContactForm () {
   messageInput.status === 'error') {
 
   } else {
-    await useFetch('/api/ContactSubmissions/create', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: name.value,
-        email: email.value,
-        mobile: mobileNumber.value,
-        message: message.value
-      })
+    mail.send({
+      from: 'admin@sewcial.space',
+      subject: `Contact Form from ${name.value}`,
+      text: `
+        name: ${name.value}
+        email: ${email.value}
+        mobile-number: ${mobileNumber.value}
+
+        message: ${message.value}
+      `
     })
   }
 }
