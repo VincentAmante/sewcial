@@ -54,7 +54,7 @@ refresh()
 
 const emit = defineEmits(['clickedLikedBtn'])
 const { user, isUserSet, updateLikedItems } = useUserStore()
-if (isUserSet && useAuth().status.value === 'authenticated') {
+if (isUserSet) {
   const { refresh: refreshIsLiked } = await useFetch('/api/CatalogueItems/isLiked', {
     method: 'POST',
     body: JSON.stringify({
@@ -66,14 +66,12 @@ if (isUserSet && useAuth().status.value === 'authenticated') {
     }
   })
   refreshIsLiked()
-} else if (useAuth().status.value !== 'authenticated') {
-  emit('clickedLikedBtn')
 }
 
 function onLike () {
-  itemIsLiked.value = !itemIsLiked.value
   const { user, isUserSet } = useUserStore()
-  if (isUserSet) {
+  if (isUserSet && useAuth().status.value === 'authenticated') {
+    itemIsLiked.value = !itemIsLiked.value
     const url = itemIsLiked.value ? '/api/CatalogueItems/likeItem' : '/api/CatalogueItems/unlikeItem'
     useFetch(url, {
       method: 'POST',
@@ -93,6 +91,8 @@ function onLike () {
         refreshLiked()
       }
     })
+  } else {
+    emit('clickedLikedBtn')
   }
 }
 </script>
