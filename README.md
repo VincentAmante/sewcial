@@ -1,6 +1,8 @@
-# sewcial (sidebase)
+# Sewcial
 
-Sewcial website on the sidebase stack
+Sewcial is a project made by students studying in Bath Spa University - RAK.
+This is the website for the conceptual business.
+
 [Link to Website](https://www.sewcial.space/)
 
 Technologies used:
