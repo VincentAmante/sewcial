@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client'
+
 export default defineEventHandler(async (event) => {
   if (event.context.params === undefined) {
     return null

@@ -48,7 +48,6 @@ async function submitContactForm () {
         name: ${name.value}
         email: ${email.value}
         mobile-number: ${mobileNumber.value}
-
         message: ${message.value}
       `
     })

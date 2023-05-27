@@ -53,7 +53,6 @@ const navColour = computed(() => {
       }
   }
 })
-
 const toggledStyles = computed(() => {
   if (isToggled.value) {
     return {

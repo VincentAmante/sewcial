@@ -43,15 +43,6 @@ const textInput = computed({
   }
 })
 
-const bookingPeople = computed({
-  get () {
-    return props.modelValue
-  },
-  set (value) {
-    emit('update:modelValue', value)
-  }
-})
-
 const { errorStyling, hasError } = useErrorStyling(props.hasError)
 watch(() => props.hasError, (newValue) => {
   hasError.value = newValue

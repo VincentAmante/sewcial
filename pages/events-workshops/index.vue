@@ -9,12 +9,6 @@ useHead({
   title: 'Sewcial | Events & Workshops'
 })
 
-const bookingDate = ref(new Date())
-const startTime = ref(new Date())
-const endTime = ref(new Date())
-const currentDefaultDate = ref(new Date())
-const peopleCount = ref(0)
-
 const anchorDate = ref(new Date())
 const chosenDate = ref(anchorDate.value.getTime())
 const { width: windowWidth } = useWindowSize()
@@ -114,16 +108,6 @@ function bookWorkshop (id: string) {
     params: {
       type: 'workshop',
       id,
-      date: chosenDate.value
-    }
-  })
-}
-function bookSession () {
-  router.push({
-    name: 'events-workshops-booking_type_id_date',
-    params: {
-      type: 'session',
-      id: uuidv4(),
       date: chosenDate.value
     }
   })

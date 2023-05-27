@@ -494,7 +494,7 @@ const formHasCardDetailsErrors = computed(() => {
               <div class="text-h1">
                 Booking Confirmed
               </div>
-              <p>Your booking code is {{ id }}. We’ve sent you the details in your email.</p>
+              <p>Your booking code is {{ id }}. We will soon send you the details in your email.</p>
               <ul class="booking-list">
                 <li
                   v-for="workshop in workshops"

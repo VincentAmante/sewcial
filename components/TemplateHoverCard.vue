@@ -23,6 +23,7 @@ defineProps({
       class="w-full h-full group-hover:brightness-75  min-h-[5rem] object-cover object-center"
       :src="image"
     >
+      <!-- Placeholder while loading -->
       <template #loading>
         <div class="text-secondary bg-primary flex flex-col items-center justify-center w-full h-full text-lg">
           Loading..
@@ -30,11 +31,14 @@ defineProps({
         </div>
       </template>
     </UseImage>
+
     <!-- Info -->
     <div class="info-container bg-primary absolute top-auto bottom-0 left-0 w-full py-4 transform desktop:translate-y-full backface-hidden transition-all group-hover:transform-none">
       <div class="info-wrapper flex justify-between items-center px-4">
         <div class="card-text text-dark">
-          <h1><slot name="item-name" /></h1>
+          <h1>
+            <slot name="item-name" />
+          </h1>
           <h3 class="capitalize">
             <slot name="owner-name" />
           </h3>
