@@ -38,12 +38,12 @@ const emailHasError = ref(false)
 const emailErrorStyling = computed(() => {
   return emailHasError.value
     ? {
-        container: 'border-accent-2',
+        container: ['border-accent-2', 'text-accent-2'],
         input: 'text-accent-2',
         placeholder: 'placeholder:text-accent-2'
       }
     : {
-        container: 'border-primary',
+        container: ['border-primary', 'text-primary'],
         input: 'text-primary',
         placeholder: 'placeholder:text-primary'
       }
