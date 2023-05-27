@@ -52,7 +52,7 @@ const { refresh } = useFetch(`/api/CatalogueItems/${route.params.id}`, {
 })
 refresh()
 
-const emit = defineEmits(['clicked-liked-btn'])
+const emit = defineEmits(['clickedLikedBtn'])
 const { user, isUserSet, updateLikedItems } = useUserStore()
 if (isUserSet && useAuth().status.value === 'authenticated') {
   const { refresh: refreshIsLiked } = await useFetch('/api/CatalogueItems/isLiked', {
@@ -67,7 +67,7 @@ if (isUserSet && useAuth().status.value === 'authenticated') {
   })
   refreshIsLiked()
 } else if (useAuth().status.value !== 'authenticated') {
-  emit('clicked-liked-btn')
+  emit('clickedLikedBtn')
 }
 
 function onLike () {
