@@ -67,7 +67,7 @@ const signInToggled = ref(false)
       format="shop"
       @clicked-liked-btn="attemptLogIn"
     />
-    <NuxtPage />
+    <NuxtPage @clicked-liked-btn="attemptLogIn" />
     <Footer />
   </div>
 </template>
