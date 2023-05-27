@@ -46,7 +46,7 @@ const textInput = computed({
     <input
       id=""
       v-model.lazy="textInput"
-      class=" rounded-md border-2 border-solid border-secondary bg-none pb-2 px-1 focus:outline-none align-middle"
+      class=" rounded-md border-2 border-solid border-secondary bg-none py-1 px-1 focus:outline-none align-middle"
       :type="type"
       :name="name"
       :placeholder="placeholder"
