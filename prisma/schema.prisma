@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
+  provider     = "postgres"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -144,7 +144,7 @@ model ContactSubmission {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
+  id                 String    @id @default(cuid())
   userId             String
   type               String
   provider           String?
@@ -154,39 +154,40 @@ model Account {
   refreshToken       String?
   accessToken        String?
   accessTokenExpires DateTime?
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
+  refresh_token      String?   @db.Text
+  access_token       String?   @db.Text
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   expires_at         Int?
   token_type         String?
   scope              String?
-  id_token           String?  @db.Text
+  id_token           String?   @db.Text
   session_state      String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId])
   @@unique([provider, providerAccountId])
   @@unique([providerId, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
   id           String   @id @default(cuid())
   userId       String?
   expires      DateTime
-  sessionToken String?   @unique
-  accessToken  String?   @unique
+  sessionToken String?  @unique
+  accessToken  String?  @unique
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  user         User?     @relation(fields: [userId], references: [id])
+  user         User?    @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
+
 model User {
   id            String               @id @default(uuid())
   name          String?
-  email         String?               @unique
+  email         String?              @unique
   emailVerified DateTime?
   image         String?
   createdAt     DateTime             @default(now())
@@ -195,7 +196,6 @@ model User {
   accounts      Account[]
   sessions      Session[]
 }
-
 
 model VerificationToken {
   identifier String
