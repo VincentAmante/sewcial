@@ -1,17 +1,19 @@
 <!-- TODO: Apply advanced behaviour -->
 <script setup lang="ts">
 
+defineEmits(['close-btn-clicked'])
 </script>
 
-<!-- 
+<!--
     $emit('close-btn-clicked') creates an event that can be used to execute code
     see '../DescriptionSlider.vue for an implementation of the 'close-btn-clicked' emit
 -->
 <template>
-    <font-awesome-icon 
-        @click = "$emit('close-btn-clicked')"
-        class="close-button"
-        :icon="['fas', 'xmark']"/>
+  <AppIcon
+    class="close-button"
+    :icon="['fas', 'xmark']"
+    @click="$emit('close-btn-clicked')"
+  />
 </template>
 
 <style scoped lang="scss">

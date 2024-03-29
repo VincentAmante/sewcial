@@ -4,8 +4,10 @@ import { useRoute } from 'vue-router'
 import ButtonLikedPage from '../icons/ButtonLikedPage.vue'
 
 import BurgerButton from './BurgerButton.vue'
-import Navigation from './Navigation.vue'
-import HeaderLogo from '@/components/TheHeader/HeaderLogo.vue'
+import LazyNavigation from './Navigation.vue'
+import { useUserStore } from '~/stores/useUserStore'
+
+const { userLikedItems } = useUserStore()
 
 const props = defineProps({
   format: {
@@ -28,11 +30,7 @@ const setColour = (page: String) => {
     case 'home':
     case '':
       return 'primary'
-    case 'test':
     case 'about':
-    case 'test-icen':
-    case 'test-kie':
-    case 'test-nehan':
     case 'templates':
       return 'secondary'
     default:
@@ -51,52 +49,69 @@ const formatStyle = computed(() => {
   switch (props.format) {
     case 'home':
     case '':
-      return 'home'
+      return {
+        header: ['z-[135]', 'fixed', 'border-none', 'pointer-events-none'],
+        logo: ['tablet:justify-start']
+      }
     case 'about':
     case 'shop':
-      return 'shop'
+      return {
+        header: ['z-[135]'],
+        logo: ['tablet:justify-start']
+      }
     default:
-      return 'base'
+      return {
+        header: ['z-[135]'],
+        logo: ['tablet:justify-start']
+      }
   }
 })
+
+const emit = defineEmits(['clickedLikedBtn'])
 </script>
 <template>
   <header
-    :class="formatStyle"
-    class="flex items-center justify-end w-full border-b-4 border-dashed border-secondary static top-0 z-[105]"
+    :class="formatStyle.header"
+    class="flex items-center justify-end w-full border-b-4 border-dashed border-secondary static top-0 px-mobile-w"
   >
     <TheHeaderLogo
-      :class="formatStyle"
+      :class="formatStyle.logo"
       :colour="navColour"
       :header-toggled="headerToggled"
-      class="logo w-full left-0 right-0 flex justify-start absolute tablet:justify-center"
+      class="logo w-full left-0 right-0 flex justify-start absolute"
     />
-    <div class="flex items-center gap-2 z-[105] fixed">
-      <ButtonLikedPage class="btn-liked-page h-6 tablet:h-[30px]" />
-      <BurgerButton v-model="headerToggled" class="burger-btn" :colour="navColour" />
+    <div class="flex items-center gap-4 z-[150] fixed">
+      <div
+        class="relative"
+        :class="(format === 'shop') ? 'block' : 'hidden'"
+      >
+        <ButtonLikedPage
+          class="btn-liked-page h-6 tablet:h-[30px] cursor-pointer"
+          @click="$emit('clickedLikedBtn')"
+        />
+      </div>
+      <BurgerButton
+        v-model="headerToggled"
+        class="burger-btn z-[150]"
+        :colour="navColour"
+      />
     </div>
   </header>
 
-  <Navigation :is-toggled="headerToggled" :colour="navColour" :page="page" />
+  <LazyNavigation
+    :is-toggled="headerToggled"
+    :colour="navColour"
+    :page="page"
+  />
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 
 header {
-    padding-inline: clamp($margin-width-mobile, 5vw, 50px);
+    padding-inline: clamp(30px, 5vw, 50px);
     height: clamp(70px, 15vw, 90px);
-    &.home {
-        border: none
     }
-    &.home { position: fixed; }
-    &:not(.shop){
-        .btn-liked-page {
-            display: none;
-        }
-    }
-}
-
 .logo {
-    padding-inline: clamp($margin-width-mobile, 5vw, 50px);
+    padding-inline: clamp(30px, 5vw, 50px);
 }
 </style>

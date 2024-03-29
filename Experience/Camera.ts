@@ -32,12 +32,19 @@ export default class Camera {
     // Switch between either perspective or ortho
     this.instance = this.createOrthographicCamera()
 
-    this.instance.position.x = -10
-    this.instance.position.y = -6.8
-    this.instance.position.z = -20
-    console.log(this.instance.position)
+    this.instance.position.x = 18.6
+    this.instance.position.y = 10
+    this.instance.position.z = 20
 
     this.scene.add(this.instance)
+
+    // window.addEventListener('keydown', (event) => {
+    //   if (event.keyCode === 37) {
+    //     this.instance.position.x -= 0.1
+    //   } else if (event.keyCode === 39) {
+    //     this.instance.position.x += 0.1
+    //   }
+    // })
   }
 
   createPerspectiveCamera () {
@@ -56,6 +63,13 @@ export default class Camera {
       100
     )
 
+    let zoom = (this.sizes.width / 1080)
+    if (zoom > 1 && this.sizes.width > 1080) {
+      zoom = 1
+    } else if (zoom < 0.5) {
+      zoom = 0.5
+    }
+    this.orthographicCamera.zoom = zoom
     return this.orthographicCamera
   }
 
@@ -79,6 +93,13 @@ export default class Camera {
     this.orthographicCamera.top = this.sizes.frustrum / 2
     this.orthographicCamera.bottom = -this.sizes.frustrum / 2
 
+    let zoom = (this.sizes.width / 1080)
+    if (zoom > 1 && this.sizes.width > 1080) {
+      zoom = 1
+    } else if (zoom < 0.5) {
+      zoom = 0.5
+    }
+    this.orthographicCamera.zoom = zoom
     this.instance = this.orthographicCamera
   }
 
@@ -97,12 +118,12 @@ export default class Camera {
     // Set Limitations
     this.controls.minDistance = 7
     this.controls.maxDistance = 50
-    this.controls.minAzimuthAngle = Math.PI * 0.2
-    this.controls.maxAzimuthAngle = Math.PI * 0.25
-    this.controls.minPolarAngle = Math.PI * 0.35
-    this.controls.maxPolarAngle = Math.PI * 0.40
+    this.controls.minAzimuthAngle = Math.PI * 0.04
+    this.controls.maxAzimuthAngle = Math.PI * 0.4
+    this.controls.minPolarAngle = Math.PI * 0.25
+    this.controls.maxPolarAngle = Math.PI * 0.4
     this.controls.maxZoom = 1.5
-    this.controls.minZoom = 0.9
+    this.controls.minZoom = 0.5
     this.cam = false
   }
 

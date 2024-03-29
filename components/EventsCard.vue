@@ -1,89 +1,44 @@
 <script setup lang="ts">
-    // Import download button
-    import RSVPButton from '@/components/RSVPButton.vue';
-    
-    // Variables passed to this component are props
-    const props = defineProps({
-        image: {
-          type: String,
-          required: true
-        }
-    })
+// Import download button
+import RSVPButton from '@/components/RSVPButton.vue'
+
+// Variables passed to this component are props
+defineProps({
+  image: {
+    type: String,
+    required: true
+  }
+})
+
+defineEmits(['clickedRsvp'])
 </script>
 
 <!-- Card -->
 <template>
-    <div class="cards" onclick="location.href='html/image.html'">
-        <div class="card">
-          <div class="card-image" :style="{ backgroundImage: `url(${image})` }"></div>
-        <div class="card-info">
-            <h1>
-              <slot name="event-name"></slot>
-            </h1>
-            <h3>
-              <slot name="date"></slot>
-            </h3>
-            <h3 class = "disclaimer">
-              FREE ENTRY!
-            </h3>
-            <RSVPButton></RSVPButton>
-        </div>
-        </div>
+  <div
+    class="cards m-2 cursor-pointer group min-w-[20rem] select-none"
+  >
+    <div class="card flex flex-col text-dark bg-primary w-full h-full rounded-2xl transition-all group-hover:transform">
+      <div class="aspect-[1.1/1] overflow-hidden h-80">
+        <div
+          class="card-image bg-cover bg-center bg-no-repeat rounded-t-2xl align-middle brightness-100 h-full
+       transition-all group-hover:scale-105 group-hover:brightness-[80%]"
+          :style="{ backgroundImage: `url(${image})` }"
+        />
+      </div>
+      <div class="card-info flex flex-col p-4 justify-start grow items">
+        <h1 class="my-2 break-words">
+          <slot name="event-name" />
+        </h1>
+        <h3 class="my-2">
+          <slot name="date" />
+        </h3>
+        <slot><p>This is the event description.</p></slot>
+        <h3 class="disclaimer pt-2 my-6 grow">
+          FREE ENTRY!
+        </h3>
+        <RSVPButton @click.stop="() => $emit('clickedRsvp')" />
+      </div>
     </div>
+  </div>
 </template>
-
-<!-- Scoped Styling -->
-<style scoped lang="scss">
-.cards {
-    padding: .75em;
-    margin: 5px;
-    .card {
-      flex-direction: column;
-      color: $clr-text;
-      background-color: $clr-primary;
-      width: 100%; // change this depending on the thign
-      border-radius: 20px;
-      transition: transform 300ms linear;
-
-      &:hover {
-        cursor: pointer;
-        transform: scale(1);
-        box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
-        
-        .card-image {
-          filter: brightness(100%);
-        }
-      }
-    }
-  
-    // Content
-    .card-info {
-      flex-direction: column;
-      padding: 1.8rem;
-      text-align: left;
-      h1, h3 {
-        margin-block: 0.2em;
-      }
-
-      .disclaimer {
-        padding-top: 0.5em;
-        margin-block: 1.5em;
-      }
-    }
-  
-    // Images
-    .card-image{
-      aspect-ratio: 1.1 / 1;
-      overflow: hidden;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-radius: 20px 20px 0px 0px;
-      width: 100%;
-      vertical-align: middle;
-      filter: brightness(90%);
-      // background-image: url(../assets/images/OpenMic.png);
-    }
-  }
-  
-</style>

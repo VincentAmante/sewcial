@@ -1,9 +1,10 @@
 <script setup lang="ts">
 // Import download button
+import { UseImage } from '@vueuse/components'
 import DownloadButton from '@/components/DownloadButton.vue'
 
 // Variables passed to this component are props
-const props = defineProps({
+defineProps({
   image: {
     type: String,
     required: true
@@ -14,86 +15,39 @@ const props = defineProps({
 <!-- Card -->
 <template>
   <div
-    class="cards m-2 cursor-pointer group min-w-[20rem]"
+    class="cards m-2 cursor-pointer group select-none"
   >
-    <div class="card flex flex-col bg-primary rounded-2xl w-full h-full">
+    <div class="card flex flex-col bg-primary rounded-2xl w-full h-full max-w-xs">
       <div class="aspect-[1.1/1] overflow-hidden h-80">
-        <div
-          class="card-image bg-cover bg-center bg-no-repeat rounded-t-2xl align-middle brightness-100 h-full
+        <UseImage
+          class="card-image object-cover object-center rounded-t-2xl align-middle brightness-100 w-full h-full
        transition-all group-hover:scale-105 group-hover:brightness-[80%]"
-          :style="{ backgroundImage: `url(${image})` }"
-        />
+          :src="image"
+        >
+          <template #loading>
+            <div class="text-primary bg-secondary flex flex-col items-center justify-center w-full h-full text-lg">
+              Loading..
+              <AppIcon class="animate-spin" :icon="['fas', 'spinner']" />
+            </div>
+          </template>
+        </UseImage>
       </div>
       <div class="card-info flex flex-col p-4 justify-start grow items">
-        <h1 class="my-2">
+        <h1 class="my-2 mb-0">
           <slot name="item-name" />
         </h1>
-        <h3 class="my-2 capitalize">
+        <h3 class="my-2 capitalize mt-0">
           <slot name="owner" />
         </h3>
-        <p class=" text-justify grow">
+        <p class=" text-justify line-clamp-3">
           <slot name="description" />
         </p>
-        <div class="flex justify-center">
-          <DownloadButton />
+        <div class="flex justify-center items-end grow">
+          <div>
+            <DownloadButton />
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<!-- Scoped Styling -->
-<!-- <style scoped lang="scss">
-.cards {
-    margin: 10px;
-
-    .card {
-      flex-direction: column;
-      color: $clr-text;
-      background-color: $clr-primary;
-      width: 180px; // change this depending on the thign
-      height: 300px;
-      border-radius: 15px;
-
-      @include media(desktop) {
-        width: 260px;
-        height: 370px;
-      }
-
-      &:hover {
-        cursor: pointer;
-        box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
-
-        .card-image {
-          filter: brightness(80%);
-
-        }
-      }
-    }
-
-    // Content
-    .card-info {
-      flex-direction: column;
-      padding: 1rem;
-      justify-content: center;
-
-      h1, h3 {
-        margin: 0;
-      }
-    }
-
-    // Images
-    .card-image{
-      aspect-ratio: 1.1 / 1;
-      overflow: hidden;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-radius: 15px 15px 0px 0px;
-      width: 100%;
-      vertical-align: middle;
-      filter: brightness(100%);
-
-    }
-  }
-</style> -->

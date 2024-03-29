@@ -1,44 +1,67 @@
 <script setup lang="ts">
 
+useHead({
+  title: 'Sewcial | About Us'
+})
+
 </script>
 
 <template>
   <main class="relative overflow-x-hidden">
     <!-- Stickers -->
     <div class="sticker-container absolute w-full ">
-      <img class="sticker sticker-1 hidden desktop:block absolute -z-10 right-0 top-0 transform translate-x-[20%] translate-y-[-3%] w-[32rem]" src="@/assets/images/Sticker_7.png" alt="">
+      <img
+        class="sticker sticker-1 hidden desktop:block absolute -z-10 right-0 top-2 transform translate-x-[20%] translate-y-[-3%] w-[40rem]"
+        src="@/assets/images/Sticker_7.png"
+        alt=""
+      >
     </div>
 
     <div class="about-container">
-      <div class="splash-greeting flex flex-col items-center gap-2 p-4 py-16 desktop:p-20">
-        <h1 class="text-h-giant m-0 text-secondary lowercase">
-          hello my
+      <div class="splash-greeting flex text-center flex-col gap-0 p-4 py-16 desktop:p-20 desktop:text-left desktop:translate-x-[8%] desktop:text">
+        <h1 class="text-[100px] m-0 -mb-5 text-secondary lowercase">
+          sew.
         </h1>
-        <SpeechBubble alignment="right" colour-override="accent-1" class="transform -rotate-6 -translate-x-3 self-center flex flex-col gap-2 py-0">
-          <h1 class="text-h-giant uppercase">
-            cute cute
+        <SpeechBubbleRaw alignment="left" colour-override="accent-1" class="transform -rotate-6 -translate-x-0 -translate-y-0 flex flex-col gap-2 py-0 -ml-2 my-0 scale-90 self-center mobile:px-8 desktop:self-start">
+          <h1 class="text-[100px] w-full lowercase text-center transform my-0 py-0.05 px-2">
+            share.
           </h1>
-        </SpeechBubble>
-        <h1 class="text-h-giant text-secondary lowercase">
-          sewdents
+        </SpeechBubbleRaw>
+        <h1 class="text-[100px] text-secondary lowercase -mt-2 -translate-y-4">
+          connect.
         </h1>
       </div>
 
-      <section class="about-info">
-        <img src="../assets/images/third-place.png" alt="about us">
-        <div class="about-wrapper">
-          <div class="heading">
+      <section
+        class="about-info flex flex-col-reverse bg-secondary outline-4 outline-dashed outline-secondary
+        desktop:flex-row desktop:items-center"
+      >
+        <img
+          class="p-8 pt-0 mt-10 translate-x-[3%] desktop:px-0 desktop:py-20 desktop:w-2/5 relative transform desktop:translate-x-[-15%]"
+          src="../assets/images/third-place2.png"
+          alt="about us"
+        >
+
+        <img
+          class="hidden absolute right-0 top-100 w-[15%] desktop:block lgScreen:w-[10%] xlScreen:[5%]"
+          src="@/assets/images/aboutstickers.png"
+        >
+        <div class="about-wrapper p-8 pb-0 desktop:p-20 desktop:pl-0 py-16">
+          <div class="heading flex flex-col my-8">
             <div class="flex">
-              <h1 class="text-h-big-boy p-0">
+              <h1 class="text-h-big-boy p-0  my-0">
                 <span class="text-accent-1">A</span> <span class="text-primary lowercase">third place</span>
               </h1>
             </div>
-            <div class="flex gap-4 items-center">
-              <TiltedHeading class="and bg-primary text-accent-1 p-0 px-4 flex items-center transform translate-y-3">
+            <div class="flex gap-4 items-center desktop:-mt-6">
+              <TiltedHeading
+                text-color="accent-1"
+                class="and bg-primary p-0 px-4 flex items-center transform translate-y-3"
+              >
                 and
               </TiltedHeading>
               <h1 class="text-h-big-boy p-0 ">
-                <span class="flex text-h-big-boy text-primary lowercase">
+                <span class="flex text-h-big-boy text-accent-1 lowercase">
                   creative space
                 </span>
               </h1>
@@ -46,42 +69,52 @@
             </div>
           </div>
 
-          <div class="para">
+          <div class="para text-primary leading-6 desktop:w-[70%] desktop:ml-20 max-w-[60ch]">
             <p>
-              Lorem ipsum dolor sit amet consectetur. At purus maecenas nunc egestas sed. Tempor adipiscing venenatis praesent nisi tincidunt.
-              Orci enim tristique aenean eu ac. Vel vestibulum imperdiet scelerisque dignissim in sagittis non dolor senectus.
-              Sapien sodales tortor elementum suspendisse non mauris scelerisque. <br><br>
-              Aliquam at pulvinar ipsum fringilla fermentum. Pulvinar enim scelerisque cras semper ac tortor. Scelerisque elit id risus mattis nibh lectus.
-              Arcu turpis viverra cras fusce sit commodo porttitor. <br><br>
-              Mattis pellentesque sed nunc dictum arcu mauris at. Nunc tortor mi non facilisis. Blandit risus mi sed tincidunt. Egestas nec est nisl laoreet
-              lobortis arcu quis purus egestas. Dictum amet facilisis sed neque tortor.<br>
-              Vestibulum tempor faucibus laoreet massa neque enim velit maecenas. Lorem vulputate enim neque in ac volutpat pharetra. Nulla consequat varius et leo sit. <br><br>
-              Augue ut et faucibus donec. Sed hac elementum nunc hendrerit egestas tellus et rhoncus luctus. Lorem vitae diam purus quis in est pharetra enim.
+              Welcome to Sewcial, your place to sew, share, and connect!
+              We host a collection of spaces that provide a unique environment for youth to pursue their passions in sustainable fashion,
+              earn from learning new skills, and build a community.
+            </p>
+            <p>
+              Eat and study at the Sewcial Cafe;
+              meet new people and participate in events at the Sewcial Lounge;
+              learn how to sew, craft, and upcycle at the Sewcial Studio.
+            </p>
+            <p>
+              We aim to be one of very few third places catered to young people in Dubai
+              -
+              somewhere outside home or school that one spends time in to interact with others.
+              We do this by intentionally curating these spaces to serve them and their needs for community, creativity, and belonging.
+            </p>
+            <p>
+              We hope to see you soon at Sewcial, where creativity provides community.
             </p>
           </div>
         </div>
       </section>
 
-      <section class="team-container">
-        <div class="team-heading">
-          <h1 class="text-h-big-boy cream-h">
+      <section class="team-container bg-accent-1 outline-4 outline-dashed outline-accent-1 relative z-[100] p-8 desktop:20">
+        <div class="team-heading flex items-center justify-center gap-2 pb-8">
+          <h1 class="text-h-big-boy text-primary capitalize">
             Meet
           </h1>
-          <TiltedHeading class="bg-secondary text-accent-1 py-0 px-4 rounded-lg uppercase the">
+          <TiltedHeading class="bg-primary text-secondary text-center py-0 px-0 rounded-lg uppercase tablet:mx-2 tablet:ml-3">
             The
           </TiltedHeading>
-          <h1 class="text-h-big-boy cream-h">
+          <h1 class="text-h-big-boy text-primary capitalize">
             Team!
           </h1>
         </div>
-        <div class="team-members">
-          <div class="one">
+        <div class="team-members flex flex-col items-center desktop:flex-row justify-center desktop:px-10">
+          <div class="one flex flex-row gap-5 desktop:gap-0">
             <TeamPictures img-src="/images/team-icons/nehan.png">
               <template #name>
                 Nehan Tariq
               </template>
               <template #role>
-                Role
+                <span>Design</span>
+                <span>Front-end</span>
+                <span>Marketing</span>
               </template>
             </TeamPictures>
             <TeamPictures img-src="/images/team-icons/frnk.png">
@@ -89,17 +122,21 @@
                 Franchesca Raymundo
               </template>
               <template #role>
-                Role
+                <span>Design</span>
+                <span>Front-end</span>
+                <span>Marketing</span>
               </template>
             </TeamPictures>
           </div>
-          <div class="two">
+          <div class="two flex flex-row gap-5 desktop:gap-0">
             <TeamPictures img-src="/images/team-icons/louis.png">
               <template #name>
                 Anthony Cubillas
               </template>
               <template #role>
-                Role
+                <span>QA Testing</span>
+                <span>Marketing</span>
+                <span>Development</span>
               </template>
             </TeamPictures>
             <TeamPictures img-src="/images/team-icons/icen.png">
@@ -107,223 +144,131 @@
                 Vincent Amante
               </template>
               <template #role>
-                Role
+                <span>Front-end</span>
+                <span>Back-end</span>
+                <span>3D Modelling</span>
               </template>
             </TeamPictures>
           </div>
-          <div class="three">
+          <div class="three flex flex-row gap-5 desktop:gap-0">
             <TeamPictures img-src="/images/team-icons/nella.png">
               <template #name>
                 Nella Bermudo
               </template>
               <template #role>
-                Role
+                <span>Team Leader</span>
+                <span>3D Modelling</span>
+                <span>Content Writing</span>
               </template>
             </TeamPictures>
-            <TeamPictures img-src="/images/team-icons/bie.png">
+            <TeamPictures
+              img-src="/images/team-icons/bie.png"
+            >
               <template #name>
                 Princelle Abbie
               </template>
               <template #role>
-                Role
+                <span>Design</span>
+                <span>3D Modelling</span>
+                <span>Content Writing</span>
               </template>
             </TeamPictures>
           </div>
         </div>
       </section>
 
-      <section class="banner">
-        <div class="wrapper-1">
-          <div class="container">
-            <img src="../assets/images/about-1.png" alt="about us">
-            <div class="card light">
-              <h1>“motherr”</h1>
-            </div>
+      <section class="p-8 desktop:p-20">
+        <div class="grid grid-cols-1 gap-1">
+          <div class="grid grid-cols-3 gap-1">
+            <NuxtLink to="https://www.instagram.com/p/CsObqGCg0Z1/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/may-14.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CsN9V4fSxmD/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/may-13.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CsL8YxgAqn1/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/reel1.jpg"
+              >
+            </NuxtLink>
           </div>
-          <div class="container">
-            <div class="card dark">
-              <h1>“fav hangout spot 4evs”</h1>
-            </div>
-            <img src="../assets/images/about-3.png" alt="about us">
+          <div class="grid grid-cols-3 gap-1">
+            <NuxtLink to="https://www.instagram.com/p/CsJXpqvya7W/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/may-09.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CsGuojXM7PR/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/may-10.jpg"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CsBgZQVvLMr/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/may-11.png"
+              >
+            </NuxtLink>
           </div>
-        </div>
-        <div class="wrapper-2">
-          <div class="container">
-            <img src="../assets/images/about-2.png" alt="about us">
-            <div class="card dark">
-              <h1>“grape”</h1>
-            </div>
+          <div class="grid grid-cols-3 gap-1">
+            <NuxtLink to="https://www.instagram.com/p/Cr8XLjjvnO7/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/may-07.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/Cr3XXHLPIdx/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/may-05.jpg"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CryIRACP4XI/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/may-03.png"
+              >
+            </NuxtLink>
           </div>
-          <div class="container">
-            <div class="card light">
-              <h1>“so slay halal queen”</h1>
-            </div>
-            <img src="../assets/images/about-4.png" alt="about us">
+          <div class="grid grid-cols-3 gap-1">
+            <NuxtLink to="https://www.instagram.com/p/Crs9UhhvjKs/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/may-01.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/Crn7xkWhHhU/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/april-29.png"
+              >
+            </NuxtLink>
+
+            <NuxtLink to="https://www.instagram.com/p/CrimAKwBlYH/" class="aspect-square overflow-hidden">
+              <img
+                class="w-full hover:scale-105 transition-all duration-300 ease-in-out hover:brightness-90"
+                src="../assets/images/april-27.png"
+              >
+            </NuxtLink>
           </div>
         </div>
       </section>
     </div>
   </main>
 </template>
-
-<style scoped lang="scss">
-.about-container{
-    .splash-greeting{
-        h1{
-        margin: 0;
-            text-transform: lowercase;
-        }
-    }
-}
-.about-info{
-    background-color: $clr-secondary;
-    outline: 4px dashed $clr-secondary;
-    display: flex;
-    flex-direction: column-reverse;
-
-    @include media(desktop){
-        flex-direction: row;
-        align-items: center;
-        // align-items: stretch;
-    }
-
-    img{
-        padding: 0 2em 2em 2em;
-        width: 100%;
-        @include media(desktop){
-            padding: 5em 0 5em 0;
-            width: 50%;
-            position: relative;
-            transform: translateX(-20%);
-        }
-    }
-
-    .about-wrapper{
-        padding: 2em 2em 0 2em;
-        @include media(desktop){
-            padding: 5em 5em 5em 0;
-        }
-    }
-    .heading{
-        display: flex;
-        flex-direction: column;
-    }
-    .pink-h-small{
-        color: $clr-accent-1;
-        text-transform: lowercase;
-    }
-    .and{
-        background-color: $clr-primary;
-        color: $clr-accent-1;
-    }
-    .para{
-        color: $clr-primary;
-        line-height: 1.2em;
-    }
-}
-.team-container{
-    background-color: $clr-accent-1;
-    outline: 4px dashed $clr-accent-1;
-    margin-top: -1px;
-    position: relative;
-    z-index: 100;
-    padding: 2em;
-    @include media(desktop){
-        padding: 5em;
-    }
-    .team-heading{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding-bottom: 2em;
-    }
-    .cream-h{
-        color: $clr-primary;
-        text-transform: capitalize;
-    }
-    .the{
-        background-color: $clr-secondary;
-        color: $clr-accent-1;
-    }
-    .team-members{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        @include media(desktop){
-            flex-direction: row;
-            justify-content: space-evenly;
-            padding-inline: 3em;
-        }
-    }
-    .one, .two, .three{
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        @include media(desktop){
-            gap: 0;
-        }
-    }
-}
-
-.banner{
-    padding: 2em;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    h1{
-      font-size: 50px;
-    }
-
-    @include media(tablet){
-        .wrapper-1, .wrapper-2{
-            width: 50%;
-        }
-        padding: 5em;
-        flex-direction: row;
-        align-items: stretch;
-    }
-    .container{
-        display: flex;
-        align-items: stretch;
-        img{
-            width: 50%;
-            height: auto;
-        }
-        .card{
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        }
-    }
-
-    .light{
-        background-color: $clr-primary;
-        outline: 1px $clr-secondary solid;
-        h1{
-            color: $clr-secondary;
-            text-transform: lowercase;
-            text-align: center;
-            padding: 0.5em;
-        }
-    }
-    .dark{
-        background-color: $clr-accent-2;
-        outline: 1px $clr-secondary solid;
-        h1{
-            color: $clr-primary;
-            text-shadow:
-            -1px -1px 0 $clr-secondary,
-            1px -1px 0 $clr-secondary,
-            -1px  1px 0 $clr-secondary,
-            1px  1px 0 $clr-secondary;
-            text-transform: lowercase;
-            text-align: center;
-            padding: 0.5em;
-        }
-    }
-}
-
-</style>

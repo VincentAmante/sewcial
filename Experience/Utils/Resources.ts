@@ -9,7 +9,8 @@ export default class Resources extends EventEmitter {
   renderer: any
   assets: any
   items: {
-        name?: string | undefined
+      room?: string | undefined,
+      name?: string | undefined
     }
 
   queue: any
@@ -90,6 +91,8 @@ export default class Resources extends EventEmitter {
 
     if (this.loaded === this.queue) {
       this.emit('assets-ready')
+    } else {
+      this.emit('item-loaded')
     }
   }
 }

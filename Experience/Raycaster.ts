@@ -2,147 +2,208 @@ import * as THREE from 'three'
 import Experience from './Experience'
 
 export default class Raycaster {
-    experience: Experience
-    scene: any
-    resources: any
-    camera: any
-    sizes: any
-    hitBoxMaterial: THREE.MeshBasicMaterial
-    chairHitBox!: THREE.Mesh<THREE.BoxGeometry, any>
-    plantHitBox!: THREE.Mesh<THREE.BoxGeometry, any>
-    windowHitBox!: THREE.Mesh<THREE.BoxGeometry, any>
-    giftHitBox!: THREE.Mesh<THREE.BoxGeometry, any>
-    raycaster!: THREE.Raycaster
-    cursorDown!: THREE.Vector2
-    cursor!: THREE.Vector2
-    objectsToTest!: any[]
-    touchedPoints!: any[]
-    cursorXMin!: number
-    cursorXMax!: number
-    cursorYMin!: number
-    cursorYMax!: number
-    absX!: number
-    absY!: number
-    intersectsObjects: any
-    selectedModel: any
-    rawIntersects: any
+  experience: Experience
+  scene: any
+  resources: any
+  camera: any
+  sizes: any
+  hitBoxMaterial: THREE.MeshBasicMaterial
+  loungeMarkerHitBox!: THREE.Mesh<THREE.BoxGeometry, any>
+  studioMarkerHitBox!: THREE.Mesh<THREE.BoxGeometry, any>
+  cafeMarkerHitBox!: THREE.Mesh<THREE.BoxGeometry, any>
+  shopMarkerHitBox!: THREE.Mesh<THREE.BoxGeometry, any>
+  raycaster!: THREE.Raycaster
+  cursorDown!: THREE.Vector2
+  cursor!: THREE.Vector2
+  objectsToTest!: any[]
+  touchedPoints!: any[]
+  cursorXMin!: number
+  cursorXMax!: number
+  cursorYMin!: number
+  cursorYMax!: number
+  absX!: number
+  absY!: number
+  intersectsObjects: any
+  selectedModel: any
+  rawIntersects: any
+  pointer: THREE.Vector2
+  constructor () {
+    this.experience = new Experience()
+    this.scene = this.experience.scene
+    this.resources = this.experience.resources
+    this.camera = this.experience.camera
+    this.sizes = this.experience.sizes
+    this.pointer = new THREE.Vector2()
 
-    constructor(){
-        this.experience = new Experience()
-        this.scene = this.experience.scene
-        this.resources = this.experience.resources
-        this.camera = this.experience.camera
-        this.sizes = this.experience.sizes
+    this.hitBoxMaterial = new THREE.MeshBasicMaterial({ color: 0xFF0000, wireframe: true })
+    // wait for assets to load
+    this.resources.on('assets-ready', () => {
+      this.loungeMarkerHitBox = new THREE.Mesh(
+        new THREE.BoxGeometry(0.35, 0.5, 0.35),
+        this.hitBoxMaterial
+      )
+      this.loungeMarkerHitBox.position.set(-0.65, 1.75, -1)
+      this.loungeMarkerHitBox.visible = false
+      this.scene.add(this.loungeMarkerHitBox)
 
-        this.hitBoxMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true} )
-        // wait for assets to load
-        this.resources.on('assets-ready', () => {
-            // chairHitBox
-            this.chairHitBox = new THREE.Mesh(
-                new THREE.BoxGeometry(.35, .5, .35),
-                this.hitBoxMaterial
-            )
-            this.chairHitBox.position.set(.3, .25, .7)
-            this.chairHitBox.rotation.y = Math.PI * .4
-            this.chairHitBox.visible = false
-            // this.scene.add(this.chairHitBox)
+      this.cafeMarkerHitBox = new THREE.Mesh(
+        new THREE.BoxGeometry(0.35, 0.5, 0.35),
+        this.hitBoxMaterial
+      )
+      this.cafeMarkerHitBox.position.set(-0.65, 1.55, 1)
+      this.cafeMarkerHitBox.visible = false
+      this.scene.add(this.cafeMarkerHitBox)
 
-            this.plantHitBox = new THREE.Mesh(
-                new THREE.BoxGeometry(.35, .55, .35),
-                this.hitBoxMaterial   
-            )
-            this.plantHitBox.position.set(-2.2, .35, 1)
-            this.plantHitBox.visible = false
-            // this.scene.add(this.plantHitBox)
+      this.shopMarkerHitBox = new THREE.Mesh(
+        new THREE.BoxGeometry(0.35, 0.5, 0.35),
+        this.hitBoxMaterial
+      )
+      this.shopMarkerHitBox.position.set(-0.2, 1.35, -0.75)
+      this.shopMarkerHitBox.visible = false
+      this.scene.add(this.shopMarkerHitBox)
 
+      this.studioMarkerHitBox = new THREE.Mesh(
+        new THREE.BoxGeometry(0.35, 0.5, 0.35),
+        this.hitBoxMaterial
+      )
+      this.scene.add(this.studioMarkerHitBox)
+      this.studioMarkerHitBox.position.set(1.5, 1.55, -1)
+      this.studioMarkerHitBox.visible = false
+      this.scene.add(this.studioMarkerHitBox)
 
-            this.windowHitBox = new THREE.Mesh(
-                new THREE.BoxGeometry(.55, .55, .3),
-                this.hitBoxMaterial
-            )
-            this.windowHitBox.position.set(-.45, .61, -.35)
-            this.windowHitBox.visible = false
-            // this.scene.add(this.windowHitBox)
+      // raycaster
+      this.raycaster = new THREE.Raycaster()
+      this.cursorDown = new THREE.Vector2()
+      this.cursor = new THREE.Vector2()
 
-            this.giftHitBox = new THREE.Mesh(
-                new THREE.BoxGeometry(.5, .5, .5),
-                this.hitBoxMaterial
-            )
-            this.giftHitBox.position.set(1.85, .25, .5)
-            this.giftHitBox.visible = false
-            this.scene.add(this.giftHitBox)
+      // Objects to test
+      this.objectsToTest = [
+        this.loungeMarkerHitBox,
+        this.cafeMarkerHitBox,
+        this.shopMarkerHitBox,
+        this.studioMarkerHitBox
+      ]
 
-            // raycaster
-            this.raycaster = new THREE.Raycaster()
-            this.cursorDown = new THREE.Vector2()
-            this.cursor = new THREE.Vector2()
+      /// These eventListeners came from jZhou's code, don't know what it does yet though
+      this.touchedPoints = []
+      window.addEventListener('pointerdown', this.onPointerDown.bind(this))
+      window.addEventListener('pointermove', this.onPointerMove.bind(this))
+      // Click listener
+      window.addEventListener('pointerup', this.onPointerUp.bind(this))
+    })
+  }
 
-            // Objects to test
-            this.objectsToTest = [
-                this.chairHitBox,
-                this.plantHitBox,
-                this.windowHitBox,
-                this.giftHitBox
-            ]
+  onPointerUp (event) {
+    this.cursor.x = event.clientX / this.sizes.width * 2 - 1
+    this.cursor.y = -(event.clientY / this.sizes.height) * 2 + 1
 
-            /// These eventListeners came from jZhou's code, don't know what it does yet though
-            this.touchedPoints = []
-            window.addEventListener('pointerdown', (event) =>
-            {   
-                this.touchedPoints.push(event.pointerId)
+    this.absX = Math.abs(this.cursor.x)
+    this.absY = Math.abs(this.cursor.y)
 
-                this.cursorXMin = Math.abs((event.clientX / this.sizes.width * 2 - 1)*0.9)
-                this.cursorXMax = Math.abs((event.clientX / this.sizes.width * 2 - 1)*1.1)
-
-                this.cursorYMin = Math.abs((event.clientY / this.sizes.height * 2 - 1)*0.9)
-                this.cursorYMax = Math.abs((event.clientY / this.sizes.height * 2 - 1)*1.1)
-
-            })
-
-            // Click listener
-            window.addEventListener('pointerup', (event) =>
-            {
-                this.cursor.x = event.clientX / this.sizes.width * 2 - 1
-                this.cursor.y = - (event.clientY / this.sizes.height) * 2 + 1
-
-                this.absX = Math.abs(this.cursor.x)
-                this.absY = Math.abs(this.cursor.y)
-
-                if (this.touchedPoints.length === 1 && 
-                this.absX > this.cursorXMin && this.absX < this.cursorXMax &&
-                this.absY > this.cursorYMin && this.absY < this.cursorYMax) {
-
-                    this.click(this.cursor)
-                    this.touchedPoints = []
-                }
-                else {
-
-                    this.touchedPoints = []
-                }
-            })
-        })
+    if (this.touchedPoints.length === 1 &&
+            this.absX > this.cursorXMin && this.absX < this.cursorXMax &&
+            this.absY > this.cursorYMin && this.absY < this.cursorYMax) {
+      this.click(this.cursor)
+      this.touchedPoints = []
+    } else {
+      this.touchedPoints = []
     }
+  }
 
-    click(cursor: THREE.Vector2){
-        this.raycaster.setFromCamera(cursor, this.camera.instance)
-        this.intersectsObjects = this.raycaster.intersectObjects(this.objectsToTest)
+  onPointerDown (event) {
+    this.touchedPoints.push(event.pointerId)
 
-        if (this.intersectsObjects.length > 0){
-            this.selectedModel = this.intersectsObjects[0].object
+    this.cursorXMin = Math.abs((event.clientX / this.sizes.width * 2 - 1) * 0.9)
+    this.cursorXMax = Math.abs((event.clientX / this.sizes.width * 2 - 1) * 1.1)
 
-            // Ensures that the first object touched is a hitbox
-            // TODO: Remove once better handling of hitboxes is added
-            this.rawIntersects = this.raycaster.intersectObjects(this.scene.children)
-            if (this.rawIntersects[0].object !== this.selectedModel){
-                return
-            }
+    this.cursorYMin = Math.abs((event.clientY / this.sizes.height * 2 - 1) * 0.9)
+    this.cursorYMax = Math.abs((event.clientY / this.sizes.height * 2 - 1) * 1.1)
+  }
 
-            switch(this.selectedModel){
+  onPointerMove (event) {
+    // calculate pointer position in normalized device coordinates
+    // (-1 to +1) for both components
 
-                case this.giftHitBox:
-                    window.dispatchEvent(new Event('triggerMessage'))
-                    break;
-            }
-        }
+    this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1
+    this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1
+
+    this.raycaster.setFromCamera(this.pointer, this.camera.instance)
+    this.intersectsObjects = this.raycaster.intersectObjects(this.objectsToTest)
+
+    this.experience.world.markerLounge.unhover()
+    this.experience.world.markerCafe.unhover()
+    this.experience.world.markerShop.unhover()
+    this.experience.world.markerStudio.unhover()
+
+    window.document.querySelector('body').style.cursor = 'default'
+
+    if (this.intersectsObjects.length > 0) {
+      this.selectedModel = this.intersectsObjects[0].object
+
+      // Ensures that the first object touched is a hitbox
+      // TODO: Remove once better handling of hitboxes is added
+      this.rawIntersects = this.raycaster.intersectObjects(this.scene.children)
+      if (this.rawIntersects[0].object !== this.selectedModel) {
+        return
+      }
+
+      switch (this.selectedModel) {
+        case this.loungeMarkerHitBox:
+          this.experience.world.markerLounge.hover()
+          window.document.querySelector('body').style.cursor = 'pointer'
+          break
+        case this.cafeMarkerHitBox:
+          this.experience.world.markerCafe.hover()
+          window.document.querySelector('body').style.cursor = 'pointer'
+
+          break
+        case this.shopMarkerHitBox:
+          this.experience.world.markerShop.hover()
+          window.document.querySelector('body').style.cursor = 'pointer'
+
+          break
+        case this.studioMarkerHitBox:
+          this.experience.world.markerStudio.hover()
+          window.document.querySelector('body').style.cursor = 'pointer'
+          break
+      }
     }
+  }
+
+  unmount () {
+    window.removeEventListener('pointerdown', this.onPointerDown)
+    window.removeEventListener('pointermove', this.onPointerMove)
+    window.removeEventListener('pointerup', this.onPointerUp)
+  }
+
+  click (cursor: THREE.Vector2) {
+    this.raycaster.setFromCamera(cursor, this.camera.instance)
+    this.intersectsObjects = this.raycaster.intersectObjects(this.objectsToTest)
+
+    if (this.intersectsObjects.length > 0) {
+      this.selectedModel = this.intersectsObjects[0].object
+
+      // Ensures that the first object touched is a hitbox
+      // TODO: Remove once better handling of hitboxes is added
+      this.rawIntersects = this.raycaster.intersectObjects(this.scene.children)
+      if (this.rawIntersects[0].object !== this.selectedModel) {
+        return
+      }
+
+      switch (this.selectedModel) {
+        case this.loungeMarkerHitBox:
+          window.dispatchEvent(new Event('toggle-lounge'))
+          break
+        case this.cafeMarkerHitBox:
+          window.dispatchEvent(new Event('toggle-cafe'))
+          break
+        case this.shopMarkerHitBox:
+          window.dispatchEvent(new Event('toggle-shop'))
+          break
+        case this.studioMarkerHitBox:
+          window.dispatchEvent(new Event('toggle-studio'))
+          break
+      }
+    }
+  }
 }

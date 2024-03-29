@@ -1,8 +1,4 @@
 <script setup lang = "ts">
-// Import Chevrons
-import IconChevronLeft from './icons/IconChevronLeft.vue'
-import IconChevronRight from './icons/IconChevronRight.vue'
-
 const props = defineProps({
   modelValue: {
     type: Array,
@@ -15,6 +11,11 @@ const props = defineProps({
   originalList: {
     type: Array,
     required: true
+  },
+  altColors: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 const {
@@ -67,18 +68,26 @@ watchEffect(() => {
   currentPage.value = 1
   getPage({ currentPage: 1, currentPageSize: currentPageSize.value })
 })
+
+const textColour = computed(() => {
+  return (props.altColors) ? 'text-primary' : 'text-secondary'
+})
 </script>
 
 <template>
   <div>
-    <ul class="flex justify-center content-center mt-3 list-none">
+    <ul class="flex justify-center content-center mt-3 list-none items-center">
       <li
         class="inline-block mr-2"
-        :class="(isFirstPage) ? ['opacity-50' , 'pointer-events-none'] : ['']"
+        :class="(isFirstPage) ? ['opacity-50' , 'pointer-events-none'] : ['cursor-pointer']"
       >
-        <a class="chevron" href="#" @click="() => prev()">
-          <IconChevronLeft />
-        </a>
+        <div
+          class="chevron"
+          :class="textColour"
+          @click="() => prev()"
+        >
+          <AppIcon :icon="['fas', 'chevron-left']" />
+        </div>
       </li>
       <li
         v-for="pageNum in pageCount"
@@ -86,17 +95,22 @@ watchEffect(() => {
         class="inline-block mr-2"
         :class="(currentPage !== pageNum) ? ['hover:opacity-75'] : ['cursor-default']"
       >
-        <a
+        <div
           class="page-link p-2 px-4 rounded-full"
-          href="#"
-          :class="(currentPage === pageNum) ? ['bg-accent-1', 'text-primary', 'cursor-default', 'pointer-events-none'] : ['']"
+          :class="(currentPage === pageNum) ? ['bg-accent-1', 'text-primary', 'cursor-default', 'pointer-events-none'] : ['cursor-pointer', textColour]"
           @click="currentPage = pageNum"
-        >{{ pageNum }}</a>
+        >
+          {{ pageNum }}
+        </div>
       </li>
-      <li class="inline-block mr-2" :class="(isLastPage) ? ['opacity-50' , 'pointer-events-none'] : ['']">
-        <a class="chevron" href="#" @click="() => next()">
-          <IconChevronRight />
-        </a>
+      <li class="inline-block mr-2" :class="(isLastPage) ? ['opacity-50' , 'pointer-events-none'] : ['cursor-pointer']">
+        <div
+          class="chevron"
+          :class="textColour"
+          @click="() => next()"
+        >
+          <AppIcon :icon="['fas', 'chevron-right']" />
+        </div>
       </li>
     </ul>
   </div>

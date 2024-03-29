@@ -1,5 +1,3 @@
-import { Author } from '@prisma/client'
-
 type FirstLastName = {
   firstName: string
   lastName: string

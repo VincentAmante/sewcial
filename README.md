@@ -1,6 +1,9 @@
-# sewcial (sidebase)
+# Sewcial
 
-Sewcial website on the sidebase stack
+Sewcial is a project made by students studying in Bath Spa University - RAK.
+This is the website for the conceptual business.
+
+[Link to Website](https://www.sewcial.space/)
 
 Technologies used:
 
@@ -10,7 +13,7 @@ Technologies used:
 - nuxt-auth
 - tRPC 10
 - Tailwind CSS
-- SCSS (for old sewcial support)
+- SCSS (for old sewcial code support)
 
 ## Set Up
 
@@ -33,12 +36,21 @@ npm run dev
 
 - [Inline Fold (for hiding long Tailwind Classes)](https://marketplace.visualstudio.com/items?itemName=moalamri.inline-fold)
 - [Alternative: Tailwind Fold (Much newer but better imo)](https://marketplace.visualstudio.com/items?itemName=stivo.tailwind-fold)
+- [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
 
 ## Conceptual Difference between Nuxt3 and Vue3
 
 Nuxt is a framework that is built on Vue. The key difference is that Nuxt performs what is called 'Universal Rendering'. This renders content on a server-side environment, which allows the back-end functionality that Sewcial requires. This differs from Vue which runs as a Single-Page Application, where all the content is rendered on the user's browser. Nuxt bridges its serverside rendering with Vue's client-rendering by *also* running some javascript on the client browser after sending the generated HTML content. This concept (called Hydration) allows the same SinglePage experience while still allowing space for server-side code.
 
-## Structural Difference between Nuxt3 and Vue3 (for Front End)
+### 3D Scene Setup
+
+Assets are defined in `public/Experience`, where models and textures can be found
+The code for everything ThreeJS-related is found in `src/Experience`.
+`Experience/World/World.ts` and `Experience/World/Room.ts` is an insight into how objects are added into the world.
+`Experience/Utils/assets.ts` and `Experience/Utils/Resources.ts` will show you how the assets are loaded.
+
+## Structural Difference between Nuxt3 and Vue3 (for Front End Devs migrating from old repo)
 
 All your Vue code will run without crash in Nuxt3. A few differences persists though that may change how you work.
 
@@ -58,9 +70,3 @@ All your Vue code will run without crash in Nuxt3. A few differences persists th
 
 - eslinting for universally formatted code, a lot of errors will exist that will go away on save
   - If some remain, not all erorrs crash the app, do fix if convenient
-
-## TailwindCSS Migration
-
-The migration to TailwindCSS is to hopefully make the styling much more consistent and easier to edit. For now, SCSS will remain supported but styling in TailwindCSS will now remain as the new standard, where SCSS will eventually be phased out and removed from the project.
-
-When ready, `tailwind.config.js` should contain many of the styles you'll be utilising in the project, please make use of them to reduce the use of arbitrary values in the style.

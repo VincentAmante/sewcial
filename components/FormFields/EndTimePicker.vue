@@ -14,6 +14,11 @@ const props = defineProps({
   isDisabled: {
     type: Boolean,
     required: true
+  },
+  hasError: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -72,46 +77,35 @@ const endingTimes = computed(() => {
   return endingTimesList
 })
 
+const { errorStyling, hasError } = useErrorStyling(props.hasError)
+watch(() => props.hasError, (newValue) => {
+  hasError.value = newValue
+})
 </script>
 
 <template>
-  <label for="end-time">
-    <caption>
+  <label
+    class="flex flex-col w-full capitalize relative gap-1"
+    for="end-time"
+  >
+    <caption class="text-left text-white uppercase">
       End Time
     </caption>
-    <select v-model="startTime" name="end-time" :disabled="isDisabled">
-      <option v-for="availableTime in endingTimes" :value="availableTime.timeValue">
+    <select
+      v-model="startTime"
+      name="end-time"
+      :disabled="isDisabled"
+      class=" rounded-md p-2 border-[1px] border-solid"
+      :class="errorStyling"
+      @change="hasError = false"
+    >
+      <option
+        v-for="availableTime in endingTimes"
+        :key="availableTime.timeValue"
+        :value="availableTime.timeValue"
+      >
         {{ availableTime.timeFormat }}
       </option>
     </select>
   </label>
 </template>
-
-<style scoped lang="scss">
-  label {
-    @include flex-col;
-    // align-items: flex-start;
-    width: 100%;
-    text-transform: capitalize;
-    position: relative;
-    gap: .25em;
-
-    caption {
-      text-align: left;
-      color: white;
-      text-transform: uppercase;
-    }
-
-    select {
-      outline: grey;
-      border-radius: 5px;
-      padding: .5em;
-      // padding-block: 1em;
-      border: 1px solid grey;
-
-      option {
-        line-height: 2em;
-      }
-    }
-  }
-</style>

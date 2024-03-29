@@ -1,11 +1,9 @@
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   error: Object
 })
 const handleError = () => clearError({ redirect: '/' })
-
-console.log(props.error?.stack)
 </script>
 
 <template>

@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import type { Template } from '@prisma/client'
+import { UseImage } from '@vueuse/components'
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import ButtonDownload from '@/components/icons/ButtonDownload.vue'
 import ButtonFullscreen from '@/components/icons/ButtonFullscreen.vue'
 import { Skill } from '~/enums/Skill'
+
+const title = ref('Sewcial |')
+useHead({
+  title
+})
 
 const route = useRoute()
 if (route.params.id === undefined) {
@@ -30,14 +36,28 @@ const templatePlaceholder: Template = {
 }
 const template: Ref<Template> = ref(templatePlaceholder)
 
-const { data, pending, error, refresh } = useFetch(`/api/Templates/${route.params.id}`, {
+const { refresh } = useFetch(`/api/Templates/${route.params.id}`, {
   onResponse ({ response }) {
     const data = response._data as Template
+    title.value = `Sewcial | ${data.name}`
     template.value = data
   }
 })
 refresh()
 
+function downloadImage () {
+  fetch(template.value.templateImage)
+    .then(response => response.blob())
+    .then((blob) => {
+      const blobUrl = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.download = template.value.templateImage.replace(/^.*[\\\/]/, '')
+      a.href = blobUrl
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+    })
+}
 </script>
 
 <template>
@@ -50,20 +70,36 @@ refresh()
         <img class="sticker sticker-1" src="@/assets/images/Sticker_4.png" alt="">
       </div>
       <div class="breadcrumbs">
-        <p>TEMPLATES</p>
+        <NuxtLink to="/templates">
+          TEMPLATES
+        </NuxtLink>
+        <p>></p>
         <p> {{ template.name }}</p>
       </div>
       <div class="template-selected">
-        <img :src="template.thumbnail" alt="template-1">
+        <UseImage
+          class="card-image object-cover object-center rounded-t-2xl align-middle brightness-100 w-full h-full
+       transition-all group-hover:scale-105 group-hover:brightness-[80%]"
+          :src="template.thumbnail"
+        >
+          <template #loading>
+            <div class="text-secondary flex flex-col items-center justify-center w-full h-full text-lg max-w-sm min-h-[20rem]">
+              Loading..
+              <AppIcon class="animate-spin" :icon="['fas', 'spinner']" />
+            </div>
+          </template>
+        </UseImage>
         <div class="template-info">
           <h1>{{ template.name }}</h1>
           <p>{{ template.description }}</p>
 
           <SpeechBubble class="speech-bubble">
-            <a>DOWNLOAD AS PDF</a>
+            <a @click="() => downloadImage()">DOWNLOAD AS PDF</a>
           </SpeechBubble>
           <SpeechBubble alignment="right" class="speech-bubble">
-            <a>VIEW TEMPLATE ONLINE</a>
+            <NuxtLink :to="template.templateImage">
+              VIEW TEMPLATE ONLINE
+            </NuxtLink>
           </SpeechBubble>
         </div>
       </div>
@@ -74,8 +110,13 @@ refresh()
       <h1>{{ template.name }}</h1>
       <img :src="template.templateImage">
       <div class="buttons">
-        <ButtonDownload class="btn" />
-        <ButtonFullscreen class="btn" />
+        <ButtonDownload
+          :url="template.templateImage"
+          class="btn"
+        />
+        <a :href="template.templateImage" class="btn">
+          <ButtonFullscreen />
+        </a>
       </div>
     </section>
 

@@ -24,6 +24,11 @@ const selectedLabel = ref(props.options.find(
 // for targetting the element to attach the click outside event to
 const target = ref<HTMLElement>()
 
+watch(() => props.modelValue, (newValue) => {
+  selected.value = newValue
+  selectedLabel.value = props.options.find(option => option.value === newValue)?.label ?? newValue
+})
+
 onMounted(() => {
   selected.value = props.options[0].value
 
@@ -44,7 +49,9 @@ onMounted(() => {
       @click="() => toggleVisibility()"
     >
       <span>{{ selectedLabel }}</span>
-      <span :class="(visible) ? ['text-accent-1']: ''">V</span>
+      <span :class="(visible) ? ['text-accent-1']: ''">
+        <AppIcon :icon="['fas', 'chevron-down']" />
+      </span>
     </div>
     <ul
       class="flex flex-col absolute bg-secondary w-full rounded-b-lg z-50"

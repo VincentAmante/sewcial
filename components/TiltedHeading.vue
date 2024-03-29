@@ -5,6 +5,11 @@ const props = defineProps({
     type: String,
     default: 'primary',
     required: false
+  },
+  big: {
+    type: Boolean,
+    default: false,
+    required: false
   }
 })
 
@@ -29,14 +34,16 @@ const dynamicStyle = computed(() => {
   }
   return styles
 })
+
+const tilt = computed(() => {
+  return (props.big) ? '-rotate-[10deg]' : '-rotate-[15deg]'
+})
 </script>
 
-<!-- Template with defined slots -->
-<!-- Currently, content by default goes to the one without a name -->
 <template lang="">
   <p
-    class="text-h-tilted rounded-md py-1 px-2 relative w-fit max-w-[50ch] -rotate-6"
-    :class="dynamicStyle"
+    class="text-h-tilted rounded-md py-1 px-2 relative w-fit max-w-[50ch]"
+    :class="[dynamicStyle, tilt]"
   >
     <slot />
   </p>

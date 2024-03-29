@@ -3,6 +3,12 @@ import { z } from 'zod'
 import ContactField from '@/components/FormFields/ContactField.vue'
 import ContactTextArea from '@/components/FormFields/ContactTextArea.vue'
 
+const mail = useMail()
+
+useHead({
+  title: 'Sewcial | Contact Us'
+})
+
 const name = ref('')
 const email = ref('')
 const mobileNumber = ref('')
@@ -35,21 +41,30 @@ async function submitContactForm () {
   messageInput.status === 'error') {
 
   } else {
-    await useFetch('/api/ContactSubmissions/create', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: name.value,
-        email: email.value,
-        mobile: mobileNumber.value,
-        message: message.value
-      })
+    mail.send({
+      from: 'admin@sewcial.space',
+      subject: `Contact Form from ${name.value}`,
+      text: `
+        name: ${name.value}
+        email: ${email.value}
+        mobile-number: ${mobileNumber.value}
+        message: ${message.value}
+      `
     })
   }
 }
 </script>
 
 <template>
-  <main class="flex flex-col py-default-h gap-[5vmax] mx-default-w tablet:flex-row tablet:justify-between">
+  <main class="flex flex-col py-default-h gap-[5vmax] mx-default-w tablet:flex-row tablet:justify-between my-desktop-h">
+    <img
+      class="hidden absolute left-0 top-25 w-[10%] desktop:block lgScreen:w-[7%] xlScreen:[3%]"
+      src="@/assets/images/contactsticker1.png"
+    >
+    <img
+      class="hidden absolute right-0 top-25 w-[10%] desktop:block lgScreen:w-[7%] xlScreen:[3%]"
+      src="@/assets/images/contactsticker2.png"
+    >
     <section class="w-full flex flex-col px-[3vw]">
       <div class="flex flex-col w-full px-0">
         <SpeechBubble class="flex flex-col py-4">
@@ -58,7 +73,7 @@ async function submitContactForm () {
           </h1>
         </SpeechBubble>
         <SpeechBubble
-          class="flex flex-col gap-4 py-8"
+          class="flex flex-col gap-10 py-8 mt-10"
           alignment="right"
         >
           <div>
@@ -66,7 +81,10 @@ async function submitContactForm () {
               Location
             </h1>
             <h2 class="my-0 font-normal">
-              Dubai Marina, Dubai, UAE
+              RAKEZ Academic Zone - Block D
+            </h2>
+            <h2 class="my-0 font-normal">
+              Al Dhait South - Ras Al Khaimah, U.A.E
             </h2>
           </div>
           <div>
@@ -74,7 +92,7 @@ async function submitContactForm () {
               Phone Number
             </h1>
             <h2 class="my-0 font-normal">
-              +971 00 000 000
+              +971 00 000 000 / +971 23 456 7890
             </h2>
           </div>
           <div>
@@ -82,7 +100,7 @@ async function submitContactForm () {
               Email
             </h1>
             <h2 class="my-0 font-normal">
-              sewcial@gmail.com
+              socials@sewcial.space
             </h2>
           </div>
         </SpeechBubble>
@@ -114,17 +132,3 @@ async function submitContactForm () {
     </section>
   </main>
 </template>
-
-<!-- <style scoped lang="scss">
-    main {
-        padding: $margin-width;
-
-        h1, h2 {
-          margin-block: 0;
-        }
-        h2 {
-          font-weight: 400;
-          text-transform: none;
-        }
-    }
-</style> -->

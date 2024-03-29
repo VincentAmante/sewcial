@@ -25,6 +25,3 @@ const selectedRoute = computed({
     </option>
   </select>
 </template>
-
-<script lang="scss">
-</script>

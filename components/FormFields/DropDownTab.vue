@@ -1,13 +1,8 @@
 <script setup lang="ts">
-// Import Plus
-import IconPlus from '@/components/icons/IconPlus.vue'
-
-//
 // Variables passed to this component are props
 const props = defineProps({
   alignment: {
     type: String,
-    required: true,
     default: 'left'
   },
   modelValue: {
@@ -36,7 +31,10 @@ const tabToggled = useVModel(props, 'modelValue', emit)
           Title Here
         </slot>
       </h1>
-      <IconPlus class="icon mx-4" />
+      <AppIcon
+        :icon="(tabToggled ? ['fas', 'minus'] : ['fas', 'plus'])"
+        class="icon mx-4 transition-all cursor-pointer text-[2rem]"
+      />
     </div>
     <div
       class="transition-all overflow-hidden"

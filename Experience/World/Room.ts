@@ -1,17 +1,18 @@
 import * as THREE from 'three'
 import Experience from '../Experience'
+import Resources from '../Utils/Resources'
 
 export default class Room {
   experience: Experience
   scene: any
-  resources: any
+  resources: Resources
   room: any
   actualRoom: any
 
   constructor () {
     this.experience = new Experience()
-    this.scene = this.experience.scene
     this.resources = this.experience.resources
+    this.scene = this.experience.scene
     this.room = this.resources.items.room
     this.actualRoom = this.room.scene
 
@@ -30,7 +31,9 @@ export default class Room {
         })
       }
 
-      if (child.name === 'WindowGlass' || child.name === 'WindowGlass2') {
+      if (child.name === 'WindowGlass' ||
+      child.name === 'WindowGlass2' ||
+      child.name === 'WindowGlass3') {
         child.material = new THREE.MeshPhysicalMaterial()
         child.material.roughness = 0
         child.material.color.set(0xFFFFFF)

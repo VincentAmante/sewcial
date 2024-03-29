@@ -5,20 +5,43 @@
 @tailwind utilities;
 
 @layer base {
-    h1 {
+    html {
+      font-family: 'Lexend', sans-serif;
+    }
+
+    .text-h-giant {
+      @apply text-6xl font-bold;
+    }
+
+    .text-h-big-boy {
+      @apply text-5xl font-bold;
+    }
+
+    .text-h-tilted {
+      @apply text-4xl font-bold uppercase;
+    }
+    h1, .text-h1 {
       @apply text-3xl uppercase font-bold;
     }
 
-    h2 {
+    h2, .text-h2 {
       @apply text-3xl font-bold;
     }
 
-    h3 {
+    h3, .text-h3 {
       @apply text-xl font-bold;
     }
 
-    p {
-      @apply text-base;
+    p, .body {
+      @apply text-base my-2;
+    }
+
+    .bubble, .button, button {
+      @apply text-alt uppercase font-semibold;
+    }
+
+    .caption {
+      @apply text-xs font-normal;
     }
   }
 
@@ -27,16 +50,45 @@
   }
 
   @layer utilities {
-    @variants responsive {
-      /* Hide scrollbar for Chrome, Safari and Opera */
-      .no-scrollbar::-webkit-scrollbar {
-          display: none;
-      }
 
-      /* Hide scrollbar for IE, Edge and Firefox */
-      .no-scrollbar {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-      }
+    .backface-visible {
+      backface-visibility: 'visible',
+    }
+    .backface-hidden {
+      backface-visibility: 'hidden',
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    .scrollbar-blue::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+      margin: 2rem;
+    }
+
+    .scrollbar-blue::-webkit-scrollbar-track {
+      border-radius: 100vh;
+      background-color: #FFFAE0;
+      margin-right: .5rem;
+      margin: 5vw;
+    }
+
+    .scrollbar-blue::-webkit-scrollbar-thumb {
+      background: #607BDA;
+      border-radius: 100vh;
+      margin: 1rem;
+    }
+
+    .scrollbar-blue::-webkit-scrollbar-thumb:hover {
+      background: #c0a0b9;
     }
   }

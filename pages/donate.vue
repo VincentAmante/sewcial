@@ -2,19 +2,24 @@
 // Import of a speechbubble
 import SpeechBubble from '@/components/SpeechBubble.vue'
 import TiltedHeading from '@/components/TiltedHeading.vue'
+
+useHead({
+  title: 'Sewcial | Donate'
+})
+
 </script>
 <template>
   <main>
     <!-- Just test divs, don't mind -->
     <section class="flex flex-col items-center text-center text-secondary my-default-h gap-[4vw]">
-      <div class="text-6xl flex flex-col items-center justify-center text-secondary font-bold pt-5 gap-0 tablet:flex-row tablet:gap-4">
+      <div class="text-7xl flex flex-col items-center justify-center text-secondary font-bold pt-5 gap-0 tablet:flex-row tablet:gap-4">
         <span>Support</span>
-        <TiltedHeading>
+        <TiltedHeading class="bg-accent-1">
           THE
         </TiltedHeading>
         <span>community</span>
       </div>
-      <div class="flex flex-col tablet:flex-row gap-[6vw]">
+      <div class="flex flex-col tablet:flex-row gap-[6vw] mb-16">
         <div class="info-card flex flex-col items-center text-center">
           <img
             src="@/assets/icons/sharelove.png"
@@ -39,10 +44,10 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
         <div class="flex flex-col items-center text-center">
           <img src="@/assets/icons/star.png" alt="">
           <h2 class="m-0">
-            Lorem Ipsum
+            Make Anew
           </h2>
           <p class="m-0 max-w-[12rem] text-black">
-            Up-cycle unique pieces from unused clothing
+            Up-cycle unique pieces from used clothing
           </p>
         </div>
       </div>
@@ -88,16 +93,28 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
             </li>
             <li>
               Condition is unusable - Our partner, Kiswa, kindly buy these from us
-              at AED2/kg and recycles them into furniture in Turkey. Luxury -
+              at AED2/kg and recycles them into furniture in Turkey.
+            </li>
+            <li>
+              Luxury -
               regardless of the condition, we do our best to authenticate internally
               and repair.
             </li>
           </ol>
         </div>
+
+        <img
+          class="hidden absolute left-0 w-[8%] desktop:block lgScreen:w-[5%] xlScreen:[2%]"
+          src="@/assets/images/donatesticker1.png"
+        >
+        <img
+          class="hidden absolute right-0 w-[10%] desktop:block lgScreen:w-[6.5%] xlScreen:[4%]"
+          src="@/assets/images/donatesticker2.png"
+        >
       </div>
     </section>
     <section>
-      <div class="flex flex-col items-center justify-center px-default-w pb-20 gap-8 tablet:flex-row ">
+      <div class="flex flex-col items-center justify-center px-default-w pb-20 gap-8 tablet:flex-row mt-16">
         <div class="max-w-lg my-8">
           <img src="@/assets/images/donatemap.png" alt="">
         </div>
@@ -115,9 +132,9 @@ import TiltedHeading from '@/components/TiltedHeading.vue'
           >
             <div class="text-alt font-medium">
               <span class="uppercase">Location</span> <br>
-              Office No. 3002, Al Manara Tower <br>
-              Dubai Marina <br>
-              Dubai, UAE
+              RAKEZ Academic Zone<br>
+              Block D - Al Dhait South<br>
+              Ras Al Khaimah, U.A.E
             </div>
           </SpeechBubble>
         </div>

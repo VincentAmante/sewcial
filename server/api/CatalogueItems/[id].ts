@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client'
+
 export default defineEventHandler(async (event) => {
   if (event.context.params === undefined) {
     return null
@@ -16,6 +17,8 @@ export default defineEventHandler(async (event) => {
     typeof item.sizingsData === 'object' &&
     Array.isArray(item?.sizingsData)) {
     sizingsData = item?.sizingsData as Prisma.JsonArray
+  } else {
+    sizingsData = []
   }
 
   return {
