@@ -43,13 +43,18 @@ const itemPlaceholder: CatalogueItemWithMaterials = {
 const catalogueItem: Ref<CatalogueItem> = ref(itemPlaceholder)
 
 const itemIsLiked = ref(false)
+
+// Fetch catalogue item from the server
 const { refresh } = useFetch(`/api/CatalogueItems/${route.params.id}`, {
+
+  // Sets response data to variables the catalogueItem page uses
   onResponse ({ response }) {
     const data = response._data as CatalogueItem
     catalogueItem.value = data
     title.value = `Sewcial | ${data.name}`
   }
 })
+// refresh page to display data
 refresh()
 
 const emit = defineEmits(['clickedLikedBtn'])

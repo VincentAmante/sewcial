@@ -1,9 +1,7 @@
 <script setup lang="ts">
-
 import { onMounted, ref, onBeforeUnmount } from 'vue'
 import LazyAppCanvas from '@/components/Subpages/AppCanvas.vue'
 // import router from '@/router'
-
 const router = useRouter()
 // Listens for a certain event where it then redirects to /about
 // So far this seems to be the best way to handle ThreeJS -> Vue interactions
@@ -51,20 +49,20 @@ onBeforeUnmount(() => {
   <main class="overflow-hidden">
     <div
       id="loading-screen"
-      class="absolute w-full h-full flex justify-center items-center z-50 bg-secondary transition-all duration-1000"
+      class="absolute z-50 flex items-center justify-center w-full h-full transition-all duration-1000 bg-secondary"
       :class="loadingScreenStyle.background"
     >
       <div
-        class="bg-accent-1 rounded-3xl transition-all duration-1000 py-4 px-8 m-2"
+        class="px-8 py-4 m-2 transition-all duration-1000 bg-accent-1 rounded-3xl"
         :class="loadingScreenStyle.screen"
       >
-        <AppIcon class="animate-spin text-center text-4xl w-full text-primary" :icon="['fas', 'spinner']" />
-        <h1 class="text-h-big-boy text-primary text-center my-0">
+        <AppIcon class="w-full text-4xl text-center animate-spin text-primary" :icon="['fas', 'spinner']" />
+        <h1 class="my-0 text-center text-h-big-boy text-primary">
           Loading..
         </h1>
         <p
           id="loading-type"
-          class="w-full font-light text-primary text-center mt-0"
+          class="w-full mt-0 font-light text-center text-primary"
         >
           Downloading Assets
           <span id="loading-bar" class="hidden">0</span>
